@@ -1,2 +1,3 @@
-# Udemy_JS_and_TS_Courses
+# Udemy JS and TS Courses
+
 Files created during Udemy.com JS and TS courses.

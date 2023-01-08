@@ -77,35 +77,53 @@
 // isPalindrome("Madam I'm Adam");
 
 //* 04 Caesar Cipher
-function caesarCipher(str: string, num: number) {
-  num = num % 26;
-  let lowerCaseString = str.toLowerCase();
-  let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
-  let newString = "";
+// function caesarCipher(str: string, num: number) {
+//   num = num % 26;
+//   let lowerCaseString = str.toLowerCase();
+//   let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+//   let newString = "";
 
-  for (let i = 0; i < lowerCaseString.length; i++) {
-    let currentLetter = lowerCaseString[i];
-    if (currentLetter === " ") {
-      newString += currentLetter;
-      continue;
+//   for (let i = 0; i < lowerCaseString.length; i++) {
+//     let currentLetter = lowerCaseString[i];
+//     if (currentLetter === " ") {
+//       newString += currentLetter;
+//       continue;
+//     }
+//     let currentIndex = alphabet.indexOf(currentLetter);
+//     let newIndex = currentIndex + num;
+//     if (newIndex > 25) {
+//       newIndex = newIndex - 26;
+//     }
+//     if (newIndex < 0) {
+//       newIndex = newIndex + 26;
+//     }
+//     if (str[i] === str[i].toUpperCase()) {
+//       newString += alphabet[newIndex].toUpperCase();
+//     } else {
+//       newString += alphabet[newIndex];
+//     }
+//   }
+//   console.log("newString:", newString);
+//   return newString;
+// }
+
+// caesarCipher("Zoo Keeper", 2);
+// caesarCipher("JavaScript", -900);
+
+//* 05 Reverse Words
+function reverseWords(str: string) {
+  let wordsArray = str.split(" ");
+  let reversedWordsArr: string[] = [];
+
+  wordsArray.forEach((word) => {
+    let reversedWord = "";
+    for (let i = word.length - 1; i >= 0; i--) {
+      reversedWord += word[i];
     }
-    let currentIndex = alphabet.indexOf(currentLetter);
-    let newIndex = currentIndex + num;
-    if (newIndex > 25) {
-      newIndex = newIndex - 26;
-    }
-    if (newIndex < 0) {
-      newIndex = newIndex + 26;
-    }
-    if (str[i] === str[i].toUpperCase()) {
-      newString += alphabet[newIndex].toUpperCase();
-    } else {
-      newString += alphabet[newIndex];
-    }
-  }
-  console.log("newString:", newString);
-  return newString;
+    reversedWordsArr.push(reversedWord);
+  });
+  let result = reversedWordsArr.join(" ");
+  console.log({ result });
+  return result;
 }
-
-caesarCipher("Zoo Keeper", 2);
-caesarCipher("JavaScript", -900);
+reverseWords("this is a string of words");

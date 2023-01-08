@@ -111,19 +111,32 @@
 // caesarCipher("JavaScript", -900);
 
 //* 05 Reverse Words
-function reverseWords(str: string) {
-  let wordsArray = str.split(" ");
-  let reversedWordsArr: string[] = [];
+// function reverseWords(str: string) {
+//   let wordsArray = str.split(" ");
+//   let reversedWordsArr: string[] = [];
 
-  wordsArray.forEach((word) => {
-    let reversedWord = "";
-    for (let i = word.length - 1; i >= 0; i--) {
-      reversedWord += word[i];
-    }
-    reversedWordsArr.push(reversedWord);
-  });
-  let result = reversedWordsArr.join(" ");
-  console.log({ result });
-  return result;
+//   wordsArray.forEach((word) => {
+//     let reversedWord = "";
+//     for (let i = word.length - 1; i >= 0; i--) {
+//       reversedWord += word[i];
+//     }
+//     reversedWordsArr.push(reversedWord);
+//   });
+//   let result = reversedWordsArr.join(" ");
+//   console.log({ result });
+//   return result;
+// }
+// reverseWords("this is a string of words");
+
+//* 06 Reverse Array In Place
+function reverseArrayInPlace(array: Array<string | number>) {
+  for (let i = 0; i < array.length / 2; i++) {
+    let tempVar = array[i];
+    array[i] = array[array.length - 1 - i];
+    array[array.length - 1 - i] = tempVar;
+  }
+  console.log({ array });
+  return array;
 }
-reverseWords("this is a string of words");
+reverseArrayInPlace([1, 2, 3, 4, 5, 6]);
+reverseArrayInPlace([1, 2, 3, 4, 5, 6, 7]);

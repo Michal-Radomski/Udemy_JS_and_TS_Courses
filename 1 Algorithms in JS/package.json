@@ -2,8 +2,9 @@
   "name": "1-algorithms-in-js",
   "version": "1.0.0",
   "description": "",
+  "main": "index.ts",
   "scripts": {
-    "start": "nodemon 01_FizzBuzz.ts"
+    "start": "clear && nodemon index.ts"
   },
   "keywords": [],
   "author": "",

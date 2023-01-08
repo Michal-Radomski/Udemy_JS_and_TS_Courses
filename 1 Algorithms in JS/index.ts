@@ -52,26 +52,60 @@
 // );
 
 //* 03 isPalindrome Algorithm
-function isPalindrome(string: string) {
-  string = string.toLowerCase();
-  let charactersArray = string.split("");
-  let validCharacters = "abcdefghijklmnopqrstuvwxyz".split("");
+// function isPalindrome(string: string) {
+//   string = string.toLowerCase();
+//   let charactersArray = string.split("");
+//   let validCharacters = "abcdefghijklmnopqrstuvwxyz".split("");
 
-  let lettersArray: string[] = [];
+//   let lettersArray: string[] = [];
 
-  charactersArray.forEach((character) => {
-    if (validCharacters.indexOf(character) > -1) {
-      lettersArray.push(character);
+//   charactersArray.forEach((character) => {
+//     if (validCharacters.indexOf(character) > -1) {
+//       lettersArray.push(character);
+//     }
+//   });
+//   console.log("lettersArray:", lettersArray);
+
+//   if (lettersArray.join("") === lettersArray.reverse().join("")) {
+//     console.log(true);
+//     return true;
+//   } else {
+//     console.log(false);
+//     return false;
+//   }
+// }
+// isPalindrome("Madam I'm Adam");
+
+//* 04 Caesar Cipher
+function caesarCipher(str: string, num: number) {
+  num = num % 26;
+  let lowerCaseString = str.toLowerCase();
+  let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+  let newString = "";
+
+  for (let i = 0; i < lowerCaseString.length; i++) {
+    let currentLetter = lowerCaseString[i];
+    if (currentLetter === " ") {
+      newString += currentLetter;
+      continue;
     }
-  });
-  console.log("lettersArray:", lettersArray);
-
-  if (lettersArray.join("") === lettersArray.reverse().join("")) {
-    console.log(true);
-    return true;
-  } else {
-    console.log(false);
-    return false;
+    let currentIndex = alphabet.indexOf(currentLetter);
+    let newIndex = currentIndex + num;
+    if (newIndex > 25) {
+      newIndex = newIndex - 26;
+    }
+    if (newIndex < 0) {
+      newIndex = newIndex + 26;
+    }
+    if (str[i] === str[i].toUpperCase()) {
+      newString += alphabet[newIndex].toUpperCase();
+    } else {
+      newString += alphabet[newIndex];
+    }
   }
+  console.log("newString:", newString);
+  return newString;
 }
-isPalindrome("Madam I'm Adam");
+
+caesarCipher("Zoo Keeper", 2);
+caesarCipher("JavaScript", -900);

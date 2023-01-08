@@ -1,0 +1,11 @@
+{
+  "name": "1-algorithms-in-js",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "nodemon 01_FizzBuzz.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

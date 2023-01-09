@@ -129,7 +129,7 @@
 // reverseWords("this is a string of words");
 
 //* 06 Reverse Array In Place
-// function reverseArrayInPlace(array: Array<string | number>) {
+// function reverseArrayInPlace(array: Array<number>) {
 //   for (let i = 0; i < array.length / 2; i++) {
 //     let tempVar = array[i];
 //     array[i] = array[array.length - 1 - i];
@@ -142,16 +142,35 @@
 // reverseArrayInPlace([1, 2, 3, 4, 5, 6, 7]);
 
 //////////-----------------------------
-//* 10 Fibonacci - recursive
-function fibonacci(position: number): number {
-  if (position < 3) {
-    return 1;
-  } else return fibonacci(position - 1) + fibonacci(position - 2);
+//* 10 Fibonacci - recursive -> Runtime exponential BAD!
+// function fibonacci(position: number): number {
+//   if (position < 3) {
+//     return 1;
+//   } else return fibonacci(position - 1) + fibonacci(position - 2);
+// }
+// console.log(fibonacci(6));
+// console.log(fibonacci(9));
+// console.log(fibonacci(12));
+// console.log(fibonacci(4));
+// console.log(fibonacci(20));
+// console.log(fibonacci(40));
+// // console.log(fibonacci(50));
+
+//* 11 Memoized Fibonacci -> Runtime linear!
+function fibMemo(index: number, cache?: Array<number>) {
+  cache = cache || [];
+
+  if (cache[index]) {
+    return cache[index];
+  } else {
+    if (index < 3) {
+      return 1;
+    } else {
+      cache[index] = (fibMemo(index - 1, cache) as number) + (fibMemo(index - 2, cache) as number);
+    }
+  }
+  return cache[index];
 }
-console.log(fibonacci(6));
-console.log(fibonacci(9));
-console.log(fibonacci(12));
-console.log(fibonacci(4));
-console.log(fibonacci(20));
-console.log(fibonacci(40));
-console.log(fibonacci(50));
+console.log(fibMemo(12));
+console.log(fibMemo(50));
+console.log(fibMemo(1000));

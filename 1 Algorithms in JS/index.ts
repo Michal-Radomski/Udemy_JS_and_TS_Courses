@@ -129,14 +129,29 @@
 // reverseWords("this is a string of words");
 
 //* 06 Reverse Array In Place
-function reverseArrayInPlace(array: Array<string | number>) {
-  for (let i = 0; i < array.length / 2; i++) {
-    let tempVar = array[i];
-    array[i] = array[array.length - 1 - i];
-    array[array.length - 1 - i] = tempVar;
-  }
-  console.log({ array });
-  return array;
+// function reverseArrayInPlace(array: Array<string | number>) {
+//   for (let i = 0; i < array.length / 2; i++) {
+//     let tempVar = array[i];
+//     array[i] = array[array.length - 1 - i];
+//     array[array.length - 1 - i] = tempVar;
+//   }
+//   console.log({ array });
+//   return array;
+// }
+// reverseArrayInPlace([1, 2, 3, 4, 5, 6]);
+// reverseArrayInPlace([1, 2, 3, 4, 5, 6, 7]);
+
+//////////-----------------------------
+//* 10 Fibonacci - recursive
+function fibonacci(position: number): number {
+  if (position < 3) {
+    return 1;
+  } else return fibonacci(position - 1) + fibonacci(position - 2);
 }
-reverseArrayInPlace([1, 2, 3, 4, 5, 6]);
-reverseArrayInPlace([1, 2, 3, 4, 5, 6, 7]);
+console.log(fibonacci(6));
+console.log(fibonacci(9));
+console.log(fibonacci(12));
+console.log(fibonacci(4));
+console.log(fibonacci(20));
+console.log(fibonacci(40));
+console.log(fibonacci(50));

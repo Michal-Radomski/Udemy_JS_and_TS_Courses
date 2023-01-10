@@ -142,70 +142,87 @@
 // reverseArrayInPlace([1, 2, 3, 4, 5, 6, 7]);
 
 //* 07 Mean Median Mode Algorithm
-function meanMedianMode(array: Array<number>) {
-  return {
-    mean: getMean(array),
-    median: getMedian(array),
-    mode: getMode(array),
-  };
-}
-function getMean(array: Array<number>) {
-  let sum = 0;
-  for (let i = 0; i < array.length; i++) {
-    sum = sum + array[i];
-  }
-  const mean = sum / array.length;
-  console.log({ mean });
-  return mean;
-}
-function getMedian(array: Array<number>) {
-  let sortedArray = array.sort(function (a, b) {
-    return a - b;
-  });
-  let median;
-  // console.log({ sortedArray });
-  if (sortedArray.length % 2 !== 0) {
-    median = sortedArray[Math.floor(sortedArray.length / 2)];
-  } else {
-    let mid1 = sortedArray[sortedArray.length / 2 - 1];
-    let mid2 = sortedArray[sortedArray.length / 2];
-    // console.log(mid1, mid2);
-    median = (mid1 + mid2) / 2;
-  }
-  console.log({ median });
-  return median;
-}
-function getMode(array: Array<number>) {
-  let modeObj: { [num: string]: number } = {};
+// function meanMedianMode(array: Array<number>) {
+//   return {
+//     mean: getMean(array),
+//     median: getMedian(array),
+//     mode: getMode(array),
+//   };
+// }
+// function getMean(array: Array<number>) {
+//   let sum = 0;
+//   for (let i = 0; i < array.length; i++) {
+//     sum = sum + array[i];
+//   }
+//   const mean = sum / array.length;
+//   console.log({ mean });
+//   return mean;
+// }
+// function getMedian(array: Array<number>) {
+//   let sortedArray = array.sort(function (a, b) {
+//     return a - b;
+//   });
+//   let median;
+//   // console.log({ sortedArray });
+//   if (sortedArray.length % 2 !== 0) {
+//     median = sortedArray[Math.floor(sortedArray.length / 2)];
+//   } else {
+//     let mid1 = sortedArray[sortedArray.length / 2 - 1];
+//     let mid2 = sortedArray[sortedArray.length / 2];
+//     // console.log(mid1, mid2);
+//     median = (mid1 + mid2) / 2;
+//   }
+//   console.log({ median });
+//   return median;
+// }
+// function getMode(array: Array<number>) {
+//   let modeObj: { [num: string]: number } = {};
 
-  // Create modeObj
-  array.forEach((num) => {
-    if (!modeObj[num]) {
-      modeObj[num] = 0;
+//   // Create modeObj
+//   array.forEach((num) => {
+//     if (!modeObj[num]) {
+//       modeObj[num] = 0;
+//     }
+//     modeObj[num]++;
+//   });
+
+//   // Create array of mode/s
+//   let maxFrequency = 0;
+//   let modes: string[] = [];
+//   for (let num in modeObj) {
+//     if (modeObj[num] > maxFrequency) {
+//       modes = [num];
+//       maxFrequency = modeObj[num];
+//     } else if (modeObj[num] === maxFrequency) {
+//       modes.push(num);
+//     }
+//   }
+//   // If every value appears same amount of times
+//   if (modes.length === Object.keys(modeObj).length) {
+//     modes = [];
+//   }
+//   console.log({ modes });
+//   return modes;
+// }
+
+// meanMedianMode([1, 2, 3, 4, 5, 4, 6, 1]);
+
+//* 08 Two Sum
+function twoSum(numArray: Array<number>, sum: number) {
+  let pairs = [];
+  let hashTable = [];
+  for (let i = 0; i < numArray.length; i++) {
+    let currNum = numArray[i];
+    let counterpart = sum - currNum;
+    if (hashTable.indexOf(counterpart) !== -1) {
+      pairs.push([currNum, counterpart]);
     }
-    modeObj[num]++;
-  });
-
-  // Create array of mode/s
-  let maxFrequency = 0;
-  let modes: string[] = [];
-  for (let num in modeObj) {
-    if (modeObj[num] > maxFrequency) {
-      modes = [num];
-      maxFrequency = modeObj[num];
-    } else if (modeObj[num] === maxFrequency) {
-      modes.push(num);
-    }
+    hashTable.push(currNum);
   }
-  // If every value appears same amount of times
-  if (modes.length === Object.keys(modeObj).length) {
-    modes = [];
-  }
-  console.log({ modes });
-  return modes;
+  // console.log({ hashTable });
+  return pairs;
 }
-
-meanMedianMode([1, 2, 3, 4, 5, 4, 6, 1]);
+console.log(twoSum([1, 6, 4, 5, 3, 3], 7));
 
 //////////-----------------------------
 //* 10 Fibonacci - recursive -> Runtime exponential BAD!

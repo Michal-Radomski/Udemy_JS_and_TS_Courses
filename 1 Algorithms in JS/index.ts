@@ -225,24 +225,34 @@
 // console.log(twoSum([1, 6, 4, 5, 3, 3], 7));
 
 //* 09 Binary Search
-function binarySearch(numArray: Array<number>, key: number): boolean {
-  let middleIdx = Math.floor(numArray.length / 2);
-  let middleElem = numArray[middleIdx];
-  console.log({ middleIdx, middleElem });
+//* Recursive function
+// function factorial(num: number): number {
+//   if (num === 1) {
+//     return num;
+//   } else {
+//     return num * factorial(num - 1);
+//   }
+// }
+// console.log("factorial(5):", factorial(5));
 
-  if (middleElem === key) {
-    return true;
-  } else if (middleElem < key && numArray.length > 1) {
-    {
-      return binarySearch(numArray.splice(middleIdx, numArray.length), key);
-    }
-  } else if (middleElem > key && numArray.length > 1) {
-    return binarySearch(numArray.splice(0, middleIdx), key);
-  } else {
-    return false;
-  }
-}
-console.log(binarySearch([5, 7, 12, 16, 36, 39, 42, 56, 71], 56));
+// function binarySearch(numArray: Array<number>, key: number): boolean {
+//   let middleIdx = Math.floor(numArray.length / 2);
+//   let middleElem = numArray[middleIdx];
+//   // console.log({ numArray, middleIdx, middleElem });
+
+//   if (middleElem === key) {
+//     return true;
+//   } else if (middleElem < key && numArray.length > 1) {
+//     {
+//       return binarySearch(numArray.splice(middleIdx, numArray.length), key);
+//     }
+//   } else if (middleElem > key && numArray.length > 1) {
+//     return binarySearch(numArray.splice(0, middleIdx), key);
+//   } else {
+//     return false;
+//   }
+// }
+// console.log(binarySearch([5, 7, 12, 16, 36, 39, 42, 56, 71], 56));
 
 //* 10 Fibonacci - recursive -> Runtime exponential BAD!
 // function fibonacci(position: number): number {
@@ -276,3 +286,5 @@ console.log(binarySearch([5, 7, 12, 16, 36, 39, 42, 56, 71], 56));
 // console.log(fibMemo(12));
 // console.log(fibMemo(50));
 // console.log(fibMemo(1000));
+
+//* 12

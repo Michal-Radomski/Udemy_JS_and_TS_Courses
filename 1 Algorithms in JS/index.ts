@@ -287,4 +287,31 @@
 // console.log(fibMemo(50));
 // console.log(fibMemo(1000));
 
-//* 12
+//* 12 Sieve of Eratosthenes Algorithm
+// function sieveOfEratosthenes(num: number): Array<number> {
+//   let primes = [];
+//   for (let i = 0; i <= num; i++) {
+//     primes[i] = true;
+//   }
+
+//   primes[0] = false;
+//   primes[1] = false;
+
+//   for (let i = 2; i <= Math.sqrt(num); i++) {
+//     for (let j = 2; i * j <= num; j++) {
+//       primes[i * j] = false;
+//     }
+//   }
+
+//   const result = [];
+//   for (let i = 0; i < primes.length; i++) {
+//     if (primes[i]) {
+//       result.push(i);
+//     }
+//   }
+//   console.log({ result });
+//   return result;
+// }
+// sieveOfEratosthenes(49);
+
+//* 13 Buble Sort Algorithm

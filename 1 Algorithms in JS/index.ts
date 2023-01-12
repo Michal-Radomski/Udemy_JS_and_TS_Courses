@@ -331,35 +331,62 @@
 // console.log(bubbleSort([6000, 34, 203, 3, 746, 200, 984, 198, 764, 9, 1]));
 
 //* 14 Merge Sort Algorithm
-function mergeSort(array: Array<number>): Array<number> {
-  if (array.length < 2) {
-    return array;
-  }
-  let middleIndex = Math.floor(array.length / 2);
-  let firstHalf = array.slice(0, middleIndex);
-  let secondHalf = array.slice(middleIndex);
+// function mergeSort(array: Array<number>): Array<number> {
+//   if (array.length < 2) {
+//     return array;
+//   }
+//   let middleIndex = Math.floor(array.length / 2);
+//   let firstHalf = array.slice(0, middleIndex);
+//   let secondHalf = array.slice(middleIndex);
 
-  return merge(mergeSort(firstHalf), mergeSort(secondHalf));
-}
+//   return merge(mergeSort(firstHalf), mergeSort(secondHalf));
+// }
 
-function merge(array1: Array<number>, array2: Array<number>): Array<number> {
-  let result = [];
-  // console.log({ array1, array2 });
-  while (array1.length && array2.length) {
-    let minElem;
-    if (array1[0] < array2[0]) {
-      minElem = array1.shift();
-    } else {
-      minElem = array2.shift();
+// function merge(array1: Array<number>, array2: Array<number>): Array<number> {
+//   let result = [];
+//   // console.log({ array1, array2 });
+//   while (array1.length && array2.length) {
+//     let minElem;
+//     if (array1[0] < array2[0]) {
+//       minElem = array1.shift();
+//     } else {
+//       minElem = array2.shift();
+//     }
+//     result.push(minElem);
+//   }
+
+//   if (array1.length) {
+//     result = result.concat(array1);
+//   } else {
+//     result = result.concat(array2);
+//   }
+//   return result as Array<number>;
+// }
+// console.log(mergeSort([6000, 34, 203, 3, 746, 200, 984, 198, 764, 1, 9, 1, 0]));
+
+//* 15 Max Stock Profit Algorithm
+function maxStockProfit(pricesArray: Array<number>): number {
+  let maxProfit = -1;
+  let buyPrice = 0;
+  let sellPrice = 0;
+
+  let changeBuyPrice = true;
+
+  for (let i = 0; i < pricesArray.length; i++) {
+    if (changeBuyPrice) {
+      buyPrice = pricesArray[i];
     }
-    result.push(minElem);
-  }
+    sellPrice = pricesArray[i + 1];
 
-  if (array1.length) {
-    result = result.concat(array1);
-  } else {
-    result = result.concat(array2);
+    if (sellPrice < buyPrice) {
+      changeBuyPrice = true;
+    } else {
+      let tempProfit = sellPrice - buyPrice;
+      if (tempProfit > maxProfit) maxProfit = tempProfit;
+      changeBuyPrice = false;
+    }
   }
-  return result as Array<number>;
+  return maxProfit;
 }
-console.log(mergeSort([6000, 34, 203, 3, 746, 200, 984, 198, 764, 1, 9, 1, 0]));
+
+console.log(maxStockProfit([10, 18, 4, 5, 9, 6, 16, 12]));

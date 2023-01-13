@@ -1,21 +1,21 @@
 //* 01 FizzBuzz Algorithm
-// function fizzBuzz(num: number) {
-//   for (let i = 1; i <= num; i++) {
-//     // if (i % 3 === 0 && i % 5 === 0) {
-//     if (i % 15 === 0) {
-//       console.log("FizzBuzz", i);
-//     } else if (i % 3 === 0) {
-//       console.log("Fizz", i);
-//     } else if (i % 5 === 0) {
-//       console.log("Buzz", i);
-//     } else {
-//       console.log(i);
-//     }
-//   }
-// }
+function fizzBuzz(num: number) {
+  for (let i = 1; i <= num; i++) {
+    // if (i % 3 === 0 && i % 5 === 0) {
+    if (i % 15 === 0) {
+      console.log("FizzBuzz", i);
+    } else if (i % 3 === 0) {
+      console.log("Fizz", i);
+    } else if (i % 5 === 0) {
+      console.log("Buzz", i);
+    } else {
+      console.log(i);
+    }
+  }
+}
 
 // // fizzBuzz(20);
-// fizzBuzz(31);
+fizzBuzz(31);
 
 //* 02 Harmless Ransom Note Algorithm
 // function harmlessRansomNote(noteText: string, magazineText: string) {
@@ -365,28 +365,29 @@
 // console.log(mergeSort([6000, 34, 203, 3, 746, 200, 984, 198, 764, 1, 9, 1, 0]));
 
 //* 15 Max Stock Profit Algorithm
-function maxStockProfit(pricesArray: Array<number>): number {
-  let maxProfit = -1;
-  let buyPrice = 0;
-  let sellPrice = 0;
+// function maxStockProfit(pricesArray: Array<number>): number {
+//   let maxProfit = -1;
+//   let buyPrice = 0;
+//   let sellPrice = 0;
 
-  let changeBuyPrice = true;
+//   let changeBuyPrice = true;
 
-  for (let i = 0; i < pricesArray.length; i++) {
-    if (changeBuyPrice) {
-      buyPrice = pricesArray[i];
-    }
-    sellPrice = pricesArray[i + 1];
+//   for (let i = 0; i < pricesArray.length; i++) {
+//     if (changeBuyPrice) {
+//       buyPrice = pricesArray[i];
+//     }
+//     sellPrice = pricesArray[i + 1];
 
-    if (sellPrice < buyPrice) {
-      changeBuyPrice = true;
-    } else {
-      let tempProfit = sellPrice - buyPrice;
-      if (tempProfit > maxProfit) maxProfit = tempProfit;
-      changeBuyPrice = false;
-    }
-  }
-  return maxProfit;
-}
-
-console.log(maxStockProfit([10, 18, 4, 5, 9, 6, 16, 12]));
+//     if (sellPrice < buyPrice) {
+//       changeBuyPrice = true;
+//     } else {
+//       let tempProfit = sellPrice - buyPrice;
+//       if (tempProfit > maxProfit) {
+//         maxProfit = tempProfit;
+//       }
+//       changeBuyPrice = false;
+//     }
+//   }
+//   return maxProfit;
+// }
+// console.log(maxStockProfit([10, 18, 4, 5, 9, 6, 16, 12]));

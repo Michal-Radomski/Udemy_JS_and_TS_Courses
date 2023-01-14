@@ -118,6 +118,21 @@ LinkedList.prototype.search = function (searchValue) {
   return null;
 };
 
+LinkedList.prototype.indexOf = function (value) {
+  let currentNode = this.head;
+  let currentIndex = 0;
+  const indexes = [];
+
+  while (currentNode) {
+    if (currentNode.value === value) {
+      indexes.push(currentIndex);
+    }
+    currentNode = currentNode.next;
+    currentIndex++;
+  }
+  return indexes;
+};
+
 const myLL = new LinkedList();
 
 myLL.addToTail(10);
@@ -128,6 +143,7 @@ myLL.addToHead(200);
 myLL.addToHead(300);
 
 console.log("myLL:", myLL);
-
 console.log("myLL.search(30):", myLL.search(30));
 console.log("myLL.search(80):", myLL.search(80));
+console.log("myLL.indexOf(20):", myLL.indexOf(20));
+console.log("myLL.indexOf(80):", myLL.indexOf(80));

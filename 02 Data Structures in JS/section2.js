@@ -45,6 +45,50 @@ LinkedList.prototype.addToTail = function (value) {
   this.tail = newNode;
 };
 
+// const myLL = new LinkedList();
+
+// myLL.addToTail(10);
+// myLL.addToTail(20);
+// myLL.addToTail(30);
+// myLL.addToHead(100);
+// myLL.addToHead(200);
+// myLL.addToHead(300);
+
+// // console.log("myLL.tail.prev.prev:", myLL.tail.prev.prev);
+// // console.log("myLL:", myLL);
+// console.log("myLL.tail.prev.prev.prev.prev.prev:", myLL.tail.prev.prev.prev.prev.prev);
+
+LinkedList.prototype.removeHead = function () {
+  if (!this.head) {
+    return null;
+  }
+  let val = this.head.value;
+  this.head = this.head.next;
+
+  if (this.head) {
+    this.head.prev = null;
+  } else {
+    this.tail = null;
+  }
+  return val;
+};
+
+LinkedList.prototype.removeTail = function () {
+  if (!this.tail) {
+    return null;
+  }
+  let val = this.tail.value;
+  this.tail = this.tail.prev;
+
+  if (this.tail) {
+    this.tail.next = null;
+  } else {
+    this.head = null;
+  }
+
+  return val;
+};
+
 const myLL = new LinkedList();
 
 myLL.addToTail(10);
@@ -54,6 +98,9 @@ myLL.addToHead(100);
 myLL.addToHead(200);
 myLL.addToHead(300);
 
-// console.log("myLL.tail.prev.prev:", myLL.tail.prev.prev);
-// console.log("myLL:", myLL);
-console.log("myLL.tail.prev.prev.prev.prev.prev:", myLL.tail.prev.prev.prev.prev.prev);
+console.log("myLL:", myLL);
+
+myLL.removeTail();
+myLL.removeTail();
+
+console.log("myLL:", myLL);

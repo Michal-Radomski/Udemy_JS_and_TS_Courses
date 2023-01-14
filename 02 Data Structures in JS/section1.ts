@@ -9,7 +9,7 @@ interface UserInterface {
   gender: string;
 }
 
-function User(this: any, firstName: string, lastName: string, age: number, gender: string) {
+function User(this: UserInterface, firstName: string, lastName: string, age: number, gender: string) {
   this.firstName = firstName;
   this.lastName = lastName;
   this.age = age;

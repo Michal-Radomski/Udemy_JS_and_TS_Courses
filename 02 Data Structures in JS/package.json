@@ -2,9 +2,8 @@
   "name": "1-data-structures-in-js",
   "version": "1.0.0",
   "description": "",
-  "main": "section1.ts",
   "scripts": {
-    "start": "clear && nodemon section1.ts"
+    "start": "clear && nodemon section2.ts"
   },
   "keywords": [],
   "author": "",

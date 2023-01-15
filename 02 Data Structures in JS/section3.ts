@@ -98,13 +98,48 @@ BST.prototype.breadthFirstTraversal = function (iteratorFunc: (arg0: number) => 
   }
 };
 
-function log(node: { value: number }) {
-  console.log(node.value);
-}
+// function log(node: { value: number }) {
+//   console.log(node.value);
+// }
+
+// const bst = new (BST as any)(50);
+// bst.insert(30);
+// bst.insert(50);
+// bst.insert(10);
+
+// bst.breadthFirstTraversal(log);
+
+BST.prototype.getMinVal = function () {
+  if (this.left) {
+    return this.left.getMinVal();
+  } else {
+    return this.value;
+  }
+};
+
+BST.prototype.getMaxVal = function () {
+  if (this.right) {
+    return this.right.getMaxVal();
+  } else {
+    return this.value;
+  }
+};
 
 const bst = new (BST as any)(50);
+
 bst.insert(30);
-bst.insert(50);
+bst.insert(70);
+bst.insert(100);
+bst.insert(60);
+bst.insert(59);
+bst.insert(20);
+bst.insert(45);
+bst.insert(35);
+bst.insert(85);
+bst.insert(105);
 bst.insert(10);
 
-bst.breadthFirstTraversal(log);
+console.log("bst:", bst);
+
+console.log("bst.getMinVal():", bst.getMinVal());
+console.log("bst.getMaxVal():", bst.getMaxVal());

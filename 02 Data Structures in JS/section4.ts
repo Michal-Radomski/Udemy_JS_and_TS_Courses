@@ -46,7 +46,7 @@ HashTable.prototype.hash = function (key: string) {
 
 HashTable.prototype.insert = function (key: string, value: string) {
   const index = this.hash(key);
-  console.log({ index });
+  // console.log({ index });
   if (!this.buckets[index]) {
     this.buckets[index] = new (HashNode as any)(key, value);
   } else if (this.buckets[index].key === key) {
@@ -64,6 +64,33 @@ HashTable.prototype.insert = function (key: string, value: string) {
   }
 };
 
+// const myHT = new (HashTable as any)(30);
+// myHT.insert("Dean", "dean@gmail.com");
+// myHT.insert("Megan", "megan@gmail.com");
+// myHT.insert("Dane", "dane@yahoo.com");
+// myHT.insert("Dean", "deanmachine@gmail.com");
+// myHT.insert("Megan", "megansmith@gmail.com");
+// myHT.insert("Dane", "dane1010@outlook.com");
+// // console.log("myHT:", myHT, typeof myHT);
+// console.log("myHT.buckets:", myHT.buckets);
+
+HashTable.prototype.get = function (key: string) {
+  const index = this.hash(key);
+
+  if (!this.buckets[index]) {
+    return null;
+  } else {
+    let currentNode = this.buckets[index];
+    while (currentNode) {
+      if (currentNode.key === key) {
+        return currentNode;
+      }
+      currentNode = currentNode.next;
+    }
+    return null;
+  }
+};
+
 const myHT = new (HashTable as any)(30);
 myHT.insert("Dean", "dean@gmail.com");
 myHT.insert("Megan", "megan@gmail.com");
@@ -71,5 +98,6 @@ myHT.insert("Dane", "dane@yahoo.com");
 myHT.insert("Dean", "deanmachine@gmail.com");
 myHT.insert("Megan", "megansmith@gmail.com");
 myHT.insert("Dane", "dane1010@outlook.com");
-// console.log("myHT:", myHT, typeof myHT);
-console.log("myHT.buckets:", myHT.buckets);
+console.log("myHT.get('Megan'):", myHT.get("Megan"));
+console.log("myHT.get('Dean'):", myHT.get("Dean"));
+console.log("myHT.get('Dane'):", myHT.get("Dane"));

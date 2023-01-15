@@ -71,12 +71,40 @@ BST.prototype.depthFirstTraversal = function (iteratorFunc: (arg0: number) => vo
   }
 };
 
-function log(value: number) {
-  console.log(value);
+// function log(value: number) {
+//   console.log(value);
+// }
+
+// const bst = new (BST as any)(50);
+// bst.insert(30);
+// bst.insert(50);
+// bst.insert(10);
+// bst.depthFirstTraversal(log, "in-order");
+
+BST.prototype.breadthFirstTraversal = function (iteratorFunc: (arg0: number) => void) {
+  const queue = [this];
+  console.log("queue:", queue);
+  console.log("this:", this);
+
+  while (queue.length) {
+    let treeNode = queue.shift();
+    iteratorFunc(treeNode);
+    if (treeNode.left) {
+      queue.push(treeNode.left);
+    }
+    if (treeNode.right) {
+      queue.push(treeNode.right);
+    }
+  }
+};
+
+function log(node: { value: number }) {
+  console.log(node.value);
 }
 
 const bst = new (BST as any)(50);
 bst.insert(30);
 bst.insert(50);
 bst.insert(10);
-bst.depthFirstTraversal(log, "in-order");
+
+bst.breadthFirstTraversal(log);

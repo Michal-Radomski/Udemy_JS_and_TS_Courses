@@ -91,13 +91,40 @@ HashTable.prototype.get = function (key: string) {
   }
 };
 
+// const myHT = new (HashTable as any)(30);
+// myHT.insert("Dean", "dean@gmail.com");
+// myHT.insert("Megan", "megan@gmail.com");
+// myHT.insert("Dane", "dane@yahoo.com");
+// myHT.insert("Dean", "deanmachine@gmail.com");
+// myHT.insert("Megan", "megansmith@gmail.com");
+// myHT.insert("Dane", "dane1010@outlook.com");
+// console.log("myHT.get('Megan'):", myHT.get("Megan"));
+// console.log("myHT.get('Dean'):", myHT.get("Dean"));
+// console.log("myHT.get('Dane'):", myHT.get("Dane"));
+
+HashTable.prototype.retrieveAll = function () {
+  const allNodes = [];
+  for (let i = 0; i < this.numBuckets; i++) {
+    let currentNode = this.buckets[i];
+    while (currentNode) {
+      allNodes.push(currentNode);
+      currentNode = currentNode.next;
+    }
+  }
+  // console.log("allNodes:", allNodes);
+  return allNodes;
+};
+
 const myHT = new (HashTable as any)(30);
+
 myHT.insert("Dean", "dean@gmail.com");
 myHT.insert("Megan", "megan@gmail.com");
 myHT.insert("Dane", "dane@yahoo.com");
 myHT.insert("Dean", "deanmachine@gmail.com");
 myHT.insert("Megan", "megansmith@gmail.com");
 myHT.insert("Dane", "dane1010@outlook.com");
-console.log("myHT.get('Megan'):", myHT.get("Megan"));
-console.log("myHT.get('Dean'):", myHT.get("Dean"));
-console.log("myHT.get('Dane'):", myHT.get("Dane"));
+myHT.insert("Joe", "joedoe@facebook.com");
+myHT.insert("Jane", "janedoe@facebook.com");
+
+console.log("myHT.buckets:", myHT.buckets);
+console.log("myHT.retrieveAll():", myHT.retrieveAll());

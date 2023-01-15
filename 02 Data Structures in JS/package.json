@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "clear && nodemon section3.ts"
+    "start": "clear && nodemon section4.ts"
   },
   "keywords": [],
   "author": "",

@@ -46,9 +46,37 @@ BST.prototype.contains = function (value: number) {
   }
 };
 
+// const bst = new (BST as any)(50);
+// bst.insert(30);
+// bst.insert(50);
+// bst.insert(10);
+// console.log("bst:", bst, typeof bst);
+// console.log(bst.contains(50));
+
+BST.prototype.depthFirstTraversal = function (iteratorFunc: (arg0: number) => void, order: string) {
+  if (order === "pre-order") {
+    iteratorFunc(this.value);
+  }
+  if (this.left) {
+    this.left.depthFirstTraversal(iteratorFunc, order);
+  }
+  if (order === "in-order") {
+    iteratorFunc(this.value);
+  }
+  if (this.right) {
+    this.right.depthFirstTraversal(iteratorFunc, order);
+  }
+  if (order === "post-order") {
+    iteratorFunc(this.value);
+  }
+};
+
+function log(value: number) {
+  console.log(value);
+}
+
 const bst = new (BST as any)(50);
 bst.insert(30);
 bst.insert(50);
 bst.insert(10);
-// console.log("bst:", bst, typeof bst);
-console.log(bst.contains(50));
+bst.depthFirstTraversal(log, "in-order");

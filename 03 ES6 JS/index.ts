@@ -88,10 +88,10 @@ datesArray.forEach((date: string, datesIndex: number) => {
   //* 03 filter
   //@ Params: element, index, array, Return value: a shallow copy of a portion of the given array
   const products = [
-    { name: "cucumber", type: "vegetable" },
-    { name: "banana", type: "fruit" },
-    { name: "celery", type: "vegetable" },
-    { name: "orange", type: "fruit" },
+    { name: "cucumber", type: "vegetable", quantity: 0, price: 1 },
+    { name: "banana", type: "fruit", quantity: 10, price: 15 },
+    { name: "celery", type: "vegetable", quantity: 30, price: 9 },
+    { name: "orange", type: "fruit", quantity: 3, price: 5 },
   ];
 
   // const vegetables = [] as {
@@ -105,6 +105,12 @@ datesArray.forEach((date: string, datesIndex: number) => {
   // }
   // console.log({ vegetables });
 
-  const fruits = products.filter((product) => product.type === "fruit");
-  console.log({ fruits });
+  // const fruits = products.filter((product) => product.type === "fruit");
+  // console.log({ fruits });
+
+  // Type is "vegetable" and quantity > 0 and price < 10
+  const filteredProducts = products.filter(
+    (product) => product.type === "vegetable" && product.quantity > 0 && product.price < 10
+  );
+  console.log({ filteredProducts });
 }

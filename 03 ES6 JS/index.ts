@@ -12,43 +12,56 @@ datesArray.forEach((date: string, datesIndex: number) => {
 });
 // console.log("datesTimesArray:", datesTimesArray);
 
-//* 01 forEach
-// Old way - for loop
-const colors = ["red", "blue", "green"];
-// for (var i = 0; i < colors.length; i++) {
-//   console.log(colors[i]);
-// }
-colors.forEach(function (color, index) {
-  console.log(color, index);
-});
-colors.forEach((color, index) => console.log(color, index));
+{
+  //* 01 forEach
+  //@ Params: element, index, array, Return: none (undefined)
+  // Old way - for loop
+  const colors = ["red", "blue", "green"];
+  // for (var i = 0; i < colors.length; i++) {
+  //   console.log(colors[i]);
+  // }
+  colors.forEach(function (color, index) {
+    console.log(color, index);
+  });
+  colors.forEach((color, index) => console.log(color, index));
 
-const numbers = [1, 2, 3, 4, 5];
-let sum = 0;
-let sum2 = 0;
+  const numbers = [1, 2, 3, 4, 5];
+  let sum = 0;
+  let sum2 = 0;
 
-//* V1
-// numbers.forEach(function (number, index) {
-//   sum += number;
-//   sum2 += index;
-// });
+  //* V1
+  // numbers.forEach(function (number, index) {
+  //   sum += number;
+  //   sum2 += index;
+  // });
 
-//* V2
-function adder(number: number, index: number) {
-  sum += number;
-  sum2 += index;
+  //* V2
+  function adder(number: number, index: number) {
+    sum += number;
+    sum2 += index;
+  }
+  numbers.forEach(adder);
+  // console.log({ sum, sum2 });
+
+  const images = [
+    { height: 10, width: 30 },
+    { height: 20, width: 90 },
+    { height: 54, width: 32 },
+  ];
+  let areas = [] as number[];
+
+  images.forEach((image) => areas.push(image.height * image.width));
+  // console.log({ areas });
 }
-numbers.forEach(adder);
-// console.log({ sum, sum2 });
 
-const images = [
-  { height: 10, width: 30 },
-  { height: 20, width: 90 },
-  { height: 54, width: 32 },
-];
-let areas = [] as number[];
-
-images.forEach((image) => areas.push(image.height * image.width));
-// console.log({ areas });
-
-//* 02 map
+{
+  //* 02 map
+  //@ Params: element, index, array, Return: new Array
+  const numbers = [1, 2, 3];
+  // const doubledNumbers = [] as number[];
+  // for (let i = 0; i < numbers.length; i++) {
+  //   doubledNumbers.push(numbers[i] * 2);
+  // }
+  const doubledNumbers = numbers.map((number) => number * 2);
+  console.log("doubledNumbers:", doubledNumbers);
+}

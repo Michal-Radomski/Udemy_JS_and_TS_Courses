@@ -6,7 +6,7 @@ const datesTimesArray = [] as string[];
 datesArray.forEach((date: string, datesIndex: number) => {
   timesArray.forEach((time: string, timesIndex: number) => {
     if (datesIndex === timesIndex) {
-      datesTimesArray.push(date + " " + time);
+      datesTimesArray.push(datesIndex + " -> " + date + " " + time);
     }
   });
 });
@@ -18,4 +18,7 @@ const colors = ["red", "blue", "green"];
 // for (var i = 0; i < colors.length; i++) {
 //   console.log(colors[i]);
 // }
-colors.forEach((color) => console.log(color));
+colors.forEach(function (color, index) {
+  console.log(color, index);
+});
+colors.forEach((color, index) => console.log(color, index));

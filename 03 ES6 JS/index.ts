@@ -22,3 +22,21 @@ colors.forEach(function (color, index) {
   console.log(color, index);
 });
 colors.forEach((color, index) => console.log(color, index));
+
+const numbers = [1, 2, 3, 4, 5];
+let sum = 0;
+let sum2 = 0;
+
+//* V1
+// numbers.forEach(function (number, index) {
+//   sum += number;
+//   sum2 += index;
+// });
+
+//* V2
+function adder(number: number, index: number) {
+  sum += number;
+  sum2 += index;
+}
+numbers.forEach(adder);
+console.log({ sum, sum2 });

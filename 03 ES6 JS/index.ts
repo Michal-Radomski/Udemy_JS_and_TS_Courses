@@ -1,4 +1,4 @@
-//* Nested forEach loop
+//* 00 Nested forEach loop
 const datesArray = ["2019-01-11", "2019-01-12", "2019-01-13", "2019-01-14"] as string[];
 const timesArray = ["00:00:00", "06:00:00", "12:00:00", "18:00:00"] as string[];
 const datesTimesArray = [] as string[];
@@ -10,7 +10,7 @@ datesArray.forEach((date: string, datesIndex: number) => {
     }
   });
 });
-console.log("datesTimesArray:", datesTimesArray);
+// console.log("datesTimesArray:", datesTimesArray);
 
 //* 01 forEach
 // Old way - for loop
@@ -39,4 +39,16 @@ function adder(number: number, index: number) {
   sum2 += index;
 }
 numbers.forEach(adder);
-console.log({ sum, sum2 });
+// console.log({ sum, sum2 });
+
+const images = [
+  { height: 10, width: 30 },
+  { height: 20, width: 90 },
+  { height: 54, width: 32 },
+];
+let areas = [] as number[];
+
+images.forEach((image) => areas.push(image.height * image.width));
+// console.log({ areas });
+
+//* 02 map

@@ -93,6 +93,18 @@ datesArray.forEach((date: string, datesIndex: number) => {
     { name: "celery", type: "vegetable" },
     { name: "orange", type: "fruit" },
   ];
-  const fruits = products.filter((elem) => elem.type === "fruit");
+
+  // const vegetables = [] as {
+  //   name: string;
+  //   type: string;
+  // }[];
+  // for (var i = 0; i < products.length; i++) {
+  //   if (products[i].type === "vegetable") {
+  //     vegetables.push(products[i]);
+  //   }
+  // }
+  // console.log({ vegetables });
+
+  const fruits = products.filter((product) => product.type === "fruit");
   console.log({ fruits });
 }

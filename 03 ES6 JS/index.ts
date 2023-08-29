@@ -57,11 +57,22 @@ datesArray.forEach((date: string, datesIndex: number) => {
 {
   //* 02 map
   //@ Params: element, index, array, Return: new Array
-  const numbers = [1, 2, 3];
+  const numbers = [1, 2, 3]; //* unchanged!
   // const doubledNumbers = [] as number[];
   // for (let i = 0; i < numbers.length; i++) {
   //   doubledNumbers.push(numbers[i] * 2);
   // }
+
+  // const doubledNumbers = numbers.map(function (number) {
+  //   return number * 2;
+  // });
   const doubledNumbers = numbers.map((number) => number * 2);
   console.log("doubledNumbers:", doubledNumbers);
+
+  const cars = [
+    { model: "Buick", price: "Cheap" },
+    { model: "Camaro", price: "Expensive" },
+  ];
+  const prices = cars.map((car) => car.price);
+  console.log({ prices });
 }

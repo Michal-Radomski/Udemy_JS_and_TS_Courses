@@ -75,4 +75,11 @@ datesArray.forEach((date: string, datesIndex: number) => {
   ];
   const prices = cars.map((car) => car.price);
   console.log({ prices });
+
+  const paints = [{ color: "red" }, { color: "blue" }, { color: "yellow" }];
+  function pluck(array: Array<any>, property: string) {
+    const returnArray = array.map((elem) => elem[property]);
+    return returnArray;
+  }
+  console.log(pluck(paints, "color"));
 }

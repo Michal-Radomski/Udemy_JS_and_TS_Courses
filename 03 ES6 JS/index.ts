@@ -14,7 +14,7 @@ datesArray.forEach((date: string, datesIndex: number) => {
 
 {
   //* 01 forEach
-  //@ Params: element, index, array, Return: none (undefined)
+  //@ Params: element, index, array, Return value: none (undefined)
   // Old way - for loop
   const colors = ["red", "blue", "green"];
   // for (var i = 0; i < colors.length; i++) {
@@ -56,7 +56,7 @@ datesArray.forEach((date: string, datesIndex: number) => {
 
 {
   //* 02 map
-  //@ Params: element, index, array, Return: new Array
+  //@ Params: element, index, array, Return value: new Array
   const numbers = [1, 2, 3]; //* unchanged!
   // const doubledNumbers = [] as number[];
   // for (let i = 0; i < numbers.length; i++) {
@@ -82,4 +82,17 @@ datesArray.forEach((date: string, datesIndex: number) => {
     return returnArray;
   }
   console.log(pluck(paints, "color"));
+}
+
+{
+  //* 03 filter
+  //@ Params: element, index, array, Return value: a shallow copy of a portion of the given array
+  const products = [
+    { name: "cucumber", type: "vegetable" },
+    { name: "banana", type: "fruit" },
+    { name: "celery", type: "vegetable" },
+    { name: "orange", type: "fruit" },
+  ];
+  const fruits = products.filter((elem) => elem.type === "fruit");
+  console.log({ fruits });
 }

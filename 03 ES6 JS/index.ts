@@ -138,4 +138,15 @@ datesArray.forEach((date: string, datesIndex: number) => {
     return comments.filter((comment) => comment.postId === post.id);
   };
   console.log("commentsForPosts(post, comments):", commentsForPosts(post, comments));
+
+  // const numbers = [10, 20, 30];
+  // function reject(array: Array<number>, iteratorFunction: Function) {
+  //   return array.filter((element) => {
+  //     return !iteratorFunction(element);
+  //   });
+  // }
+  // const lessThanFifteen = reject(numbers, function (number: number) {
+  //   return number > 15;
+  // });
+  // console.log({ lessThanFifteen });
 }

@@ -76,9 +76,13 @@ datesArray.forEach((date: string, datesIndex: number) => {
   const prices = cars.map((car) => car.price);
   console.log({ prices });
 
+  interface Paint {
+    color: string;
+  }
+
   const paints = [{ color: "red" }, { color: "blue" }, { color: "yellow" }];
-  function pluck(array: Array<any>, property: string) {
-    const returnArray = array.map((elem) => elem[property]);
+  function pluck(array: Array<Paint>, property: string) {
+    const returnArray = array.map((elem) => elem[property as keyof Paint]);
     return returnArray;
   }
   console.log(pluck(paints, "color"));
@@ -108,9 +112,30 @@ datesArray.forEach((date: string, datesIndex: number) => {
   // const fruits = products.filter((product) => product.type === "fruit");
   // console.log({ fruits });
 
-  // Type is "vegetable" and quantity > 0 and price < 10
+  //* Filter: type is "vegetable" and quantity > 0 and price < 10
   const filteredProducts = products.filter(
     (product) => product.type === "vegetable" && product.quantity > 0 && product.price < 10
   );
   console.log({ filteredProducts });
+
+  interface Post {
+    id: number;
+    title: string;
+  }
+  interface Comment {
+    postId: number;
+    content: string;
+  }
+
+  const post: Post = { id: 4, title: "New Post" };
+  const comments: Comment[] = [
+    { postId: 4, content: "Nice post" },
+    { postId: 3, content: "It was oki" },
+    { postId: 4, content: "Neat" },
+  ];
+
+  const commentsForPosts = (post: Post, comments: Comment[]) => {
+    return comments.filter((comment) => comment.postId === post.id);
+  };
+  console.log("commentsForPosts(post, comments):", commentsForPosts(post, comments));
 }

@@ -273,11 +273,21 @@ datesArray.forEach((date: string, datesIndex: number) => {
   //* 06 reduce
   //@ Params: accumulator, currentValue, currentIndex, array and optional: initialValue, Returns a value
   const numbers = [10, 20, 30];
+  //* V1
   // let sum = 0;
   // for (let i = 0; i < numbers.length; i++) {
   //   sum += numbers[i];
   // }
   // console.log({ sum });
+  //* V2
   const sum = numbers.reduce((partialSum, number) => partialSum + number, 0);
   console.log({ sum });
+
+  const primaryColors = [{ color: "red" }, { color: "yellow" }, { color: "blue" }];
+  const colors = primaryColors.reduce((previous: string[], primaryColor) => {
+    previous.push(primaryColor.color);
+    // console.log({ previous });
+    return previous;
+  }, []);
+  console.log("colors:", colors);
 }

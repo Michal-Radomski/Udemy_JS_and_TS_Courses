@@ -268,3 +268,16 @@ datesArray.forEach((date: string, datesIndex: number) => {
     fields.every((field) => field.validate())
   );
 }
+
+{
+  //* 06 reduce
+  //@ Params: accumulator, currentValue, currentIndex, array and optional: initialValue, Returns a value
+  const numbers = [10, 20, 30];
+  // let sum = 0;
+  // for (let i = 0; i < numbers.length; i++) {
+  //   sum += numbers[i];
+  // }
+  // console.log({ sum });
+  const sum = numbers.reduce((partialSum, number) => partialSum + number, 0);
+  console.log({ sum });
+}

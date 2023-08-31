@@ -172,8 +172,8 @@ datesArray.forEach((date: string, datesIndex: number) => {
   // console.log({ user });
 
   // V2 -> ES6
-  const user2 = users.find((user) => user.name === "Alex");
-  console.log({ user2 });
+  // const user2 = users.find((user) => user.name === "Alex");
+  // console.log({ user2 });
 
   class Car {
     model: string;
@@ -182,10 +182,10 @@ datesArray.forEach((date: string, datesIndex: number) => {
     }
   }
 
-  const cars = [new Car("Buick"), new Car("Camaro"), new Car("Focus")];
+  const cars = [new Car("Buick"), new Car("Camaro"), new Car("Focus")] as Car[];
   // console.log("cars:", cars);
 
-  const focus = cars.find((car) => car.model === "Focus");
+  const focus = cars.find((car) => car.model === "Focus") as Car;
   console.log({ focus });
 
   interface Post {
@@ -206,6 +206,19 @@ datesArray.forEach((date: string, datesIndex: number) => {
   function postForComment(posts: Post[], comment: Comment) {
     return posts.find((post) => post.id === comment.postId);
   }
-
   console.log("postForComment(posts, comment):", postForComment(posts, comment));
+
+  const ladders = [
+    { id: 1, height: 20 },
+    { id: 3, height: 25 },
+  ];
+
+  function findWhere(array: any[], criteria: { [x: string]: number }) {
+    const criteriaProperty = Object.keys(criteria)[0];
+    // console.log({ criteriaProperty });
+    const res = array.find((elem) => elem[criteriaProperty] === criteria[criteriaProperty]);
+    console.log({ res });
+    return res;
+  }
+  findWhere(ladders, { height: 25 });
 }

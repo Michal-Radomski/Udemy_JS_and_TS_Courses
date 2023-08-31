@@ -222,3 +222,17 @@ datesArray.forEach((date: string, datesIndex: number) => {
   }
   findWhere(ladders, { height: 25 });
 }
+
+{
+  //* 03 every and some
+  //@ Params: element, index, array, Return value: true or false (for both)
+  const computers = [
+    { name: "Apple", ram: 24 },
+    { name: "Compaq", ram: 4 },
+    { name: "Acer", ram: 32 },
+  ];
+
+  const allComputersCanRunProgram = computers.every((computer) => computer.ram > 16);
+  const onlySomeComputersCanRunProgram = computers.some((computer) => computer.ram > 16);
+  console.log({ allComputersCanRunProgram, onlySomeComputersCanRunProgram });
+}

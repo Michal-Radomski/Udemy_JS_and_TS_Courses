@@ -152,7 +152,7 @@ datesArray.forEach((date: string, datesIndex: number) => {
 }
 
 {
-  //* 03 find
+  //* 04 find
   //@ Params: element, index, array, Return value: The first element in the array that satisfies the provided testing function or undefined
   const users = [
     { name: "Jill", id: 1 },
@@ -224,7 +224,7 @@ datesArray.forEach((date: string, datesIndex: number) => {
 }
 
 {
-  //* 03 every and some
+  //* 05 every and some
   //@ Params: element, index, array, Return value: true or false (for both)
   const computers = [
     { name: "Apple", ram: 24 },
@@ -244,5 +244,27 @@ datesArray.forEach((date: string, datesIndex: number) => {
   console.log(
     "names.some((name) => name.length > 4):",
     names.some((name) => name.length > 4)
+  );
+
+  class Field {
+    validate!: () => boolean;
+    value: string;
+    constructor(value: string) {
+      this.value = value;
+    }
+  }
+
+  Field.prototype.validate = function () {
+    return this.value.length > 2;
+  };
+
+  const username = new Field("2coll");
+  const password = new Field("my_password");
+  const birthDate = new Field("10/10/2010");
+
+  const fields = [username, password, birthDate];
+  console.log(
+    "fields.every((field) => field.validate()):",
+    fields.every((field) => field.validate())
   );
 }

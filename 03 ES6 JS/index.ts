@@ -150,3 +150,28 @@ datesArray.forEach((date: string, datesIndex: number) => {
   // });
   // console.log({ lessThanFifteen });
 }
+
+{
+  //* 03 find
+  //@ Params: element, index, array, Return value: The first element in the array that satisfies the provided testing function or undefined
+  const users = [
+    { name: "Jill", id: 1 },
+    { name: "Alex", id: 2 },
+    { name: "Bill", id: 3 },
+    { name: "Alex", id: 4 },
+  ];
+
+  // V1 -> old version
+  // let user = { name: "" };
+  // for (let i = 0; i < users.length; i++) {
+  //   if (users[i].name === "Alex") {
+  //     user = users[i];
+  //     break;
+  //   }
+  // }
+  // console.log({ user });
+
+  // V2 -> ES6
+  const user2 = users.find((user) => user.name === "Alex");
+  console.log({ user2 });
+}

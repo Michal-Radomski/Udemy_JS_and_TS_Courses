@@ -174,4 +174,38 @@ datesArray.forEach((date: string, datesIndex: number) => {
   // V2 -> ES6
   const user2 = users.find((user) => user.name === "Alex");
   console.log({ user2 });
+
+  class Car {
+    model: string;
+    constructor(model: string) {
+      this.model = model;
+    }
+  }
+
+  const cars = [new Car("Buick"), new Car("Camaro"), new Car("Focus")];
+  // console.log("cars:", cars);
+
+  const focus = cars.find((car) => car.model === "Focus");
+  console.log({ focus });
+
+  interface Post {
+    id: number;
+    title: string;
+  }
+  interface Comment {
+    postId: number;
+    content: string;
+  }
+
+  const posts = [
+    { id: 1, title: "New Post" },
+    { id: 2, title: "Old Post" },
+  ];
+  const comment = { postId: 1, content: "Great Post" };
+
+  function postForComment(posts: Post[], comment: Comment) {
+    return posts.find((post) => post.id === comment.postId);
+  }
+
+  console.log("postForComment(posts, comment):", postForComment(posts, comment));
 }

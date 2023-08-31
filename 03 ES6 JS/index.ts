@@ -235,4 +235,14 @@ datesArray.forEach((date: string, datesIndex: number) => {
   const allComputersCanRunProgram = computers.every((computer) => computer.ram > 16);
   const onlySomeComputersCanRunProgram = computers.some((computer) => computer.ram > 16);
   console.log({ allComputersCanRunProgram, onlySomeComputersCanRunProgram });
+
+  const names = ["Alexandria", "Matthew", "Joe"];
+  console.log(
+    "names.every((name) => name.length > 4):",
+    names.every((name) => name.length > 4)
+  );
+  console.log(
+    "names.some((name) => name.length > 4):",
+    names.some((name) => name.length > 4)
+  );
 }

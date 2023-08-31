@@ -290,4 +290,21 @@ datesArray.forEach((date: string, datesIndex: number) => {
     return previous;
   }, []);
   console.log("colors:", colors);
+
+  function balancedParens(string: string) {
+    return !string.split("").reduce(function (previous: number, char: string) {
+      if (previous < 0) {
+        return previous;
+      }
+      if (char === "(") {
+        return ++previous;
+      }
+      if (char === ")") {
+        return --previous;
+      }
+      return previous;
+    }, 0);
+  }
+  console.log('balancedParens("(((()))))1"):', balancedParens("(((()))))1"));
+  console.log('balancedParens(")("):', balancedParens(")("));
 }

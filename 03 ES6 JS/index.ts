@@ -307,4 +307,39 @@ datesArray.forEach((date: string, datesIndex: number) => {
   }
   console.log('balancedParens("(((()))))1"):', balancedParens("(((()))))1"));
   console.log('balancedParens(")("):', balancedParens(")("));
+
+  const trips = [{ distance: 34 }, { distance: 12 }, { distance: 1 }];
+  const totalDistance = trips.reduce((acc, curr) => acc + curr.distance, 0);
+  console.log({ totalDistance });
+
+  const desks = [{ type: "sitting" }, { type: "standing" }, { type: "sitting" }, { type: "sitting" }, { type: "standing" }];
+  const deskTypes = desks.reduce(
+    function (prev, curr) {
+      if (curr.type === "sitting") {
+        return { standing: prev.standing, sitting: prev.sitting + 1 };
+      }
+      if (curr.type === "standing") {
+        return { standing: prev.standing + 1, sitting: prev.sitting };
+      }
+      return prev;
+    },
+    { sitting: 0, standing: 0 }
+  );
+  console.log({ deskTypes });
+
+  const numbers2 = [1, 1, 2, 3, 4, 4];
+  function unique(array: number[]) {
+    return array.reduce(function (acc, element) {
+      const existingElement = acc.find(function (target) {
+        return target === element;
+      });
+
+      if (!existingElement) {
+        acc.push(element);
+      }
+
+      return acc;
+    }, [] as number[]);
+  }
+  console.log("unique(numbers2):", unique(numbers2));
 }

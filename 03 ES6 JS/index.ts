@@ -341,6 +341,7 @@ datesArray.forEach((date: string, datesIndex: number) => {
   }
   console.log("unique(numbers2):", unique(numbers2));
 
+  //* only with find
   // function unique2(array: number[]) {
   //   const newNumbers = [] as number[];
   //   array.find((_elem, index, arr) => {
@@ -351,4 +352,30 @@ datesArray.forEach((date: string, datesIndex: number) => {
   //   return newNumbers;
   // }
   // console.log("unique2(numbers2):", unique2(numbers2));
+}
+
+//* Additional exercises
+{
+  //* 07 at()
+  const array1 = [5, 12, 8, 130, 44];
+  console.log("array1.at(2):", array1.at(2)); // 8
+  console.log("array1.at(-2):", array1.at(-2)); // 130
+}
+
+{
+  //* 08 concat()
+  //@ Returns a new Array instance
+  const array1 = ["a", "b", "c"];
+  const array2 = ["d", "e", "f"];
+  const array3 = ([] as string[]).concat(array1, array2);
+  console.log("array3:", array3); // ["a", "b", "c", "d", "e", "f"]
+}
+
+{
+  //* 09 findIndex()
+  //@ Params: element, index, array, Return value: The index of the first element in the array that passes the test or -1
+  const array1 = [5, 12, 8, 130, 44];
+  const indexValueGt_13 = array1.findIndex((elem) => elem > 13); //* 3
+  const indexValueGt_200 = array1.findIndex((elem) => elem > 200); //* -1
+  console.log({ indexValueGt_13, indexValueGt_200 });
 }

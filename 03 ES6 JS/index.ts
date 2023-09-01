@@ -379,3 +379,38 @@ datesArray.forEach((date: string, datesIndex: number) => {
   const indexValueGt_200 = array1.findIndex((elem) => elem > 200); //* -1
   console.log({ indexValueGt_13, indexValueGt_200 });
 }
+
+{
+  //* 10 flat()
+  //@ Params: depth, default: 1, Return value: a new array
+  const arr1 = [0, 1, 2, [3, 4]];
+  console.log("arr1.flat(1):", arr1.flat(1)); // expected output: Array [0, 1, 2, 3, 4]
+
+  const arr2 = [0, 1, [2, [3, [4, 5]]]];
+  console.log("arr2.flat(1):", arr2.flat(1)); // expected output: Array [0, 1, 2, Array [3, Array [4, 5]]]
+  console.log("arr2.flat(2):", arr2.flat(2)); // expected output: Array [0, 1, 2, 3, Array [4, 5]]
+  console.log("arr2.flat(Infinity):", arr2.flat(Infinity)); // expected output: Array [0, 1, 2, 3, 4, 5]
+}
+
+{
+  //* 11 ArrayFrom()
+  //@ Params: element, index, Return value: a new array
+  const set = new Set(["foo", "bar", "baz", "foo"]);
+  const arr1 = Array.from(set);
+  console.log({ arr1 }); // [ "foo", "bar", "baz" ]
+
+  const map = new Map([
+    [1, 2],
+    [2, 4],
+    [4, 8],
+  ]);
+  const arr2 = Array.from(map);
+  console.log({ arr2 }); // [[1, 2], [2, 4], [4, 8]]
+}
+
+{
+  //* 12 includes()
+  //@ Params: searchElement, fromIndex - optional , Return value: boolean
+  const pets = ["cat", "dog", "bat"];
+  console.log("pets.includes('cat'):", pets.includes("cat")); // Expected output: true
+}

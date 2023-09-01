@@ -333,13 +333,22 @@ datesArray.forEach((date: string, datesIndex: number) => {
       const existingElement = acc.find(function (target) {
         return target === element;
       });
-
       if (!existingElement) {
         acc.push(element);
       }
-
       return acc;
     }, [] as number[]);
   }
   console.log("unique(numbers2):", unique(numbers2));
+
+  // function unique2(array: number[]) {
+  //   const newNumbers = [] as number[];
+  //   array.find((_elem, index, arr) => {
+  //     if (arr[index] !== arr[index + 1]) {
+  //       newNumbers.push(arr[index]);
+  //     }
+  //   });
+  //   return newNumbers;
+  // }
+  // console.log("unique2(numbers2):", unique2(numbers2));
 }

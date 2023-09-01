@@ -414,3 +414,52 @@ datesArray.forEach((date: string, datesIndex: number) => {
   const pets = ["cat", "dog", "bat"];
   console.log("pets.includes('cat'):", pets.includes("cat")); // Expected output: true
 }
+
+{
+  //* 13 indexOf()
+  //@ Params: searchElement, fromIndex - optional , Return value: The first index of the element in the array; -1 if not found
+  const beasts = ["ant", "bison", "camel", "duck", "bison"];
+  console.log("beasts.indexOf('bison'):", beasts.indexOf("bison")); // Expected output: 1
+}
+
+{
+  //* 14 join()
+  //@ Params: separator , Return value: string
+  const elements = ["Fire", "Air", "Water"];
+  console.log("elements.join():", elements.join()); // Expected output: "Fire,Air,Water"
+  console.log("elements.join(''):", elements.join("")); // Expected output: "FireAirWater
+}
+
+{
+  //* 15 pop()
+  //@ Params: --- , Return value: removed elem (the last one) from the array
+  const plants = ["broccoli", "cauliflower", "cabbage", "kale", "tomato"];
+  console.log("plants.pop():", plants.pop()); // Expected output: "tomato"
+  console.log({ plants }); // [ 'broccoli', 'cauliflower', 'cabbage', 'kale' ]
+
+  //* 16 push()
+  //@ Returns a new length of the array
+  const animals = ["pigs", "goats", "sheep"];
+  const count = animals.push("cows");
+  console.log({ animals, count }); // Expected output: Array ["pigs", "goats", "sheep", "cows"], count: 4
+
+  //* 17 shift()
+  //@ Params: --- , Return value: removed elem (the first one) from the array
+  const array2 = [1, 2, 3];
+  const firstElement = array2.shift();
+  console.log({ array2 }); // Expected output: Array [2, 3]
+  console.log({ firstElement }); // Expected output: 1
+
+  //* 18 unshift()
+  //@ Returns a new length of the array
+  const array3 = [1, 2, 3];
+  console.log("array3.unshift(4, 5):", array3.unshift(4, 5)); // Expected output: 5
+  console.log({ array3 }); // Expected output: Array [4, 5, 1, 2, 3]
+
+  // *19 reverse()
+  //@ Careful: reverse is destructive -- it changes the original!
+  const array1 = ["one", "two", "three"];
+  const reversed = array1.reverse();
+  console.log("reversed:", reversed); // Expected output: "reversed:" Array ["three", "two", "one"]
+  console.log("array1:", array1); // Expected output: "reversed:" Array ["three", "two", "one"]
+}

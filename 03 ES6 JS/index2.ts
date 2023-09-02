@@ -196,6 +196,18 @@ console.log("$.ajax:", $.ajax);
   //* Spread operator
   const defaultColors = ["green", "red"];
   const userFavoriteColors = ["orange", "yellow"];
-  const colors = [...defaultColors, ...userFavoriteColors];
+  const fallColors = ["fireRed", "fallOrange"];
+  const colors = ["pink", "blue", ...fallColors, ...defaultColors, ...userFavoriteColors];
   console.log({ colors });
+
+  //* Rest + rest operator together
+  //- rest operator
+  function validateShoppingList(...items: string[]) {
+    if (items.indexOf("milk") < 0) {
+      //- spread operator
+      return ["milk", ...items];
+    }
+    return items;
+  }
+  console.log('validateShoppingList("oranges", "bread", "eggs"):', validateShoppingList("oranges", "bread", "eggs"));
 }

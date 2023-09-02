@@ -315,34 +315,63 @@ console.log("$.ajax:", $.ajax);
 
 {
   //* Classes
+  //* ES5
   interface Options {
     title: string;
     color?: string;
   }
 
-  //* ES5
-  function Car(this: any, options: Options) {
-    this.title = options.title;
-  }
-  Car.prototype.drive = function () {
-    return "vroom";
-  };
-  function Toyota(this: any, options: Options) {
-    Car.call(this, options);
-    this.color = options.color;
-  }
-  Toyota.prototype = Object.create(Car.prototype);
-  Toyota.prototype.constructor = Toyota;
-  Toyota.prototype.honk = function () {
-    return "beep";
-  };
-  // const car = new (Car as any)({ title: "Focus" });
-  // console.log({ car });
-  // console.log("car.drive():", car.drive());
-  const toyota = new (Toyota as any)({ color: "red", title: "Corolla" });
-  console.log({ toyota });
-  console.log("toyota.drive():", toyota.drive());
-  console.log("toyota.honk():", toyota.honk());
+  // function Car(this: any, options: Options) {
+  //   this.title = options.title;
+  // }
+  // Car.prototype.drive = function () {
+  //   return "vroom";
+  // };
+  // function Toyota(this: any, options: Options) {
+  //   Car.call(this, options);
+  //   this.color = options.color;
+  // }
+  // Toyota.prototype = Object.create(Car.prototype);
+  // Toyota.prototype.constructor = Toyota;
+  // Toyota.prototype.honk = function () {
+  //   return "beep";
+  // };
+  // // const car = new (Car as any)({ title: "Focus" });
+  // // console.log({ car });
+  // // console.log("car.drive():", car.drive());
+  // const toyota = new (Toyota as any)({ color: "red", title: "Corolla" });
+  // console.log({ toyota });
+  // console.log("toyota.drive():", toyota.drive());
+  // console.log("toyota.honk():", toyota.honk());
 
   //* ES5
+  class Car {
+    title: string;
+    constructor({ title }: { title: string }) {
+      this.title = title;
+    }
+    drive() {
+      return "vroom";
+    }
+  }
+  // console.log({ Car }, typeof Car);
+  const car = new Car({ title: "Focus" });
+  // console.log({ car }, typeof car);
+  console.log("car.drive():", car.drive());
+
+  class Toyota extends Car {
+    color: string;
+    constructor(options: Options) {
+      super(options);
+      this.color = options.color!;
+    }
+    honk() {
+      return "beep";
+    }
+  }
+
+  const toyota = new Toyota({ color: "red", title: "Corolla" });
+  console.log({ toyota });
+  console.log("toyota.honk():", toyota.honk());
+  console.log("toyota.drive():", toyota.drive());
 }

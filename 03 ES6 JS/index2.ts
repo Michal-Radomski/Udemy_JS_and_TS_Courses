@@ -312,3 +312,37 @@ console.log("$.ajax:", $.ajax);
   }
   console.log("double(numbers):", double(numbers));
 }
+
+{
+  //* Classes
+  interface Options {
+    title: string;
+    color?: string;
+  }
+
+  //* ES5
+  function Car(this: any, options: Options) {
+    this.title = options.title;
+  }
+  Car.prototype.drive = function () {
+    return "vroom";
+  };
+  function Toyota(this: any, options: Options) {
+    Car.call(this, options);
+    this.color = options.color;
+  }
+  Toyota.prototype = Object.create(Car.prototype);
+  Toyota.prototype.constructor = Toyota;
+  Toyota.prototype.honk = function () {
+    return "beep";
+  };
+  // const car = new (Car as any)({ title: "Focus" });
+  // console.log({ car });
+  // console.log("car.drive():", car.drive());
+  const toyota = new (Toyota as any)({ color: "red", title: "Corolla" });
+  console.log({ toyota });
+  console.log("toyota.drive():", toyota.drive());
+  console.log("toyota.honk():", toyota.honk());
+
+  //* ES5
+}

@@ -49,4 +49,30 @@
   console.log("add(1,2):", add(1, 2));
   console.log("add2(1,2):", add2(1, 2));
   console.log("add3(1,2):", add3(1, 2));
+
+  const double = (number: number) => 2 * number;
+  console.log("double(1):", double(1));
+
+  const team = {
+    members: ["Jane", "Bill"],
+    teamName: "Super Squad",
+    teamSummary: function () {
+      const that = this;
+      // console.log({ that });
+      return this.members.map(function (member: string) {
+        return `${member} is on team ${that.teamName}`;
+      });
+    },
+
+    teamSummary2: function () {
+      // console.log("this:", this);
+      //* this === team
+      return this.members.map((member: string) => {
+        // console.log("this:", this);
+        return `${member} is on team ${this.teamName}`;
+      });
+    },
+  };
+  console.log("team.teamSummary():", team.teamSummary());
+  console.log("team.teamSummary2():", team.teamSummary2());
 }

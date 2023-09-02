@@ -181,3 +181,21 @@ console.log("$.ajax:", $.ajax);
   const newAdminUser2 = createAdminUser(testUser);
   console.log({ newAdminUser2 });
 }
+
+{
+  //* Rest and Spread operators
+  //* Rest operator
+  function addNumbers(...numbers: number[]) {
+    // console.log({ numbers });
+    return numbers.reduce((sum: number, number: number) => {
+      return sum + number;
+    }, 0);
+  }
+  console.log("addNumbers(1,2,3,4,5):", addNumbers(1, 2, 3, 4, 5));
+
+  //* Spread operator
+  const defaultColors = ["green", "red"];
+  const userFavoriteColors = ["orange", "yellow"];
+  const colors = [...defaultColors, ...userFavoriteColors];
+  console.log({ colors });
+}

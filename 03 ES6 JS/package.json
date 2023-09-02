@@ -9,5 +9,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "jsdom": "^22.1.0"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.18",
+    "@types/jsdom": "^21.1.2",
+    "@types/node": "^20.5.8"
+  }
 }

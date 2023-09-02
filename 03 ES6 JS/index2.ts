@@ -1,3 +1,19 @@
+export {};
+
+const { JSDOM } = require("jsdom");
+const { window } = new JSDOM("", {
+  url: "https://example.org/",
+  referrer: "https://example.com/",
+  contentType: "text/html",
+  includeNodeLocations: true,
+  storageQuota: 10000000,
+});
+const $ = require("jquery")(window);
+
+// console.log("window", window);
+// console.log("$", $);
+console.log("$.ajax:", $.ajax);
+
 {
   //* let and const
   //@ ES5
@@ -86,7 +102,6 @@
 
   function createBookShop(inventory: Inventory[]) {
     return {
-      // inventory: inventory,
       inventory,
       inventoryValue(): number {
         return this.inventory.reduce((total: number, book) => total + book.price, 0);
@@ -106,4 +121,12 @@
   // console.log("bookShop:", bookShop);
   console.log("bookShop.priceForTitle('Harry Potter'):", bookShop.priceForTitle("Harry Potter"));
   console.log("bookShop.inventoryValue():", bookShop.inventoryValue());
+
+  // const url = "https://fileupload.com";
+  // const data = { color: "red" };
+
+  // function saveFile(url: string, data: Object) {
+  //   $.ajax({ method: "POST", url, data });
+  // }
+  // console.log("saveFile(url, data):", saveFile(url, data));
 }

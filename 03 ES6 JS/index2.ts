@@ -302,4 +302,13 @@ console.log("$.ajax:", $.ajax);
     return { x, y };
   });
   console.log({ points2 });
+
+  const numbers = [1, 2, 3];
+  function double([elem, ...rest]: number[]): number[] {
+    if (!elem) {
+      return [];
+    }
+    return [2 * elem, ...double(rest)];
+  }
+  console.log("double(numbers):", double(numbers));
 }

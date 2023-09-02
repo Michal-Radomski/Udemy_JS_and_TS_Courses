@@ -76,3 +76,34 @@
   console.log("team.teamSummary():", team.teamSummary());
   console.log("team.teamSummary2():", team.teamSummary2());
 }
+
+{
+  //* Enhanced Object Literal
+  interface Inventory {
+    title: string;
+    price: number;
+  }
+
+  function createBookShop(inventory: Inventory[]) {
+    return {
+      // inventory: inventory,
+      inventory,
+      inventoryValue(): number {
+        return this.inventory.reduce((total: number, book) => total + book.price, 0);
+      },
+      priceForTitle(tittle: string): number {
+        return this.inventory.find((book) => book.title === tittle)!.price;
+      },
+    };
+  }
+
+  const inventory: Inventory[] = [
+    { title: "Harry Potter", price: 10 },
+    { title: "Eloquent JS", price: 15 },
+  ];
+  const bookShop = createBookShop(inventory);
+
+  // console.log("bookShop:", bookShop);
+  console.log("bookShop.priceForTitle('Harry Potter'):", bookShop.priceForTitle("Harry Potter"));
+  console.log("bookShop.inventoryValue():", bookShop.inventoryValue());
+}

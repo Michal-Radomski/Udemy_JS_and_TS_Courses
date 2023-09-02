@@ -130,3 +130,54 @@ console.log("$.ajax:", $.ajax);
   // }
   // console.log("saveFile(url, data):", saveFile(url, data));
 }
+
+{
+  //* Default function arguments
+  //* V1
+  // function makeAjaxRequest(url: string, method?: string) {
+  //   if (!method) {
+  //     method = "GET";
+  //   }
+  //   // Logic to make the request
+  //   console.log({ url, method });
+  // }
+  //* V2
+  function makeAjaxRequest(url: string, method: string = "GET") {
+    // Logic to make the request
+    console.log({ url, method });
+  }
+
+  makeAjaxRequest("google.com");
+  makeAjaxRequest("google.com", "GET");
+  makeAjaxRequest("google.com", "POST");
+  makeAjaxRequest("google.com", null as any);
+
+  class User {
+    id: number;
+    admin?: boolean;
+    constructor(id: number, admin: boolean = false) {
+      this.id = id;
+      this.admin = admin;
+    }
+  }
+
+  let testUser = new User(generateId());
+  // console.log({ testUser });
+
+  function generateId(): number {
+    const randomNumber = Math.round(Math.random() * 99999);
+    // console.log({ randomNumber });
+    return randomNumber;
+  }
+
+  function createAdminUser(user: User = new User(generateId())): User {
+    const adminUser = { ...user, admin: true };
+    return adminUser;
+  }
+
+  const newAdminUser = createAdminUser();
+  console.log({ newAdminUser });
+
+  const newAdminUser2 = createAdminUser(testUser);
+  console.log({ newAdminUser2 });
+}

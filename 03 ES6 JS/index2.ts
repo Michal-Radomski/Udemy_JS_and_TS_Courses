@@ -211,3 +211,27 @@ console.log("$.ajax:", $.ajax);
   }
   console.log('validateShoppingList("oranges", "bread", "eggs"):', validateShoppingList("oranges", "bread", "eggs"));
 }
+
+{
+  //* Destructuring
+  const expense = {
+    type: "Business",
+    amount: "$ 45 USD",
+  };
+  const { type, amount } = expense;
+  console.log({ type, amount });
+
+  const savedFile = {
+    extension: "jpg",
+    name: "report",
+    size: 14040,
+  };
+
+  function fileSumary(
+    { name, extension, size }: { name: string; extension: string; size: number },
+    { color }: { color: string }
+  ) {
+    console.log(`The file ${name}.${extension} is of size: ${size} -> color: ${color}`);
+  }
+  fileSumary(savedFile, { color: "red" });
+}

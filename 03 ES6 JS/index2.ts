@@ -234,4 +234,72 @@ console.log("$.ajax:", $.ajax);
     console.log(`The file ${name}.${extension} is of size: ${size} -> color: ${color}`);
   }
   fileSumary(savedFile, { color: "red" });
+
+  const companies = ["Google", "Facebook", "Uber"];
+  // const [name, name2, name3] = companies;
+  // console.log({ name, name2, name3 });
+  const { length } = companies;
+  console.log({ length });
+  const [_name, _name2, ...rest] = companies;
+  console.log({ rest });
+
+  const companies2 = [
+    { name: "Google", location: "Mountain View" },
+    { name: "Facebook", location: "Menlo Park" },
+    { name: "Uber", location: "San Francisco" },
+  ];
+
+  // ES5
+  const googleLocation = companies2[0].location;
+  console.log({ googleLocation });
+
+  // ES6
+  const [{ location }] = companies2;
+  console.log({ location });
+
+  const Google = {
+    locations: ["Mountain View", "New York", "London"],
+  };
+  const {
+    locations: [googleLoc],
+  } = Google;
+  console.log({ googleLoc });
+
+  //^ Order is NOT important!
+  function singUp({
+    password,
+    userName,
+    email,
+    dateOfBirth,
+    city,
+  }: {
+    dateOfBirth: string;
+    userName: string;
+    password: string;
+    email: string;
+    city: string;
+  }) {
+    // create new user
+    console.log({ userName, password, email, dateOfBirth, city });
+  }
+  const user = {
+    userName: "myName",
+    password: "myPassword",
+    email: "test@test.com",
+    dateOfBirth: "20 20 20",
+    city: "New York",
+  };
+  // singUp("myName", "myPassword", "test@test.com", "20 20 20", "New York");
+  singUp(user);
+
+  const points = [
+    [4, 5],
+    [10, 1],
+    [0, 40],
+  ];
+
+  const points2 = points.map(([x, y]) => {
+    return { x, y };
+  });
+  console.log({ points2 });
 }

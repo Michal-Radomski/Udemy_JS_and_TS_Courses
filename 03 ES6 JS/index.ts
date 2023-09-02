@@ -456,10 +456,51 @@ datesArray.forEach((date: string, datesIndex: number) => {
   console.log("array3.unshift(4, 5):", array3.unshift(4, 5)); // Expected output: 5
   console.log({ array3 }); // Expected output: Array [4, 5, 1, 2, 3]
 
-  // *19 reverse()
+  // * 19 reverse()
   //@ Careful: reverse is destructive -- it changes the original!
   const array1 = ["one", "two", "three"];
   const reversed = array1.reverse();
   console.log("reversed:", reversed); // Expected output: "reversed:" Array ["three", "two", "one"]
   console.log("array1:", array1); // Expected output: "reversed:" Array ["three", "two", "one"]
+}
+
+{
+  //* 20 sort()
+  //@ Params: a, b , Return value: The reference to the original array, now sorted
+  const months = ["March", "Jan", "Feb", "Dec"];
+  months.sort();
+  console.log({ months }); // Expected output: Array ["Dec", "Feb", "Jan", "March"]
+
+  const array1 = [1, 30, 4, 21, 100000];
+  array1.sort();
+  console.log({ array1 }); // Expected output: Array [1, 100000, 21, 30, 4]
+
+  const arr2 = array1.sort((a, b) => a - b);
+  console.log({ arr2 }); // [ 1, 4, 21, 30, 100000 ]
+  console.log({ array1 }); // [ 1, 4, 21, 30, 100000 ]
+}
+
+{
+  //* 21 slice()
+  //@ Params: star (zero-based index), end (zero-based index) , Return value: A new array containing the extracted elements
+  const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+  const citrus = fruits.slice(1, 3);
+
+  console.log({ fruits }); // ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango']
+  console.log({ citrus }); // ['Orange','Lemon']
+}
+
+{
+  //* 22 splice()
+  //@ Params: star (zero-based index), deleteCount, Return value: An array containing the deleted elements
+
+  const myFish = ["angel", "clown", "mandarin", "sturgeon"];
+  const removed = myFish.splice(2, 0, "drum");
+
+  console.log({ myFish }); // ["angel", "clown", "drum", "mandarin", "sturgeon"]
+  console.log({ removed }); // []
+
+  const removed2 = myFish.splice(3, 1);
+  console.log({ myFish }); // ["angel", "clown", "drum", "sturgeon"]
+  console.log({ removed2 }); // ["mandarin"]
 }

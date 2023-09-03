@@ -442,6 +442,7 @@ console.log("$.ajax:", $.ajax);
   interface TestingTeam {
     lead: string;
     tester: string;
+    [Symbol.iterator](): Generator<string, void, unknown>;
   }
 
   interface EngineeringTeam {
@@ -451,11 +452,16 @@ console.log("$.ajax:", $.ajax);
     manager: string;
     engineering: string;
     testingTeam: TestingTeam;
+    [Symbol.iterator](): Generator<string, void, unknown>;
   }
 
-  const testingTeam = {
+  const testingTeam: TestingTeam = {
     lead: "Amanda",
     tester: "Bill",
+    [Symbol.iterator]: function* () {
+      yield this.lead;
+      yield this.tester;
+    },
   };
 
   const engineeringTeam: EngineeringTeam = {
@@ -465,24 +471,37 @@ console.log("$.ajax:", $.ajax);
     lead: "Jill",
     manager: "Alex",
     engineering: "Dave",
+    [Symbol.iterator]: function* () {
+      yield this.lead;
+      yield this.manager;
+      yield this.engineering;
+      // const testingTeamGenerator = TestingTeamIterator(team.testingTeam);
+      // console.log("testingTeamGenerator:", testingTeamGenerator);
+      // yield* testingTeamGenerator;
+      yield* this.testingTeam;
+    },
   };
 
-  function* TestingTeamIterator(team: TestingTeam) {
-    yield team.lead;
-    yield team.tester;
-  }
+  // function* TestingTeamIterator(team: TestingTeam) {
+  //   yield team.lead;
+  //   yield team.tester;
+  // }
 
-  function* TeamIterator(team: EngineeringTeam) {
-    yield team.lead;
-    yield team.manager;
-    yield team.engineering;
-    const testingTeamGenerator = TestingTeamIterator(team.testingTeam);
-    // console.log("testingTeamGenerator:", testingTeamGenerator);
-    yield* testingTeamGenerator;
-  }
+  // function* TeamIterator(team: EngineeringTeam) {
+  //   yield team.lead;
+  //   yield team.manager;
+  //   yield team.engineering;
+  //   // const testingTeamGenerator = TestingTeamIterator(team.testingTeam);
+  //   // console.log("testingTeamGenerator:", testingTeamGenerator);
+  //   // yield* testingTeamGenerator;
+  //   yield* team.testingTeam;
+  // }
 
   const names = [] as string[];
-  for (let name of TeamIterator(engineeringTeam)) {
+  // for (let name of TeamIterator(engineeringTeam)) {
+  //   names.push(name);
+  // }
+  for (let name of engineeringTeam) {
     names.push(name);
   }
   console.log({ names });

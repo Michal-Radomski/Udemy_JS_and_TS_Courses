@@ -384,8 +384,8 @@ console.log("$.ajax:", $.ajax);
   }
 
   let total = 0;
-  const numbers = [1, 2, 3, 4, 5];
-  for (let number of numbers) {
+  const numbers_1 = [1, 2, 3, 4, 5];
+  for (let number of numbers_1) {
     total += number;
   }
   console.log({ total });
@@ -410,4 +410,11 @@ console.log("$.ajax:", $.ajax);
   console.log({ result }); // Expected output: "12345"
 
   //* 4. Generators
+  function* numbers() {
+    yield;
+  }
+  const gen = numbers();
+
+  console.log(gen.next());
+  console.log(gen.next());
 }

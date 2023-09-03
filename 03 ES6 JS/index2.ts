@@ -410,11 +410,13 @@ console.log("$.ajax:", $.ajax);
   console.log({ result }); // Expected output: "12345"
 
   //* 4. Generators
-  function* numbers() {
-    yield;
+  function* shopping() {
+    // @ts-ignore
+    const stuffFromStore = yield "cash";
+    return stuffFromStore;
   }
-  const gen = numbers();
-
+  const gen = shopping();
+  // console.log({ gen });
   console.log(gen.next());
-  console.log(gen.next());
+  console.log(gen.next("groceries"));
 }

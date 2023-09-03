@@ -377,7 +377,7 @@ console.log("$.ajax:", $.ajax);
 }
 
 {
-  //* Generators
+  //* 1. for...of loop
   const colors = ["red", "green", "blue"];
   for (let color of colors) {
     console.log({ color });
@@ -389,4 +389,25 @@ console.log("$.ajax:", $.ajax);
     total += number;
   }
   console.log({ total });
+
+  //* 2. for...in loop
+  const obj = { a: 1, b: 2, c: 3 };
+  for (const prop in obj) {
+    console.log(`obj.${prop} = ${obj[prop as keyof typeof obj]}`);
+  }
+  // Logs:
+  // "obj.a = 1"
+  // "obj.b = 2"
+  // "obj.c = 3"
+
+  //* 3. do...while
+  let result = "";
+  let i = 0;
+  do {
+    i = i + 1;
+    result = result + i;
+  } while (i < 5);
+  console.log({ result }); // Expected output: "12345"
+
+  //* 4. Generators
 }

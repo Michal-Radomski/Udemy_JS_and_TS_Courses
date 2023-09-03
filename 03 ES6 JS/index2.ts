@@ -505,4 +505,32 @@ console.log("$.ajax:", $.ajax);
     names.push(name);
   }
   console.log({ names });
+
+  //^ RangeError: Maximum call stack size exceeded
+  // class Comment {
+  //   content: string;
+  //   children: Comment[];
+
+  //   constructor(content: string, children: Comment[]) {
+  //     this.content = content;
+  //     this.children = children;
+  //   }
+
+  //   *[Symbol.iterator](): Generator<string, void, unknown> {
+  //     yield this.content;
+  //     for (let child of children) {
+  //       yield* child;
+  //     }
+  //   }
+  // }
+
+  // const children = [new Comment("good comment", []), new Comment("bad comment", []), new Comment("meh comment", [])];
+  // const tree = new Comment("Great Post!", children);
+  // console.log("tree", tree);
+
+  // const values = [];
+  // for (let value of tree) {
+  //   values.push(value);
+  // }
+  // console.log({ values });
 }

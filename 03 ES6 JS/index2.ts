@@ -413,10 +413,29 @@ console.log("$.ajax:", $.ajax);
   function* shopping() {
     // @ts-ignore
     const stuffFromStore = yield "cash";
-    return stuffFromStore;
+    // @ts-ignore
+    const stuffFromLaundry = yield "laundry";
+    // console.log({ stuffFromStore, stuffFromLaundry }, typeof stuffFromLaundry, typeof stuffFromStore);
+    return [stuffFromStore, stuffFromLaundry];
   }
   const gen = shopping();
   // console.log({ gen });
   console.log(gen.next());
   console.log(gen.next("groceries"));
+  console.log(gen.next("clean clothes"));
+
+  function* colors2() {
+    yield "red";
+    yield "blue";
+    yield "green";
+  }
+  // const gen2 = colors2();
+  // console.log(gen2.next());
+  // console.log(gen2.next());
+  // console.log(gen2.next());
+  // console.log(gen2.next());
+
+  const myColors = [];
+  for (let color of colors2()) myColors.push(color);
+  console.log("myColors", myColors);
 }

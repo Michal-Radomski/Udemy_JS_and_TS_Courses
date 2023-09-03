@@ -1,5 +1,6 @@
 export {};
 
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const { JSDOM } = require("jsdom");
 const { window } = new JSDOM("", {
   url: "https://example.org/",
@@ -533,4 +534,38 @@ console.log("$.ajax:", $.ajax);
   //   values.push(value);
   // }
   // console.log({ values });
+}
+
+//^ JS Recursion
+const fibonacci = (n: number): number => {
+  if (n < 3) return 1;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+};
+console.log("fibonacci(10):", fibonacci(10)); //55
+
+const factorial = (n: number): number => {
+  if (n === 0) {
+    return 1;
+  } else {
+    return n * factorial(n - 1);
+  }
+};
+console.log("factorial(10):", factorial(10)); // 3628800
+
+{
+  //* Promises and Fetch
+  const promise = new Promise<void>((resolve, _reject) => {
+    // _reject();
+    const request = new XMLHttpRequest();
+    // console.log("request:", request);
+    request.onload = () => {
+      resolve();
+    };
+  });
+
+  promise
+    .then(() => console.log("finally finished"))
+    .then(() => console.log("I was also ran!"))
+    .catch((err: Error) => console.log("finally unfinished", err));
+  console.log("promise:", promise);
 }

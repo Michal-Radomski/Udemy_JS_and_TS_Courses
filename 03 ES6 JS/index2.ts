@@ -554,18 +554,34 @@ console.log("factorial(10):", factorial(10)); // 3628800
 
 {
   //* Promises and Fetch
-  const promise = new Promise<void>((resolve, _reject) => {
-    // _reject();
-    const request = new XMLHttpRequest();
-    // console.log("request:", request);
-    request.onload = () => {
-      resolve();
-    };
-  });
+  // const promise = new Promise<void>((resolve, _reject) => {
+  //   // _reject();
+  //   const request = new XMLHttpRequest();
+  //   // console.log("request:", request);
+  //   request.onload = () => {
+  //     resolve();
+  //   };
+  // });
 
-  promise
-    .then(() => console.log("finally finished"))
-    .then(() => console.log("I was also ran!"))
-    .catch((err: Error) => console.log("finally unfinished", err));
-  console.log("promise:", promise);
+  // promise
+  //   .then(() => console.log("finally finished"))
+  //   .then(() => console.log("I was also ran!"))
+  //   .catch((err: Error) => console.log("finally unfinished", err));
+  // console.log("promise:", promise);
+
+  //@ Better to use library like axios or jQuery Ajax!
+  const url = "https://jsonplaceholder.typicode.com/posts/";
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => console.log({ data }))
+    .catch((err) => console.log({ err }));
+
+  $.ajax({
+    url: url,
+    type: "GET",
+    dataType: "json", // added data type
+    success: function (res: JQuery.jqXHR<any>) {
+      console.log(res);
+    },
+  });
 }

@@ -375,3 +375,18 @@ console.log("$.ajax:", $.ajax);
   console.log("toyota.honk():", toyota.honk());
   console.log("toyota.drive():", toyota.drive());
 }
+
+{
+  //* Generators
+  const colors = ["red", "green", "blue"];
+  for (let color of colors) {
+    console.log({ color });
+  }
+
+  let total = 0;
+  const numbers = [1, 2, 3, 4, 5];
+  for (let number of numbers) {
+    total += number;
+  }
+  console.log({ total });
+}

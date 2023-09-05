@@ -26,6 +26,29 @@
   </head>
 
   <body>
-    <div class="container"></div>
+    <div class="container">
+      <h2>Tablice i obiekty</h2>
+    </div>
+
+    <!-- //* Script -->
+    <script>
+      const thTab = ["ID", "Names"];
+      const namesTab = ["Jan", "Tomek", "Krzysztof", "Piotr", "Lucyna", "Olga", "Monika"];
+      const tableObj = {
+        th: thTab,
+        names: namesTab,
+      };
+      document.write("<table>");
+      document.write("<tr>");
+      for (let i = 0; i < tableObj.th.length; i++) {
+        document.write("<th>" + tableObj.th[i] + "</th>");
+      }
+      document.write("</tr>");
+      for (let i = 0; i < tableObj.names.length; i++) {
+        document.write("<tr>");
+        document.write("<td>" + i + "</td><td>" + tableObj.names[i] + "</td>");
+        document.write("</tr>");
+      }
+    </script>
   </body>
 </html>

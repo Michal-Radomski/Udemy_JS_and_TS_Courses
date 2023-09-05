@@ -13,3 +13,18 @@ body {
   box-sizing: border-box;
   background-color: whitesmoke !important;
 }
+
+h2 {
+  text-align: center;
+}
+table {
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}

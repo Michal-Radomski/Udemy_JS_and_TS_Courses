@@ -28,12 +28,33 @@
   <body>
     <div class="container">
       <!-- <h2>Tablice i obiekty</h2> -->
-      <p id="Pochodna"></p>
+      <!-- <p id="Pochodna"></p>
       <p id="Pochodna2"></p>
 
       <p id="Answer"></p>
       <p id="Delta"></p>
-      <p id="Positive"></p>
+      <p id="Positive"></p> -->
+
+      <div class="main">
+        <div class="left">
+          <h1>Straight pattern</h1>
+          <label for="x1">X1: </label><br />
+          <input type="text" id="x1" value="4" placeholder="input number" /><br />
+          <label for="y1">Y1: </label><br />
+          <input type="text" id="y1" value="4" placeholder="input number" /><br />
+          <label for="x2">X2:</label><br />
+          <input type="text" id="x2" value="6" placeholder="input number" /><br />
+          <label for="y2">Y2:</label><br />
+          <input type="y2" id="y2" value="6" placeholder="input number" /><br />
+          <button onclick="genPattern();">Generate straight line !!!</button>
+        </div>
+        <div class="right">
+          <h2>Result:</h2>
+          <p id="straight"></p>
+          <h2>Fine:</h2>
+          <p id="fine"></p>
+        </div>
+      </div>
     </div>
 
     <!-- //* Script -->

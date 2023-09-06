@@ -14,18 +14,20 @@ body {
   background-color: whitesmoke !important;
 }
 
+// table {
+//   width: 100px;
+//   margin-left: auto;
+//   margin-right: auto;
+// }
+
+// table,
+// th,
+// td {
+//   border: 1px solid black;
+// }
+
 h2,
 p {
   text-align: center;
-}
-table {
-  width: 100px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-table,
-th,
-td {
-  border: 1px solid black;
+  margin-bottom: 0.5rem;
 }

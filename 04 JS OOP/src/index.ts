@@ -169,47 +169,114 @@
 // })();
 
 //@ ES5 constructor function
-function CheckingIncreasing(this: any) {
-  // console.log("this:", this);
-  this.m1 = "";
-  this.m2 = "";
+// function CheckingIncreasing(this: any) {
+//   // console.log("this:", this);
+//   this.m1 = "";
+//   this.m2 = "";
 
-  this.linearFunArr = ["(m-7)x+4", "(m+6)x+6"];
-  this.strFun1 = "";
-  this.strFun2 = "";
-  this.afactor1 = "";
-  this.afactor2 = "";
-  this.val1 = "";
-  this.val2 = "";
-  this.res1 = "";
-  this.res2 = "";
+//   this.linearFunArr = ["(m-7)x+4", "(m+6)x+6"];
+//   this.strFun1 = "";
+//   this.strFun2 = "";
+//   this.afactor1 = "";
+//   this.afactor2 = "";
+//   this.val1 = "";
+//   this.val2 = "";
+//   this.res1 = "";
+//   this.res2 = "";
 
-  this.checkingFirstFun = function () {
-    this.strFun1 = this.linearFunArr[0];
-    this.afactor1 = this.strFun1.slice(1, -4);
-    console.log("this.afactor1:", this.afactor1);
+//   this.checkingFirstFun = function () {
+//     this.strFun1 = this.linearFunArr[0];
+//     this.afactor1 = this.strFun1.slice(1, -4);
+//     // console.log("this.afactor1:", this.afactor1);
 
-    this.m1 = this.afactor1.slice(0, -2);
-    this.val1 = this.afactor1.slice(1);
-    this.res1 = "" + this.m1 + " > " + this.val1;
-    return this.res1;
+//     this.m1 = this.afactor1.slice(0, -2);
+//     this.val1 = this.afactor1.slice(1);
+//     this.res1 = "" + this.m1 + " > " + this.val1;
+//     return this.res1;
+//   };
+
+//   this.checkingSecondFun = function () {
+//     this.strFun2 = this.linearFunArr[1];
+//     this.afactor2 = this.strFun2.slice(1, -4);
+//     this.m2 = this.afactor2.slice(0, -2);
+//     this.val2 = this.afactor2.slice(1);
+//     this.res2 = "" + this.m2 + " > " + this.val2;
+//     return this.res2;
+//   };
+// }
+
+// (function Make() {
+//   const obj = new (CheckingIncreasing as any)();
+//   // console.log("obj;", obj);
+//   const resultPar1 = obj.checkingFirstFun();
+//   (document.getElementById("resultPar1") as HTMLParagraphElement).innerHTML = resultPar1;
+//   const obj2 = new obj.constructor();
+//   // console.log("obj2;", obj2);
+//   const resultPar2 = obj2.checkingFirstFun();
+//   (document.getElementById("resultPar2") as HTMLParagraphElement).innerHTML = resultPar2;
+// })();
+
+//@ ES5 constructor function
+function CheckingFactors(this: any) {
+  this.funsArr = ["(m-3)x^2+4x+2", "4x^2+(m+4)x+5", "5x^2+4x+(m-1)"];
+  this.afactor = "";
+  this.bfactor = "";
+  this.cfactor = "";
+  this.resultInfo = "";
+  this.firstFunChecking = function () {
+    this.strFun = this.funsArr[0];
+    this.afactor = this.strFun.slice(1, -9);
+    this.bfactor = this.strFun.slice(9, -3);
+    this.cfactor = this.strFun.slice(12);
+    if (this.afactor.includes("m") == true && this.bfactor.includes("m") == false && this.cfactor.includes("m") == false) {
+      this.resultInfo = "Funkcja " + this.strFun + " posiada parametr m jedynie we współczynniku a";
+    }
+    return this.resultInfo;
   };
 
-  this.checkingSecondFun = function () {
-    this.strFun2 = this.linearFunArr[1];
-    this.afactor2 = this.strFun2.slice(1, -4);
-    this.m2 = this.afactor2.slice(0, -2);
-    this.val2 = this.afactor2.slice(1);
-    this.res2 = "" + this.m2 + " > " + this.val2;
-    return this.res2;
+  this.secondFunChecking = function () {
+    this.strFun = this.funsArr[1];
+    this.afactor = this.strFun.slice(0, -11);
+    this.bfactor = this.strFun.slice(6, -5);
+    this.cfactor = this.strFun.slice(12);
+    if (this.afactor.includes("m") == false && this.bfactor.includes("m") == true && this.cfactor.includes("m") == false) {
+      this.resultInfo = "Funkcja " + this.strFun + " posiada parametr m tylko we współczynniku b";
+    }
+    return this.resultInfo;
+  };
+  this.thirdFunChecking = function () {
+    this.strFun = this.funsArr[2];
+    this.afactor = this.strFun.slice(0, -12);
+    this.bfactor = this.strFun.slice(5, -7);
+    this.cfactor = this.strFun.slice(9);
+    if (this.afactor.includes("m") == false && this.bfactor.includes("m") == false && this.cfactor.includes("m") == true) {
+      this.resultInfo = "Funkcja " + this.strFun + " posiada parametr m tylko we współczynniku c";
+    }
+    return this.resultInfo;
   };
 }
+function SomeFun() {}
 
 (function Make() {
-  const obj = new (CheckingIncreasing as any)();
-  const resultPar1 = obj.checkingFirstFun();
-  (document.getElementById("resultPar1") as HTMLParagraphElement).innerHTML = resultPar1;
-  const obj2 = new obj.constructor();
-  const resultPar2 = obj2.checkingFirstFun();
-  (document.getElementById("resultPar2") as HTMLParagraphElement).innerHTML = resultPar2;
+  const obj = new (CheckingFactors as any)();
+  const resultFun1 = obj.firstFunChecking();
+  (document.getElementById("resultFun1") as HTMLParagraphElement).innerHTML = resultFun1;
+  const resultFun2 = obj.secondFunChecking();
+  (document.getElementById("resultFun2") as HTMLParagraphElement).innerHTML = resultFun2;
+  const resultFun3 = obj.thirdFunChecking();
+  (document.getElementById("resultFun3") as HTMLParagraphElement).innerHTML = resultFun3;
+  const check = resultFun1 instanceof SomeFun;
+  if (check == true) {
+    (document.getElementById("inst") as HTMLParagraphElement).innerHTML = "instancja typu SomeFun";
+  } else {
+    (document.getElementById("inst") as HTMLParagraphElement).innerHTML = "instancja typu CheckingFactors";
+  }
+  const someFun = new (SomeFun as any)();
+  // console.log("someFun:", someFun);
+
+  const checkSF = someFun instanceof SomeFun;
+  // console.log("checkSF:", checkSF);
+  if (checkSF == true) {
+    (document.getElementById("instSF") as HTMLParagraphElement).innerHTML = "instancja typu SomeFun";
+  }
 })();

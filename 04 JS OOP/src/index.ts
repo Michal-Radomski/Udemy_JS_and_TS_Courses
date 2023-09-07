@@ -55,57 +55,115 @@
 // obj.funEx2 = "3x^2+5x+4";
 // obj.deltaMethod(obj.funEx1);
 
-function Straight(this: any, x1: string, x2: string, y1: string, y2: string) {
-  this.x1 = x1;
-  this.x2 = x2;
-  this.y1 = y1;
-  this.y2 = y2;
+//@ ES5 constructor function
+// function Straight(this: any, x1: string, x2: string, y1: string, y2: string) {
+//   this.x1 = x1;
+//   this.x2 = x2;
+//   this.y1 = y1;
+//   this.y2 = y2;
 
-  this.resx = 0;
-  this.resy = 0;
+//   this.resx = 0;
+//   this.resy = 0;
+//   this.fineRes = "";
 
-  this.fineRes = "";
+//   this.xdiff = function () {
+//     let result = this.x2 - this.x1;
+//     return result;
+//   };
 
-  this.xdiff = function () {
-    let result = this.x2 - this.x1;
+//   this.ydiff = function () {
+//     let result = this.y2 - this.y1;
+//     return result;
+//   };
 
-    return result;
+//   this.x1 = parseInt(this.x1);
+//   this.x2 = parseInt(this.x2);
+//   this.y1 = parseInt(this.y1);
+//   this.y2 = parseInt(this.y2);
+
+//   this.generateStraight = function () {
+//     this.resx = this.xdiff();
+//     this.resy = this.ydiff();
+//     return "(y - " + this.y1 + ")" + this.resx + " - " + this.resy + "(x - " + this.x1 + ") = 0 !!!";
+//   };
+
+//   this.genFinePattern = function () {
+//     this.fineRes = "y = " + this.resy / this.resx + "x + " + this.resy / this.resx;
+//     return this.fineRes;
+//   };
+// }
+
+// function genPattern() {
+//   const x1 = (document.getElementById("x1") as HTMLInputElement).value;
+//   const x2 = (document.getElementById("x2") as HTMLInputElement).value;
+//   const y1 = (document.getElementById("y1") as HTMLInputElement).value;
+//   const y2 = (document.getElementById("y2") as HTMLInputElement).value;
+
+//   const patternOfStraight = new (Straight as any)(x1, x2, y1, y2);
+//   const str = patternOfStraight.generateStraight();
+//   (document.getElementById("straight") as HTMLParagraphElement).innerHTML = str;
+//   const fineStr = patternOfStraight.genFinePattern();
+//   (document.getElementById("fine") as HTMLParagraphElement).innerHTML = fineStr;
+// }
+
+//@ ES5 constructor function
+function CheckParallel(this: any) {
+  this.funArr1 = ["2x+4", "2x+3"];
+  this.funArr2 = ["3x+3", "-3x+4"];
+
+  this.funEl1 = "";
+  this.funEl2 = "";
+  this.funEl3 = "";
+  this.funEl4 = "";
+
+  this.resa1 = "";
+  this.resa2 = "";
+  this.resa3 = "";
+  this.resa4 = "";
+
+  this.info1 = "";
+  this.info2 = "";
+
+  this.resParallel = function () {
+    this.funEl1 = this.funArr1[0];
+    this.resa1 = this.funEl1.slice(0, -3);
+    this.funEl2 = this.funArr1[1];
+    this.resa2 = this.funEl2.slice(0, -3);
+    this.resa1 = parseInt(this.resa1);
+    this.resa2 = parseInt(this.resa2);
+
+    if (this.resa1 == this.resa2) {
+      this.info1 = "te proste są równoległe";
+      return this.info1;
+    } else {
+      this.info1 = "te proste nie są równoległe";
+      return this.info1;
+    }
   };
-  this.ydiff = function () {
-    let result = this.y2 - this.y1;
-    return result;
-  };
 
-  this.x1 = parseInt(this.x1);
-  this.x2 = parseInt(this.x2);
-  this.y1 = parseInt(this.y1);
-  this.y2 = parseInt(this.y2);
+  this.resNoParallel = function () {
+    this.funEl3 = this.funArr2[0];
+    this.resa3 = this.funEl3.slice(0, -3);
+    this.funEl4 = this.funArr2[1];
+    this.resa4 = this.funEl4.slice(0, -3);
+    this.resa3 = parseInt(this.resa3);
+    this.resa4 = parseInt(this.resa4);
+    let resDiv = this.resa3 / this.resa4;
 
-  this.generateStraight = function () {
-    this.resx = this.xdiff();
-    this.resy = this.ydiff();
-    return "(y - " + this.y1 + ")" + this.resx + " - " + this.resy + "(x - " + this.x1 + ") = 0 !!!";
-  };
-
-  this.genFinePattern = function () {
-    this.fineRes = "y = " + this.resy / this.resx + "x + " + this.resy / this.resx;
-    return this.fineRes;
+    if (resDiv == -1) {
+      this.info2 = "proste są prostopadłe";
+      return this.info2;
+    } else {
+      this.info2 = "proste nie są prostopadłe";
+      return this.info2;
+    }
   };
 }
 
-function genPattern() {
-  const x1 = (document.getElementById("x1") as HTMLInputElement).value;
-  const x2 = (document.getElementById("x2") as HTMLInputElement).value;
-  const y1 = (document.getElementById("y1") as HTMLInputElement).value;
-  const y2 = (document.getElementById("y2") as HTMLInputElement).value;
-
-  const patternOfStraight = new (Straight as any)(x1, x2, y1, y2);
-
-  const str = patternOfStraight.generateStraight();
-
-  (document.getElementById("straight") as HTMLParagraphElement).innerHTML = str;
-
-  const fineStr = patternOfStraight.genFinePattern();
-
-  (document.getElementById("fine") as HTMLParagraphElement).innerHTML = fineStr;
-}
+(function CheckFunction() {
+  const check = new (CheckParallel() as any)();
+  const checkParallel = check.resParallel();
+  (document.getElementById("parallel") as HTMLParagraphElement).innerHTML = checkParallel;
+  const checkNoParallel = check.resNoParallel();
+  (document.getElementById("noParallel") as HTMLParagraphElement).innerHTML = checkNoParallel;
+})();

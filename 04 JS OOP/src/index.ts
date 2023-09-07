@@ -106,7 +106,6 @@
 //   (document.getElementById("fine") as HTMLParagraphElement).innerHTML = fineStr;
 // }
 
-//@ ES5 constructor function
 function CheckParallel(this: any) {
   this.funArr1 = ["2x+4", "2x+3"];
   this.funArr2 = ["3x+3", "-3x+4"];
@@ -161,7 +160,7 @@ function CheckParallel(this: any) {
 }
 
 (function CheckFunction() {
-  const check = new (CheckParallel() as any)();
+  const check = new (CheckParallel as any)();
   const checkParallel = check.resParallel();
   (document.getElementById("parallel") as HTMLParagraphElement).innerHTML = checkParallel;
   const checkNoParallel = check.resNoParallel();

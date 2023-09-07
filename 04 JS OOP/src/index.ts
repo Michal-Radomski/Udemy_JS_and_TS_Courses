@@ -106,63 +106,110 @@
 //   (document.getElementById("fine") as HTMLParagraphElement).innerHTML = fineStr;
 // }
 
-function CheckParallel(this: any) {
-  this.funArr1 = ["2x+4", "2x+3"];
-  this.funArr2 = ["3x+3", "-3x+4"];
+//@ ES5 constructor function
+// function CheckParallel(this: any) {
+//   this.funArr1 = ["2x+4", "2x+3"];
+//   this.funArr2 = ["3x+3", "-3x+4"];
 
-  this.funEl1 = "";
-  this.funEl2 = "";
-  this.funEl3 = "";
-  this.funEl4 = "";
+//   this.funEl1 = "";
+//   this.funEl2 = "";
+//   this.funEl3 = "";
+//   this.funEl4 = "";
 
-  this.resa1 = "";
-  this.resa2 = "";
-  this.resa3 = "";
-  this.resa4 = "";
+//   this.resa1 = "";
+//   this.resa2 = "";
+//   this.resa3 = "";
+//   this.resa4 = "";
 
-  this.info1 = "";
-  this.info2 = "";
+//   this.info1 = "";
+//   this.info2 = "";
 
-  this.resParallel = function () {
-    this.funEl1 = this.funArr1[0];
-    this.resa1 = this.funEl1.slice(0, -3);
-    this.funEl2 = this.funArr1[1];
-    this.resa2 = this.funEl2.slice(0, -3);
-    this.resa1 = parseInt(this.resa1);
-    this.resa2 = parseInt(this.resa2);
+//   this.resParallel = function () {
+//     this.funEl1 = this.funArr1[0];
+//     this.resa1 = this.funEl1.slice(0, -3);
+//     this.funEl2 = this.funArr1[1];
+//     this.resa2 = this.funEl2.slice(0, -3);
+//     this.resa1 = parseInt(this.resa1);
+//     this.resa2 = parseInt(this.resa2);
 
-    if (this.resa1 == this.resa2) {
-      this.info1 = "te proste są równoległe";
-      return this.info1;
-    } else {
-      this.info1 = "te proste nie są równoległe";
-      return this.info1;
-    }
+//     if (this.resa1 == this.resa2) {
+//       this.info1 = "te proste są równoległe";
+//       return this.info1;
+//     } else {
+//       this.info1 = "te proste nie są równoległe";
+//       return this.info1;
+//     }
+//   };
+
+//   this.resNoParallel = function () {
+//     this.funEl3 = this.funArr2[0];
+//     this.resa3 = this.funEl3.slice(0, -3);
+//     this.funEl4 = this.funArr2[1];
+//     this.resa4 = this.funEl4.slice(0, -3);
+//     this.resa3 = parseInt(this.resa3);
+//     this.resa4 = parseInt(this.resa4);
+//     let resDiv = this.resa3 / this.resa4;
+
+//     if (resDiv == -1) {
+//       this.info2 = "proste są prostopadłe";
+//       return this.info2;
+//     } else {
+//       this.info2 = "proste nie są prostopadłe";
+//       return this.info2;
+//     }
+//   };
+// }
+
+// (function CheckFunction() {
+//   const check = new (CheckParallel as any)();
+//   const checkParallel = check.resParallel();
+//   (document.getElementById("parallel") as HTMLParagraphElement).innerHTML = checkParallel;
+//   const checkNoParallel = check.resNoParallel();
+//   (document.getElementById("noParallel") as HTMLParagraphElement).innerHTML = checkNoParallel;
+// })();
+
+//@ ES5 constructor function
+function CheckingIncreasing(this: any) {
+  // console.log("this:", this);
+  this.m1 = "";
+  this.m2 = "";
+
+  this.linearFunArr = ["(m-7)x+4", "(m+6)x+6"];
+  this.strFun1 = "";
+  this.strFun2 = "";
+  this.afactor1 = "";
+  this.afactor2 = "";
+  this.val1 = "";
+  this.val2 = "";
+  this.res1 = "";
+  this.res2 = "";
+
+  this.checkingFirstFun = function () {
+    this.strFun1 = this.linearFunArr[0];
+    this.afactor1 = this.strFun1.slice(1, -4);
+    console.log("this.afactor1:", this.afactor1);
+
+    this.m1 = this.afactor1.slice(0, -2);
+    this.val1 = this.afactor1.slice(1);
+    this.res1 = "" + this.m1 + " > " + this.val1;
+    return this.res1;
   };
 
-  this.resNoParallel = function () {
-    this.funEl3 = this.funArr2[0];
-    this.resa3 = this.funEl3.slice(0, -3);
-    this.funEl4 = this.funArr2[1];
-    this.resa4 = this.funEl4.slice(0, -3);
-    this.resa3 = parseInt(this.resa3);
-    this.resa4 = parseInt(this.resa4);
-    let resDiv = this.resa3 / this.resa4;
-
-    if (resDiv == -1) {
-      this.info2 = "proste są prostopadłe";
-      return this.info2;
-    } else {
-      this.info2 = "proste nie są prostopadłe";
-      return this.info2;
-    }
+  this.checkingSecondFun = function () {
+    this.strFun2 = this.linearFunArr[1];
+    this.afactor2 = this.strFun2.slice(1, -4);
+    this.m2 = this.afactor2.slice(0, -2);
+    this.val2 = this.afactor2.slice(1);
+    this.res2 = "" + this.m2 + " > " + this.val2;
+    return this.res2;
   };
 }
 
-(function CheckFunction() {
-  const check = new (CheckParallel as any)();
-  const checkParallel = check.resParallel();
-  (document.getElementById("parallel") as HTMLParagraphElement).innerHTML = checkParallel;
-  const checkNoParallel = check.resNoParallel();
-  (document.getElementById("noParallel") as HTMLParagraphElement).innerHTML = checkNoParallel;
+(function Make() {
+  const obj = new (CheckingIncreasing as any)();
+  const resultPar1 = obj.checkingFirstFun();
+  (document.getElementById("resultPar1") as HTMLParagraphElement).innerHTML = resultPar1;
+  const obj2 = new obj.constructor();
+  const resultPar2 = obj2.checkingFirstFun();
+  (document.getElementById("resultPar2") as HTMLParagraphElement).innerHTML = resultPar2;
 })();

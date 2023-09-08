@@ -336,48 +336,96 @@
 //   (document.getElementById("resultFunCFact2") as HTMLParagraphElement).innerHTML = resultFun2.cfactor;
 // })();
 
-const objFunPattern = {
-  wX: function () {
-    return (document.getElementById("wX") as HTMLInputElement).value;
+//@ ES5 constructor function
+// const objFunPattern = {
+//   wX: function () {
+//     return (document.getElementById("wX") as HTMLInputElement).value;
+//   },
+//   wY: function () {
+//     return (document.getElementById("wY") as HTMLInputElement).value;
+//   },
+//   Ax: function () {
+//     return (document.getElementById("Ax") as HTMLInputElement).value;
+//   },
+//   Ay: function () {
+//     return (document.getElementById("Ay") as HTMLInputElement).value;
+//   },
+// };
+
+// function MakePattern() {
+//   let a = 0;
+//   let pattern = "";
+//   const wX = Number(objFunPattern.wX());
+//   const wY = Number(objFunPattern.wY());
+//   const Ax = Number(objFunPattern.Ax());
+//   const Ay = Number(objFunPattern.Ay());
+//   a = (Ay - wY) / (Ax - wX);
+//   pattern = "y= " + a + "*(x+" + wX + ")^2+" + wY;
+//   (document.getElementById("resultPattern") as HTMLInputElement).innerHTML = pattern;
+// }
+
+// const btn = document.getElementById("btn") as HTMLButtonElement;
+
+// btn.addEventListener("click", MakePattern);
+// const objCopy = objFunPattern;
+// // console.log("objCopy===objFunPattern:", objCopy === objFunPattern);
+
+// function MakeCopyPattern() {
+//   let ca = 0;
+//   let cpattern = "";
+//   const cwX = Number(objCopy.wX());
+//   const cwY = Number(objCopy.wY());
+//   const cAx = Number(objCopy.Ax());
+//   const cAy = Number(objCopy.Ay());
+//   ca = (cAy - cwY) / (cAx - cwX);
+//   cpattern = "y= " + ca + "*(x+" + cwX + ")^2+" + cwY;
+//   (document.getElementById("resultCopyPattern") as HTMLParagraphElement).innerHTML = cpattern;
+// }
+// btn.addEventListener("click", MakeCopyPattern);
+
+//@ ES5 constructor function
+const linearFunObj1 = {
+  la: function () {
+    return (document.getElementById("apar1") as HTMLInputElement).value;
   },
-  wY: function () {
-    return (document.getElementById("wY") as HTMLInputElement).value;
+  lb: function () {
+    return (document.getElementById("bpar1") as HTMLInputElement).value;
   },
-  Ax: function () {
-    return (document.getElementById("Ax") as HTMLInputElement).value;
+};
+const linearFunObj2 = {
+  la: function () {
+    return (document.getElementById("apar2") as HTMLInputElement).value;
   },
-  Ay: function () {
-    return (document.getElementById("Ay") as HTMLInputElement).value;
+  lb: function () {
+    return (document.getElementById("bpar2") as HTMLInputElement).value;
   },
 };
 
-function MakePattern() {
-  let a = 0;
-  let pattern = "";
-  const wX = Number(objFunPattern.wX());
-  const wY = Number(objFunPattern.wY());
-  const Ax = Number(objFunPattern.Ax());
-  const Ay = Number(objFunPattern.Ay());
-  a = (Ay - wY) / (Ax - wX);
-  pattern = "y= " + a + "*(x+" + wX + ")^2+" + wY;
-  (document.getElementById("resultPattern") as HTMLInputElement).innerHTML = pattern;
+function compareObjects() {
+  const linearFun1 = linearFunObj1;
+  const linearFun2 = linearFunObj1;
+  if (linearFunObj1 === linearFunObj2) {
+    (document.getElementById("objectCompareResult") as HTMLParagraphElement).innerHTML = "Te dwa obiekty są równe";
+  } else {
+    (document.getElementById("objectCompareResult") as HTMLParagraphElement).innerHTML = "Te dwa obiekty nie są równe";
+  }
+  if (linearFun1 === linearFun2) {
+    (document.getElementById("referenceCompareResult") as HTMLParagraphElement).innerHTML = "Te dwa obiekty są równe";
+  } else {
+    (document.getElementById("referenceCompareResult") as HTMLParagraphElement).innerHTML = "Te dwa obiekty nie są równe";
+  }
 }
 
+function makePatterns() {
+  const a1 = linearFunObj1.la();
+  const b1 = linearFunObj1.lb();
+  const a2 = linearFunObj2.la();
+  const b2 = linearFunObj2.lb();
+  const y1 = a1 + "x+" + b1;
+  const y2 = a2 + "x+" + b2;
+  (document.getElementById("linearFunPatt1") as HTMLParagraphElement).innerHTML = y1;
+  (document.getElementById("linearFunPatt2") as HTMLParagraphElement).innerHTML = y2;
+}
 const btn = document.getElementById("btn") as HTMLButtonElement;
-
-btn.addEventListener("click", MakePattern);
-const objCopy = objFunPattern;
-console.log("objCopy===objFunPattern:", objCopy === objFunPattern);
-
-function MakeCopyPattern() {
-  let ca = 0;
-  let cpattern = "";
-  const cwX = Number(objCopy.wX());
-  const cwY = Number(objCopy.wY());
-  const cAx = Number(objCopy.Ax());
-  const cAy = Number(objCopy.Ay());
-  ca = (cAy - cwY) / (cAx - cwX);
-  cpattern = "y= " + ca + "*(x+" + cwX + ")^2+" + cwY;
-  (document.getElementById("resultCopyPattern") as HTMLParagraphElement).innerHTML = cpattern;
-}
-btn.addEventListener("click", MakeCopyPattern);
+btn.addEventListener("click", compareObjects);
+btn.addEventListener("click", makePatterns);

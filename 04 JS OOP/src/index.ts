@@ -430,48 +430,68 @@
 // btn.addEventListener("click", compareObjects);
 // btn.addEventListener("click", makePatterns);
 
-let funArr = new Array() as any[];
-// console.log("funArr:", funArr);
-function MakeFunsArray() {
-  let pattern = "";
-  let funItems = "" as any;
-  function createFunPattern() {
-    const a = (document.getElementById("a") as HTMLInputElement).value;
-    const b = (document.getElementById("b") as HTMLInputElement).value;
-    pattern = a + "x+" + b;
-    return pattern;
-  }
-  function fillArray(patt: string) {
-    funArr.push(patt);
-    return funArr;
-  }
+// let funArr = new Array() as any[];
+// // console.log("funArr:", funArr);
+// function MakeFunsArray() {
+//   let pattern = "";
+//   let funItems = "" as any;
+//   function createFunPattern() {
+//     const a = (document.getElementById("a") as HTMLInputElement).value;
+//     const b = (document.getElementById("b") as HTMLInputElement).value;
+//     pattern = a + "x+" + b;
+//     return pattern;
+//   }
+//   function fillArray(patt: string) {
+//     funArr.push(patt);
+//     return funArr;
+//   }
 
-  pattern = createFunPattern();
-  funArr = fillArray(pattern);
-  funItems = document.getElementsByClassName("li");
-  // console.log("funItems:", funItems);
-  for (let i = 0; i < funArr.length; i++) {
-    funItems[i].innerHTML = funArr[i];
-  }
-  function arrModification() {
-    const moda = (document.getElementById("moda") as HTMLInputElement).value;
-    let arrEl = funArr[0];
-    arrEl = Array.from(arrEl);
-    // console.log({ arrEl });
-    arrEl.splice(0, 1, moda);
-    let pattern = arrEl.toString();
-    pattern = pattern.replace(/,/g, "");
-    funItems[0].innerHTML = pattern;
-  }
-  const modBtn = document.getElementById("modBtn") as HTMLButtonElement;
-  modBtn.addEventListener("click", arrModification);
-}
-const btn = document.getElementById("btn") as HTMLButtonElement;
-btn.addEventListener("click", MakeFunsArray);
+//   pattern = createFunPattern();
+//   funArr = fillArray(pattern);
+//   funItems = document.getElementsByClassName("li");
+//   // console.log("funItems:", funItems);
+//   for (let i = 0; i < funArr.length; i++) {
+//     funItems[i].innerHTML = funArr[i];
+//   }
+//   function arrModification() {
+//     const moda = (document.getElementById("moda") as HTMLInputElement).value;
+//     let arrEl = funArr[0];
+//     arrEl = Array.from(arrEl);
+//     // console.log({ arrEl });
+//     arrEl.splice(0, 1, moda);
+//     let pattern = arrEl.toString();
+//     pattern = pattern.replace(/,/g, "");
+//     funItems[0].innerHTML = pattern;
+//   }
+//   const modBtn = document.getElementById("modBtn") as HTMLButtonElement;
+//   modBtn.addEventListener("click", arrModification);
+// }
+// const btn = document.getElementById("btn") as HTMLButtonElement;
+// btn.addEventListener("click", MakeFunsArray);
 
+//* Array Constructor
 const arrayEmpty = new Array(2);
 // console.log({ arrayEmpty });
 
+//* Object Constructor
 const obj: any = new Object();
 obj.foo = 42;
 // console.log({ obj });
+
+//* Boolean Constructor
+const bZero = new Boolean(0);
+const bNull = new Boolean(null);
+const bEmptyString = new Boolean("");
+const bFalse = new Boolean(false);
+// console.log({ bZero, bNull, bEmptyString, bFalse });
+
+// console.log("typeof bFalse:", typeof bFalse);
+// console.log("Boolean(bFalse):", Boolean(bFalse));
+
+const bTrue = new Boolean(true);
+const bTrueString = new Boolean("true");
+// console.log({ bTrue, bTrueString });
+
+const bTrueValue = bTrue.valueOf();
+const bTrueToString = bTrue.toString();
+// console.log({ bTrueValue, bTrueToString });

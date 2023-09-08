@@ -500,8 +500,21 @@ const bTrueToString = bTrue.toString();
 const a = new Number("123"); // a === 123 is false //* Object
 const b = Number("123"); // b === 123 is true //* Number
 
-console.log({ a, b });
-console.log("a instanceof Number:", a instanceof Number); // true
-console.log("b instanceof Number:", (b as any) instanceof Number); // false
+// console.log({ a, b });
+// console.log("a instanceof Number:", a instanceof Number); // true
+// console.log("b instanceof Number:", (b as any) instanceof Number); // false
 
-console.log("typeof a:", typeof a, "typeof b", typeof b); // object, number
+// console.log("typeof a:", typeof a, "typeof b", typeof b); // object, number
+
+//* Regex Constructor
+const regex1 = /\w+/ as RegExp;
+const regex2 = new RegExp("\\w+") as RegExp;
+
+// console.log({ regex1 }, typeof regex1); // Expected output: /\w+/
+// console.log({ regex2 }, typeof regex2); // Expected output: /\w+/
+// console.log("regex1 === regex2:", regex1 === regex2); // Expected output: false
+
+const paragraph: string = "The quick brown fox jumps over the lazy dog. It barked.";
+const regex: RegExp = /[A-Z]/g;
+const found = paragraph.match(regex) as RegExpMatchArray;
+console.log({ found }); // Expected output: Array ["T", "I"]s

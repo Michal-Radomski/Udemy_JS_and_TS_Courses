@@ -495,3 +495,13 @@ const bTrueString = new Boolean("true");
 const bTrueValue = bTrue.valueOf();
 const bTrueToString = bTrue.toString();
 // console.log({ bTrueValue, bTrueToString });
+
+//* Number Constructor
+const a = new Number("123"); // a === 123 is false //* Object
+const b = Number("123"); // b === 123 is true //* Number
+
+console.log({ a, b });
+console.log("a instanceof Number:", a instanceof Number); // true
+console.log("b instanceof Number:", (b as any) instanceof Number); // false
+
+console.log("typeof a:", typeof a, "typeof b", typeof b); // object, number

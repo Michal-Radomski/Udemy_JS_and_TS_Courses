@@ -384,48 +384,87 @@
 // btn.addEventListener("click", MakeCopyPattern);
 
 //@ ES5 constructor function
-const linearFunObj1 = {
-  la: function () {
-    return (document.getElementById("apar1") as HTMLInputElement).value;
-  },
-  lb: function () {
-    return (document.getElementById("bpar1") as HTMLInputElement).value;
-  },
-};
-const linearFunObj2 = {
-  la: function () {
-    return (document.getElementById("apar2") as HTMLInputElement).value;
-  },
-  lb: function () {
-    return (document.getElementById("bpar2") as HTMLInputElement).value;
-  },
-};
+// const linearFunObj1 = {
+//   la: function () {
+//     return (document.getElementById("apar1") as HTMLInputElement).value;
+//   },
+//   lb: function () {
+//     return (document.getElementById("bpar1") as HTMLInputElement).value;
+//   },
+// };
+// const linearFunObj2 = {
+//   la: function () {
+//     return (document.getElementById("apar2") as HTMLInputElement).value;
+//   },
+//   lb: function () {
+//     return (document.getElementById("bpar2") as HTMLInputElement).value;
+//   },
+// };
 
-function compareObjects() {
-  const linearFun1 = linearFunObj1;
-  const linearFun2 = linearFunObj1;
-  if (linearFunObj1 === linearFunObj2) {
-    (document.getElementById("objectCompareResult") as HTMLParagraphElement).innerHTML = "Te dwa obiekty są równe";
-  } else {
-    (document.getElementById("objectCompareResult") as HTMLParagraphElement).innerHTML = "Te dwa obiekty nie są równe";
-  }
-  if (linearFun1 === linearFun2) {
-    (document.getElementById("referenceCompareResult") as HTMLParagraphElement).innerHTML = "Te dwa obiekty są równe";
-  } else {
-    (document.getElementById("referenceCompareResult") as HTMLParagraphElement).innerHTML = "Te dwa obiekty nie są równe";
-  }
-}
+// function compareObjects() {
+//   const linearFun1 = linearFunObj1;
+//   const linearFun2 = linearFunObj1;
+//   if (linearFunObj1 === linearFunObj2) {
+//     (document.getElementById("objectCompareResult") as HTMLParagraphElement).innerHTML = "Te dwa obiekty są równe";
+//   } else {
+//     (document.getElementById("objectCompareResult") as HTMLParagraphElement).innerHTML = "Te dwa obiekty nie są równe";
+//   }
+//   if (linearFun1 === linearFun2) {
+//     (document.getElementById("referenceCompareResult") as HTMLParagraphElement).innerHTML = "Te dwa obiekty są równe";
+//   } else {
+//     (document.getElementById("referenceCompareResult") as HTMLParagraphElement).innerHTML = "Te dwa obiekty nie są równe";
+//   }
+// }
 
-function makePatterns() {
-  const a1 = linearFunObj1.la();
-  const b1 = linearFunObj1.lb();
-  const a2 = linearFunObj2.la();
-  const b2 = linearFunObj2.lb();
-  const y1 = a1 + "x+" + b1;
-  const y2 = a2 + "x+" + b2;
-  (document.getElementById("linearFunPatt1") as HTMLParagraphElement).innerHTML = y1;
-  (document.getElementById("linearFunPatt2") as HTMLParagraphElement).innerHTML = y2;
+// function makePatterns() {
+//   const a1 = linearFunObj1.la();
+//   const b1 = linearFunObj1.lb();
+//   const a2 = linearFunObj2.la();
+//   const b2 = linearFunObj2.lb();
+//   const y1 = a1 + "x+" + b1;
+//   const y2 = a2 + "x+" + b2;
+//   (document.getElementById("linearFunPatt1") as HTMLParagraphElement).innerHTML = y1;
+//   (document.getElementById("linearFunPatt2") as HTMLParagraphElement).innerHTML = y2;
+// }
+// const btn = document.getElementById("btn") as HTMLButtonElement;
+// btn.addEventListener("click", compareObjects);
+// btn.addEventListener("click", makePatterns);
+
+let funArr = new Array() as any[];
+console.log("funArr:", funArr);
+function MakeFunsArray() {
+  let pattern = "";
+  let funItems = "" as any;
+  function createFunPattern() {
+    const a = (document.getElementById("a") as HTMLInputElement).value;
+    const b = (document.getElementById("b") as HTMLInputElement).value;
+    pattern = a + "x+" + b;
+    return pattern;
+  }
+  function fillArray(patt: string) {
+    funArr.push(patt);
+    return funArr;
+  }
+
+  pattern = createFunPattern();
+  funArr = fillArray(pattern);
+  funItems = document.getElementsByClassName("li");
+  console.log("funItems:", funItems);
+  for (let i = 0; i < funArr.length; i++) {
+    funItems[i].innerHTML = funArr[i];
+  }
+  function arrModification() {
+    const moda = (document.getElementById("moda") as HTMLInputElement).value;
+    let arrEl = funArr[0];
+    arrEl = Array.from(arrEl);
+    console.log({ arrEl });
+    arrEl.splice(0, 1, moda);
+    let pattern = arrEl.toString();
+    pattern = pattern.replace(/,/g, "");
+    funItems[0].innerHTML = pattern;
+  }
+  const modBtn = document.getElementById("modBtn") as HTMLButtonElement;
+  modBtn.addEventListener("click", arrModification);
 }
 const btn = document.getElementById("btn") as HTMLButtonElement;
-btn.addEventListener("click", compareObjects);
-btn.addEventListener("click", makePatterns);
+btn.addEventListener("click", MakeFunsArray);

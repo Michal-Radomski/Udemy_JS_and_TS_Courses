@@ -431,7 +431,7 @@
 // btn.addEventListener("click", makePatterns);
 
 let funArr = new Array() as any[];
-console.log("funArr:", funArr);
+// console.log("funArr:", funArr);
 function MakeFunsArray() {
   let pattern = "";
   let funItems = "" as any;
@@ -449,7 +449,7 @@ function MakeFunsArray() {
   pattern = createFunPattern();
   funArr = fillArray(pattern);
   funItems = document.getElementsByClassName("li");
-  console.log("funItems:", funItems);
+  // console.log("funItems:", funItems);
   for (let i = 0; i < funArr.length; i++) {
     funItems[i].innerHTML = funArr[i];
   }
@@ -457,7 +457,7 @@ function MakeFunsArray() {
     const moda = (document.getElementById("moda") as HTMLInputElement).value;
     let arrEl = funArr[0];
     arrEl = Array.from(arrEl);
-    console.log({ arrEl });
+    // console.log({ arrEl });
     arrEl.splice(0, 1, moda);
     let pattern = arrEl.toString();
     pattern = pattern.replace(/,/g, "");
@@ -468,3 +468,10 @@ function MakeFunsArray() {
 }
 const btn = document.getElementById("btn") as HTMLButtonElement;
 btn.addEventListener("click", MakeFunsArray);
+
+const arrayEmpty = new Array(2);
+// console.log({ arrayEmpty });
+
+const obj: any = new Object();
+obj.foo = 42;
+// console.log({ obj });

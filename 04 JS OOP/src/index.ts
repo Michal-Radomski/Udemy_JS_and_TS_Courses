@@ -282,56 +282,102 @@
 // })();
 
 //@ ES5 constructor function
-function CheckingFactors(this: any) {
-  this.funsArr = ["x^2+4x+2"];
-  this.afactor = "";
-  this.bfactor = "";
-  this.cfactor = "";
+// function CheckingFactors(this: any) {
+//   this.funsArr = ["x^2+4x+2"];
+//   this.afactor = "";
+//   this.bfactor = "";
+//   this.cfactor = "";
 
-  this.firstFunChecking = function (linn: string) {
-    this.strFun = "(" + linn + ")" + this.funsArr[0];
-    this.afactor = this.strFun.slice(0, -8);
-    this.bfactor = this.strFun.slice(9, -3);
-    this.cfactor = this.strFun.slice(12);
-    return {
-      funEx: this.strFun,
-      afactor: linn,
-      bfactor: this.bfactor,
-      cfactor: this.cfactor,
-    };
-  };
+//   this.firstFunChecking = function (linn: string) {
+//     this.strFun = "(" + linn + ")" + this.funsArr[0];
+//     this.afactor = this.strFun.slice(0, -8);
+//     this.bfactor = this.strFun.slice(9, -3);
+//     this.cfactor = this.strFun.slice(12);
+//     return {
+//       funEx: this.strFun,
+//       afactor: linn,
+//       bfactor: this.bfactor,
+//       cfactor: this.cfactor,
+//     };
+//   };
 
-  this.secondFunChecking = function (af: string, bf: string, cf: string) {
-    this.strFun = "(" + af + ")x^2+" + "(" + bf + ")x+(" + cf + ")";
-    this.afactor = this.strFun.slice(0, -16);
-    this.bfactor = this.strFun.slice(10, -7);
-    this.cfactor = this.strFun.slice(17);
-    af = this.afactor;
-    bf = this.bfactor;
-    cf = this.cfactor;
-    return {
-      funEx: this.strFun,
-      afactor: af,
-      bfactor: bf,
-      cfactor: cf,
-    };
-  };
+//   this.secondFunChecking = function (af: string, bf: string, cf: string) {
+//     this.strFun = "(" + af + ")x^2+" + "(" + bf + ")x+(" + cf + ")";
+//     this.afactor = this.strFun.slice(0, -16);
+//     this.bfactor = this.strFun.slice(10, -7);
+//     this.cfactor = this.strFun.slice(17);
+//     af = this.afactor;
+//     bf = this.bfactor;
+//     cf = this.cfactor;
+//     return {
+//       funEx: this.strFun,
+//       afactor: af,
+//       bfactor: bf,
+//       cfactor: cf,
+//     };
+//   };
+// }
+// function SomeFun() {}
+
+// (function Make() {
+//   const obj = new (CheckingFactors as any)();
+//   // console.log("obj:", obj);
+
+//   const resultFun = obj.firstFunChecking("m-5");
+//   (document.getElementById("resultFunEx") as HTMLParagraphElement).innerHTML = resultFun.funEx;
+//   (document.getElementById("resultFunLinn") as HTMLParagraphElement).innerHTML = resultFun.afactor;
+//   (document.getElementById("resultFunBFact") as HTMLParagraphElement).innerHTML = resultFun.bfactor;
+//   (document.getElementById("resultFunCFact") as HTMLParagraphElement).innerHTML = resultFun.cfactor;
+
+//   const resultFun2 = obj.secondFunChecking("2m-4", "m-3", "m-6");
+//   (document.getElementById("resultFunEx2") as HTMLParagraphElement).innerHTML = resultFun2.funEx;
+//   (document.getElementById("resultFunLinn2") as HTMLParagraphElement).innerHTML = resultFun2.afactor;
+//   (document.getElementById("resultFunBFact2") as HTMLParagraphElement).innerHTML = resultFun2.bfactor;
+//   (document.getElementById("resultFunCFact2") as HTMLParagraphElement).innerHTML = resultFun2.cfactor;
+// })();
+
+const objFunPattern = {
+  wX: function () {
+    return (document.getElementById("wX") as HTMLInputElement).value;
+  },
+  wY: function () {
+    return (document.getElementById("wY") as HTMLInputElement).value;
+  },
+  Ax: function () {
+    return (document.getElementById("Ax") as HTMLInputElement).value;
+  },
+  Ay: function () {
+    return (document.getElementById("Ay") as HTMLInputElement).value;
+  },
+};
+
+function MakePattern() {
+  let a = 0;
+  let pattern = "";
+  const wX = Number(objFunPattern.wX());
+  const wY = Number(objFunPattern.wY());
+  const Ax = Number(objFunPattern.Ax());
+  const Ay = Number(objFunPattern.Ay());
+  a = (Ay - wY) / (Ax - wX);
+  pattern = "y= " + a + "*(x+" + wX + ")^2+" + wY;
+  (document.getElementById("resultPattern") as HTMLInputElement).innerHTML = pattern;
 }
-function SomeFun() {}
 
-(function Make() {
-  const obj = new (CheckingFactors as any)();
-  // console.log("obj:", obj);
+const btn = document.getElementById("btn") as HTMLButtonElement;
 
-  const resultFun = obj.firstFunChecking("m-5");
-  (document.getElementById("resultFunEx") as HTMLParagraphElement).innerHTML = resultFun.funEx;
-  (document.getElementById("resultFunLinn") as HTMLParagraphElement).innerHTML = resultFun.afactor;
-  (document.getElementById("resultFunBFact") as HTMLParagraphElement).innerHTML = resultFun.bfactor;
-  (document.getElementById("resultFunCFact") as HTMLParagraphElement).innerHTML = resultFun.cfactor;
+btn.addEventListener("click", MakePattern);
+const objCopy = objFunPattern;
+console.log("objCopy===objFunPattern:", objCopy === objFunPattern);
 
-  const resultFun2 = obj.secondFunChecking("2m-4", "m-3", "m-6");
-  (document.getElementById("resultFunEx2") as HTMLParagraphElement).innerHTML = resultFun2.funEx;
-  (document.getElementById("resultFunLinn2") as HTMLParagraphElement).innerHTML = resultFun2.afactor;
-  (document.getElementById("resultFunBFact2") as HTMLParagraphElement).innerHTML = resultFun2.bfactor;
-  (document.getElementById("resultFunCFact2") as HTMLParagraphElement).innerHTML = resultFun2.cfactor;
-})();
+function MakeCopyPattern() {
+  let ca = 0;
+  let cpattern = "";
+  const cwX = Number(objCopy.wX());
+  const cwY = Number(objCopy.wY());
+  const cAx = Number(objCopy.Ax());
+  const cAy = Number(objCopy.Ay());
+  ca = (cAy - cwY) / (cAx - cwX);
+  cpattern = "y= " + ca + "*(x+" + cwX + ")^2+" + cwY;
+  (document.getElementById("resultCopyPattern") as HTMLParagraphElement).innerHTML = cpattern;
+}
+btn.addEventListener("click", MakeCopyPattern);

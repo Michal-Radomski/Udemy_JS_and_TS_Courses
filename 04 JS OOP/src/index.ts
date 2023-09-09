@@ -1011,54 +1011,98 @@ const b = Number("123"); // b === 123 is true //* Number
 // btn.addEventListener("click", make);
 
 //* Classes
-class Circle {
+// class Circle {
+//   r: number;
+//   constructor(r: number) {
+//     this.r = r;
+//   }
+//   makeVolume() {
+//     return 2 * Math.PI * this.r;
+//   }
+//   makeArea() {
+//     return Math.PI * Math.pow(this.r, 2);
+//   }
+// }
+// function make() {
+//   const r = (document.getElementById("r") as HTMLInputElement).value;
+//   const circle = new Circle(Number(r));
+//   // console.log({ circle });
+//   const circleVolume = circle.makeVolume();
+//   const circleArea = circle.makeArea();
+//   (document.getElementById("okrag") as HTMLParagraphElement).innerHTML = "Okrąg !!!";
+//   (document.getElementById("objetosc") as HTMLParagraphElement).innerHTML = String(circleVolume);
+//   (document.getElementById("pole") as HTMLParagraphElement).innerHTML = String(circleArea);
+// }
+// const btn = document.getElementById("btn") as HTMLButtonElement;
+// btn.addEventListener("click", make);
+// class Triangle {
+//   a: number;
+//   h: number;
+//   constructor(a: number, h: number) {
+//     this.a = a;
+//     this.h = h;
+//   }
+//   makeVolume() {
+//     return 3 * this.a;
+//   }
+//   makeArea() {
+//     let part = this.a * this.h;
+//     let fullArea = part / 2;
+//     return fullArea;
+//   }
+// }
+// function make2() {
+//   const a = (document.getElementById("a") as HTMLInputElement).value;
+//   const h = a;
+//   const triangle = new Triangle(Number(a), Number(h)) as Triangle;
+//   // console.log({ triangle });
+//   const triangleVolume = triangle.makeVolume();
+//   const triangleArea = triangle.makeArea();
+
+//   (document.getElementById("trojkat") as HTMLParagraphElement).innerHTML = "Trójkąt !!!";
+//   (document.getElementById("objetosc2") as HTMLParagraphElement).innerHTML = triangleVolume.toString();
+//   (document.getElementById("pole2") as HTMLParagraphElement).innerHTML = triangleArea.toString();
+// }
+// btn.addEventListener("click", make2);
+
+class Figure {
+  type: string;
+  constructor(type: string) {
+    this.type = type;
+  }
+  displayType() {
+    return this.type;
+  }
+}
+class Ball extends Figure {
   r: number;
-  constructor(r: number) {
+  constructor(name: string, r: number) {
+    super(name);
     this.r = r;
   }
   makeVolume() {
-    return 2 * Math.PI * this.r;
+    let partVolume = Math.PI * Math.pow(this.r, 3);
+    let volume = 1.3 * partVolume;
+    return volume;
   }
   makeArea() {
-    return Math.PI * Math.pow(this.r, 2);
+    return 4 * Math.PI * Math.pow(this.r, 2);
   }
 }
+
 function make() {
   const r = (document.getElementById("r") as HTMLInputElement).value;
-  const circle = new Circle(Number(r));
-  const circleVolume = circle.makeVolume();
-  const circleArea = circle.makeArea();
-  (document.getElementById("okrag") as HTMLParagraphElement).innerHTML = "Okrąg !!!";
-  (document.getElementById("objetosc") as HTMLParagraphElement).innerHTML = String(circleVolume);
-  (document.getElementById("pole") as HTMLParagraphElement).innerHTML = String(circleArea);
+  const fig3d = new Figure("3d");
+  const figure3d = fig3d.displayType();
+  (document.getElementById("figura3d") as HTMLParagraphElement).innerHTML = figure3d;
+  const ball: Ball = new Ball("Kula", Number(r));
+  // console.log({ ball }, typeof ball);
+  const nameOfKula = ball.displayType();
+  const ballVolume = ball.makeVolume();
+  const ballArea = ball.makeArea();
+  (document.getElementById("figKula") as HTMLParagraphElement).innerHTML = nameOfKula;
+  (document.getElementById("objetosc") as HTMLParagraphElement).innerHTML = String(ballVolume);
+  (document.getElementById("pole") as HTMLParagraphElement).innerHTML = String(ballArea);
 }
 const btn = document.getElementById("btn") as HTMLButtonElement;
 btn.addEventListener("click", make);
-class Triangle {
-  a: number;
-  h: number;
-  constructor(a: number, h: number) {
-    this.a = a;
-    this.h = h;
-  }
-  makeVolume() {
-    return 3 * this.a;
-  }
-  makeArea() {
-    let part = this.a * this.h;
-    let fullArea = part / 2;
-    return fullArea;
-  }
-}
-function make2() {
-  const a = (document.getElementById("a") as HTMLInputElement).value;
-  const h = a;
-  const triangle = new Triangle(Number(a), Number(h));
-  const triangleVolume = triangle.makeVolume();
-  const triangleArea = triangle.makeArea();
-
-  (document.getElementById("trojkat") as HTMLParagraphElement).innerHTML = "Trójkąt !!!";
-  (document.getElementById("objetosc2") as HTMLParagraphElement).innerHTML = triangleVolume.toString();
-  (document.getElementById("pole2") as HTMLParagraphElement).innerHTML = triangleArea.toString();
-}
-btn.addEventListener("click", make2);

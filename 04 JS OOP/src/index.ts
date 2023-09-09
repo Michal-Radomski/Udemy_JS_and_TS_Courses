@@ -1181,34 +1181,84 @@ const b = Number("123"); // b === 123 is true //* Number
 // const btn = document.getElementById("btn") as HTMLButtonElement;
 // btn.addEventListener("click", getValuesFromForm);
 
+// const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+// const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+// const datas = {
+//   xstart: parseInt((document.getElementById("xstartpoint") as HTMLInputElement).value),
+//   ystart: parseInt((document.getElementById("ystartpoint") as HTMLInputElement).value),
+//   xend: parseInt((document.getElementById("xendpoint") as HTMLInputElement).value),
+//   yend: parseInt((document.getElementById("yendpoint") as HTMLInputElement).value),
+// };
+// const methods = {
+//   drawGradient: function (xstart: number, ystart: number, xend: number, yend: number) {
+//     const gradient = ctx.createLinearGradient(xstart, ystart, xend, yend);
+//     gradient.addColorStop(0, "rgb(255,0,0)");
+//     gradient.addColorStop(0.5, "rgb(0,255,0)");
+//     gradient.addColorStop(1, "rgb(255,0,0)");
+//     ctx.fillStyle = gradient;
+//     ctx.beginPath();
+//     ctx.moveTo(100, 0);
+//     ctx.lineTo(350, 350);
+//     ctx.lineTo(100, 700);
+//     ctx.lineTo(0, 350);
+//     ctx.lineTo(100, 0);
+//     ctx.stroke();
+//     ctx.fill();
+//     ctx.closePath();
+//   },
+// };
+// function drawGradient() {
+//   methods.drawGradient(datas.xstart, datas.ystart, datas.xend, datas.yend);
+// }
+// const btn = document.getElementById("btn") as HTMLButtonElement;
+// btn.addEventListener("click", drawGradient);
+
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 const datas = {
-  xstart: parseInt((document.getElementById("xstartpoint") as HTMLInputElement).value),
-  ystart: parseInt((document.getElementById("ystartpoint") as HTMLInputElement).value),
-  xend: parseInt((document.getElementById("xendpoint") as HTMLInputElement).value),
-  yend: parseInt((document.getElementById("yendpoint") as HTMLInputElement).value),
+  color: "red",
+  offsetX: -30,
+  offsetY: -20,
+  shadowColor: "brown",
+  shadowBlur: 20,
+  x: 10,
+  y: 10,
+  w: 300,
+  h: 300,
 };
+
 const methods = {
-  drawGradient: function (xstart: number, ystart: number, xend: number, yend: number) {
-    const gradient = ctx.createLinearGradient(xstart, ystart, xend, yend);
-    gradient.addColorStop(0, "rgb(255,0,0)");
-    gradient.addColorStop(0.5, "rgb(0,255,0)");
-    gradient.addColorStop(1, "rgb(255,0,0)");
-    ctx.fillStyle = gradient;
-    ctx.beginPath();
-    ctx.moveTo(100, 0);
-    ctx.lineTo(350, 350);
-    ctx.lineTo(100, 700);
-    ctx.lineTo(0, 350);
-    ctx.lineTo(100, 0);
-    ctx.stroke();
-    ctx.fill();
-    ctx.closePath();
+  drawShadow: function (
+    c: string,
+    ox: number,
+    oy: number,
+    sc: string,
+    sb: number,
+    x: number,
+    y: number,
+    w: number,
+    h: number
+  ) {
+    ctx.fillStyle = c;
+    ctx.shadowOffsetX = ox;
+    ctx.shadowOffsetY = oy;
+    ctx.shadowColor = sc;
+    ctx.shadowBlur = sb;
+    ctx.fillRect(x, y, w, h);
   },
 };
-function drawGradient() {
-  methods.drawGradient(datas.xstart, datas.ystart, datas.xend, datas.yend);
+function drawShadow() {
+  methods.drawShadow(
+    datas.color,
+    datas.offsetX,
+    datas.offsetY,
+    datas.shadowColor,
+    datas.shadowBlur,
+    datas.x,
+    datas.y,
+    datas.w,
+    datas.h
+  );
 }
 const btn = document.getElementById("btn") as HTMLButtonElement;
-btn.addEventListener("click", drawGradient);
+btn.addEventListener("click", drawShadow);

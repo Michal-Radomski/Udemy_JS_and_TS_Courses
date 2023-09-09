@@ -495,6 +495,8 @@ const bTrueString = new Boolean("true");
 const bTrueValue = bTrue.valueOf();
 const bTrueToString = bTrue.toString();
 // console.log({ bTrueValue, bTrueToString });
+const boolean = Boolean(true);
+// console.log({ boolean }, typeof boolean);
 
 //* Number Constructor
 const a = new Number("123"); // a === 123 is false //* Object
@@ -507,14 +509,391 @@ const b = Number("123"); // b === 123 is true //* Number
 // console.log("typeof a:", typeof a, "typeof b", typeof b); // object, number
 
 //* Regex Constructor
-const regex1 = /\w+/ as RegExp;
-const regex2 = new RegExp("\\w+") as RegExp;
+// const regex1 = /\w+/ as RegExp;
+// const regex2 = new RegExp("\\w+") as RegExp;
 
 // console.log({ regex1 }, typeof regex1); // Expected output: /\w+/
 // console.log({ regex2 }, typeof regex2); // Expected output: /\w+/
 // console.log("regex1 === regex2:", regex1 === regex2); // Expected output: false
 
-const paragraph: string = "The quick brown fox jumps over the lazy dog. It barked.";
-const regex: RegExp = /[A-Z]/g;
-const found = paragraph.match(regex) as RegExpMatchArray;
-console.log({ found }); // Expected output: Array ["T", "I"]s
+// const paragraph: string = "The quick brown fox jumps over the lazy dog. It barked.";
+// const regex: RegExp = /[A-Z]/g;
+// const regex3: RegExp = /[1-9]/g;
+
+//* string + match
+// const found = paragraph.match(regex) as RegExpMatchArray;
+// console.log({ found }); // Expected output: Array ["T", "I"]s
+// const found3 = paragraph.match(regex3) as RegExpMatchArray;
+// console.log({ found3 }); //* null !!!
+
+//* Regex + match
+// const csLewisQuote = "We are what we believe we are.";
+// const regex4 = /are/;
+// console.log("csLewisQuote.match(regex4):", csLewisQuote.match(regex4));
+
+// //* String Constructor
+// const a_str = new String("Hello world"); // a === "Hello world" is false
+// const b_str = String("Hello world"); // b === "Hello world" is true
+// console.log({ a_str, b_str }, a_str === b_str);
+
+// console.log("a_str instanceof String:", a_str instanceof String); // true
+// console.log("b_str instanceof String:", (b_str as any) instanceof String); // false
+
+// console.log("typeof a_str", typeof a_str);
+// console.log("typeof b_str", typeof b_str);
+
+// function Delta(this: any, b: number, a: number, c: number) {
+//   this.a = a;
+//   this.b = b;
+//   this.c = c;
+//   this.makeDelta = function () {
+//     return Math.pow(this.b, 2) - 4 * this.a * this.c;
+//   };
+//   this.deltaDescription = function () {
+//     const delta = this.makeDelta();
+//     if (delta > 0) {
+//       (document.getElementById("roots") as HTMLParagraphElement).innerHTML =
+//         "Istnieją dwa pierwiastki !!! <br>" + ", bo delta jest równa: " + delta + "<br>" + "czyli jest większa od zera";
+//     } else if (delta == 0) {
+//       (document.getElementById("roots") as HTMLParagraphElement).innerHTML =
+//         "istnieje tylko jeden pierwiastek !!! <br>" + ", bo delta jest równa: " + delta;
+//     } else {
+//       (document.getElementById("roots") as HTMLParagraphElement).innerHTML = "nie ma pierwiastków, bo delta: " + delta;
+//     }
+//   };
+//   this.roots = function () {
+//     let delta = this.makeDelta();
+//     // console.log({ delta });
+//     const x1 = ((-this.b - Math.sqrt(delta)) / 2) * this.a;
+//     const x2 = ((-this.b + Math.sqrt(delta)) / 2) * this.a;
+//     (document.getElementById("rootsParam") as HTMLParagraphElement).innerHTML = "x1: " + x1 + " x2: " + x2;
+//   };
+// }
+// Delta.prototype.makeDelta2 = function () {
+//   return Math.pow(this.b, 2) - 4 * this.a * this.c;
+// };
+// Delta.prototype.deltaDescription2 = function () {
+//   const delta = this.makeDelta2();
+//   // console.log({ delta });
+//   if (delta > 0) {
+//     (document.getElementById("roots") as HTMLParagraphElement).innerHTML = "Istnieją dwa pierwiastki !!!";
+//   } else if (delta == 0) {
+//     (document.getElementById("roots") as HTMLParagraphElement).innerHTML = "Istnieje tylko jeden pierwiastek";
+//   } else {
+//     (document.getElementById("roots") as HTMLParagraphElement).innerHTML = "Nie ma pierwiastków";
+//   }
+// };
+// Delta.prototype.roots2 = function () {
+//   let delta = this.makeDelta2();
+//   const x1 = ((-this.b - Math.sqrt(delta)) / 2) * this.a;
+//   const x2 = ((-this.b + Math.sqrt(delta)) / 2) * this.a;
+//   (document.getElementById("rootsParam") as HTMLParagraphElement).innerHTML = "x1: " + x1 + " x2: " + x2;
+// };
+// const result = new (Delta as any)(-4, 1, -5);
+// result.makeDelta2();
+// result.deltaDescription2();
+// result.roots2();
+// // result.makeDelta();
+// // result.deltaDescription();
+// // result.roots();
+
+// console.log("result:", result);
+// console.log("Delta:", Delta);
+
+// const qFunObj = {
+//   a: 3,
+//   b: 4,
+//   c: 4,
+//   qy: function () {
+//     return "y= " + qFunObj.a + "x^2+" + qFunObj.b + "x+" + qFunObj.c;
+//   },
+//   derrQFun: function () {
+//     return "dy= " + 2 * qFunObj.a + "x+" + qFunObj.b;
+//   },
+// };
+
+// const mesFunObj = {
+//   topa: 10,
+//   topb: 1,
+//   bottoma: 4,
+//   bottomb: 3,
+//   mFun: function () {
+//     return "y= (" + mesFunObj.topa + "x+" + mesFunObj.topb + ")/(" + mesFunObj.bottoma + "x+" + mesFunObj.bottomb + ")";
+//   },
+//   derrMFun: function () {
+//     return mesFunObj.topa / mesFunObj.bottoma;
+//   },
+// };
+
+// function QFunction(this: any, a: number, b: number, c: number) {
+//   this.a = a;
+//   this.b = b;
+//   this.c = c;
+// }
+// function MFunction(this: any, ta: number, tb: number, ba: number, bb: number) {
+//   this.ta = ta;
+//   this.tb = tb;
+//   this.ba = ba;
+//   this.bb = bb;
+// }
+// QFunction.prototype = qFunObj;
+// MFunction.prototype = mesFunObj;
+
+// const qfun = new (QFunction as any)(1, -4, -5);
+// const isProt = qFunObj.isPrototypeOf(qfun);
+
+// (document.getElementById("qFun") as HTMLParagraphElement).innerHTML = "funkcja: " + qFunObj.qy();
+// (document.getElementById("derrOfQFun") as HTMLParagraphElement).innerHTML = "pochodna: " + qFunObj.derrQFun();
+
+// if (isProt == true) {
+//   (document.getElementById("testProto") as HTMLParagraphElement).innerHTML =
+//     "Tak, obiekt qFunObj jest prototypem funkcji " + qFunObj.qy();
+// }
+// const mesFun = new (MFunction as any)(10, 1, 3, 4);
+// const isProt2 = mesFunObj.isPrototypeOf(mesFun);
+// if (isProt2 == true) {
+//   (document.getElementById("testProto2") as HTMLParagraphElement).innerHTML =
+//     "tak, obiekt mesFunObj jest prototypem funkcji" + mesFunObj.mFun();
+// }
+
+//* isPrototypeOf
+// function Foo() {}
+// function Bar() {}
+
+// Bar.prototype = Object.create(Foo.prototype);
+// const bar = new (Bar as any)();
+// console.log({ bar });
+// console.log("Foo.prototype.isPrototypeOf(bar):", Foo.prototype.isPrototypeOf(bar)); // Expected output: true
+// console.log("Bar.prototype.isPrototypeOf(bar):", Bar.prototype.isPrototypeOf(bar)); // Expected output: true
+
+//@ ES5 constructor function
+// const Person = function (this: any, name: string) {
+//   this.name = name;
+//   this.type = "human";
+// };
+
+// Person.prototype.info = function () {
+//   console.log("Name:", this.name, "Type:", this.type);
+// };
+
+// const Robot = function (this: any, _name: string) {
+//   // console.log("this:",this, typeof this);
+//   Person.apply(this, arguments as any);
+//   this.type = "robot";
+// };
+
+// Robot.prototype = Person.prototype; // Set prototype to Person's
+// Robot.prototype.constructor = Robot; // Set constructor back to Robot
+
+// const person = new (Person as any)("Bob");
+// const robot = new (Robot as any)("Boutros");
+
+// person.info(); // Name: Bob Type: human
+// robot.info(); // Name: Boutros Type: robot
+
+//* Closures
+// function makeFunc() {
+//   const name = "Mozilla";
+//   function displayName() {
+//     console.log(name);
+//   }
+//   return displayName;
+// }
+
+// const myFunc = makeFunc();
+// myFunc();
+
+//* Prototypes
+// function Figure(this: any) {
+//   this.name = "figure";
+//   this.toString = function () {
+//     return this.name;
+//   };
+// }
+// function Figure3d(this: any) {
+//   this.name = "figure 3d";
+// }
+// function Cuboid(this: any, a: number, b: number, h: number) {
+//   this.name = "prostopadłościan";
+//   this.a = a;
+//   this.b = b;
+//   this.h = h;
+//   this.makeVolume = function () {
+//     return this.a * this.b * this.h;
+//   };
+//   this.makeArea = function () {
+//     let areaPart1 = 2 * this.a * this.b;
+//     let areaPart2 = 2 * this.b * this.h;
+//     let areaPart3 = 2 * this.a * this.h;
+//     let fullArea = areaPart1 + areaPart2 + areaPart3;
+//     return fullArea;
+//   };
+// }
+// Figure3d.prototype = new (Figure as any)();
+// Cuboid.prototype = new (Figure3d as any)();
+// function make() {
+//   const a = (document.getElementById("a") as HTMLInputElement).value;
+//   const b = (document.getElementById("b") as HTMLInputElement).value;
+//   const h = (document.getElementById("H") as HTMLInputElement).value;
+//   const cuboid1 = new (Cuboid as any)(a, b, h);
+//   const fig = cuboid1.toString();
+//   const volume = cuboid1.makeVolume();
+//   const area = cuboid1.makeArea();
+//   (document.getElementById("fig1") as HTMLParagraphElement).innerHTML = fig;
+//   (document.getElementById("objetosc") as HTMLParagraphElement).innerHTML = volume;
+//   (document.getElementById("pole") as HTMLParagraphElement).innerHTML = area;
+// }
+// const btn = document.getElementById("btn1") as HTMLButtonElement;
+// btn.addEventListener("click", make);
+// function triPrism(this: any, a: number, b: number, c: number, th: number, ph: number) {
+//   this.a = a;
+//   this.b = b;
+//   this.c = c;
+//   this.th = th;
+//   this.ph = ph;
+//   this.name = "graniastosłup trójkątny";
+//   this.volumePrism = function () {
+//     const triangleArea = (this.a * this.th) / 2;
+//     const prismVol = triangleArea * this.ph;
+//     return prismVol;
+//   };
+//   this.areaPrism = function () {
+//     const triangleArea = (this.a * this.th) / 2;
+//     const asideArea = this.a * this.ph;
+//     const fullArea = 2 * triangleArea + asideArea;
+//     return fullArea;
+//   };
+// }
+// triPrism.prototype = new (Figure3d as any)();
+// function make2() {
+//   const a = (document.getElementById("a") as any).value;
+//   const b = (document.getElementById("b") as any).value;
+//   const c = (document.getElementById("c") as any).value;
+//   const ph = (document.getElementById("H") as any).value;
+//   const th = (document.getElementById("th") as any).value;
+//   const trip = new (triPrism as any)(a, b, c, th, ph);
+//   const fig2 = trip.toString();
+//   (document.getElementById("fig2") as HTMLParagraphElement).innerHTML = fig2;
+//   const volume2 = trip.volumePrism();
+//   const area2 = trip.areaPrism();
+//   (document.getElementById("objetosc2") as HTMLParagraphElement).innerHTML = volume2;
+//   (document.getElementById("pole2") as HTMLParagraphElement).innerHTML = area2;
+// }
+// btn.addEventListener("click", make2);
+
+function Figure() {}
+Figure.prototype.name = "figure";
+Figure.prototype.toString = function () {
+  return this.name;
+};
+function Figure3d(this: any) {
+  this.name = "figure 3d";
+}
+function PyramidTriangleBase(this: any, ap: number, hp: number, ho: number, hb: number) {
+  this.ap = ap;
+  this.hp = hp;
+  this.ho = ho;
+  this.hb = hb;
+  this.name = "ostrosłup o podstawie trójkąta";
+  this.makeVolume = function () {
+    let baseArea = (this.ap * this.hp) / 2;
+    let pyramidTrBaseVolume = (baseArea * this.ho) / 3;
+    return pyramidTrBaseVolume;
+  };
+  this.makeArea = function () {
+    let baseArea = (this.ap * this.hp) / 2;
+    let asideArea = (this.ap * this.hb) / 2;
+    let fullArea = baseArea + 3 * asideArea;
+    return fullArea;
+  };
+}
+
+function PyramidSquareBase(this: any, ap: string, hb: string, ho: string) {
+  this.ap = ap;
+  this.hb = hb;
+  this.ho = ho;
+  this.name = "ostrosłup o podstawie kwadratu";
+  this.makeVolume = function () {
+    let baseArea = this.ap * this.ap;
+    let pyramidSqBaseVolume = (baseArea * this.ho) / 3;
+    return pyramidSqBaseVolume;
+  };
+  this.makeArea = function () {
+    let baseArea = this.ap * this.ap;
+    let asideArea = (this.ap * this.hb) / 2;
+    let fullArea = baseArea + asideArea * 4;
+    return fullArea;
+  };
+}
+function PyramidPolygonBase(this: any, ap: any, hb: any, ho: any) {
+  this.ap = ap;
+  this.hb = hb;
+  this.ho = ho;
+  this.name = "ostrosłup o podstawie wielokąta foremnego";
+  this.makeVolume = function () {
+    let ctan = 1 / Math.tan((36 * Math.PI) / 180);
+    let baseArea = Math.pow(this.ap, 2) * ctan * 1.25;
+    let pyramidPolyBaseVolume = (baseArea * this.ho) / 3;
+    return pyramidPolyBaseVolume;
+  };
+  this.makeArea = function () {
+    let ctan = 1 / Math.tan((36 * Math.PI) / 180);
+    let baseArea = Math.pow(this.ap, 2) * ctan * 1.25;
+    let asideArea = (this.ap * this.hb) / 2;
+    let fullArea = baseArea + this.ap * asideArea * 5;
+    return fullArea;
+  };
+}
+Figure3d.prototype = Figure.prototype;
+Figure3d.prototype.constructor = Figure3d;
+
+PyramidTriangleBase.prototype = Figure3d.prototype;
+PyramidTriangleBase.prototype.constructor = PyramidTriangleBase;
+
+function make() {
+  const ap = (document.getElementById("ap") as HTMLInputElement).value;
+  const hp = (document.getElementById("hp") as HTMLInputElement).value;
+  const ho = (document.getElementById("ho") as HTMLInputElement).value;
+  const hb = (document.getElementById("hb") as HTMLInputElement).value;
+  const pyramidTrBase = new (PyramidTriangleBase as any)(ap, hp, ho, hb);
+  let fig = pyramidTrBase.toString();
+  let volume = pyramidTrBase.makeVolume();
+  let area = pyramidTrBase.makeArea();
+  (document.getElementById("ostro1") as HTMLParagraphElement).innerHTML = fig;
+  (document.getElementById("objetosc") as HTMLParagraphElement).innerHTML = volume;
+  (document.getElementById("pole") as HTMLParagraphElement).innerHTML = area;
+}
+const btn = document.getElementById("btn1") as HTMLButtonElement;
+btn.addEventListener("click", make);
+
+PyramidSquareBase.prototype = Figure3d.prototype;
+PyramidSquareBase.prototype.constructor = PyramidSquareBase;
+function make2() {
+  const ap = (document.getElementById("ap") as HTMLInputElement).value;
+  const hb = (document.getElementById("hb") as HTMLInputElement).value;
+  const ho = (document.getElementById("ho") as HTMLInputElement).value;
+  const pyramidSquareBase = new (PyramidSquareBase as any)(ap, hb, ho);
+  let fig = pyramidSquareBase.toString();
+  let volume = pyramidSquareBase.makeVolume();
+  let area = pyramidSquareBase.makeArea();
+  (document.getElementById("ostro2") as HTMLParagraphElement).innerHTML = fig;
+  (document.getElementById("objetosc2") as HTMLParagraphElement).innerHTML = volume;
+  (document.getElementById("pole2") as HTMLParagraphElement).innerHTML = area;
+}
+btn.addEventListener("click", make2);
+PyramidPolygonBase.prototype = Figure3d.prototype;
+PyramidPolygonBase.prototype.constructor = PyramidPolygonBase;
+function make3() {
+  const ap = (document.getElementById("ap") as HTMLInputElement).value;
+  const hb = (document.getElementById("hb") as HTMLInputElement).value;
+  const ho = (document.getElementById("ho") as HTMLInputElement).value;
+  const pyramidPoligonBase = new (PyramidPolygonBase as any)(ap, hb, ho);
+  let fig = pyramidPoligonBase.toString();
+  let volume = pyramidPoligonBase.makeVolume();
+  let area = pyramidPoligonBase.makeArea();
+
+  (document.getElementById("ostro3") as HTMLParagraphElement).innerHTML = fig;
+  (document.getElementById("objetosc3") as HTMLParagraphElement).innerHTML = volume;
+  (document.getElementById("pole3") as HTMLParagraphElement).innerHTML = area;
+}
+btn.addEventListener("click", make3);

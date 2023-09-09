@@ -957,55 +957,108 @@ const b = Number("123"); // b === 123 is true //* Number
 // const btn = document.getElementById("btn1") as HTMLButtonElement;
 // btn.addEventListener("click", make);
 
-function Figure() {}
-Figure.prototype.name = "figure";
-Figure.prototype.toString = function () {
-  const resultArr = [];
-  if (this.constructor.parent) {
-    resultArr[resultArr.length] = this.constructor.parent.toString();
+// function Figure() {}
+// Figure.prototype.name = "figure";
+// Figure.prototype.toString = function () {
+//   const resultArr = [];
+//   if (this.constructor.parent) {
+//     resultArr[resultArr.length] = this.constructor.parent.toString();
+//   }
+//   resultArr[resultArr.length] = this.name;
+//   return resultArr.join(",");
+// };
+// function Figure3d(this: any) {
+//   this.name = "figure 3d";
+// }
+// function Cylinder(this: any, rp: number, hw: number) {
+//   this.rp = rp;
+//   this.hw = hw;
+//   this.name = "bryła walca";
+//   this.makeVolume = function () {
+//     return Math.PI * Math.pow(this.rp, 2) * this.hw;
+//   };
+//   this.makeArea = function () {
+//     let asideArea = 2 * Math.PI * this.rp * this.hw;
+//     let baseArea = Math.PI * Math.pow(this.rp, 2);
+//     let fullArea = 2 * baseArea + asideArea;
+//     return fullArea;
+//   };
+// }
+// const tempFun = function () {};
+// tempFun.prototype = Figure.prototype;
+// Figure3d.prototype = new (tempFun as any)();
+// Figure3d.prototype.constructor = Figure3d;
+// Figure3d.parent = Figure.prototype;
+// tempFun.prototype = Figure3d.prototype;
+// Cylinder.prototype = new (tempFun as any)();
+// Cylinder.prototype.constructor = Cylinder;
+// Cylinder.parent = Figure3d.prototype;
+
+// function make() {
+//   const rp = (document.getElementById("rp") as HTMLInputElement).value;
+//   const hw = (document.getElementById("hw") as HTMLInputElement).value;
+
+//   const cylinder = new (Cylinder as any)(rp, hw);
+//   let fig = cylinder.toString();
+//   let volume = cylinder.makeVolume();
+//   let area = cylinder.makeArea();
+
+//   (document.getElementById("walec") as HTMLParagraphElement).innerHTML = fig;
+//   (document.getElementById("objetosc") as HTMLParagraphElement).innerHTML = volume;
+//   (document.getElementById("pole") as HTMLParagraphElement).innerHTML = area;
+// }
+// const btn = document.getElementById("btn1") as HTMLButtonElement;
+// btn.addEventListener("click", make);
+
+//* Classes
+class Circle {
+  r: number;
+  constructor(r: number) {
+    this.r = r;
   }
-  resultArr[resultArr.length] = this.name;
-  return resultArr.join(",");
-};
-function Figure3d(this: any) {
-  this.name = "figure 3d";
+  makeVolume() {
+    return 2 * Math.PI * this.r;
+  }
+  makeArea() {
+    return Math.PI * Math.pow(this.r, 2);
+  }
 }
-function Cylinder(this: any, rp: number, hw: number) {
-  this.rp = rp;
-  this.hw = hw;
-  this.name = "bryła walca";
-  this.makeVolume = function () {
-    return Math.PI * Math.pow(this.rp, 2) * this.hw;
-  };
-  this.makeArea = function () {
-    let asideArea = 2 * Math.PI * this.rp * this.hw;
-    let baseArea = Math.PI * Math.pow(this.rp, 2);
-    let fullArea = 2 * baseArea + asideArea;
-    return fullArea;
-  };
-}
-const tempFun = function () {};
-tempFun.prototype = Figure.prototype;
-Figure3d.prototype = new (tempFun as any)();
-Figure3d.prototype.constructor = Figure3d;
-Figure3d.parent = Figure.prototype;
-tempFun.prototype = Figure3d.prototype;
-Cylinder.prototype = new (tempFun as any)();
-Cylinder.prototype.constructor = Cylinder;
-Cylinder.parent = Figure3d.prototype;
-
 function make() {
-  const rp = (document.getElementById("rp") as HTMLInputElement).value;
-  const hw = (document.getElementById("hw") as HTMLInputElement).value;
-
-  const cylinder = new (Cylinder as any)(rp, hw);
-  let fig = cylinder.toString();
-  let volume = cylinder.makeVolume();
-  let area = cylinder.makeArea();
-
-  (document.getElementById("walec") as HTMLParagraphElement).innerHTML = fig;
-  (document.getElementById("objetosc") as HTMLParagraphElement).innerHTML = volume;
-  (document.getElementById("pole") as HTMLParagraphElement).innerHTML = area;
+  const r = (document.getElementById("r") as HTMLInputElement).value;
+  const circle = new Circle(Number(r));
+  const circleVolume = circle.makeVolume();
+  const circleArea = circle.makeArea();
+  (document.getElementById("okrag") as HTMLParagraphElement).innerHTML = "Okrąg !!!";
+  (document.getElementById("objetosc") as HTMLParagraphElement).innerHTML = String(circleVolume);
+  (document.getElementById("pole") as HTMLParagraphElement).innerHTML = String(circleArea);
 }
-const btn = document.getElementById("btn1") as HTMLButtonElement;
+const btn = document.getElementById("btn") as HTMLButtonElement;
 btn.addEventListener("click", make);
+class Triangle {
+  a: number;
+  h: number;
+  constructor(a: number, h: number) {
+    this.a = a;
+    this.h = h;
+  }
+  makeVolume() {
+    return 3 * this.a;
+  }
+  makeArea() {
+    let part = this.a * this.h;
+    let fullArea = part / 2;
+    return fullArea;
+  }
+}
+function make2() {
+  const a = (document.getElementById("a") as HTMLInputElement).value;
+  const h = a;
+  const triangle = new Triangle(Number(a), Number(h));
+  const triangleVolume = triangle.makeVolume();
+  const triangleArea = triangle.makeArea();
+
+  (document.getElementById("trojkat") as HTMLParagraphElement).innerHTML = "Trójkąt !!!";
+  (document.getElementById("objetosc2") as HTMLParagraphElement).innerHTML = triangleVolume.toString();
+  (document.getElementById("pole2") as HTMLParagraphElement).innerHTML = triangleArea.toString();
+}
+btn.addEventListener("click", make2);

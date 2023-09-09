@@ -1065,44 +1065,63 @@ const b = Number("123"); // b === 123 is true //* Number
 // }
 // btn.addEventListener("click", make2);
 
-class Figure {
-  type: string;
-  constructor(type: string) {
-    this.type = type;
-  }
-  displayType() {
-    return this.type;
-  }
-}
-class Ball extends Figure {
-  r: number;
-  constructor(name: string, r: number) {
-    super(name);
-    this.r = r;
-  }
-  makeVolume() {
-    let partVolume = Math.PI * Math.pow(this.r, 3);
-    let volume = 1.3 * partVolume;
-    return volume;
-  }
-  makeArea() {
-    return 4 * Math.PI * Math.pow(this.r, 2);
-  }
-}
+// class Figure {
+//   type: string;
+//   constructor(type: string) {
+//     this.type = type;
+//   }
+//   displayType() {
+//     return this.type;
+//   }
+// }
+// class Ball extends Figure {
+//   r: number;
+//   constructor(name: string, r: number) {
+//     super(name);
+//     this.r = r;
+//   }
+//   makeVolume() {
+//     let partVolume = Math.PI * Math.pow(this.r, 3);
+//     let volume = 1.3 * partVolume;
+//     return volume;
+//   }
+//   makeArea() {
+//     return 4 * Math.PI * Math.pow(this.r, 2);
+//   }
+// }
 
+// function make() {
+//   const r = (document.getElementById("r") as HTMLInputElement).value;
+//   const fig3d = new Figure("3d");
+//   const figure3d = fig3d.displayType();
+//   (document.getElementById("figura3d") as HTMLParagraphElement).innerHTML = figure3d;
+//   const ball: Ball = new Ball("Kula", Number(r));
+//   // console.log({ ball }, typeof ball);
+//   const nameOfKula = ball.displayType();
+//   const ballVolume = ball.makeVolume();
+//   const ballArea = ball.makeArea();
+//   (document.getElementById("figKula") as HTMLParagraphElement).innerHTML = nameOfKula;
+//   (document.getElementById("objetosc") as HTMLParagraphElement).innerHTML = String(ballVolume);
+//   (document.getElementById("pole") as HTMLParagraphElement).innerHTML = String(ballArea);
+// }
+// const btn = document.getElementById("btn") as HTMLButtonElement;
+// btn.addEventListener("click", make);
+
+class Prosta {
+  a: number;
+  b: number;
+  constructor(a: number, b: number) {
+    this.a = a;
+    this.b = b;
+  }
+  static display(a: string, b: string) {
+    return "y= " + a + "x+" + b;
+  }
+}
 function make() {
-  const r = (document.getElementById("r") as HTMLInputElement).value;
-  const fig3d = new Figure("3d");
-  const figure3d = fig3d.displayType();
-  (document.getElementById("figura3d") as HTMLParagraphElement).innerHTML = figure3d;
-  const ball: Ball = new Ball("Kula", Number(r));
-  // console.log({ ball }, typeof ball);
-  const nameOfKula = ball.displayType();
-  const ballVolume = ball.makeVolume();
-  const ballArea = ball.makeArea();
-  (document.getElementById("figKula") as HTMLParagraphElement).innerHTML = nameOfKula;
-  (document.getElementById("objetosc") as HTMLParagraphElement).innerHTML = String(ballVolume);
-  (document.getElementById("pole") as HTMLParagraphElement).innerHTML = String(ballArea);
+  const a = (document.getElementById("a") as HTMLInputElement).value;
+  const b = (document.getElementById("b") as HTMLInputElement).value;
+  (document.getElementById("rownanieProstej") as HTMLInputElement).innerHTML = Prosta.display(a, b);
 }
 const btn = document.getElementById("btn") as HTMLButtonElement;
 btn.addEventListener("click", make);

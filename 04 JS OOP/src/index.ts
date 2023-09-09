@@ -1107,21 +1107,76 @@ const b = Number("123"); // b === 123 is true //* Number
 // const btn = document.getElementById("btn") as HTMLButtonElement;
 // btn.addEventListener("click", make);
 
-class Prosta {
-  a: number;
-  b: number;
-  constructor(a: number, b: number) {
-    this.a = a;
-    this.b = b;
-  }
-  static display(a: string, b: string) {
-    return "y= " + a + "x+" + b;
-  }
-}
-function make() {
-  const a = (document.getElementById("a") as HTMLInputElement).value;
-  const b = (document.getElementById("b") as HTMLInputElement).value;
-  (document.getElementById("rownanieProstej") as HTMLInputElement).innerHTML = Prosta.display(a, b);
+// class Prosta {
+//   a: number;
+//   b: number;
+//   constructor(a: number, b: number) {
+//     this.a = a;
+//     this.b = b;
+//   }
+//   static display(a: string, b: string) {
+//     return "y= " + a + "x+" + b;
+//   }
+// }
+// function make() {
+//   const a = (document.getElementById("a") as HTMLInputElement).value;
+//   const b = (document.getElementById("b") as HTMLInputElement).value;
+//   (document.getElementById("rownanieProstej") as HTMLInputElement).innerHTML = Prosta.display(a, b);
+// }
+// const btn = document.getElementById("btn") as HTMLButtonElement;
+// btn.addEventListener("click", make);
+
+//* Canvas and Classes
+const valuesFromForm = {
+  x: Number((document.getElementById("x") as HTMLInputElement).value),
+  y: Number((document.getElementById("y") as HTMLInputElement).value),
+  szer: Number((document.getElementById("szer") as HTMLInputElement).value),
+  wys: Number((document.getElementById("wys") as HTMLInputElement).value),
+  color: (document.getElementById("color") as HTMLInputElement).value,
+  lw: Number((document.getElementById("lw") as HTMLInputElement).value),
+  r: 100,
+  starta: 0,
+  enda: 2,
+};
+const methods = {
+  drawRect: function (x: number, y: number, szer: number, wys: number, color: string, lw: number) {
+    const c = document.getElementById("canvas") as HTMLCanvasElement;
+    const ctx = c.getContext("2d") as CanvasRenderingContext2D;
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lw;
+    ctx.rect(x, y, szer, wys);
+    ctx.stroke();
+  },
+  drawCircle: function (x: number, y: number, r: number, starta: number, enda: number, color: string, lw: number) {
+    const c = document.getElementById("canvas") as HTMLCanvasElement;
+    const ctx = c.getContext("2d") as CanvasRenderingContext2D;
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lw;
+    ctx.arc(x, y, r, starta * Math.PI, enda * Math.PI, true);
+    ctx.stroke();
+  },
+};
+
+function getValuesFromForm(): void {
+  methods.drawRect(
+    valuesFromForm.x,
+    valuesFromForm.y,
+    valuesFromForm.szer,
+    valuesFromForm.wys,
+    valuesFromForm.color,
+    valuesFromForm.lw
+  );
+  methods.drawCircle(
+    valuesFromForm.x,
+    valuesFromForm.y,
+    valuesFromForm.r,
+    valuesFromForm.starta,
+    valuesFromForm.enda,
+    valuesFromForm.color,
+    valuesFromForm.lw
+  );
 }
 const btn = document.getElementById("btn") as HTMLButtonElement;
-btn.addEventListener("click", make);
+btn.addEventListener("click", getValuesFromForm);

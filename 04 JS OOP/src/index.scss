@@ -32,22 +32,52 @@ body {
 //   margin-bottom: 0.5rem;
 // }
 
-.main {
-  width: 700px;
+// .main {
+//   width: 700px;
+//   margin-left: auto;
+//   margin-right: auto;
+// }
+// .left,
+// .right {
+//   float: left;
+// }
+// .left {
+//   width: 170px;
+// }
+// .right {
+//   width: 400px;
+//   padding: 50px;
+// }
+// p {
+//   font-size: 20px;
+// }
+
+h2 {
+  text-align: center;
+}
+form {
+  width: 200px;
+  min-height: 100px;
+  padding: 20px;
   margin-left: auto;
   margin-right: auto;
 }
-.left,
-.right {
-  float: left;
+input {
+  width: 100%;
+  background-color: green;
 }
-.left {
-  width: 170px;
+input:focus {
+  border: 2px solid black;
 }
-.right {
-  width: 400px;
-  padding: 50px;
+button {
+  width: 100%;
+  text-align: center;
 }
-p {
-  font-size: 20px;
+#canvas {
+  background-color: lightgreen;
+  display: block;
+  width: 600px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
 }

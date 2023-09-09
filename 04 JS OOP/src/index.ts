@@ -781,6 +781,123 @@ const b = Number("123"); // b === 123 is true //* Number
 // }
 // btn.addEventListener("click", make2);
 
+// function Figure() {}
+// Figure.prototype.name = "figure";
+// Figure.prototype.toString = function () {
+//   return this.name;
+// };
+// function Figure3d(this: any) {
+//   this.name = "figure 3d";
+// }
+// function PyramidTriangleBase(this: any, ap: number, hp: number, ho: number, hb: number) {
+//   this.ap = ap;
+//   this.hp = hp;
+//   this.ho = ho;
+//   this.hb = hb;
+//   this.name = "ostrosłup o podstawie trójkąta";
+//   this.makeVolume = function () {
+//     let baseArea = (this.ap * this.hp) / 2;
+//     let pyramidTrBaseVolume = (baseArea * this.ho) / 3;
+//     return pyramidTrBaseVolume;
+//   };
+//   this.makeArea = function () {
+//     let baseArea = (this.ap * this.hp) / 2;
+//     let asideArea = (this.ap * this.hb) / 2;
+//     let fullArea = baseArea + 3 * asideArea;
+//     return fullArea;
+//   };
+// }
+
+// function PyramidSquareBase(this: any, ap: string, hb: string, ho: string) {
+//   this.ap = ap;
+//   this.hb = hb;
+//   this.ho = ho;
+//   this.name = "ostrosłup o podstawie kwadratu";
+//   this.makeVolume = function () {
+//     let baseArea = this.ap * this.ap;
+//     let pyramidSqBaseVolume = (baseArea * this.ho) / 3;
+//     return pyramidSqBaseVolume;
+//   };
+//   this.makeArea = function () {
+//     let baseArea = this.ap * this.ap;
+//     let asideArea = (this.ap * this.hb) / 2;
+//     let fullArea = baseArea + asideArea * 4;
+//     return fullArea;
+//   };
+// }
+// function PyramidPolygonBase(this: any, ap: any, hb: any, ho: any) {
+//   this.ap = ap;
+//   this.hb = hb;
+//   this.ho = ho;
+//   this.name = "ostrosłup o podstawie wielokąta foremnego";
+//   this.makeVolume = function () {
+//     let ctan = 1 / Math.tan((36 * Math.PI) / 180);
+//     let baseArea = Math.pow(this.ap, 2) * ctan * 1.25;
+//     let pyramidPolyBaseVolume = (baseArea * this.ho) / 3;
+//     return pyramidPolyBaseVolume;
+//   };
+//   this.makeArea = function () {
+//     let ctan = 1 / Math.tan((36 * Math.PI) / 180);
+//     let baseArea = Math.pow(this.ap, 2) * ctan * 1.25;
+//     let asideArea = (this.ap * this.hb) / 2;
+//     let fullArea = baseArea + this.ap * asideArea * 5;
+//     return fullArea;
+//   };
+// }
+// Figure3d.prototype = Figure.prototype;
+// Figure3d.prototype.constructor = Figure3d;
+
+// PyramidTriangleBase.prototype = Figure3d.prototype;
+// PyramidTriangleBase.prototype.constructor = PyramidTriangleBase;
+
+// function make() {
+//   const ap = (document.getElementById("ap") as HTMLInputElement).value;
+//   const hp = (document.getElementById("hp") as HTMLInputElement).value;
+//   const ho = (document.getElementById("ho") as HTMLInputElement).value;
+//   const hb = (document.getElementById("hb") as HTMLInputElement).value;
+//   const pyramidTrBase = new (PyramidTriangleBase as any)(ap, hp, ho, hb);
+//   let fig = pyramidTrBase.toString();
+//   let volume = pyramidTrBase.makeVolume();
+//   let area = pyramidTrBase.makeArea();
+//   (document.getElementById("ostro1") as HTMLParagraphElement).innerHTML = fig;
+//   (document.getElementById("objetosc") as HTMLParagraphElement).innerHTML = volume;
+//   (document.getElementById("pole") as HTMLParagraphElement).innerHTML = area;
+// }
+// const btn = document.getElementById("btn1") as HTMLButtonElement;
+// btn.addEventListener("click", make);
+
+// PyramidSquareBase.prototype = Figure3d.prototype;
+// PyramidSquareBase.prototype.constructor = PyramidSquareBase;
+// function make2() {
+//   const ap = (document.getElementById("ap") as HTMLInputElement).value;
+//   const hb = (document.getElementById("hb") as HTMLInputElement).value;
+//   const ho = (document.getElementById("ho") as HTMLInputElement).value;
+//   const pyramidSquareBase = new (PyramidSquareBase as any)(ap, hb, ho);
+//   let fig = pyramidSquareBase.toString();
+//   let volume = pyramidSquareBase.makeVolume();
+//   let area = pyramidSquareBase.makeArea();
+//   (document.getElementById("ostro2") as HTMLParagraphElement).innerHTML = fig;
+//   (document.getElementById("objetosc2") as HTMLParagraphElement).innerHTML = volume;
+//   (document.getElementById("pole2") as HTMLParagraphElement).innerHTML = area;
+// }
+// btn.addEventListener("click", make2);
+// PyramidPolygonBase.prototype = Figure3d.prototype;
+// PyramidPolygonBase.prototype.constructor = PyramidPolygonBase;
+// function make3() {
+//   const ap = (document.getElementById("ap") as HTMLInputElement).value;
+//   const hb = (document.getElementById("hb") as HTMLInputElement).value;
+//   const ho = (document.getElementById("ho") as HTMLInputElement).value;
+//   const pyramidPoligonBase = new (PyramidPolygonBase as any)(ap, hb, ho);
+//   let fig = pyramidPoligonBase.toString();
+//   let volume = pyramidPoligonBase.makeVolume();
+//   let area = pyramidPoligonBase.makeArea();
+
+//   (document.getElementById("ostro3") as HTMLParagraphElement).innerHTML = fig;
+//   (document.getElementById("objetosc3") as HTMLParagraphElement).innerHTML = volume;
+//   (document.getElementById("pole3") as HTMLParagraphElement).innerHTML = area;
+// }
+// btn.addEventListener("click", make3);
+
 function Figure() {}
 Figure.prototype.name = "figure";
 Figure.prototype.toString = function () {
@@ -789,111 +906,53 @@ Figure.prototype.toString = function () {
 function Figure3d(this: any) {
   this.name = "figure 3d";
 }
-function PyramidTriangleBase(this: any, ap: number, hp: number, ho: number, hb: number) {
-  this.ap = ap;
-  this.hp = hp;
-  this.ho = ho;
-  this.hb = hb;
-  this.name = "ostrosłup o podstawie trójkąta";
+function Cone(this: any, rp: number, l: number, hc: number) {
+  this.rp = rp;
+  this.l = l;
+  this.hc = hc;
+  this.name = "bryła stożka";
   this.makeVolume = function () {
-    let baseArea = (this.ap * this.hp) / 2;
-    let pyramidTrBaseVolume = (baseArea * this.ho) / 3;
-    return pyramidTrBaseVolume;
+    let partVolume = Math.PI * Math.pow(this.rp, 2) * this.hc;
+    let volume = partVolume / 3;
+    return volume;
   };
   this.makeArea = function () {
-    let baseArea = (this.ap * this.hp) / 2;
-    let asideArea = (this.ap * this.hb) / 2;
-    let fullArea = baseArea + 3 * asideArea;
+    let baseArea = Math.PI * Math.pow(this.rp, 2);
+    let sideArea = Math.PI * this.rp * this.l;
+    let fullArea = baseArea + sideArea;
     return fullArea;
   };
 }
-
-function PyramidSquareBase(this: any, ap: string, hb: string, ho: string) {
-  this.ap = ap;
-  this.hb = hb;
-  this.ho = ho;
-  this.name = "ostrosłup o podstawie kwadratu";
-  this.makeVolume = function () {
-    let baseArea = this.ap * this.ap;
-    let pyramidSqBaseVolume = (baseArea * this.ho) / 3;
-    return pyramidSqBaseVolume;
-  };
-  this.makeArea = function () {
-    let baseArea = this.ap * this.ap;
-    let asideArea = (this.ap * this.hb) / 2;
-    let fullArea = baseArea + asideArea * 4;
-    return fullArea;
-  };
-}
-function PyramidPolygonBase(this: any, ap: any, hb: any, ho: any) {
-  this.ap = ap;
-  this.hb = hb;
-  this.ho = ho;
-  this.name = "ostrosłup o podstawie wielokąta foremnego";
-  this.makeVolume = function () {
-    let ctan = 1 / Math.tan((36 * Math.PI) / 180);
-    let baseArea = Math.pow(this.ap, 2) * ctan * 1.25;
-    let pyramidPolyBaseVolume = (baseArea * this.ho) / 3;
-    return pyramidPolyBaseVolume;
-  };
-  this.makeArea = function () {
-    let ctan = 1 / Math.tan((36 * Math.PI) / 180);
-    let baseArea = Math.pow(this.ap, 2) * ctan * 1.25;
-    let asideArea = (this.ap * this.hb) / 2;
-    let fullArea = baseArea + this.ap * asideArea * 5;
-    return fullArea;
-  };
-}
-Figure3d.prototype = Figure.prototype;
+const tempFun = function () {};
+// console.log("tempFunc:", tempFun);
+tempFun.prototype = Figure.prototype;
+Figure3d.prototype = new (tempFun as any)();
 Figure3d.prototype.constructor = Figure3d;
-
-PyramidTriangleBase.prototype = Figure3d.prototype;
-PyramidTriangleBase.prototype.constructor = PyramidTriangleBase;
+tempFun.prototype = Figure3d.prototype;
+Cone.prototype = new (tempFun as any)();
+Cone.prototype.constructor = Cone;
 
 function make() {
-  const ap = (document.getElementById("ap") as HTMLInputElement).value;
-  const hp = (document.getElementById("hp") as HTMLInputElement).value;
-  const ho = (document.getElementById("ho") as HTMLInputElement).value;
-  const hb = (document.getElementById("hb") as HTMLInputElement).value;
-  const pyramidTrBase = new (PyramidTriangleBase as any)(ap, hp, ho, hb);
-  let fig = pyramidTrBase.toString();
-  let volume = pyramidTrBase.makeVolume();
-  let area = pyramidTrBase.makeArea();
-  (document.getElementById("ostro1") as HTMLParagraphElement).innerHTML = fig;
+  const rp = (document.getElementById("rp") as HTMLInputElement).value;
+  const l = (document.getElementById("l") as HTMLInputElement).value;
+  const hc = (document.getElementById("hc") as HTMLInputElement).value;
+
+  const cone = new (Cone as any)(rp, l, hc);
+  let fig = cone.toString();
+  let volume = cone.makeVolume();
+  let area = cone.makeArea();
+
+  (document.getElementById("coneFigure") as HTMLParagraphElement).innerHTML = fig;
   (document.getElementById("objetosc") as HTMLParagraphElement).innerHTML = volume;
   (document.getElementById("pole") as HTMLParagraphElement).innerHTML = area;
+
+  const fig3d = new (Figure3d as any)();
+  let figure3d = fig3d.toString();
+  (document.getElementById("figure3d") as HTMLParagraphElement).innerHTML = figure3d;
+
+  const emptyFig = new (Figure as any)();
+  let figure = emptyFig.toString();
+  (document.getElementById("figure") as HTMLParagraphElement).innerHTML = figure;
 }
 const btn = document.getElementById("btn1") as HTMLButtonElement;
 btn.addEventListener("click", make);
-
-PyramidSquareBase.prototype = Figure3d.prototype;
-PyramidSquareBase.prototype.constructor = PyramidSquareBase;
-function make2() {
-  const ap = (document.getElementById("ap") as HTMLInputElement).value;
-  const hb = (document.getElementById("hb") as HTMLInputElement).value;
-  const ho = (document.getElementById("ho") as HTMLInputElement).value;
-  const pyramidSquareBase = new (PyramidSquareBase as any)(ap, hb, ho);
-  let fig = pyramidSquareBase.toString();
-  let volume = pyramidSquareBase.makeVolume();
-  let area = pyramidSquareBase.makeArea();
-  (document.getElementById("ostro2") as HTMLParagraphElement).innerHTML = fig;
-  (document.getElementById("objetosc2") as HTMLParagraphElement).innerHTML = volume;
-  (document.getElementById("pole2") as HTMLParagraphElement).innerHTML = area;
-}
-btn.addEventListener("click", make2);
-PyramidPolygonBase.prototype = Figure3d.prototype;
-PyramidPolygonBase.prototype.constructor = PyramidPolygonBase;
-function make3() {
-  const ap = (document.getElementById("ap") as HTMLInputElement).value;
-  const hb = (document.getElementById("hb") as HTMLInputElement).value;
-  const ho = (document.getElementById("ho") as HTMLInputElement).value;
-  const pyramidPoligonBase = new (PyramidPolygonBase as any)(ap, hb, ho);
-  let fig = pyramidPoligonBase.toString();
-  let volume = pyramidPoligonBase.makeVolume();
-  let area = pyramidPoligonBase.makeArea();
-
-  (document.getElementById("ostro3") as HTMLParagraphElement).innerHTML = fig;
-  (document.getElementById("objetosc3") as HTMLParagraphElement).innerHTML = volume;
-  (document.getElementById("pole3") as HTMLParagraphElement).innerHTML = area;
-}
-btn.addEventListener("click", make3);

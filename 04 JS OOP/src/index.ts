@@ -1126,57 +1126,89 @@ const b = Number("123"); // b === 123 is true //* Number
 // const btn = document.getElementById("btn") as HTMLButtonElement;
 // btn.addEventListener("click", make);
 
-//* Canvas and Classes
-const valuesFromForm = {
-  x: Number((document.getElementById("x") as HTMLInputElement).value),
-  y: Number((document.getElementById("y") as HTMLInputElement).value),
-  szer: Number((document.getElementById("szer") as HTMLInputElement).value),
-  wys: Number((document.getElementById("wys") as HTMLInputElement).value),
-  color: (document.getElementById("color") as HTMLInputElement).value,
-  lw: Number((document.getElementById("lw") as HTMLInputElement).value),
-  r: 100,
-  starta: 0,
-  enda: 2,
+//* Canvas and OOP JS
+// const valuesFromForm = {
+//   x: Number((document.getElementById("x") as HTMLInputElement).value),
+//   y: Number((document.getElementById("y") as HTMLInputElement).value),
+//   szer: Number((document.getElementById("szer") as HTMLInputElement).value),
+//   wys: Number((document.getElementById("wys") as HTMLInputElement).value),
+//   color: (document.getElementById("color") as HTMLInputElement).value,
+//   lw: Number((document.getElementById("lw") as HTMLInputElement).value),
+//   r: 100,
+//   starta: 0,
+//   enda: 2,
+// };
+// const methods = {
+//   drawRect: function (x: number, y: number, szer: number, wys: number, color: string, lw: number) {
+//     const c = document.getElementById("canvas") as HTMLCanvasElement;
+//     const ctx = c.getContext("2d") as CanvasRenderingContext2D;
+//     ctx.beginPath();
+//     ctx.strokeStyle = color;
+//     ctx.lineWidth = lw;
+//     ctx.rect(x, y, szer, wys);
+//     ctx.stroke();
+//   },
+//   drawCircle: function (x: number, y: number, r: number, starta: number, enda: number, color: string, lw: number) {
+//     const c = document.getElementById("canvas") as HTMLCanvasElement;
+//     const ctx = c.getContext("2d") as CanvasRenderingContext2D;
+//     ctx.beginPath();
+//     ctx.strokeStyle = color;
+//     ctx.lineWidth = lw;
+//     ctx.arc(x, y, r, starta * Math.PI, enda * Math.PI, true);
+//     ctx.stroke();
+//   },
+// };
+
+// function getValuesFromForm(): void {
+//   methods.drawRect(
+//     valuesFromForm.x,
+//     valuesFromForm.y,
+//     valuesFromForm.szer,
+//     valuesFromForm.wys,
+//     valuesFromForm.color,
+//     valuesFromForm.lw
+//   );
+//   methods.drawCircle(
+//     valuesFromForm.x,
+//     valuesFromForm.y,
+//     valuesFromForm.r,
+//     valuesFromForm.starta,
+//     valuesFromForm.enda,
+//     valuesFromForm.color,
+//     valuesFromForm.lw
+//   );
+// }
+// const btn = document.getElementById("btn") as HTMLButtonElement;
+// btn.addEventListener("click", getValuesFromForm);
+
+const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+const datas = {
+  xstart: parseInt((document.getElementById("xstartpoint") as HTMLInputElement).value),
+  ystart: parseInt((document.getElementById("ystartpoint") as HTMLInputElement).value),
+  xend: parseInt((document.getElementById("xendpoint") as HTMLInputElement).value),
+  yend: parseInt((document.getElementById("yendpoint") as HTMLInputElement).value),
 };
 const methods = {
-  drawRect: function (x: number, y: number, szer: number, wys: number, color: string, lw: number) {
-    const c = document.getElementById("canvas") as HTMLCanvasElement;
-    const ctx = c.getContext("2d") as CanvasRenderingContext2D;
+  drawGradient: function (xstart: number, ystart: number, xend: number, yend: number) {
+    const gradient = ctx.createLinearGradient(xstart, ystart, xend, yend);
+    gradient.addColorStop(0, "rgb(255,0,0)");
+    gradient.addColorStop(0.5, "rgb(0,255,0)");
+    gradient.addColorStop(1, "rgb(255,0,0)");
+    ctx.fillStyle = gradient;
     ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = lw;
-    ctx.rect(x, y, szer, wys);
+    ctx.moveTo(100, 0);
+    ctx.lineTo(350, 350);
+    ctx.lineTo(100, 700);
+    ctx.lineTo(0, 350);
+    ctx.lineTo(100, 0);
     ctx.stroke();
-  },
-  drawCircle: function (x: number, y: number, r: number, starta: number, enda: number, color: string, lw: number) {
-    const c = document.getElementById("canvas") as HTMLCanvasElement;
-    const ctx = c.getContext("2d") as CanvasRenderingContext2D;
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = lw;
-    ctx.arc(x, y, r, starta * Math.PI, enda * Math.PI, true);
-    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
   },
 };
-
-function getValuesFromForm(): void {
-  methods.drawRect(
-    valuesFromForm.x,
-    valuesFromForm.y,
-    valuesFromForm.szer,
-    valuesFromForm.wys,
-    valuesFromForm.color,
-    valuesFromForm.lw
-  );
-  methods.drawCircle(
-    valuesFromForm.x,
-    valuesFromForm.y,
-    valuesFromForm.r,
-    valuesFromForm.starta,
-    valuesFromForm.enda,
-    valuesFromForm.color,
-    valuesFromForm.lw
-  );
+function drawGradient() {
+  methods.drawGradient(datas.xstart, datas.ystart, datas.xend, datas.yend);
 }
 const btn = document.getElementById("btn") as HTMLButtonElement;
-btn.addEventListener("click", getValuesFromForm);
+btn.addEventListener("click", drawGradient);

@@ -256,7 +256,7 @@
       </div> -->
 
       <!-- //* Canvas -->
-      <h2>Rysowanie płaskich figur geometrycznych</h2>
+      <!-- <h2>Rysowanie płaskich figur geometrycznych</h2>
       <form>
         <label for="x">Parametr X: </label>
         <input type="text" id="x" value="2" />
@@ -272,7 +272,30 @@
         <input type="text" id="lw" value="3" />
         <button type="button" id="btn">Narysuj figurę !!!</button>
       </form>
-      <canvas id="canvas"></canvas>
+      <canvas id="canvas"></canvas> -->
+
+      <div style="width: 800px; margin-left: auto; margin-right: auto">
+        <label for="xstartpoint">X Start Point</label>
+        <br />
+        <input type="text" id="xstartpoint" value="0" placeholder="20" />
+        <br />
+        <label for="ystartpoint">Y Start Point</label>
+        <br />
+        <input type="text" id="ystartpoint" value="0" placeholder="20" />
+        <br />
+        <label for="xendpoint">X End Point</label>
+        <br />
+        <input type="text" id="xendpoint" value="300" placeholder="300" />
+        <br />
+        <label for="yendpoint">Y End Point</label>
+        <br />
+        <input type="text" id="yendpoint" value="300" placeholder="300" />
+        <br />
+        <button id="btn">Generate gradient !!!</button>
+        <div>
+          <canvas id="canvas" width="800" height="700"></canvas>
+        </div>
+      </div>
     </div>
 
     <!-- //* Script -->

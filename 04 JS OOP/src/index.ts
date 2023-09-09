@@ -898,61 +898,114 @@ const b = Number("123"); // b === 123 is true //* Number
 // }
 // btn.addEventListener("click", make3);
 
+// function Figure() {}
+// Figure.prototype.name = "figure";
+// Figure.prototype.toString = function () {
+//   return this.name;
+// };
+// function Figure3d(this: any) {
+//   this.name = "figure 3d";
+// }
+// function Cone(this: any, rp: number, l: number, hc: number) {
+//   this.rp = rp;
+//   this.l = l;
+//   this.hc = hc;
+//   this.name = "bryła stożka";
+//   this.makeVolume = function () {
+//     let partVolume = Math.PI * Math.pow(this.rp, 2) * this.hc;
+//     let volume = partVolume / 3;
+//     return volume;
+//   };
+//   this.makeArea = function () {
+//     let baseArea = Math.PI * Math.pow(this.rp, 2);
+//     let sideArea = Math.PI * this.rp * this.l;
+//     let fullArea = baseArea + sideArea;
+//     return fullArea;
+//   };
+// }
+// const tempFun = function () {};
+// // console.log("tempFunc:", tempFun);
+// tempFun.prototype = Figure.prototype;
+// Figure3d.prototype = new (tempFun as any)();
+// Figure3d.prototype.constructor = Figure3d;
+// tempFun.prototype = Figure3d.prototype;
+// Cone.prototype = new (tempFun as any)();
+// Cone.prototype.constructor = Cone;
+
+// function make() {
+//   const rp = (document.getElementById("rp") as HTMLInputElement).value;
+//   const l = (document.getElementById("l") as HTMLInputElement).value;
+//   const hc = (document.getElementById("hc") as HTMLInputElement).value;
+
+//   const cone = new (Cone as any)(rp, l, hc);
+//   let fig = cone.toString();
+//   let volume = cone.makeVolume();
+//   let area = cone.makeArea();
+
+//   (document.getElementById("coneFigure") as HTMLParagraphElement).innerHTML = fig;
+//   (document.getElementById("objetosc") as HTMLParagraphElement).innerHTML = volume;
+//   (document.getElementById("pole") as HTMLParagraphElement).innerHTML = area;
+
+//   const fig3d = new (Figure3d as any)();
+//   let figure3d = fig3d.toString();
+//   (document.getElementById("figure3d") as HTMLParagraphElement).innerHTML = figure3d;
+
+//   const emptyFig = new (Figure as any)();
+//   let figure = emptyFig.toString();
+//   (document.getElementById("figure") as HTMLParagraphElement).innerHTML = figure;
+// }
+// const btn = document.getElementById("btn1") as HTMLButtonElement;
+// btn.addEventListener("click", make);
+
 function Figure() {}
 Figure.prototype.name = "figure";
 Figure.prototype.toString = function () {
-  return this.name;
+  const resultArr = [];
+  if (this.constructor.parent) {
+    resultArr[resultArr.length] = this.constructor.parent.toString();
+  }
+  resultArr[resultArr.length] = this.name;
+  return resultArr.join(",");
 };
 function Figure3d(this: any) {
   this.name = "figure 3d";
 }
-function Cone(this: any, rp: number, l: number, hc: number) {
+function Cylinder(this: any, rp: number, hw: number) {
   this.rp = rp;
-  this.l = l;
-  this.hc = hc;
-  this.name = "bryła stożka";
+  this.hw = hw;
+  this.name = "bryła walca";
   this.makeVolume = function () {
-    let partVolume = Math.PI * Math.pow(this.rp, 2) * this.hc;
-    let volume = partVolume / 3;
-    return volume;
+    return Math.PI * Math.pow(this.rp, 2) * this.hw;
   };
   this.makeArea = function () {
+    let asideArea = 2 * Math.PI * this.rp * this.hw;
     let baseArea = Math.PI * Math.pow(this.rp, 2);
-    let sideArea = Math.PI * this.rp * this.l;
-    let fullArea = baseArea + sideArea;
+    let fullArea = 2 * baseArea + asideArea;
     return fullArea;
   };
 }
 const tempFun = function () {};
-// console.log("tempFunc:", tempFun);
 tempFun.prototype = Figure.prototype;
 Figure3d.prototype = new (tempFun as any)();
 Figure3d.prototype.constructor = Figure3d;
+Figure3d.parent = Figure.prototype;
 tempFun.prototype = Figure3d.prototype;
-Cone.prototype = new (tempFun as any)();
-Cone.prototype.constructor = Cone;
+Cylinder.prototype = new (tempFun as any)();
+Cylinder.prototype.constructor = Cylinder;
+Cylinder.parent = Figure3d.prototype;
 
 function make() {
   const rp = (document.getElementById("rp") as HTMLInputElement).value;
-  const l = (document.getElementById("l") as HTMLInputElement).value;
-  const hc = (document.getElementById("hc") as HTMLInputElement).value;
+  const hw = (document.getElementById("hw") as HTMLInputElement).value;
 
-  const cone = new (Cone as any)(rp, l, hc);
-  let fig = cone.toString();
-  let volume = cone.makeVolume();
-  let area = cone.makeArea();
+  const cylinder = new (Cylinder as any)(rp, hw);
+  let fig = cylinder.toString();
+  let volume = cylinder.makeVolume();
+  let area = cylinder.makeArea();
 
-  (document.getElementById("coneFigure") as HTMLParagraphElement).innerHTML = fig;
+  (document.getElementById("walec") as HTMLParagraphElement).innerHTML = fig;
   (document.getElementById("objetosc") as HTMLParagraphElement).innerHTML = volume;
   (document.getElementById("pole") as HTMLParagraphElement).innerHTML = area;
-
-  const fig3d = new (Figure3d as any)();
-  let figure3d = fig3d.toString();
-  (document.getElementById("figure3d") as HTMLParagraphElement).innerHTML = figure3d;
-
-  const emptyFig = new (Figure as any)();
-  let figure = emptyFig.toString();
-  (document.getElementById("figure") as HTMLParagraphElement).innerHTML = figure;
 }
 const btn = document.getElementById("btn1") as HTMLButtonElement;
 btn.addEventListener("click", make);

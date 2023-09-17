@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon index.ts"
+    "start": "clear && nodemon index.ts"
   },
   "keywords": [],
   "author": "",

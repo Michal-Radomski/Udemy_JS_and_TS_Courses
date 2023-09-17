@@ -69,3 +69,24 @@ export {};
 // const string = `text1
 // text2`;
 // console.log({ string });
+
+//* Tagged Templates
+const Harry = "Lorem ipsum1";
+const Lott = "Lorem ipsum2";
+const Orwell = "Lorem ipsum3";
+
+const lines = [Harry, Lott, Orwell];
+
+// function buildHtml(tags: TemplateStringsArray, lines: string[]) {
+//   console.log({ tags });
+//   console.log({ lines });
+// }
+// buildHtml`<li>${lines}</li>`;
+function buildHtml2(tags: TemplateStringsArray, lines: string[]) {
+  const newHTML = lines.map((line) => {
+    return `${tags[0]}${line}${tags[1]}`;
+  });
+  return newHTML;
+}
+const result = buildHtml2`<li>${lines}</li>`;
+console.log({ result });

@@ -90,3 +90,9 @@ function buildHtml2(tags: TemplateStringsArray, lines: string[]) {
 }
 const result = buildHtml2`<li>${lines}</li>`;
 console.log({ result });
+
+function test() {
+  return "Hello from inside";
+}
+const templateLiteral = `Rob Jim Bill ${test()}`;
+console.log({ templateLiteral });

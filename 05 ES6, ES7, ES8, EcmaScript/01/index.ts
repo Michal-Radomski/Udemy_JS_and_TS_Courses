@@ -1,4 +1,32 @@
 export {};
+//* Additional Constructors
+//* File constructor
+// const file = new File(["foo"], "foo.txt", {
+//   type: "text/plain",
+// });
+// console.log({ file });
+
+//* FileReader constructor
+// function printFile(file: File) {
+//   const reader = new FileReader();
+//   console.log({ reader });
+//   reader.onload = (evt) => {
+//     console.log(evt.target?.result);
+//   };
+//   reader.readAsText(file);
+// }
+// printFile(file);
+
+//* Blob constructor
+// const array = ['<q id="a"><span id="b">hey!</span></q>']; // an array consisting of a single string
+// const blob = new Blob(array, { type: "text/html" }); // the blob
+// console.log({ blob });
+
+//* ArrayBuffer constructor
+// const buffer = new ArrayBuffer(8);
+// console.log("buffer.byteLength:", buffer.byteLength); // Expected output: 8
+// console.log({ buffer });
+
 ("use script");
 // var i = 2;
 // console.log({ i });

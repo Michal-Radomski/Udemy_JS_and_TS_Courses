@@ -99,28 +99,77 @@ export {};
 // console.log({ string });
 
 //* Tagged Templates
-const Harry = "Lorem ipsum1";
-const Lott = "Lorem ipsum2";
-const Orwell = "Lorem ipsum3";
+// const Harry = "Lorem ipsum1";
+// const Lott = "Lorem ipsum2";
+// const Orwell = "Lorem ipsum3";
 
-const lines = [Harry, Lott, Orwell];
+// const lines = [Harry, Lott, Orwell];
 
-// function buildHtml(tags: TemplateStringsArray, lines: string[]) {
-//   console.log({ tags });
-//   console.log({ lines });
+// // function buildHtml(tags: TemplateStringsArray, lines: string[]) {
+// //   console.log({ tags });
+// //   console.log({ lines });
+// // }
+// // buildHtml`<li>${lines}</li>`;
+// function buildHtml2(tags: TemplateStringsArray, lines: string[]) {
+//   const newHTML = lines.map((line) => {
+//     return `${tags[0]}${line}${tags[1]}`;
+//   });
+//   return newHTML;
 // }
-// buildHtml`<li>${lines}</li>`;
-function buildHtml2(tags: TemplateStringsArray, lines: string[]) {
-  const newHTML = lines.map((line) => {
-    return `${tags[0]}${line}${tags[1]}`;
-  });
-  return newHTML;
-}
-const result = buildHtml2`<li>${lines}</li>`;
-console.log({ result });
+// const result = buildHtml2`<li>${lines}</li>`;
+// console.log({ result });
 
-function test() {
-  return "Hello from inside";
+// function test() {
+//   return "Hello from inside";
+// }
+// const templateLiteral = `Rob Jim Bill ${test()}`;
+// console.log({ templateLiteral });
+
+//* Function: default and rest operator
+// function getArea(x: number, y: number, s: string = "r") {
+//   if (s === "r") {
+//     return x * y;
+//   } else if (s === "t") {
+//     return (x * y) / 2;
+//   }
+// }
+// // const getArea = (x: number, y: number, s: string = "r") => {
+// //   if (s === "r") {
+// //     return x * y;
+// //   } else if (s === "t") {
+// //     return (x * y) / 2;
+// //   }
+// // };
+
+// const rectArea = getArea(2, 5, "r");
+// console.log({ rectArea });
+// const rectArea2 = getArea(2, 5);
+// console.log({ rectArea2 });
+// const triangleArea = getArea(2, 5, "t");
+// console.log({ triangleArea });
+
+// function findHighest(upperLimit: number, ..._rest: number[]) {
+//   // console.log({ arguments });
+//   console.log({ _rest });
+//   let max = 0;
+//   for (let i = 0; i < arguments.length; i++) {
+//     if (arguments[i] < upperLimit && arguments[i] > max) {
+//       max = arguments[i];
+//     }
+//   }
+//   return max;
+// }
+function findHighest(upperLimit: number, ...numList: number[]) {
+  // console.log({ arguments });
+  // console.log({ numList });
+  let max = 0;
+  numList.filter((num: number) => {
+    if (num < upperLimit && num > max) {
+      max = num;
+    }
+  });
+  return max;
 }
-const templateLiteral = `Rob Jim Bill ${test()}`;
-console.log({ templateLiteral });
+
+const highest = findHighest(80, 90, 112, 321, 12);
+console.log({ highest });

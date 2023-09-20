@@ -159,17 +159,44 @@ export {};
 //   }
 //   return max;
 // }
-function findHighest(upperLimit: number, ...numList: number[]) {
-  // console.log({ arguments });
-  // console.log({ numList });
-  let max = 0;
-  numList.filter((num: number) => {
-    if (num < upperLimit && num > max) {
-      max = num;
-    }
-  });
-  return max;
-}
+// function findHighest(upperLimit: number, ...numList: number[]) {
+//   // console.log({ arguments });
+//   // console.log({ numList });
+//   let max = 0;
+//   numList.filter((num: number) => {
+//     if (num < upperLimit && num > max) {
+//       max = num;
+//     }
+//   });
+//   return max;
+// }
 
-const highest = findHighest(80, 90, 112, 321, 12);
-console.log({ highest });
+// const highest = findHighest(80, 90, 112, 321, 12);
+// console.log({ highest });
+
+//* Rest operator (I don't know how many parameters)
+function sumRest(...numberList: number[]): number {
+  return numberList.reduce((total: number, num: number) => {
+    return total + num;
+  }, 0);
+}
+const numberList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+console.log(sumRest(...numberList));
+console.log(sumRest(1, 2, 3, 4, 5));
+
+//* Spread syntax (I have separate params as array, unpack it)
+function sumSpread(x: number, y: number, z: number) {
+  return x + y + z;
+}
+const numbers = [1, 2, 3] as const;
+// The ugly way
+console.log(sumSpread(numbers[0], numbers[1], numbers[2]));
+// The old way
+console.log(sumSpread.apply(null, numbers as [number, number, number]));
+// The spread operator way
+console.log(sumSpread(...numbers));
+
+const state = { a: 1, b: 2 };
+const action = { type: "done", payload: 30 };
+const newState = { ...state, newProperty: action.payload };
+console.log({ newState });

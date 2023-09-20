@@ -174,6 +174,7 @@ export {};
 // const highest = findHighest(80, 90, 112, 321, 12);
 // console.log({ highest });
 
+//* Spread operator
 //* Rest operator (I don't know how many parameters)
 function sumRest(...numberList: number[]): number {
   return numberList.reduce((total: number, num: number) => {
@@ -200,3 +201,10 @@ const state = { a: 1, b: 2 };
 const action = { type: "done", payload: 30 };
 const newState = { ...state, newProperty: action.payload };
 console.log({ newState });
+
+const numbersSet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+console.log(Math.min(...numbersSet));
+
+const arr1 = ["a", "b", "c", "d", "e"];
+const arr2 = [1, 2, 3, ...arr1, 4, 5, 6];
+console.log({ arr2 });

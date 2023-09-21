@@ -176,35 +176,46 @@ export {};
 
 //* Spread operator
 //* Rest operator (I don't know how many parameters)
-function sumRest(...numberList: number[]): number {
-  return numberList.reduce((total: number, num: number) => {
-    return total + num;
-  }, 0);
-}
-const numberList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-console.log(sumRest(...numberList));
-console.log(sumRest(1, 2, 3, 4, 5));
+// function sumRest(...numberList: number[]): number {
+//   return numberList.reduce((total: number, num: number) => {
+//     return total + num;
+//   }, 0);
+// }
+// const numberList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// console.log(sumRest(...numberList));
+// console.log(sumRest(1, 2, 3, 4, 5));
 
-//* Spread syntax (I have separate params as array, unpack it)
-function sumSpread(x: number, y: number, z: number) {
-  return x + y + z;
-}
-const numbers = [1, 2, 3] as const;
-// The ugly way
-console.log(sumSpread(numbers[0], numbers[1], numbers[2]));
-// The old way
-console.log(sumSpread.apply(null, numbers as [number, number, number]));
-// The spread operator way
-console.log(sumSpread(...numbers));
+// //* Spread syntax (I have separate params as array, unpack it)
+// function sumSpread(x: number, y: number, z: number) {
+//   return x + y + z;
+// }
+// const numbers = [1, 2, 3] as const;
+// // The ugly way
+// console.log(sumSpread(numbers[0], numbers[1], numbers[2]));
+// // The old way
+// console.log(sumSpread.apply(null, numbers as [number, number, number]));
+// // The spread operator way
+// console.log(sumSpread(...numbers));
 
-const state = { a: 1, b: 2 };
-const action = { type: "done", payload: 30 };
-const newState = { ...state, newProperty: action.payload };
-console.log({ newState });
+// const state = { a: 1, b: 2 };
+// const action = { type: "done", payload: 30 };
+// const newState = { ...state, newProperty: action.payload };
+// console.log({ newState });
 
-const numbersSet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-console.log(Math.min(...numbersSet));
+// const numbersSet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+// console.log(Math.min(...numbersSet));
 
-const arr1 = ["a", "b", "c", "d", "e"];
-const arr2 = [1, 2, 3, ...arr1, 4, 5, 6];
-console.log({ arr2 });
+// const arr1 = ["a", "b", "c", "d", "e"];
+// const arr2 = [1, 2, 3, ...arr1, 4, 5, 6];
+// console.log({ arr2 });
+
+//* Arrow function
+console.log("this:", this);
+const that = function (this: any) {
+  console.log(this);
+};
+that();
+const that2 = () => {
+  console.log(this);
+};
+that2();

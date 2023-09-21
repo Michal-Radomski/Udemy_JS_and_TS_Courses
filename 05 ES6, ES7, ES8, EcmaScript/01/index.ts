@@ -210,12 +210,60 @@ export {};
 // console.log({ arr2 });
 
 //* Arrow function
-console.log("this:", this);
-const that = function (this: any) {
-  console.log(this);
+// console.log("this:", this);
+// const that = function (this: any) {
+//   console.log(this);
+// };
+// that();
+// const that2 = () => {
+//   console.log(this);
+// };
+// that2();
+
+//* Object Literals and Destructuring
+// const obj1 = new Object({ x: 1 });
+// console.log({ obj1 });
+
+// const obj2 = Object.create(null);
+// console.log({ obj2 });
+
+// const obj3 = {
+//   x: 1,
+//   aMethod: function () {
+//     console.log("test");
+//   },
+// };
+// console.log({ obj3 });
+
+const someJSON = {
+  vote_count: 541,
+  id: 460793,
+  video: false,
+  vote_average: 5.9,
+  title: "Olaf's Frozen Adventure",
+  popularity: 96.893887,
+  poster_path: "/As8WTtxXs9e3cBit3ztTf7zoRmm.jpg",
+  original_language: "en",
+  original_title: "Olaf's Frozen Adventure",
+  genre_ids: [12, 16, 35, 10751, 14, 10402],
+  backdrop_path: "/9K4QqQZg4TVXcxBGDiVY4Aey3Rn.jpg",
+  adult: false,
+  overview: "Olaf is on a mission to harness the best holiday traditions for Anna, Elsa, and Kristoff.",
+  release_date: "2017-10-27",
+  test: { test_1: { test_2: "test_2", test_3: "test_3", test_4: "test_4" } },
 };
-that();
-const that2 = () => {
-  console.log(this);
-};
-that2();
+
+// const title = someJSON.title;
+// const overview = someJSON.overview;
+// const release_date = someJSON.release_date
+
+const {
+  title: title,
+  overview,
+  release_date,
+  test: {
+    test_1: { test_2 },
+  },
+  original_language: lang,
+} = someJSON;
+console.log({ title, overview, release_date, test_2, lang });

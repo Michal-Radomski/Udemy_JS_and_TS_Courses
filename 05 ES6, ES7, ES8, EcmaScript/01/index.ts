@@ -267,3 +267,22 @@ const {
   original_language: lang,
 } = someJSON;
 console.log({ title, overview, release_date, test_2, lang });
+
+function processData({ title, release_date, overview }: { title: string; release_date: string; overview: string }) {
+  console.log(`${title} is an awesome flick. It came out on ${release_date}. ${overview}`);
+}
+processData(someJSON);
+
+// Go into nested objects
+const {
+  genre_ids: { [0]: firstGenre, [1]: secondGenre },
+} = someJSON;
+console.log({ firstGenre });
+console.log({ secondGenre });
+
+const [first, second, third] = someJSON.genre_ids;
+console.log({ first, second, third });
+const [, , , fourth, fifth] = someJSON.genre_ids;
+console.log({ fourth, fifth });
+const [, two, ...others] = someJSON.genre_ids;
+console.log({ two, others });

@@ -24,13 +24,13 @@
 
 // ES6
 class SuperHero {
-  name: string;
+  // name: string;
   strength: number;
   speed: number;
   weapon: string;
   cape: boolean;
-  constructor(name: string, strength: number, speed: number, weapon: string, cape: boolean) {
-    this.name = name;
+  constructor(_name: string, strength: number, speed: number, weapon: string, cape: boolean) {
+    // this.name = name;
     this.strength = strength;
     this.speed = speed;
     this.weapon = weapon;
@@ -39,8 +39,32 @@ class SuperHero {
   powerUp() {
     this.strength += 5;
   }
+
+  public get name() {
+    console.log("Getting Name"); //* default public
+    return name;
+  }
+  public set name(newName) {
+    console.log("Setting name"); //* default public
+    this.name = newName;
+  }
+  static goodHero() {
+    return true;
+  }
 }
 
 const hero1: SuperHero = new SuperHero("Hank", 10, 5, "Fist", true);
 // hero1.name = "Ed";
 console.log({ hero1 }, typeof hero1);
+
+const hankDetails = ["Hank", 10, 5, "Fist", true] as const;
+const philDetails = ["Phil", 15, 1, "Fist2", false] as const;
+
+const hero2 = new SuperHero(...hankDetails);
+const hero3 = new SuperHero(...philDetails);
+// hero2.name = "George"; // Error
+
+hero2.powerUp();
+hero2.speed = 2;
+
+console.log({ hero2, hero3 });

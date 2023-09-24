@@ -45,7 +45,7 @@ class SuperHero {
     return name;
   }
   public set name(newName) {
-    console.log("Setting name"); //* default public
+    // console.log("Setting name"); //* default public
     this.name = newName;
   }
   static goodHero() {
@@ -68,3 +68,18 @@ hero2.powerUp();
 hero2.speed = 2;
 
 console.log({ hero2, hero3 });
+
+class DoMath {
+  static add(x: number, y: number) {
+    return x + y;
+  }
+  static subtract(x: number, y: number) {
+    return x - y;
+  }
+  static square(x: number) {
+    return x * x;
+  }
+}
+
+const x = DoMath.add(2, 5);
+console.log({ x });

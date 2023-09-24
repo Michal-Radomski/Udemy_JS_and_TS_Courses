@@ -52,6 +52,7 @@ class SuperHero {
     return true;
   }
 }
+console.log("SuperHero:", SuperHero);
 
 const hero1: SuperHero = new SuperHero("Hank", 10, 5, "Fist", true);
 // hero1.name = "Ed";
@@ -83,3 +84,4 @@ class DoMath {
 
 const x = DoMath.add(2, 5);
 console.log({ x });
+console.log("DoMath.square(5):", DoMath.square(5));

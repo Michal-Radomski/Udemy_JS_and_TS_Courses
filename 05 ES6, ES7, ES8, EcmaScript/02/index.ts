@@ -126,3 +126,47 @@ console.log({ bill });
 // var myCar = new Car(...myCarDeets);
 // // @ts-ignore
 // console.log(myCar[CARCOLOR]);
+
+//* Arrays
+// for..of
+const arr = [1, 2, 3, 10, 11, 12];
+
+// for (let i = 0; i < arr.length; i++) {
+//   console.log(arr[i]);
+// }
+
+//* for..in
+for (let key in arr) {
+  console.log("for...in key:", key);
+}
+
+// const obj = {
+//   name: "Rob",
+//   occ: "teacher",
+//   language: "JS",
+// };
+
+// for (let key in obj) {
+//   console.log(key);
+// }
+
+// Array.prototype.forEach
+// arr.forEach((value, i) => {
+//   console.log("Value", value);
+//   console.log("Index", i);
+// });
+
+// for..in iterates over the keys of the iterator
+for (let key in arr) {
+  console.log("for in: key;", key);
+}
+
+// for..of iterates over the value of the iterator
+for (let value of arr) {
+  console.log({ value });
+}
+
+// const str = `Robert Bunch`;
+// for (let letter of str) {
+//   console.log(letter);
+// }

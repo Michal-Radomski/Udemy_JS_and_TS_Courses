@@ -156,12 +156,12 @@ for (let key in arr) {
 //   console.log("Index", i);
 // });
 
-// for..in iterates over the keys of the iterator
+//* for..in iterates over the keys of the iterator
 for (let key in arr) {
   console.log("for in: key;", key);
 }
 
-// for..of iterates over the value of the iterator
+//* for..of iterates over the value of the iterator
 for (let value of arr) {
   console.log({ value });
 }
@@ -170,3 +170,22 @@ for (let value of arr) {
 // for (let letter of str) {
 //   console.log(letter);
 // }
+
+//* Array.from()
+// const x = Array.from(`Robert`);
+// console.log(x);
+
+// const y = Array.from(`${3 + 5}49`);
+// console.log(y);
+
+const harry = `String1.`;
+const lotr = `String2.`;
+const orwell = `String3.`;
+
+const lines = Array.from([harry, lotr, orwell], (line) => {
+  return `<li>${line}</li>`;
+});
+console.log({ lines });
+
+const numbers = Array.from([2, 3, 4], (num) => num + num);
+console.log({ numbers });

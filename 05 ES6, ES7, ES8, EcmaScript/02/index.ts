@@ -70,18 +70,30 @@ hero2.speed = 2;
 
 console.log({ hero2, hero3 });
 
-class DoMath {
-  static add(x: number, y: number) {
-    return x + y;
-  }
-  static subtract(x: number, y: number) {
-    return x - y;
-  }
-  static square(x: number) {
-    return x * x;
+class Human extends SuperHero {
+  age: number;
+  constructor(name: string, strength: number, speed: number, weapon: string, cape: boolean, age: number) {
+    super(name, strength, speed, weapon, cape);
+    this.age = age;
   }
 }
 
-const x = DoMath.add(2, 5);
-console.log({ x });
-console.log("DoMath.square(5):", DoMath.square(5));
+const billDetails = ["Bill", 20, 20, "Fast Feet", true, 20] as const;
+const bill = new Human(...billDetails);
+console.log({ bill });
+
+// class DoMath {
+//   static add(x: number, y: number) {
+//     return x + y;
+//   }
+//   static subtract(x: number, y: number) {
+//     return x - y;
+//   }
+//   static square(x: number) {
+//     return x * x;
+//   }
+// }
+
+// const x = DoMath.add(2, 5);
+// console.log({ x });
+// console.log("DoMath.square(5):", DoMath.square(5));

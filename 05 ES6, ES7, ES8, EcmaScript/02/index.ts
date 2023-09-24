@@ -97,3 +97,32 @@ console.log({ bill });
 // const x = DoMath.add(2, 5);
 // console.log({ x });
 // console.log("DoMath.square(5):", DoMath.square(5));
+
+//* Not New!
+// const CARCOLOR = Symbol();
+// console.log({ CARCOLOR });
+// const CARMODEL = Symbol();
+// const CARYEAR = Symbol();
+
+// class Car {
+//   constructor(color: string, model: string, year: number) {
+//     // requires bracket syntax
+//     this[CARCOLOR as unknown as keyof Car] = color;
+//     this[CARMODEL as unknown as keyof Car] = model;
+//     this[CARYEAR as unknown as keyof Car] = year;
+//   }
+//   get color() {
+//     console.log("getting", this.color);
+//     // @ts-ignore
+//     return this[CARCOLOR];
+//   }
+//   set color(newColor) {
+//     console.log("setting color", newColor);
+//     this[CARCOLOR as unknown as keyof Car] = newColor;
+//   }
+// }
+
+// const myCarDeets = ["red", "Volvo", 2018] as const;
+// var myCar = new Car(...myCarDeets);
+// // @ts-ignore
+// console.log(myCar[CARCOLOR]);

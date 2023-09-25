@@ -264,13 +264,13 @@ console.log({ bill });
 // console.log(2, { obj, cartoon });
 
 //* Map
-const myContacts = new Map();
-myContacts.set("Rob", "555-1234");
-const rob = myContacts.get("Rob");
-console.log({ rob });
+// const myContacts = new Map();
+// myContacts.set("Rob", "555-1234");
+// const rob = myContacts.get("Rob");
+// console.log({ rob });
 
-// Size property
-console.log(myContacts.size);
+// // Size property
+// console.log(myContacts.size);
 
 // for (let value of myContacts) {
 //   console.log({ value });
@@ -281,6 +281,26 @@ console.log(myContacts.size);
 // console.log({ myContacts });
 
 // entries method (get all the entries)
-console.log("myContacts.entries():", myContacts.entries());
-console.log("myContacts.keys():", myContacts.keys());
-console.log("myContacts.values():", myContacts.values());
+// console.log("myContacts.entries():", myContacts.entries());
+// console.log("myContacts.keys():", myContacts.keys());
+// console.log("myContacts.values():", myContacts.values());
+
+//* WeakMap
+{
+  let aStrongMap = new Map();
+  let friend = { name: `Jim` };
+  aStrongMap.set(friend, `Best Friend`);
+  console.log(aStrongMap.get(friend));
+  // @ts-ignore
+  friend = null;
+  console.log(aStrongMap.entries());
+}
+{
+  let aWeakMap = new WeakMap();
+  let friend = { friend: `Bill` };
+  aWeakMap.set(friend, `Best Friend`);
+  console.log(aWeakMap.get(friend));
+  // @ts-ignore
+  friend = null;
+  console.log(aWeakMap.get(friend));
+}

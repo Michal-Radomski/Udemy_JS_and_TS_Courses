@@ -201,24 +201,40 @@ console.log({ bill });
 // console.log({ arr2 });
 
 //* Array.find() and array.findIndex()
-const array1 = [5, 12, 8, 130, 44];
-const found = array1.find((element) => element > 10); // First elem
-console.log({ found }); // Expected output: 12
+// const array1 = [5, 12, 8, 130, 44];
+// const found = array1.find((element) => element > 10); //* First elem or undefined if not found; Parameters: element, index, array
+// console.log({ found }); // Expected output: 12
 
-const array2 = [5, 12, 8, 130, 44];
-const isLargeNumber = (element: number) => element > 13; // First index
-console.log(array2.findIndex(isLargeNumber)); // Expected output: 3
+// const array2 = [5, 12, 8, 130, 44];
+// const isLargeNumber = (element: number) => element > 13; //* First index or -1 if not found; Parameters: element, index, array
+// console.log(array2.findIndex(isLargeNumber)); // Expected output: 3
 
-const arr = ["apple", "mango", "apple", "orange", "mango", "mango"];
+// const arr = ["apple", "mango", "apple", "orange", "mango", "mango"];
 
-function removeDuplicates(arr: string[]) {
-  let unique = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (unique.indexOf(arr[i]) === -1) {
-      unique.push(arr[i]);
-    }
-  }
-  return unique;
-}
-const arrReduced = removeDuplicates(arr);
-console.log({ arrReduced });
+// function removeDuplicates(arr: string[]) {
+//   let unique = [];
+//   for (let i = 0; i < arr.length; i++) {
+//     if (unique.indexOf(arr[i]) === -1) {
+//       unique.push(arr[i]);
+//     }
+//   }
+//   return unique;
+// }
+// const arrReduced = removeDuplicates(arr);
+// console.log({ arrReduced });
+
+//* Map, Set, WeakMap, WeakSet
+const str = "string";
+const num = 3;
+const bool = true;
+const undef = undefined;
+const s = Symbol("mySymbol");
+const myName = str; // Copy value of string
+console.log({ myName });
+
+// Object are stored by reference (reference points sth in memory)
+const obj = { name: "Popeye" } as { name: string; girlfriend?: string };
+const cartoon = obj;
+console.log(1, { obj, cartoon });
+cartoon.girlfriend = "Olive Oil";
+console.log(2, { obj, cartoon });

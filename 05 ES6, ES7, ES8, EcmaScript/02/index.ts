@@ -1,3 +1,27 @@
+//^ List of JS constructors
+const a = new String();
+const b = new Number();
+const c = new Boolean();
+const d = new Array();
+const e = new Object();
+const f = new Map();
+const g = new WeakMap();
+const h = new Set();
+const i = new WeakSet();
+const j = new RegExp("ab+c");
+const k = new Date();
+const l = new Error();
+const m = new Blob();
+const n = new File(["foo"], "foo.txt", { type: "text/plain" });
+// const o = new FileReader(); //* WebApi
+const p = new ArrayBuffer(8);
+const r = new Intl.DateTimeFormat();
+// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r });
+
+//* Example
+// const date = new Date(Date.UTC(2020, 11, 20, 3, 23, 16, 738));
+// console.log(new Intl.DateTimeFormat("en-US").format(date)); // Expected output: "12/20/2020"
+
 //* Classes
 // The old way
 // function SuperHero(this: any, name: string, strength: number, speed: number, weapon: string, cape: boolean):void {
@@ -224,17 +248,39 @@ console.log({ bill });
 // console.log({ arrReduced });
 
 //* Map, Set, WeakMap, WeakSet
-const str = "string";
-const num = 3;
-const bool = true;
-const undef = undefined;
-const s = Symbol("mySymbol");
-const myName = str; // Copy value of string
-console.log({ myName });
+// const str = "string";
+// const num = 3;
+// const bool = true;
+// const undef = undefined;
+// const sym = Symbol("mySymbol");
+// const myName = str; // Copy value of string
+// console.log({ myName });
 
-// Object are stored by reference (reference points sth in memory)
-const obj = { name: "Popeye" } as { name: string; girlfriend?: string };
-const cartoon = obj;
-console.log(1, { obj, cartoon });
-cartoon.girlfriend = "Olive Oil";
-console.log(2, { obj, cartoon });
+// // Object are stored by reference (reference points sth in memory)
+// const obj = { name: "Popeye" } as { name: string; girlfriend?: string };
+// const cartoon = obj;
+// console.log(1, { obj, cartoon });
+// cartoon.girlfriend = "Olive Oil";
+// console.log(2, { obj, cartoon });
+
+//* Map
+const myContacts = new Map();
+myContacts.set("Rob", "555-1234");
+const rob = myContacts.get("Rob");
+console.log({ rob });
+
+// Size property
+console.log(myContacts.size);
+
+// for (let value of myContacts) {
+//   console.log({ value });
+// }
+
+// Clear method (clear the map)
+// myContacts.clear();
+// console.log({ myContacts });
+
+// entries method (get all the entries)
+console.log("myContacts.entries():", myContacts.entries());
+console.log("myContacts.keys():", myContacts.keys());
+console.log("myContacts.values():", myContacts.values());

@@ -129,16 +129,16 @@ console.log({ bill });
 
 //* Arrays
 // for..of
-const arr = [1, 2, 3, 10, 11, 12];
+// const arr = [1, 2, 3, 10, 11, 12];
 
 // for (let i = 0; i < arr.length; i++) {
 //   console.log(arr[i]);
 // }
 
 //* for..in
-for (let key in arr) {
-  console.log("for...in key:", key);
-}
+// for (let key in arr) {
+//   console.log("for...in key:", key);
+// }
 
 // const obj = {
 //   name: "Rob",
@@ -157,14 +157,14 @@ for (let key in arr) {
 // });
 
 //* for..in iterates over the keys of the iterator
-for (let key in arr) {
-  console.log("for in: key;", key);
-}
+// for (let key in arr) {
+//   console.log("for in: key;", key);
+// }
 
-//* for..of iterates over the value of the iterator
-for (let value of arr) {
-  console.log({ value });
-}
+// //* for..of iterates over the value of the iterator
+// for (let value of arr) {
+//   console.log({ value });
+// }
 
 // const str = `Robert Bunch`;
 // for (let letter of str) {
@@ -191,11 +191,34 @@ for (let value of arr) {
 // console.log({ numbers });
 
 //* Array.of() and array.fill() /fill(value, start, end)/
-const array: number[] = Array.of(2, 3, 4, 5);
-console.log({ array });
+// const array: number[] = Array.of(2, 3, 4, 5);
+// console.log({ array });
 
-console.log([1, 2, 3].fill(4, 1, 2)); // [1, 4, 3]
+// console.log([1, 2, 3].fill(4, 1, 2)); // [1, 4, 3]
 
-const arr2 = [2, 4, 5, "a", 17, "r", 9, 9];
-arr2.fill("c", -3, -2);
-console.log({ arr2 });
+// const arr2 = [2, 4, 5, "a", 17, "r", 9, 9];
+// arr2.fill("c", -3, -2);
+// console.log({ arr2 });
+
+//* Array.find() and array.findIndex()
+const array1 = [5, 12, 8, 130, 44];
+const found = array1.find((element) => element > 10); // First elem
+console.log({ found }); // Expected output: 12
+
+const array2 = [5, 12, 8, 130, 44];
+const isLargeNumber = (element: number) => element > 13; // First index
+console.log(array2.findIndex(isLargeNumber)); // Expected output: 3
+
+const arr = ["apple", "mango", "apple", "orange", "mango", "mango"];
+
+function removeDuplicates(arr: string[]) {
+  let unique = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (unique.indexOf(arr[i]) === -1) {
+      unique.push(arr[i]);
+    }
+  }
+  return unique;
+}
+const arrReduced = removeDuplicates(arr);
+console.log({ arrReduced });

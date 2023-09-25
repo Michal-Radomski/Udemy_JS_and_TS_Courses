@@ -178,14 +178,24 @@ for (let value of arr) {
 // const y = Array.from(`${3 + 5}49`);
 // console.log(y);
 
-const harry = `String1.`;
-const lotr = `String2.`;
-const orwell = `String3.`;
+// const harry = `String1.`;
+// const lotr = `String2.`;
+// const orwell = `String3.`;
 
-const lines = Array.from([harry, lotr, orwell], (line) => {
-  return `<li>${line}</li>`;
-});
-console.log({ lines });
+// const lines = Array.from([harry, lotr, orwell], (line) => {
+//   return `<li>${line}</li>`;
+// });
+// console.log({ lines });
 
-const numbers = Array.from([2, 3, 4], (num) => num + num);
-console.log({ numbers });
+// const numbers = Array.from([2, 3, 4], (num) => num + num);
+// console.log({ numbers });
+
+//* Array.of() and array.fill() /fill(value, start, end)/
+const array: number[] = Array.of(2, 3, 4, 5);
+console.log({ array });
+
+console.log([1, 2, 3].fill(4, 1, 2)); // [1, 4, 3]
+
+const arr2 = [2, 4, 5, "a", 17, "r", 9, 9];
+arr2.fill("c", -3, -2);
+console.log({ arr2 });

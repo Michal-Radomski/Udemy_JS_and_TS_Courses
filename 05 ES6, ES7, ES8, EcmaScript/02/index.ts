@@ -312,32 +312,59 @@ console.log({ bill });
 //   console.log(aWeakMap.get(friend));
 // }
 
-//* Set
-const employeeId = new Set([`a12`, `e7`, `c2`, `a12`]);
-console.log({ employeeId });
-employeeId.forEach((emp) => {
-  console.log(emp);
-});
-const employeeSet = new Set();
-// console.log(1, { employeeSet });
-//
-const obj = {
-  name: `Jane`,
-  position: `CTO`,
-  tenure: `12 years`,
+//* Set -> All elements are unique!
+// const employeeId = new Set(["a12", "e7", "c2", "a12"]);
+// console.log({ employeeId });
+// employeeId.forEach((emp) => {
+//   console.log(emp);
+// });
+// const employeeSet = new Set();
+// // console.log(1, { employeeSet });
+// //
+// const obj = {
+//   name: `Jane`,
+//   position: `CTO`,
+//   tenure: `12 years`,
+// };
+// employeeSet.add(obj);
+// employeeSet.add(obj);
+
+// employeeSet.add({
+//   name: `Jane`,
+//   position: `CTO`,
+//   tenure: `12 years`,
+// });
+
+// employeeSet.add({
+//   name: `Jane`,
+//   position: `CTO`,
+//   tenure: `12 years`,
+// });
+
+// console.log(2, { employeeSet });
+// // console.log("employeeSet.entries():", employeeSet.entries());
+
+//* WeakSet
+const userData = {
+  numberOfUsers: 2,
+  status: 200,
+  users: [
+    {
+      name: `Rob`,
+      number: `1-515-555-1234`,
+    },
+    {
+      name: `Jim`,
+      number: `1-515-555-9876`,
+    },
+  ],
 };
+const aWeakMap = new WeakMap();
 
-employeeSet.add({
-  name: `Jane`,
-  position: `CTO`,
-  tenure: `12 years`,
-});
-
-employeeSet.add({
-  name: `Jane`,
-  position: `CTO`,
-  tenure: `12 years`,
-});
-
-console.log(2, { employeeSet });
-// console.log("employeeSet.entries():", employeeSet.entries());
+function updateUsers(userData: { numberOfUsers?: number; status?: number; users: object[] }) {
+  userData.users.forEach((user: object) => {
+    aWeakMap.set(user, `Stuff`);
+  });
+}
+updateUsers(userData);
+console.log("aWeakMap.get(userData.users[0]):", aWeakMap.get(userData.users[0]));

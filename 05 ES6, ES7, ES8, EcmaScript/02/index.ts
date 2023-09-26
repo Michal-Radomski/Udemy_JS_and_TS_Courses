@@ -345,26 +345,66 @@ console.log({ bill });
 // // console.log("employeeSet.entries():", employeeSet.entries());
 
 //* WeakSet
-const userData = {
-  numberOfUsers: 2,
-  status: 200,
-  users: [
-    {
-      name: `Rob`,
-      number: `1-515-555-1234`,
-    },
-    {
-      name: `Jim`,
-      number: `1-515-555-9876`,
-    },
-  ],
-};
-const aWeakMap = new WeakMap();
+// const userData = {
+//   numberOfUsers: 2,
+//   status: 200,
+//   users: [
+//     {
+//       name: `Rob`,
+//       number: `1-515-555-1234`,
+//     },
+//     {
+//       name: `Jim`,
+//       number: `1-515-555-9876`,
+//     },
+//   ],
+// };
+// const aWeakMap = new WeakMap();
 
-function updateUsers(userData: { numberOfUsers?: number; status?: number; users: object[] }) {
-  userData.users.forEach((user: object) => {
-    aWeakMap.set(user, `Stuff`);
-  });
+// function updateUsers(userData: { numberOfUsers?: number; status?: number; users: object[] }) {
+//   userData.users.forEach((user: object) => {
+//     aWeakMap.set(user, `Stuff`);
+//   });
+// }
+// updateUsers(userData);
+// console.log("aWeakMap.get(userData.users[0]):", aWeakMap.get(userData.users[0]));
+
+//* Symbol -> to avoid name collision!
+const symbol1 = Symbol();
+const symbol2 = Symbol(42);
+const symbol3 = Symbol("foo");
+
+console.log({ symbol1, symbol2, symbol3 });
+console.log("typeof symbol1:", typeof symbol1); // Expected output: "symbol"
+// @ts-ignore
+console.log("symbol2 === 42:", symbol2 === 42); // Expected output: false
+console.log("symbol3.toString():", symbol3.toString()); // Expected output: "Symbol(foo)"
+console.log("Symbol('foo') === Symbol('foo'):", Symbol("foo") === Symbol("foo")); // Expected output: false
+
+// console.log("Number(2) === Number(2):", Number(2) === Number(2));
+// console.log("new Number(2) === new Number(2):", new Number(2) === new Number(2));
+// console.log("undefined === undefined:", undefined === undefined);
+// console.log("Symbol() === Symbol():", Symbol() === Symbol());
+
+const CARCOLOR: unique symbol = Symbol();
+const CAR_MAKE: unique symbol = Symbol();
+const CARMODEL: unique symbol = Symbol();
+
+class Car {
+  constructor(color: string, make: string, model: string) {
+    (this as any)[CARCOLOR] = color;
+    (this as any)[CAR_MAKE] = make;
+    (this as any)[CARMODEL] = model;
+  }
+  get color() {
+    return (this as any)[CARCOLOR];
+  }
+  set color(newColor) {
+    (this as any)[CARCOLOR] = newColor;
+  }
 }
-updateUsers(userData);
-console.log("aWeakMap.get(userData.users[0]):", aWeakMap.get(userData.users[0]));
+
+let myCar = new Car(`Red`, `Chevy`, `Tahoe`);
+console.log({ myCar });
+myCar.color = `blue`;
+console.log({ myCar });

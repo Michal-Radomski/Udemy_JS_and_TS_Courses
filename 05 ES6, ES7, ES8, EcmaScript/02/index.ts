@@ -16,7 +16,14 @@ const n = new File(["foo"], "foo.txt", { type: "text/plain" });
 // const o = new FileReader(); //* WebApi
 const p = new ArrayBuffer(8);
 const r = new Intl.DateTimeFormat();
-// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r });
+const s = new Promise((resolve, _reject) => {
+  setTimeout(() => {
+    resolve("foo");
+  }, 300);
+});
+const t = new Request("https://www.mozilla.org/favicon.ico");
+// const u = new XMLHttpRequest(); //* WebApi
+// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u });
 
 //* Example
 // const date = new Date(Date.UTC(2020, 11, 20, 3, 23, 16, 738));
@@ -286,21 +293,51 @@ console.log({ bill });
 // console.log("myContacts.values():", myContacts.values());
 
 //* WeakMap
-{
-  let aStrongMap = new Map();
-  let friend = { name: `Jim` };
-  aStrongMap.set(friend, `Best Friend`);
-  console.log(aStrongMap.get(friend));
-  // @ts-ignore
-  friend = null;
-  console.log(aStrongMap.entries());
-}
-{
-  let aWeakMap = new WeakMap();
-  let friend = { friend: `Bill` };
-  aWeakMap.set(friend, `Best Friend`);
-  console.log(aWeakMap.get(friend));
-  // @ts-ignore
-  friend = null;
-  console.log(aWeakMap.get(friend));
-}
+// {
+//   let aStrongMap = new Map();
+//   let friend = { name: `Jim` };
+//   aStrongMap.set(friend, `Best Friend`);
+//   console.log(aStrongMap.get(friend));
+//   // @ts-ignore
+//   friend = null;
+//   console.log(aStrongMap.entries());
+// }
+// {
+//   let aWeakMap = new WeakMap();
+//   let friend = { friend: `Bill` };
+//   aWeakMap.set(friend, `Best Friend`);
+//   console.log(aWeakMap.get(friend));
+//   // @ts-ignore
+//   friend = null;
+//   console.log(aWeakMap.get(friend));
+// }
+
+//* Set
+const employeeId = new Set([`a12`, `e7`, `c2`, `a12`]);
+console.log({ employeeId });
+employeeId.forEach((emp) => {
+  console.log(emp);
+});
+const employeeSet = new Set();
+// console.log(1, { employeeSet });
+//
+const obj = {
+  name: `Jane`,
+  position: `CTO`,
+  tenure: `12 years`,
+};
+
+employeeSet.add({
+  name: `Jane`,
+  position: `CTO`,
+  tenure: `12 years`,
+});
+
+employeeSet.add({
+  name: `Jane`,
+  position: `CTO`,
+  tenure: `12 years`,
+});
+
+console.log(2, { employeeSet });
+// console.log("employeeSet.entries():", employeeSet.entries());

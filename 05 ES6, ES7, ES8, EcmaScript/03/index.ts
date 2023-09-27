@@ -10,21 +10,23 @@
 // }
 
 //* Callback
-const printUpper = function (text: string) {
-  console.log(text.toUpperCase());
-};
+// const printUpper = function (text: string) {
+//   console.log(text.toUpperCase());
+// };
 
-const printNumber = function (number: number) {
-  console.log(number);
-};
+// const printNumber = function (number: number) {
+//   console.log(number);
+// };
 
-function run(callback: Function, input: string | number) {
-  callback(input);
-}
+// function run(callback: Function, input: string | number) {
+//   callback(input);
+// }
 
-run(printUpper, "Test");
-run(printNumber, 5);
+// run(printUpper, "Test");
+// run(printNumber, 5);
 
-run((text: string) => {
-  console.log(text.toUpperCase());
-}, `Hello, World`);
+// run((text: string) => {
+//   console.log(text.toUpperCase());
+// }, `Hello, World`);
+
+//* Promise

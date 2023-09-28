@@ -25,7 +25,8 @@ const t = new Request("https://www.mozilla.org/favicon.ico");
 // const u = new XMLHttpRequest(); //* WebApi
 const v = new Event("look", { bubbles: true, cancelable: false });
 const w = new CustomEvent("animalFound", { detail: { name: "cat" } });
-// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w });
+const x = new AbortController();
+// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x });
 
 //* Example
 // const date = new Date(Date.UTC(2020, 11, 20, 3, 23, 16, 738));

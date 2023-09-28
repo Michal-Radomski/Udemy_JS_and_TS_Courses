@@ -1,5 +1,3 @@
-import { apiKey } from "./keys";
-
 // setTimeout(() => {
 //   console.log("Line 1, 0 timeout -> 3"); //* 3
 // }, 0);
@@ -97,13 +95,15 @@ import { apiKey } from "./keys";
 //   console.log(9, { data });
 // });
 
+import { apiKey } from "./keys";
+
 const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`;
-const getMovieData = (movieTitle: string): Promise<Object> => {
+const getMovieData = (movieTitle: string): Promise<Object[]> => {
   return new Promise((resolve, reject) => {
     fetch(apiUrl + movieTitle)
       .then((res) => res.json())
       .then(({ results }) => {
-        console.log({ results });
+        // console.log({ results });
         resolve(results);
       })
       .catch((err) => {
@@ -113,4 +113,14 @@ const getMovieData = (movieTitle: string): Promise<Object> => {
   });
 };
 
-getMovieData("hard die");
+// getMovieData("gladiator");
+(async function displayData() {
+  const data = await getMovieData("die hard");
+  console.log("data:", data[0]);
+})();
+(function displayData() {
+  const data = getMovieData("star wars");
+  data.then((results) => {
+    console.log("results:", results[0]);
+  });
+})();

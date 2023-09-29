@@ -186,8 +186,68 @@
 //   displayMovie(movie, index);
 // });
 
-import fs from "fs";
+// import fs from "fs";
 
-fs.readdir("./data", (err, files) => {
-  console.log(files);
-});
+// interface FileObj {
+//   fileName: string;
+//   data: string;
+// }
+
+// fs.readdir("./data", (err, files) => {
+//   if (err) {
+//     console.log({ err });
+//   }
+
+//   const filePromises = files.map((fileName): Promise<FileObj> => {
+//     return new Promise((resolve, reject) => {
+//       // console.log(1, { fileName });
+//       fs.readFile(`./data/${fileName}`, (err, data: Buffer) => {
+//         // console.log({data});
+//         // console.log(2, { fileName });
+//         if (err) {
+//           console.log({ err });
+//           reject(err);
+//         }
+//         resolve({
+//           fileName,
+//           data: String(data),
+//         });
+//       });
+//     });
+//   });
+
+//   // Promise.all takes 1 arg: an array of promises!
+//   Promise.all(filePromises).then((fileContentArray: FileObj[]) => {
+//     // console.log(3, { fileContentArray });
+//     const arrayCount = fileContentArray.map((fileObj: FileObj) => {
+//       const matches = fileObj.data.match(/gotYa/g);
+//       // console.log(4, { matches });
+//       if (matches) {
+//         return {
+//           name: fileObj.fileName,
+//           num: matches.length,
+//           [fileObj.fileName]: matches.length,
+//         };
+//       } else {
+//         return {
+//           name: fileObj.fileName,
+//           num: 0,
+//           [fileObj.fileName]: 0,
+//         };
+//       }
+//     });
+//     // console.log(5, { arrayCount });
+//     const orderedArray = arrayCount.sort((a, b) => {
+//       return a.num - b.num;
+//     });
+//     console.log(6, { orderedArray });
+//   });
+
+//   // Promise.race takes 1 arg: an array of promises!
+//   Promise.race(filePromises).then((_file) => {
+//     console.log("The race is over. The winner is...");
+//     // console.log(7, { _file });
+//   });
+// });
+
+//* ES7

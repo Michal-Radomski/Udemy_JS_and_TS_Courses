@@ -251,34 +251,54 @@
 // });
 
 //* ES7
-{
-  const x = 2 ** 5;
-  console.log({ x });
-  console.log("2 ** (3 ** 2):", 2 ** (3 ** 2));
-  console.log("(2 ** 3) ** 2:", (2 ** 3) ** 2);
-  console.log("2 ** 3 ** 2:", 2 ** (3 ** 2));
-  console.log("10 ** -1:", 10 ** -1);
-  console.log("(-10) ** 2:", (-10) ** 2);
+// {
+//   const x = 2 ** 5;
+//   console.log({ x });
+//   console.log("2 ** (3 ** 2):", 2 ** (3 ** 2));
+//   console.log("(2 ** 3) ** 2:", (2 ** 3) ** 2);
+//   console.log("2 ** 3 ** 2:", 2 ** (3 ** 2));
+//   console.log("10 ** -1:", 10 ** -1);
+//   console.log("(-10) ** 2:", (-10) ** 2);
 
-  const array1 = [1, 2, 3];
-  console.log("array1.includes(2):", array1.includes(2)); // Expected output: true
+//   const array1 = [1, 2, 3];
+//   console.log("array1.includes(2):", array1.includes(2)); // Expected output: true
 
-  const someJSON = {
-    name: "Wayne Rooney",
-    position: "Forward",
-    club: "Manchester United",
-  };
-  const { name, position, club } = someJSON;
-  console.log({ name });
-  console.log({ position });
+//   const someJSON = {
+//     name: "Wayne Rooney",
+//     position: "Forward",
+//     club: "Manchester United",
+//   };
+//   const { name, position, club } = someJSON;
+//   console.log({ name });
+//   console.log({ position });
 
-  // You can accept the data as an array using rest...
-  // and because it's an array, you can Destructure it back into single vars
-  // function fn(...data){
-  function fn(...[n, p, c]: string[]) {
-    console.log({ n });
-    console.log({ p });
-    console.log({ c });
-  }
-  fn(name, position, club);
-}
+//   // You can accept the data as an array using rest...
+//   // and because it's an array, you can Destructure it back into single vars
+//   // function fn(...data){
+//   function fn(...[n, p, c]: string[]) {
+//     console.log({ n });
+//     console.log({ p });
+//     console.log({ c });
+//   }
+//   fn(name, position, club);
+// }
+
+//* ES8
+//* Object.values() and Object.entries()
+const footballer = {
+  name: "Wayne Rooney",
+  position: "Forward",
+  club: "ManU",
+  scoringAverage: 1.2,
+};
+
+const footballerEntries = Object.entries(footballer);
+console.log({ footballerEntries });
+console.log("footballerEntries[0]:", footballerEntries[0]);
+console.log("footballerEntries[0][0]:", footballerEntries[0][0]);
+
+const footballerValues = Object.values(footballer);
+console.log({ footballerValues });
+
+const footballerKeys = Object.keys(footballer);
+console.log({ footballerKeys });

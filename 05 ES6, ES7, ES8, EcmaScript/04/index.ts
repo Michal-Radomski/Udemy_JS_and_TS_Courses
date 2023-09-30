@@ -95,7 +95,9 @@ function sum(x: number, y: number) {
 
 const handler = {
   apply: (target: (arg0: any, arg1: any) => number, _thisArg: any, argsList: any[]) => {
-    return target(argsList[0], argsList[1]) * 100;
+    console.log("Someone called a function");
+    return target(argsList[0], argsList[1]) * 100; //* Sum x 100!
+    // return target(argsList[0], argsList[1]); //* Nothing happens!
   },
 };
 

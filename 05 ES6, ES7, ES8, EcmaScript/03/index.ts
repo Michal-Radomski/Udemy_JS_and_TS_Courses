@@ -338,9 +338,11 @@ connection.connect(function (err) {
   console.log("connected as id " + connection.threadId);
 });
 
-// const checkLoginQuery = `SELECT * from users WHERE name = "${name}" AND email = "${email}"`;
+const checkLoginQuery = `SELECT * from users WHERE name = "${name}" AND email = "${email}"`;
+
 // connection.query(checkLoginQuery, (error, results) => {
 //   if (error) {
+//     console.error({ error });
 //     throw error;
 //   }
 //   if (results.length === 1) {
@@ -348,13 +350,14 @@ connection.connect(function (err) {
 //   }
 // });
 
-const checkLoginQuery = `SELECT * from users WHERE name = "${name}" AND email = "${email}"`;
 function checkLogin() {
   return new Promise((resolve, reject) => {
     connection.query(checkLoginQuery, (error, results) => {
       if (error) {
+        console.error({ error });
         reject(error);
       } else if (results.length == 1) {
+        console.log({ results });
         resolve(results[0].id);
       } else {
         resolve(false);
@@ -363,14 +366,12 @@ function checkLogin() {
   });
 }
 
-async function displayData() {
+(async function displayData() {
   console.log("Displaying data...");
   const userId = await checkLogin();
-  console.log({ userId });
+  console.log(1, { userId });
   if (userId) {
-    console.log({ userId });
+    console.log(2, { userId });
     console.log("User Displayed");
   }
-}
-
-displayData();
+})();

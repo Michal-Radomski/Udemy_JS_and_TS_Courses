@@ -303,24 +303,74 @@
 // const footballerKeys = Object.keys(footballer);
 // console.log({ footballerKeys });
 
-function one() {
-  return new Promise((resolve, _reject) => {
-    setTimeout(() => {
-      console.log("Done!");
-      resolve("2 seconds have passed!");
-    }, 2000);
+// function one() {
+//   return new Promise((resolve, _reject) => {
+//     setTimeout(() => {
+//       console.log("Done!");
+//       resolve("2 seconds have passed!");
+//     }, 2000);
+//   });
+// }
+
+// async function two() {
+//   console.log("Calling function one");
+//   const oneResponse = await one();
+//   console.log({ oneResponse });
+// }
+
+// // console.log("Calling function one");
+// // one().then((promiseData) => {
+// //   console.log({ promiseData });
+// // });
+// two();
+// console.log("Last line of the code");
+
+import mysql from "mysql";
+
+import { email, mySQLconfig, name } from "./keys";
+const connection = mysql.createConnection(mySQLconfig);
+// console.log({ connection });
+connection.connect(function (err) {
+  if (err) {
+    console.error("error connecting: " + err.stack);
+    return;
+  }
+  console.log("connected as id " + connection.threadId);
+});
+
+// const checkLoginQuery = `SELECT * from users WHERE name = "${name}" AND email = "${email}"`;
+// connection.query(checkLoginQuery, (error, results) => {
+//   if (error) {
+//     throw error;
+//   }
+//   if (results.length === 1) {
+//     console.log({ results });
+//   }
+// });
+
+const checkLoginQuery = `SELECT * from users WHERE name = "${name}" AND email = "${email}"`;
+function checkLogin() {
+  return new Promise((resolve, reject) => {
+    connection.query(checkLoginQuery, (error, results) => {
+      if (error) {
+        reject(error);
+      } else if (results.length == 1) {
+        resolve(results[0].id);
+      } else {
+        resolve(false);
+      }
+    });
   });
 }
 
-async function two() {
-  console.log("Calling function one");
-  const oneResponse = await one();
-  console.log({ oneResponse });
+async function displayData() {
+  console.log("Displaying data...");
+  const userId = await checkLogin();
+  console.log({ userId });
+  if (userId) {
+    console.log({ userId });
+    console.log("User Displayed");
+  }
 }
 
-// console.log("Calling function one");
-// one().then((promiseData) => {
-//   console.log({ promiseData });
-// });
-two();
-console.log("Last line of the code");
+displayData();

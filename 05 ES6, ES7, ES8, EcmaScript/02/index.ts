@@ -36,7 +36,8 @@ const handler = {
   },
 };
 const y = new Proxy(target, handler);
-// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x, y });
+const z = new TypeError();
+// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x, y, z });
 
 //* Example
 // const date = new Date(Date.UTC(2020, 11, 20, 3, 23, 16, 738));

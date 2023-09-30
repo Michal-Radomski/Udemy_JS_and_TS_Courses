@@ -26,7 +26,17 @@ const t = new Request("https://www.mozilla.org/favicon.ico");
 const v = new Event("look", { bubbles: true, cancelable: false });
 const w = new CustomEvent("animalFound", { detail: { name: "cat" } });
 const x = new AbortController();
-// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x });
+const target = { notProxied: "original value", proxied: "original value" };
+const handler = {
+  get(target: any, prop: string, receiver: any) {
+    if (prop === "proxied") {
+      return "replaced value";
+    }
+    return Reflect.get(target, prop, receiver);
+  },
+};
+const y = new Proxy(target, handler);
+// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x, y });
 
 //* Example
 // const date = new Date(Date.UTC(2020, 11, 20, 3, 23, 16, 738));

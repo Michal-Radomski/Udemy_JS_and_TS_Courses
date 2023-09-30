@@ -455,7 +455,7 @@
 }
 
 {
-  // Object.getOwnPropertyDescriptors()
+  //* Object.getOwnPropertyDescriptors()
   const footballer = {
     name: "Wayne Rooney",
     position: "Forward",

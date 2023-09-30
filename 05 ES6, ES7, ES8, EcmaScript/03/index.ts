@@ -95,13 +95,17 @@
 //   console.log(9, { data });
 // });
 
-// import { apiKey } from "./keys";
-
+//* Promises
 // import { JSDOM } from "jsdom";
 // const { window } = new JSDOM("");
 // const $ = require("jquery")(window);
 
+// import { apiKey } from "./keys";
+
 // const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`;
+// const peopleUrl = `https://api.themoviedb.org/3/person`;
+// const castUrl = `https://api.themoviedb.org/3/movie`;
+
 // const getMovieData = (movieTitle: string): Promise<Object[]> => {
 //   return new Promise((resolve, reject) => {
 //     fetch(apiUrl + movieTitle)
@@ -130,10 +134,7 @@
 //   });
 // })();
 
-//* Chaining promises
-// const peopleUrl = `https://api.themoviedb.org/3/person`;
-// const castUrl = `https://api.themoviedb.org/3/movie`;
-
+//* Promise chaining
 // function getMovieData(movieTitle: string): Promise<Object[]> {
 //   return new Promise((resolve, reject) => {
 //     $.ajax({
@@ -174,17 +175,19 @@
 //   });
 // }
 
-// async function displayMovie(movieTitle: string, index: number) {
-//   const movieData = await getMovieData(movieTitle);
-//   const castData = await getCast((movieData as any[])[0]);
-//   const personData = await getPerson((castData as any[])[0]);
-//   console.log(index, { personData });
-// }
-
 // const set = new Set(["die hard", "gladiator"]);
 // const movieElems = Array.from(set);
-// movieElems.forEach((movie, index) => {
-//   displayMovie(movie, index);
+
+// getMovieData(movieElems[0]).then((movie) => {
+//   // console.log("movie[0]:", movie[0]);
+//   return getCast(movie[0] as any)
+//     .then((castInfo) => {
+//       // console.log("castInfo[0]:", castInfo[0]);
+//       return getPerson(castInfo[0] as any);
+//     })
+//     .then((personInfo) => {
+//       console.log({ personInfo });
+//     });
 // });
 
 // import fs from "fs";
@@ -379,11 +382,11 @@
 //   }
 // })();
 
-import { apiKey } from "./keys";
-
 import { JSDOM } from "jsdom";
 const { window } = new JSDOM("");
 const $ = require("jquery")(window);
+
+import { apiKey } from "./keys";
 
 const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`;
 const peopleUrl = `https://api.themoviedb.org/3/person`;

@@ -382,65 +382,86 @@
 //   }
 // })();
 
-import { JSDOM } from "jsdom";
-const { window } = new JSDOM("");
-const $ = require("jquery")(window);
+//* Async Await
+// import { JSDOM } from "jsdom";
+// const { window } = new JSDOM("");
+// const $ = require("jquery")(window);
 
-import { apiKey } from "./keys";
+// import { apiKey } from "./keys";
 
-const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`;
-const peopleUrl = `https://api.themoviedb.org/3/person`;
-const castUrl = `https://api.themoviedb.org/3/movie`;
+// const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`;
+// const peopleUrl = `https://api.themoviedb.org/3/person`;
+// const castUrl = `https://api.themoviedb.org/3/movie`;
 
-function getMovieData(movieTitle: string): Promise<Object[]> {
-  return new Promise((resolve, reject) => {
-    $.ajax({
-      url: apiUrl + movieTitle,
-      method: "get",
-      success: (movieData: any) => {
-        // console.log(movieData)
-        resolve(movieData.results);
-      },
-      error: (errorMsg: Error) => {
-        reject(errorMsg);
-      },
-    });
-  });
+// function getMovieData(movieTitle: string): Promise<Object[]> {
+//   return new Promise((resolve, reject) => {
+//     $.ajax({
+//       url: apiUrl + movieTitle,
+//       method: "get",
+//       success: (movieData: any) => {
+//         // console.log(movieData)
+//         resolve(movieData.results);
+//       },
+//       error: (errorMsg: Error) => {
+//         reject(errorMsg);
+//       },
+//     });
+//   });
+// }
+
+// function getCast(movie: { id: string }): Promise<Object[]> {
+//   // console.log(movie)
+//   return new Promise((resolve, _reject) => {
+//     $.ajax({
+//       url: `${castUrl}/${movie.id}/credits?api_key=${apiKey}`,
+//       method: "get",
+//       success: (castData: any) => {
+//         resolve(castData.cast);
+//       },
+//     });
+//   });
+// }
+
+// function getPerson(person: { id: string }): Promise<Object[]> {
+//   return new Promise((resolve, _reject) => {
+//     $.ajax({
+//       url: `${peopleUrl}/${person.id}?api_key=${apiKey}`,
+//       success: (personData: any) => {
+//         resolve(personData);
+//       },
+//     });
+//   });
+// }
+
+// async function displayMovie(movieTitle: string, index: number) {
+//   const movieData = await getMovieData(movieTitle);
+//   const castData = await getCast((movieData as any[])[0]);
+//   const personData = await getPerson((castData as any[])[0]);
+//   console.log(index, { personData });
+// }
+
+// const set = new Set(["die hard", "gladiator"]);
+// const movieElems = Array.from(set);
+// movieElems.forEach((movie, index) => {
+//   displayMovie(movie, index);
+// });
+
+{
+  //* padStart(), padEnd(),
+  const name = "Wayne Rooney";
+  console.log('name.padEnd(5,"b"):', name.padEnd(15, "b")); //* 15 -> targetLength
+  console.log('name.padStart(20,"b"):', name.padStart(15, "b")); //* 15 -> targetLength
+  console.log({ name });
 }
 
-function getCast(movie: { id: string }): Promise<Object[]> {
-  // console.log(movie)
-  return new Promise((resolve, _reject) => {
-    $.ajax({
-      url: `${castUrl}/${movie.id}/credits?api_key=${apiKey}`,
-      method: "get",
-      success: (castData: any) => {
-        resolve(castData.cast);
-      },
-    });
-  });
+{
+  // Object.getOwnPropertyDescriptors()
+  const footballer = {
+    name: "Wayne Rooney",
+    position: "Forward",
+    club: "ManU",
+    scoringAverage: 1.2,
+  };
+  const descriptors = Object.getOwnPropertyDescriptors(footballer);
+  console.log({ descriptors });
 }
-
-function getPerson(person: { id: string }): Promise<Object[]> {
-  return new Promise((resolve, _reject) => {
-    $.ajax({
-      url: `${peopleUrl}/${person.id}?api_key=${apiKey}`,
-      success: (personData: any) => {
-        resolve(personData);
-      },
-    });
-  });
-}
-
-async function displayMovie(movieTitle: string, index: number) {
-  const movieData = await getMovieData(movieTitle);
-  const castData = await getCast((movieData as any[])[0]);
-  const personData = await getPerson((castData as any[])[0]);
-  console.log(index, { personData });
-}
-
-const set = new Set(["die hard", "gladiator"]);
-const movieElems = Array.from(set);
-movieElems.forEach((movie, index) => {
-  displayMovie(movie, index);
-});

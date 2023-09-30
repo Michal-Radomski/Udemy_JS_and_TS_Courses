@@ -285,20 +285,42 @@
 
 //* ES8
 //* Object.values() and Object.entries()
-const footballer = {
-  name: "Wayne Rooney",
-  position: "Forward",
-  club: "ManU",
-  scoringAverage: 1.2,
-};
+// const footballer = {
+//   name: "Wayne Rooney",
+//   position: "Forward",
+//   club: "ManU",
+//   scoringAverage: 1.2,
+// };
 
-const footballerEntries = Object.entries(footballer);
-console.log({ footballerEntries });
-console.log("footballerEntries[0]:", footballerEntries[0]);
-console.log("footballerEntries[0][0]:", footballerEntries[0][0]);
+// const footballerEntries = Object.entries(footballer);
+// console.log({ footballerEntries });
+// console.log("footballerEntries[0]:", footballerEntries[0]);
+// console.log("footballerEntries[0][0]:", footballerEntries[0][0]);
 
-const footballerValues = Object.values(footballer);
-console.log({ footballerValues });
+// const footballerValues = Object.values(footballer);
+// console.log({ footballerValues });
 
-const footballerKeys = Object.keys(footballer);
-console.log({ footballerKeys });
+// const footballerKeys = Object.keys(footballer);
+// console.log({ footballerKeys });
+
+function one() {
+  return new Promise((resolve, _reject) => {
+    setTimeout(() => {
+      console.log("Done!");
+      resolve("2 seconds have passed!");
+    }, 2000);
+  });
+}
+
+async function two() {
+  console.log("Calling function one");
+  const oneResponse = await one();
+  console.log({ oneResponse });
+}
+
+// console.log("Calling function one");
+// one().then((promiseData) => {
+//   console.log({ promiseData });
+// });
+two();
+console.log("Last line of the code");

@@ -81,8 +81,8 @@
 //   },
 // };
 
-// let aCar = new Car(`toyota`, `camry`);
-// let carProxy = new Proxy(aCar, handler);
+// const aCar = new Car(`toyota`, `camry`);
+// const carProxy = new Proxy(aCar, handler);
 // console.log("carProxy.make:", carProxy.make);
 
 //* Apply trap
@@ -170,41 +170,128 @@
 // importantProxy(`a Param`);
 
 //* Proxy Exercise 3
-const users = [
-  {
-    username: `bob`,
-    accessLevel: 1,
-    accessCode: 1234,
-  },
-  {
-    username: `Mary`,
-    accessLevel: 2,
-    accessCode: 2345,
-  },
-  {
-    username: `Harold`,
-    accessLevel: 2,
-    accessCode: 9999,
-  },
-];
+// const users = [
+//   {
+//     username: `bob`,
+//     accessLevel: 1,
+//     accessCode: 1234,
+//   },
+//   {
+//     username: `Mary`,
+//     accessLevel: 2,
+//     accessCode: 2345,
+//   },
+//   {
+//     username: `Harold`,
+//     accessLevel: 2,
+//     accessCode: 9999,
+//   },
+// ];
 
-const userHandler = {
-  get: (target: { [x: string]: any }, propName: string | number) => {
-    if (target[propName].accessLevel === 1) {
-      return {
-        username: "Access Denied",
-        accessLevel: "Access Denied",
-        accessCode: "Access Denied",
-      };
-    } else {
-      return target[propName];
-    }
-  },
-};
+// const userHandler = {
+//   get: (target: { [x: string]: any }, propName: string | number) => {
+//     if (target[propName].accessLevel === 1) {
+//       return {
+//         username: "Access Denied",
+//         accessLevel: "Access Denied",
+//         accessCode: "Access Denied",
+//       };
+//     } else {
+//       return target[propName];
+//     }
+//   },
+// };
 
-const userProxy = new Proxy(users, userHandler as any);
+// const userProxy = new Proxy(users, userHandler as any);
 
-console.log("userProxy[0].username:", userProxy[0].username); // Access Denied
-console.log("userProxy[0].accessCode:", userProxy[0].accessCode); // Access Denied
-console.log("userProxy[1].accessCode:", userProxy[1].accessCode); // 2345
-console.log("userProxy[2].username:", userProxy[2].username); // Harold
+// console.log("userProxy[0].username:", userProxy[0].username); // Access Denied
+// console.log("userProxy[0].accessCode:", userProxy[0].accessCode); // Access Denied
+// console.log("userProxy[1].accessCode:", userProxy[1].accessCode); // 2345
+// console.log("userProxy[2].username:", userProxy[2].username); // Harold
+
+//* Reflect Object
+// console.log({ Reflect });
+//* Reflect.get
+// const x = {
+//   a: 1,
+//   b: 2,
+// };
+// console.log('Reflect.get(x, "a"):', Reflect.get(x, "a"));
+// const arr = ["joe", "akash", "mary"];
+// console.log(Reflect.get(arr, 2));
+
+// const monster1 = {
+//   secret: "easily scared",
+//   eyeCount: 4,
+// };
+
+// const handler1 = {
+//   get: function (target: { secret: string; eyeCount: number }, prop: string) {
+//     if (prop === "secret") {
+//       return `${target.secret.substr(0, 6)} ... shhhh!`;
+//     } else {
+//       return Reflect.get(target, prop);
+//     }
+//   },
+// };
+
+// const proxy1 = new Proxy(monster1, handler1);
+
+// console.log("proxy1.eyeCount:", proxy1.eyeCount); // Expected output: 4
+// console.log("proxy1.secret:", proxy1.secret); // Expected output: "easily ... shhhh!"
+
+//* Reflect.get
+// const hgttg = {
+//   meaningOfLife: 42,
+// };
+
+// console.log(hgttg.hasOwnProperty("meaningOfLife"));
+// console.log(hgttg.hasOwnProperty("meaningOfLifeTest"));
+// console.log("meaningOfLife" in hgttg);
+// console.log(Reflect.has(hgttg, "meaningOfLife"));
+
+//* Reflect.apply
+// function sum(...array: any[]) {
+//   // console.log({ arguments });
+//   return array.reduce((number, total) => {
+//     return number + total;
+//   });
+// }
+// sum.apply = function () {
+//   throw new Error("I broke apply, just for fun!!");
+// };
+
+// console.log("sum([1, 2, 3]):", sum([1, 2, 3]));
+// console.log("Function.apply.call(sum, null, [1, 2, 3]):", Function.apply.call(sum, null, [1, 2, 3]));
+// console.log("Reflect.apply(sum, null, [1, 2, 3]):", Reflect.apply(sum, null, [1, 2, 3]));
+
+//* Reflect.defineProperty -> Reflect.defineProperty REPLACES Object.defineProperty!
+const bandit = {} as { attack: number; run(): void };
+const diffLevel = 2;
+
+if (diffLevel <= 2) {
+  Object.defineProperty(bandit, "attack", {
+    value: 15,
+    writable: false,
+  });
+  Reflect.defineProperty(bandit, "run", {
+    value: () => {
+      console.log("Bandit has fled!");
+    },
+    writable: false,
+  });
+} else {
+  Object.defineProperty(bandit, "attack", {
+    value: 25,
+    writable: false,
+  });
+}
+
+console.log(bandit.attack);
+bandit.run();
+
+//* Reflect.getOwnPropertyDescriptor
+console.log('Object.getOwnPropertyDescriptor(bandit, "attack"):', Object.getOwnPropertyDescriptor(bandit, "attack"));
+console.log('Reflect.getOwnPropertyDescriptor(bandit, "attack"):', Reflect.getOwnPropertyDescriptor(bandit, "attack"));
+
+//* Other methods: Reflect.deleteProperty() replaces Object.deleteProperty(), Reflect.getPrototypeOf(), Reflect.setPrototypeOf(,) Reflect.isExtensible()

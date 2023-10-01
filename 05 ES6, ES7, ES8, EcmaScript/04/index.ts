@@ -63,9 +63,6 @@
 // console.log({ newObj });
 
 //* Make a proxy out of a constructor/class object
-{
-}
-
 // class Car {
 //   make: string;
 //   model: string;
@@ -106,44 +103,108 @@
 // console.log("sum(2, 9):", sum(2, 9));
 // console.log("sumProxy(2, 9):", sumProxy(2, 9));
 
-//* Proxy Exercise
-const handler = {
-  set: (target: { [x: string]: any }, propName: string, newValue: null) => {
-    if (propName === `employees`) {
-      switch (typeof newValue) {
-        case `string`:
-          return (target[propName] = newValue);
-        case `object`:
-          if (Array.isArray(newValue)) {
-            return (target[propName] = newValue);
-          }
-        default:
-          throw new TypeError(`Invalid datatype. Only arrays, strings, and null are valid.`);
-      }
+//* Proxy Exercise 1
+// const handler = {
+//   set: (target: { [x: string]: any }, propName: string, newValue: null) => {
+//     if (propName === `employees`) {
+//       switch (typeof newValue) {
+//         case `string`:
+//           return (target[propName] = newValue);
+//         case `object`:
+//           if (Array.isArray(newValue)) {
+//             return (target[propName] = newValue);
+//           }
+//         default:
+//           throw new TypeError(`Invalid datatype. Only arrays, strings, and null are valid.`);
+//       }
+//     } else {
+//       return (target[propName] = newValue);
+//     }
+//   },
+// };
+
+// const manager = {
+//   office: `Dubai`,
+//   dept: `Sales`,
+//   employees: 0,
+// } as {
+//   office: string;
+//   dept: string;
+//   employees: number | string[];
+// };
+
+// const managerProxy = new Proxy(manager, handler as any);
+
+// managerProxy.office = `London`; // Updates
+// managerProxy.employees = [`Jim`, `Patrick`, `Marie`]; // Updates
+// // try {
+// //   managerProxy.employees = 3; // Does not update
+// // } catch (err) {
+// //   console.log(err);
+// // }
+// // managerProxy.employees = { name: `Jim` }; // Does not update
+// console.log({ managerProxy });
+
+// 2. APPLY (node only)
+
+// You have a heavy lifting function. Every time it's called, you need to keep track in a log, but the server logs don't provide quite what you need. Write a proxy that will append to a file, the name of the function, the params sent through, and the date.
+
+//* Proxy Exercise 2
+// import fs from "fs";
+
+// function importantFunction() {
+//   console.log("Important stuff here. No need to change.");
+// }
+
+// const importantHandler = {
+//   apply: (target: { (arg0: any): void; (arg0: any): void; name: any }, _thisArg: any, argsList: any) => {
+//     // console.log()
+//     fs.appendFile("proxyLog.txt", `${target.name}, ${argsList}, ${new Date()}\n\n`, (err) => {
+//       if (err) throw err;
+//     });
+//     target([...argsList]);
+//   },
+// };
+
+// const importantProxy = new Proxy(importantFunction, importantHandler);
+// importantProxy(`a Param`);
+
+//* Proxy Exercise 3
+const users = [
+  {
+    username: `bob`,
+    accessLevel: 1,
+    accessCode: 1234,
+  },
+  {
+    username: `Mary`,
+    accessLevel: 2,
+    accessCode: 2345,
+  },
+  {
+    username: `Harold`,
+    accessLevel: 2,
+    accessCode: 9999,
+  },
+];
+
+const userHandler = {
+  get: (target: { [x: string]: any }, propName: string | number) => {
+    if (target[propName].accessLevel === 1) {
+      return {
+        username: "Access Denied",
+        accessLevel: "Access Denied",
+        accessCode: "Access Denied",
+      };
     } else {
-      return (target[propName] = newValue);
+      return target[propName];
     }
   },
 };
 
-const manager = {
-  office: `Dubai`,
-  dept: `Sales`,
-  employees: 0,
-} as {
-  office: string;
-  dept: string;
-  employees: number | string[];
-};
+const userProxy = new Proxy(users, userHandler as any);
 
-const managerProxy = new Proxy(manager, handler as any);
-
-managerProxy.office = `London`; // Updates
-managerProxy.employees = [`Jim`, `Patrick`, `Marie`]; // Updates
-// try {
-//   managerProxy.employees = 3; // Does not update
-// } catch (err) {
-//   console.log(err);
-// }
-// managerProxy.employees = { name: `Jim` }; // Does not update
-console.log({ managerProxy });
+console.log("userProxy[0].username:", userProxy[0].username); // Access Denied
+console.log("userProxy[0].accessCode:", userProxy[0].accessCode); // Access Denied
+console.log("userProxy[1].accessCode:", userProxy[1].accessCode); // 2345
+console.log("userProxy[2].username:", userProxy[2].username); // Harold

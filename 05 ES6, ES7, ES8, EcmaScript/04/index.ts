@@ -342,44 +342,78 @@
 // }
 
 //* Iterators
-const aString = "Hello!";
-console.log("aString[Symbol.iterator]().next():", aString[Symbol.iterator]().next());
+// const aString = "Hello!";
+// console.log("aString[Symbol.iterator]().next():", aString[Symbol.iterator]().next());
 
-function makeRangeIterator(start: number, end: number, step: number) {
-  let nextIndex = start;
-  let returned = false;
+// function makeRangeIterator(start: number, end: number, step: number) {
+//   let nextIndex = start;
+//   let returned = false;
+//   return {
+//     next: function () {
+//       let result = {} as { value?: number; done: boolean };
+//       if (nextIndex < end) {
+//         result = {
+//           value: nextIndex,
+//           done: false,
+//         };
+//         nextIndex += step;
+//       } else if (!returned) {
+//         result = {
+//           value: nextIndex,
+//           done: true,
+//         };
+//         returned = true;
+//       } else {
+//         result = {
+//           done: true,
+//         };
+//       }
+//       return result;
+//     },
+//   };
+// }
+
+// const it = makeRangeIterator(1, 100, 6);
+// console.log({ it });
+
+// let result = it.next();
+// while (!result.done) {
+//   console.log("result.value:", result.value);
+//   result = it.next();
+// }
+// console.log({ result });
+// console.log("Iterated over sequence of size: ", result.value);
+
+//* Iterators, Iterables
+const aString = new String("Hi");
+console.log(aString[Symbol.iterator]);
+// for (let letter of aString) {
+//   console.log(letter);
+// }
+
+(aString as any)[Symbol.iterator as any] = function () {
   return {
+    allDone: false,
+    counter: 0,
     next: function () {
-      let result = {} as { value?: number; done: boolean };
-      if (nextIndex < end) {
-        result = {
-          value: nextIndex,
+      if (!this.allDone) {
+        this.counter++;
+        if (this.counter === 6) {
+          this.allDone = true;
+        }
+        return {
+          value: "Haha, you expected letters and didn't get any!",
           done: false,
         };
-        nextIndex += step;
-      } else if (!returned) {
-        result = {
-          value: nextIndex,
-          done: true,
-        };
-        returned = true;
       } else {
-        result = {
+        return {
           done: true,
         };
       }
-      return result;
     },
   };
-}
+};
 
-const it = makeRangeIterator(1, 100, 6);
-console.log({ it });
-
-let result = it.next();
-while (!result.done) {
-  console.log(result.value); // 1 3 5 7 9
-  result = it.next();
+for (let letter of aString) {
+  console.log(letter);
 }
-console.log({ result });
-console.log("Iterated over sequence of size: ", result.value); // 5

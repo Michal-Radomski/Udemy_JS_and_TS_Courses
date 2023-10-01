@@ -13,7 +13,6 @@ node_modules/
 .vscode/
 build/
 dist/
-notes.txt
 Temp/
 keys.ts
 data/

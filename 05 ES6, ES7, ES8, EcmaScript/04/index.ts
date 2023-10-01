@@ -89,19 +89,61 @@
 // console.log("carProxy.make:", carProxy.make);
 
 //* Apply trap
-function sum(x: number, y: number) {
-  return x + y;
-}
+// function sum(x: number, y: number) {
+//   return x + y;
+// }
 
+// const handler = {
+//   apply: (target: (arg0: any, arg1: any) => number, _thisArg: any, argsList: any[]) => {
+//     console.log("Someone called a function");
+//     return target(argsList[0], argsList[1]) * 100; //* Sum x 100!
+//     // return target(argsList[0], argsList[1]); //* Nothing happens!
+//   },
+// };
+
+// const sumProxy = new Proxy(sum, handler);
+
+// console.log("sum(2, 9):", sum(2, 9));
+// console.log("sumProxy(2, 9):", sumProxy(2, 9));
+
+//* Proxy Exercise
 const handler = {
-  apply: (target: (arg0: any, arg1: any) => number, _thisArg: any, argsList: any[]) => {
-    console.log("Someone called a function");
-    return target(argsList[0], argsList[1]) * 100; //* Sum x 100!
-    // return target(argsList[0], argsList[1]); //* Nothing happens!
+  set: (target: { [x: string]: any }, propName: string, newValue: null) => {
+    if (propName === `employees`) {
+      switch (typeof newValue) {
+        case `string`:
+          return (target[propName] = newValue);
+        case `object`:
+          if (Array.isArray(newValue)) {
+            return (target[propName] = newValue);
+          }
+        default:
+          throw new TypeError(`Invalid datatype. Only arrays, strings, and null are valid.`);
+      }
+    } else {
+      return (target[propName] = newValue);
+    }
   },
 };
 
-const sumProxy = new Proxy(sum, handler);
+const manager = {
+  office: `Dubai`,
+  dept: `Sales`,
+  employees: 0,
+} as {
+  office: string;
+  dept: string;
+  employees: number | string[];
+};
 
-console.log(sum(2, 9));
-console.log(sumProxy(2, 9));
+const managerProxy = new Proxy(manager, handler as any);
+
+managerProxy.office = `London`; // Updates
+managerProxy.employees = [`Jim`, `Patrick`, `Marie`]; // Updates
+// try {
+//   managerProxy.employees = 3; // Does not update
+// } catch (err) {
+//   console.log(err);
+// }
+// managerProxy.employees = { name: `Jim` }; // Does not update
+console.log({ managerProxy });

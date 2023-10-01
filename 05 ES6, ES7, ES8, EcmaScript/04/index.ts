@@ -297,15 +297,89 @@
 // Other methods: Reflect.deleteProperty() replaces Object.deleteProperty(), Reflect.getPrototypeOf(), Reflect.setPrototypeOf(,) Reflect.isExtensible()
 
 //* Generators, Iterators, Iterables, and for..of
-function* aGenerator() {
-  console.log("I just ran!");
-  yield 1;
-  console.log("I just ran too!");
+// function* aGenerator() {
+//   console.log("I just ran!");
+//   yield 1;
+//   console.log("I just ran too!");
+//   yield 2;
+//   console.log("I just ran too! -> 2");
+// }
+
+// const gen = aGenerator();
+// console.log({ gen });
+// gen.next();
+// gen.next();
+// gen.next();
+// gen.next();
+
+//* Iterables
+// const aString = "Hello!";
+// // console.log(aString[Symbol.iterator]);
+// const obj = { name: "Fred" };
+// // console.log(({ obj } as any)[Symbol.iterator]);
+
+// for (let letter of aString) {
+//   console.log({ letter });
+// }
+
+// for (let i = 0; i < aString.length; i++) {
+//   console.log(aString[i]);
+// }
+
+// for (let key in aString as any) {
+//   console.log(aString[key as any]);
+// }
+
+// const iterable1 = new Object();
+// (iterable1 as any)[Symbol.iterator] = function* () {
+//   yield 1;
+//   yield 2;
+//   yield 3;
+// };
+
+// for (let value of iterable1 as any) {
+//   console.log(value); // Expected output: Array [1, 2, 3]
+// }
+
+//* Iterators
+const aString = "Hello!";
+console.log("aString[Symbol.iterator]().next():", aString[Symbol.iterator]().next());
+
+function makeRangeIterator(start: number, end: number, step: number) {
+  let nextIndex = start;
+  let returned = false;
+  return {
+    next: function () {
+      let result = {} as { value?: number; done: boolean };
+      if (nextIndex < end) {
+        result = {
+          value: nextIndex,
+          done: false,
+        };
+        nextIndex += step;
+      } else if (!returned) {
+        result = {
+          value: nextIndex,
+          done: true,
+        };
+        returned = true;
+      } else {
+        result = {
+          done: true,
+        };
+      }
+      return result;
+    },
+  };
 }
 
-const gen = aGenerator();
-console.log({ gen });
-gen.next();
-gen.next();
-gen.next();
-gen.next();
+const it = makeRangeIterator(1, 100, 6);
+console.log({ it });
+
+let result = it.next();
+while (!result.done) {
+  console.log(result.value); // 1 3 5 7 9
+  result = it.next();
+}
+console.log({ result });
+console.log("Iterated over sequence of size: ", result.value); // 5

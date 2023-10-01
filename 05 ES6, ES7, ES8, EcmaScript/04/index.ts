@@ -266,32 +266,46 @@
 // console.log("Reflect.apply(sum, null, [1, 2, 3]):", Reflect.apply(sum, null, [1, 2, 3]));
 
 //* Reflect.defineProperty -> Reflect.defineProperty REPLACES Object.defineProperty!
-const bandit = {} as { attack: number; run(): void };
-const diffLevel = 2;
+// const bandit = {} as { attack: number; run(): void };
+// const diffLevel = 2;
 
-if (diffLevel <= 2) {
-  Object.defineProperty(bandit, "attack", {
-    value: 15,
-    writable: false,
-  });
-  Reflect.defineProperty(bandit, "run", {
-    value: () => {
-      console.log("Bandit has fled!");
-    },
-    writable: false,
-  });
-} else {
-  Object.defineProperty(bandit, "attack", {
-    value: 25,
-    writable: false,
-  });
+// if (diffLevel <= 2) {
+//   Object.defineProperty(bandit, "attack", {
+//     value: 15,
+//     writable: false,
+//   });
+//   Reflect.defineProperty(bandit, "run", {
+//     value: () => {
+//       console.log("Bandit has fled!");
+//     },
+//     writable: false,
+//   });
+// } else {
+//   Object.defineProperty(bandit, "attack", {
+//     value: 25,
+//     writable: false,
+//   });
+// }
+
+// console.log(bandit.attack);
+// bandit.run();
+
+// //* Reflect.getOwnPropertyDescriptor
+// console.log('Object.getOwnPropertyDescriptor(bandit, "attack"):', Object.getOwnPropertyDescriptor(bandit, "attack"));
+// console.log('Reflect.getOwnPropertyDescriptor(bandit, "attack"):', Reflect.getOwnPropertyDescriptor(bandit, "attack"));
+
+// Other methods: Reflect.deleteProperty() replaces Object.deleteProperty(), Reflect.getPrototypeOf(), Reflect.setPrototypeOf(,) Reflect.isExtensible()
+
+//* Generators, Iterators, Iterables, and for..of
+function* aGenerator() {
+  console.log("I just ran!");
+  yield 1;
+  console.log("I just ran too!");
 }
 
-console.log(bandit.attack);
-bandit.run();
-
-//* Reflect.getOwnPropertyDescriptor
-console.log('Object.getOwnPropertyDescriptor(bandit, "attack"):', Object.getOwnPropertyDescriptor(bandit, "attack"));
-console.log('Reflect.getOwnPropertyDescriptor(bandit, "attack"):', Reflect.getOwnPropertyDescriptor(bandit, "attack"));
-
-//* Other methods: Reflect.deleteProperty() replaces Object.deleteProperty(), Reflect.getPrototypeOf(), Reflect.setPrototypeOf(,) Reflect.isExtensible()
+const gen = aGenerator();
+console.log({ gen });
+gen.next();
+gen.next();
+gen.next();
+gen.next();

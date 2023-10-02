@@ -11,3 +11,5 @@ Files created during Udemy.com JS and TS courses:
 4. [JS OOP](https://www.udemy.com/course/kurs-javascript-programowanie-obiektowe)
 
 5. [ES6, ES7 & ES8 JS / ECMAScript](https://www.udemy.com/course/es6-es7-and-es8-its-time-to-update-your-javascript)
+
+6. [Mastering JavaScript Arrays](https://www.udemy.com/course/mastering-javascript-arrays)

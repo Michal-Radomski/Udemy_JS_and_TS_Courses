@@ -35,14 +35,24 @@
 // arr2.length = 0;
 // console.log({ arr1, arr2 });
 
-const arr = [1, 2, 3, 4, 5, 6, 7, 8];
-arr.push(55, 66); // Adds elem at the end of the array
-console.log({ arr });
-const last = arr.pop(); // Removes and return the last element
-console.log({ arr, last });
+// const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+// arr.push(55, 66); // Adds elem at the end of the array
+// console.log({ arr });
+// const last = arr.pop(); // Removes and return the last element
+// console.log({ arr, last });
 
-const arr1 = [1, 2, 3, 4, 5, 6, 7, 8];
-arr1.unshift(55, 66); // Adds elem at the beginning of the array
-console.log({ arr1 });
-const first = arr1.shift(); // Removes and return the first element
-console.log({ arr1, first });
+// const arr1 = [1, 2, 3, 4, 5, 6, 7, 8];
+// arr1.unshift(55, 66); // Adds elem at the beginning of the array
+// console.log({ arr1 });
+// const first = arr1.shift(); // Removes and return the first element
+// console.log({ arr1, first });
+
+const arr = [3, 15, 25, 6, 8, 12];
+console.log(1, { arr });
+for (let i = 0; i < arr.length; i++) {
+  // arr[i] = arr[i] ** 2;
+  arr[i] = Math.pow(arr[i], 2);
+}
+console.log(2, { arr });
+const arr1 = arr.map((elem) => Math.sqrt(elem));
+console.log(3, { arr1 });

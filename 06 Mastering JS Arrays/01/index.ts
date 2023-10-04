@@ -28,9 +28,21 @@
 // console.log("arr1[arr1.length - 1]:", arr1[arr1.length - 1]);
 
 //* Deleting and emptying elem
+// const arr1 = [1, 2, 3, 4, 5, 6, 7, 8];
+// delete arr1[3];
+// // console.log({ arr1 });
+// const arr2 = [...arr1];
+// arr2.length = 0;
+// console.log({ arr1, arr2 });
+
+const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+arr.push(55, 66); // Adds elem at the end of the array
+console.log({ arr });
+const last = arr.pop(); // Removes and return the last element
+console.log({ arr, last });
+
 const arr1 = [1, 2, 3, 4, 5, 6, 7, 8];
-delete arr1[3];
-// console.log({ arr1 });
-const arr2 = [...arr1];
-arr2.length = 0;
-console.log({ arr1, arr2 });
+arr1.unshift(55, 66); // Adds elem at the beginning of the array
+console.log({ arr1 });
+const first = arr1.shift(); // Removes and return the first element
+console.log({ arr1, first });

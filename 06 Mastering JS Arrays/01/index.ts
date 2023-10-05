@@ -57,12 +57,12 @@
 // const arr1 = arr.map((elem) => Math.sqrt(elem));
 // console.log(3, { arr1 });
 
-const arr2 = [3, 15, 25, 6, 8, 12];
+// const arr2 = [3, 15, 25, 6, 8, 12];
 //! for ... in -> don't use with arrays!
 // for (let key in arr2) {
 //   console.log(key, arr2[key]);
 // }
 //* for ... of -> can be used with arrays!
-for (let val of arr2) {
-  console.log({ val });
-}
+// for (let val of arr2) {
+//   console.log({ val });
+// }

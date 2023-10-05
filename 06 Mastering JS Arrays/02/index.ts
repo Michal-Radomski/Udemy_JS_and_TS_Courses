@@ -1,27 +1,66 @@
 //* Array-like collections
-const obj = { 1: "one", 2: "two", 3: "three", 4: "four" };
+// const obj = { 1: "one", 2: "two", 3: "three", 4: "four" };
 
 //! Object in not iterable
 // for (let val of obj) {
 //   console.log(val);
 // }
 
-console.log('typeof (obj as any)[Symbol.iterator] === "function":', typeof (obj as any)[Symbol.iterator] === "function");
-console.log("Array.isArray(obj):", Array.isArray(obj));
+// console.log('typeof (obj as any)[Symbol.iterator] === "function":', typeof (obj as any)[Symbol.iterator] === "function");
+// console.log("Array.isArray(obj):", Array.isArray(obj));
 
 //* Converting to Array
-const map = new Map([
-  [1, "one"],
-  [2, "two"],
-  [3, "three"],
-]);
+// const map = new Map([
+//   [1, "one"],
+//   [2, "two"],
+//   [3, "three"],
+// ]);
 
-const mapArray = [...map];
-console.log({ mapArray }, Array.isArray(mapArray));
+// const mapArray = [...map];
+// console.log({ mapArray }, Array.isArray(mapArray));
 
-const mapArray2 = Array.from(map);
-console.log({ mapArray2 }, Array.isArray(mapArray2));
+// const mapArray2 = Array.from(map);
+// console.log({ mapArray2 }, Array.isArray(mapArray2));
 
-// const objArray = Array.from(obj as any); //! []
-const objArray = Object.entries(obj);
-console.log({ objArray }, Array.isArray(objArray));
+// // const objArray = Array.from(obj as any); //! []
+// const objArray = Object.entries(obj);
+// console.log({ objArray }, Array.isArray(objArray));
+
+// const str = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+// const arr = [...str];
+// const arr2 = Array.from(str);
+// console.log(str.length, { arr, arr2 }, arr.length, arr2.length);
+
+// let str2 = "";
+// let number_i = 0;
+
+// for (let val of str) {
+//   if (val === "i") {
+//     str2 += val.toUpperCase();
+//     number_i++;
+//   } else {
+//     str2 += val;
+//   }
+// }
+// console.log({ str2, number_i });
+// console.log("str[0]:", str[0]);
+
+// const wordArr = str.split(" ", 8);
+// console.log({ wordArr });
+
+// const regexArr = str.split(/[,.] | --/, 2);
+// console.log({ regexArr });
+
+// const sumIt = function (...[]) {
+//   // console.log({ arguments });
+//   const nums = Array.from(arguments);
+//   console.log({ nums });
+// };
+// sumIt(...([1, 2, 3, 4] as const));
+
+const sumIt = function (...nums: number[]) {
+  console.log({ nums }, Array.isArray(nums));
+  const sum = nums.reduce((a, b) => a + b);
+  console.log({ sum });
+};
+sumIt(1, 2, 3);

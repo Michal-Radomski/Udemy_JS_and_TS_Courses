@@ -70,9 +70,26 @@
 // console.log("arr[idx]:", arr[idx]);
 // console.log("arr[idx-2]:", arr[idx - 2]);
 
-const obj = { q1: 55, q2: 85, q3: 90, q4: 0 };
+// const obj = { q1: 55, q2: 85, q3: 90, q4: 0 };
 
-const arr1 = Object.keys(obj);
-const arr2 = Object.values(obj);
-const arr3 = Object.entries(obj);
-console.log({ arr1, arr2, arr3 });
+// const arr1 = Object.keys(obj);
+// const arr2 = Object.values(obj);
+// const arr3 = Object.entries(obj);
+// console.log({ arr1, arr2, arr3 });
+
+// console.log(
+//   "Array.from([1, 2, 3], (x) => x + x):",
+//   Array.from([1, 2, 3], (x) => x + x)
+// ); // Expected output: Array [2, 4, 6]
+
+const isArrayLike = (coll: any) => coll !== null && typeof coll[Symbol.iterator] === "function";
+
+let obj = {
+  1: "one",
+  2: "two",
+  3: "three",
+};
+const str = "string";
+
+console.log("isArrayLike(obj):", isArrayLike(obj));
+console.log("isArrayLike(str):", isArrayLike(str));

@@ -58,9 +58,21 @@
 // };
 // sumIt(...([1, 2, 3, 4] as const));
 
-const sumIt = function (...nums: number[]) {
-  console.log({ nums }, Array.isArray(nums));
-  const sum = nums.reduce((a, b) => a + b);
-  console.log({ sum });
-};
-sumIt(1, 2, 3);
+// const sumIt = function (...nums: number[]) {
+//   console.log({ nums }, Array.isArray(nums));
+//   const sum = nums.reduce((a, b) => a + b);
+//   console.log({ sum });
+// };
+// sumIt(1, 2, 3);
+
+// const arr = [3, 15, 25, 6, 8, 12];
+// const idx = 4;
+// console.log("arr[idx]:", arr[idx]);
+// console.log("arr[idx-2]:", arr[idx - 2]);
+
+const obj = { q1: 55, q2: 85, q3: 90, q4: 0 };
+
+const arr1 = Object.keys(obj);
+const arr2 = Object.values(obj);
+const arr3 = Object.entries(obj);
+console.log({ arr1, arr2, arr3 });

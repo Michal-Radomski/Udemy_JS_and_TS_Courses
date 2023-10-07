@@ -304,27 +304,76 @@
 // console.log({ scores, passScores, failScores });
 
 //* Reduce and reduceRight
-const array1 = [
-  [0, 1],
-  [2, 3],
-  [4, 5],
-];
-const result = array1.reduceRight((accumulator, currentValue) => accumulator.concat(currentValue));
-const result2 = array1.reduce((accumulator, currentValue) => accumulator.concat(currentValue));
-console.log({ result }); // Expected output: Array [4, 5, 2, 3, 0, 1]
-console.log({ result2 });
+// const array1 = [
+//   [0, 1],
+//   [2, 3],
+//   [4, 5],
+// ];
+// const result = array1.reduceRight((accumulator, currentValue) => accumulator.concat(currentValue));
+// const result2 = array1.reduce((accumulator, currentValue) => accumulator.concat(currentValue));
+// console.log({ result }); // Expected output: Array [4, 5, 2, 3, 0, 1]
+// console.log({ result2 });
 
-const scores = [80, 50, 0, 100, 90, 80, 75];
-const sum = scores.reduce(function (acc, val) {
-  return acc + val;
-}, 0);
-console.log({ scores, sum });
+// const scores = [80, 50, 0, 100, 90, 80, 75];
+// const sum = scores.reduce(function (acc, val) {
+//   return acc + val;
+// }, 0);
+// console.log({ scores, sum });
 
-const objs = [{ firstName: "Steven" }, { lastName: "Hancock" }, { score: 85 }];
-const obj = objs.reduce(function (acc, val) {
-  return Object.assign(acc, val);
-}, {});
-const obj2 = objs.reduceRight(function (acc, val) {
-  return Object.assign(acc, val);
-}, {});
-console.log({ objs, obj, obj2 });
+// const objs = [{ firstName: "Steven" }, { lastName: "Hancock" }, { score: 85 }];
+// const obj = objs.reduce(function (acc, val) {
+//   return Object.assign(acc, val);
+// }, {});
+// const obj2 = objs.reduceRight(function (acc, val) {
+//   return Object.assign(acc, val);
+// }, {});
+// console.log({ objs, obj, obj2 });
+
+//* Every, Some
+// const scores = [80, 50, 10, 100, 90, 80, 75];
+// const results = scores.every(function (val) {
+//   return val > 0;
+// });
+// let results2 = scores.some(function (val) {
+//   return val === 0;
+// });
+// console.log({ results, results2 });
+
+//* Exercises
+// const scores = [80, 50, 0, 100, 90, 80, 75, 0, 0, 5, 65, 93];
+// const zeroCnt = scores.reduce((acc, val) => (val === 0 ? acc + 1 : acc), 0);
+
+// let zeroCnt2 = 0;
+// scores.forEach(function (val) {
+//   if (val === 0) zeroCnt2++;
+// });
+// console.log({ scores, zeroCnt, zeroCnt2 });
+
+// const stmt =
+//   "The best part of a sunset is the muted color that appears in anticipation of the deep reds, oranges and golds that will hopefully come later.";
+// const noArticles = stmt.split(" ").filter((val) => !/\ba\b|\ban\b|\bthe\b/i.test(val));
+// console.log({ noArticles });
+
+// const str = "hello world!";
+// const result = /^hello/.test(str);
+// console.log({ result }); // true
+
+// const arr1 = ["a", "b", "c", "d", "e", "f", "g"];
+// const arr2 = [1, 2, 3, 4, 5, 6];
+// const arr3 = ["1", "2", "3", "4", "5", "6"];
+// const allArrays = [arr1, arr2, arr3] as any[][];
+// const singleArray = allArrays.reduce((acc, val) => [...acc, ...val], []);
+// console.log({ allArrays, singleArray });
+
+//* Array.from()
+const nums = new Set([1, 2, "3", 4, "5"]);
+const numsArray = Array.from(nums, function (val) {
+  if (typeof val === "string") {
+    return Number(val);
+  } else {
+    return val;
+  }
+});
+console.log({ nums, numsArray });
+
+console.log(Array.from([1, 2, 3], (x) => x + x)); // Expected output: Array [2, 4, 6]

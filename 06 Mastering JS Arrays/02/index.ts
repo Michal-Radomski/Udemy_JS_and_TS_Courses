@@ -137,37 +137,55 @@
 // arr2.sort(compareNum);
 // console.log({ arr1, arr2 });
 
-const arr = [
-  {
-    firstName: "Steven",
-    lastName: "Hancock",
-    score: 90,
-  },
-  {
-    firstName: "Lynette",
-    lastName: "Jorgensen",
-    score: 100,
-  },
-  {
-    firstName: "Andrew",
-    lastName: "Wilson",
-    score: 71,
-  },
-  {
-    firstName: "Annika",
-    lastName: "Turner",
-    score: 82,
-  },
-];
+// const arr = [
+//   {
+//     firstName: "Steven",
+//     lastName: "Hancock",
+//     score: 90,
+//   },
+//   {
+//     firstName: "Lynette",
+//     lastName: "Jorgensen",
+//     score: 100,
+//   },
+//   {
+//     firstName: "Andrew",
+//     lastName: "Wilson",
+//     score: 71,
+//   },
+//   {
+//     firstName: "Annika",
+//     lastName: "Turner",
+//     score: 82,
+//   },
+// ];
 
-arr.sort(function (a, b) {
-  if (a.firstName < b.firstName) return -1;
-  if (b.firstName < a.firstName) return 1;
-  return 0;
-});
+// arr.sort(function (a, b) {
+//   if (a.firstName < b.firstName) return -1;
+//   if (b.firstName < a.firstName) return 1;
+//   return 0;
+// });
+// console.log({ arr });
+
+// arr.sort(function (a, b) {
+//   return a.score - b.score;
+// });
+// console.log({ arr });
+
+//* array.splice()
+const arr = [1, 2, 3, 4, 5, 6] as (number | string)[];
+
+// const returnArray1 = arr.splice(2, 2);
+// console.log({ returnArray1 });
+// const returnArray2 = arr.splice(4);
+// console.log({ returnArray2 });
+// const returnArray3 = arr.splice(2, 0, "a", "b");
+// console.log({ returnArray3 });
+const returnArray4 = arr.splice(2, 1, "a", "b");
+console.log({ returnArray4 });
 console.log({ arr });
 
-arr.sort(function (a, b) {
-  return a.score - b.score;
-});
-console.log({ arr });
+//* array.slice() -> shallow copy
+const animals = ["ant", "bison", "camel", "duck", "elephant"];
+console.log("animals.slice(2):", animals.slice(2)); // Expected output: Array ["camel", "duck", "elephant"]
+console.log("animals.slice(2, 4):", animals.slice(2, 4)); // Expected output: Array ["camel", "duck"]

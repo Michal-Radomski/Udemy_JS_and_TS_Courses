@@ -185,7 +185,8 @@ const returnArray4 = arr.splice(2, 1, "a", "b");
 console.log({ returnArray4 });
 console.log({ arr });
 
-//* array.slice() -> shallow copy
+//* array.slice() -> shallow copy ->
 const animals = ["ant", "bison", "camel", "duck", "elephant"];
 console.log("animals.slice(2):", animals.slice(2)); // Expected output: Array ["camel", "duck", "elephant"]
 console.log("animals.slice(2, 4):", animals.slice(2, 4)); // Expected output: Array ["camel", "duck"]
+console.log({ animals });

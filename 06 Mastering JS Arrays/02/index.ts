@@ -173,7 +173,7 @@
 // console.log({ arr });
 
 //* array.splice()
-const arr = [1, 2, 3, 4, 5, 6] as (number | string)[];
+// const arr = [1, 2, 3, 4, 5, 6] as (number | string)[];
 
 // const returnArray1 = arr.splice(2, 2);
 // console.log({ returnArray1 });
@@ -181,12 +181,38 @@ const arr = [1, 2, 3, 4, 5, 6] as (number | string)[];
 // console.log({ returnArray2 });
 // const returnArray3 = arr.splice(2, 0, "a", "b");
 // console.log({ returnArray3 });
-const returnArray4 = arr.splice(2, 1, "a", "b");
-console.log({ returnArray4 });
-console.log({ arr });
+// const returnArray4 = arr.splice(2, 1, "a", "b");
+// console.log({ returnArray4 });
+// console.log({ arr });
 
-//* array.slice() -> shallow copy ->
-const animals = ["ant", "bison", "camel", "duck", "elephant"];
-console.log("animals.slice(2):", animals.slice(2)); // Expected output: Array ["camel", "duck", "elephant"]
-console.log("animals.slice(2, 4):", animals.slice(2, 4)); // Expected output: Array ["camel", "duck"]
-console.log({ animals });
+// //* array.slice() -> shallow copy
+// const animals = ["ant", "bison", "camel", "duck", "elephant"];
+// console.log("animals.slice(2):", animals.slice(2)); // Expected output: Array ["camel", "duck", "elephant"]
+// console.log("animals.slice(2, 4):", animals.slice(2, 4)); // Expected output: Array ["camel", "duck"]
+// console.log({ animals });
+
+//* copyWithin() -> modifies the array!
+// const arr = [1, 2, 3, 4, 5, 6];
+// console.log("arr.copyWithin(2, 0, 2):", arr.copyWithin(2, 0, 2));
+// console.log("arr.copyWithin(1, 2, 3):", arr.copyWithin(1, 2, 3));
+// console.log("arr.copyWithin(2, 0):", arr.copyWithin(2, 0));
+// console.log("arr.copyWithin(3, -1):", arr.copyWithin(3, -1));
+// console.log("arr.copyWithin(0, 5, 6):", arr.copyWithin(0, 5, 6));
+
+// *Array Prototype
+// const PrintAll = (obj: Array<any>) => console.log(Object.getOwnPropertyNames(obj));
+// PrintAll(Array.prototype);
+
+//* Clone Array (Two methods close array, the base array has no changes)
+// const arr = ["Steven", "Mary", "Simone", "Ari", "McKay", "James"];
+// const arrSort = [...arr];
+// arrSort.sort();
+// const arrReverse = Array.from(arr);
+// arrReverse.reverse();
+// console.log({ arr, arrSort, arrReverse });
+
+//* Chaining
+const arr = ["Steven", "Mary", "Simone", "Ari", "McKay", "James"];
+const arrSort = [...arr].sort().toString();
+const arrReverse = Array.from(arr).reverse().toString();
+console.log({ arr, arrSort, arrReverse });

@@ -185,7 +185,7 @@
 // console.log({ returnArray4 });
 // console.log({ arr });
 
-// //* array.slice() -> shallow copy
+//* array.slice() -> shallow copy
 // const animals = ["ant", "bison", "camel", "duck", "elephant"];
 // console.log("animals.slice(2):", animals.slice(2)); // Expected output: Array ["camel", "duck", "elephant"]
 // console.log("animals.slice(2, 4):", animals.slice(2, 4)); // Expected output: Array ["camel", "duck"]
@@ -423,20 +423,26 @@
 // test([1, 2, 3]);
 
 //* Array.flat() + Array.flatMap()
-const array1 = [
-  [5, 10],
-  [15, 20],
-  [25, 30, 35, 40],
-];
-const newArray = array1.flat(1);
-console.log("newArray:", newArray);
+// const array1 = [
+//   [5, 10],
+//   [15, 20],
+//   [25, 30, 35, 40],
+// ];
+// const newArray = array1.flat(1);
+// console.log("newArray:", newArray);
 
-const strArray = [
-  "The best part of a sunset",
-  "is the muted color that appears",
-  "in anticipation",
-  "of",
-  "the deep reds, oranges and golds that will hopefully come later.",
-];
-const strArraySplit = strArray.flatMap((val) => val.split(" "));
-console.log("strArraySplit:", strArraySplit);
+// const strArray = [
+//   "The best part of a sunset",
+//   "is the muted color that appears",
+//   "in anticipation",
+//   "of",
+//   "the deep reds, oranges and golds that will hopefully come later.",
+// ];
+// const strArraySplit = strArray.flatMap((val) => val.split(" "));
+// console.log("strArraySplit:", strArraySplit);
+
+//* Array.toString()
+// const array2 = [1, 2, "a", "1a"];
+// console.log("array2.toString():", array2.toString(), typeof array2.toString()); // Expected output: "1,2,a,1a"
+
+//* Exercises

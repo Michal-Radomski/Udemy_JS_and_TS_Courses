@@ -242,47 +242,89 @@
 // console.log({ jMonths });
 
 //* Iterating Arrays
-let arr = [3, 15, 25, 6, 8, 12],
-  total = 0;
+// let arr = [3, 15, 25, 6, 8, 12],
+//   total = 0;
 
-arr.forEach(function (val) {
-  total += val;
-});
-console.log({ total });
+// arr.forEach(function (val) {
+//   total += val;
+// });
+// console.log({ total });
 
-arr.forEach(function (val, idx, theArray) {
-  theArray[idx] = val * val;
-});
-console.log({ arr });
+// arr.forEach(function (val, idx, theArray) {
+//   theArray[idx] = val * val;
+// });
+// console.log({ arr });
 
-const objArr = [
-  {
-    firstName: "Steven",
-    lastName: "Hancock",
-    score: 90,
-    pass: null,
-  },
-  {
-    firstName: "Lynette",
-    lastName: "Jorgensen",
-    score: 100,
-    pass: null,
-  },
-  {
-    firstName: "Andrew",
-    lastName: "Wilson",
-    score: 69,
-    pass: null,
-  },
-  {
-    firstName: "Annika",
-    lastName: "Turner",
-    score: 82,
-    pass: null,
-  },
-] as { firstName: string; lastName: string; score: number; pass: null | boolean }[];
+// const objArr = [
+//   {
+//     firstName: "Steven",
+//     lastName: "Hancock",
+//     score: 90,
+//     pass: null,
+//   },
+//   {
+//     firstName: "Lynette",
+//     lastName: "Jorgensen",
+//     score: 100,
+//     pass: null,
+//   },
+//   {
+//     firstName: "Andrew",
+//     lastName: "Wilson",
+//     score: 69,
+//     pass: null,
+//   },
+//   {
+//     firstName: "Annika",
+//     lastName: "Turner",
+//     score: 82,
+//     pass: null,
+//   },
+// ] as { firstName: string; lastName: string; score: number; pass: null | boolean }[];
 
-objArr.forEach(function (obj) {
-  obj.score < 70 ? (obj.pass = false) : (obj.pass = true);
-});
-console.log({ objArr });
+// objArr.forEach(function (obj) {
+//   obj.score < 70 ? (obj.pass = false) : (obj.pass = true);
+// });
+// console.log({ objArr });
+
+// const arr = [3, 15, 25, 6, 8, 12];
+// const newArray = arr.map(function (val, idx, theArray) {
+//   console.log({ val, idx, theArray });
+//   return val * val;
+// });
+// console.log({ arr, newArray });
+
+// const scores = [80, 50, 0, 100, 90, 80, 75];
+// const passScores = scores.filter(function (val) {
+//   return val >= 70;
+// });
+// const failScores = scores.filter(function (val) {
+//   return val < 70;
+// });
+// console.log({ scores, passScores, failScores });
+
+//* Reduce and reduceRight
+const array1 = [
+  [0, 1],
+  [2, 3],
+  [4, 5],
+];
+const result = array1.reduceRight((accumulator, currentValue) => accumulator.concat(currentValue));
+const result2 = array1.reduce((accumulator, currentValue) => accumulator.concat(currentValue));
+console.log({ result }); // Expected output: Array [4, 5, 2, 3, 0, 1]
+console.log({ result2 });
+
+const scores = [80, 50, 0, 100, 90, 80, 75];
+const sum = scores.reduce(function (acc, val) {
+  return acc + val;
+}, 0);
+console.log({ scores, sum });
+
+const objs = [{ firstName: "Steven" }, { lastName: "Hancock" }, { score: 85 }];
+const obj = objs.reduce(function (acc, val) {
+  return Object.assign(acc, val);
+}, {});
+const obj2 = objs.reduceRight(function (acc, val) {
+  return Object.assign(acc, val);
+}, {});
+console.log({ objs, obj, obj2 });

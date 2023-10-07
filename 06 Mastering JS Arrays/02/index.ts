@@ -212,7 +212,31 @@
 // console.log({ arr, arrSort, arrReverse });
 
 //* Chaining
-const arr = ["Steven", "Mary", "Simone", "Ari", "McKay", "James"];
-const arrSort = [...arr].sort().toString();
-const arrReverse = Array.from(arr).reverse().toString();
-console.log({ arr, arrSort, arrReverse });
+// const arr = ["Steven", "Mary", "Simone", "Ari", "McKay", "James"];
+// const arrSort = [...arr].sort().toString();
+// const arrReverse = Array.from(arr).reverse().toString();
+// console.log({ arr, arrSort, arrReverse });
+
+//* Exercises
+const growthRate = [1.1, 0.5, -0.1, 0.3, 1.2, 1.5, 2.1, 0.8, 1.5, 0.3, -0.4];
+const growthRateSort = [...growthRate].sort((a, b) => a - b);
+console.log({ growthRateSort });
+
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const jMonths = [...months]
+  .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : a.toLowerCase() > b.toLowerCase() ? 1 : 0))
+  .splice(4, 3);
+console.log({ jMonths });

@@ -366,14 +366,77 @@
 // console.log({ allArrays, singleArray });
 
 //* Array.from()
-const nums = new Set([1, 2, "3", 4, "5"]);
-const numsArray = Array.from(nums, function (val) {
-  if (typeof val === "string") {
-    return Number(val);
-  } else {
-    return val;
-  }
-});
-console.log({ nums, numsArray });
+// const nums = new Set([1, 2, "3", 4, "5"]);
+// const numsArray = Array.from(nums, function (val) {
+//   if (typeof val === "string") {
+//     return Number(val);
+//   } else {
+//     return val;
+//   }
+// });
+// console.log({ nums, numsArray });
 
-console.log(Array.from([1, 2, 3], (x) => x + x)); // Expected output: Array [2, 4, 6]
+// console.log(Array.from([1, 2, 3], (x) => x + x)); // Expected output: Array [2, 4, 6]
+
+//* Multidimensional arrays
+// const table = [] as number[][];
+
+// for (let i = 0; i < 5; i++) {
+//   table[i] = [];
+// }
+// console.log({ table });
+// for (let row = 0; row < 5; row++) {
+//   for (let col = 0; col < 5; col++) {
+//     table[row][col] = row * col;
+//   }
+// }
+// console.log("table: ", table);
+// console.log("table[3][2]:", table[3][2]);
+
+//* Combining Arrays and Extracting Values
+// const elements = ["Fire", "Air", "Water"];
+// console.log(elements.join()); // Expected output: "Fire,Air,Water"
+// console.log(elements.join("-")); // Expected output: "Fire-Air-Water"
+
+// const array1 = ["a", "b", "c"];
+// const array2 = ["d", "e", "f"];
+// const array3 = array1.concat(array2);
+// console.log(array3); // Expected output: Array ["a", "b", "c", "d", "e", "f"]
+// const newArray = [...array1, ...array2, 1, 2, 3];
+// console.log({ newArray });
+
+//* Slice()
+// const array1 = [5, 10, 15, 20, 25, 30, 35, 40];
+// const newArray = array1.slice(0, 5);
+// const newArray2 = array1.slice(2);
+// const newArray3 = array1.slice();
+// console.log({ newArray, newArray2, newArray3 });
+// console.log({ array1 });
+// console.log("array1 === newArray3:", array1 === newArray3);
+
+// const test = function (...[]) {
+//   console.log({ arguments });
+//   const argArray = Array.prototype.slice.call(arguments);
+//   console.log({ argArray });
+//   console.log("Array.isArray(argArray):", Array.isArray(argArray));
+// };
+// test([1, 2, 3]);
+
+//* Array.flat() + Array.flatMap()
+const array1 = [
+  [5, 10],
+  [15, 20],
+  [25, 30, 35, 40],
+];
+const newArray = array1.flat(1);
+console.log("newArray:", newArray);
+
+const strArray = [
+  "The best part of a sunset",
+  "is the muted color that appears",
+  "in anticipation",
+  "of",
+  "the deep reds, oranges and golds that will hopefully come later.",
+];
+const strArraySplit = strArray.flatMap((val) => val.split(" "));
+console.log("strArraySplit:", strArraySplit);

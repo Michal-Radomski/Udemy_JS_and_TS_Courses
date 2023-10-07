@@ -218,25 +218,71 @@
 // console.log({ arr, arrSort, arrReverse });
 
 //* Exercises
-const growthRate = [1.1, 0.5, -0.1, 0.3, 1.2, 1.5, 2.1, 0.8, 1.5, 0.3, -0.4];
-const growthRateSort = [...growthRate].sort((a, b) => a - b);
-console.log({ growthRateSort });
+// const growthRate = [1.1, 0.5, -0.1, 0.3, 1.2, 1.5, 2.1, 0.8, 1.5, 0.3, -0.4];
+// const growthRateSort = [...growthRate].sort((a, b) => a - b);
+// console.log({ growthRateSort });
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-const jMonths = [...months]
-  .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : a.toLowerCase() > b.toLowerCase() ? 1 : 0))
-  .splice(4, 3);
-console.log({ jMonths });
+// const months = [
+//   "January",
+//   "February",
+//   "March",
+//   "April",
+//   "May",
+//   "June",
+//   "July",
+//   "August",
+//   "September",
+//   "October",
+//   "November",
+//   "December",
+// ];
+// const jMonths = [...months]
+//   .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : a.toLowerCase() > b.toLowerCase() ? 1 : 0))
+//   .splice(4, 3);
+// console.log({ jMonths });
+
+//* Iterating Arrays
+let arr = [3, 15, 25, 6, 8, 12],
+  total = 0;
+
+arr.forEach(function (val) {
+  total += val;
+});
+console.log({ total });
+
+arr.forEach(function (val, idx, theArray) {
+  theArray[idx] = val * val;
+});
+console.log({ arr });
+
+const objArr = [
+  {
+    firstName: "Steven",
+    lastName: "Hancock",
+    score: 90,
+    pass: null,
+  },
+  {
+    firstName: "Lynette",
+    lastName: "Jorgensen",
+    score: 100,
+    pass: null,
+  },
+  {
+    firstName: "Andrew",
+    lastName: "Wilson",
+    score: 69,
+    pass: null,
+  },
+  {
+    firstName: "Annika",
+    lastName: "Turner",
+    score: 82,
+    pass: null,
+  },
+] as { firstName: string; lastName: string; score: number; pass: null | boolean }[];
+
+objArr.forEach(function (obj) {
+  obj.score < 70 ? (obj.pass = false) : (obj.pass = true);
+});
+console.log({ objArr });

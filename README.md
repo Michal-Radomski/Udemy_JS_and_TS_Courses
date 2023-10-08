@@ -13,3 +13,5 @@ Files created during Udemy.com JS and TS courses:
 5. [ES6, ES7 & ES8 JS / ECMAScript](https://www.udemy.com/course/es6-es7-and-es8-its-time-to-update-your-javascript)
 
 6. [Mastering JavaScript Arrays](https://www.udemy.com/course/mastering-javascript-arrays)
+
+7. [Functional Programming in JavaScript](https://www.udemy.com/course/functional-programming-in-javascript-a-practical-guide)

@@ -446,3 +446,29 @@
 // console.log("array2.toString():", array2.toString(), typeof array2.toString()); // Expected output: "1,2,a,1a"
 
 //* Exercises
+let table = [] as number[][],
+  rowNum = 2,
+  colNum = 2;
+console.log(1, { table });
+
+for (let i = 0; i < 10; i++) {
+  table[i] = [];
+}
+console.log(2, { table });
+
+for (let row = 0; row < 10; row++) {
+  for (let col = 0; col < 10; col++) {
+    table[row][col] = rowNum * colNum;
+    colNum += 2;
+  }
+  colNum = 2;
+  rowNum += 2;
+}
+console.log("table:", table);
+console.log("table[9][9]:", table[9][9]);
+
+const strArray1 = ["Arrays are important", "data structures for any", "language"],
+  strArray2 = ["and", "should be mastered", "in", "JavaScript."];
+
+const str = [...strArray1.flatMap((val) => val.split(" ")), ...strArray2.flatMap((val) => val.split(" "))].join(" ");
+console.log("str:", str);

@@ -576,4 +576,35 @@
 // };
 // console.log(getPagePosition());
 
-//* Maps and Sets
+//* Maps
+const obj = { name: "Michal" } as { name: string; lastName: string; score: number; "10": number };
+obj.lastName = "Rad";
+obj["score"] = 100;
+obj[10] = 10;
+console.log({ obj });
+
+const map = new Map();
+map.set("i", 100);
+map.set("j", 5);
+console.log({ map });
+
+console.log('map.get("i"):', map.get("i"));
+console.log("map.size:", map.size);
+
+const array = [...map];
+console.log({ array });
+console.log("map.keys():", map.keys());
+const arr = [...map.keys()];
+console.log({ arr });
+
+//* Sets
+const set = new Set();
+set.add(100);
+set.add(5);
+set.add(100);
+console.log({ set });
+
+const arr2 = [1, 2, 4, 6, 8, 6, 7, 10, 2];
+const set2 = new Set(arr2);
+const uniqArray = [...set2];
+console.log({ uniqArray });

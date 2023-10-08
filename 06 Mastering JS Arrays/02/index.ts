@@ -446,29 +446,105 @@
 // console.log("array2.toString():", array2.toString(), typeof array2.toString()); // Expected output: "1,2,a,1a"
 
 //* Exercises
-let table = [] as number[][],
-  rowNum = 2,
-  colNum = 2;
-console.log(1, { table });
+// let table = [] as number[][],
+//   rowNum = 2,
+//   colNum = 2;
+// console.log(1, { table });
 
-for (let i = 0; i < 10; i++) {
-  table[i] = [];
-}
-console.log(2, { table });
+// for (let i = 0; i < 10; i++) {
+//   table[i] = [];
+// }
+// console.log(2, { table });
 
-for (let row = 0; row < 10; row++) {
-  for (let col = 0; col < 10; col++) {
-    table[row][col] = rowNum * colNum;
-    colNum += 2;
-  }
-  colNum = 2;
-  rowNum += 2;
-}
-console.log("table:", table);
-console.log("table[9][9]:", table[9][9]);
+// for (let row = 0; row < 10; row++) {
+//   for (let col = 0; col < 10; col++) {
+//     table[row][col] = rowNum * colNum;
+//     colNum += 2;
+//   }
+//   colNum = 2;
+//   rowNum += 2;
+// }
+// console.log("table:", table);
+// console.log("table[9][9]:", table[9][9]);
 
-const strArray1 = ["Arrays are important", "data structures for any", "language"],
-  strArray2 = ["and", "should be mastered", "in", "JavaScript."];
+// const strArray1 = ["Arrays are important", "data structures for any", "language"],
+//   strArray2 = ["and", "should be mastered", "in", "JavaScript."];
 
-const str = [...strArray1.flatMap((val) => val.split(" ")), ...strArray2.flatMap((val) => val.split(" "))].join(" ");
-console.log("str:", str);
+// const str = [...strArray1.flatMap((val) => val.split(" ")), ...strArray2.flatMap((val) => val.split(" "))].join(" ");
+// console.log("str:", str);
+
+//* Searching
+//* indexOf(), lastIndexOf()
+// const beasts = ["ant", "bison", "camel", "duck", "bison"];
+// console.log("beasts.indexOf('bison'):", beasts.indexOf("bison")); // Expected output: 1
+// console.log("beasts.indexOf('dog'):", beasts.indexOf("dog")); //* -1
+
+// const animals = ["Dodo", "Tiger", "Penguin", "Dodo"];
+// console.log("animals.lastIndexOf('Dodo'):", animals.lastIndexOf("Dodo")); // Expected output: 3
+// console.log("animals.lastIndexOf('Tiger'):", animals.lastIndexOf("Tiger")); // Expected output: 1
+// console.log("animals.lastIndexOf('Duck'):", animals.lastIndexOf("Duck")); //* -1
+
+// if (beasts.indexOf("bison") > -1) {
+//   console.log("bison in beasts");
+// }
+
+// const students = ["Steven", "Lynette", "Kalie", "LJ", "Joshua", "Sarah", "Emily"],
+//   scores = [80, 90, 55, 60, 85, 95, 25, 100];
+
+// // const numLoc = scores.lastIndexOf(5);
+// // const strLoc = students.indexOf("Steven");
+// // console.log({ numLoc, strLoc });
+
+// if (scores.includes(100)) {
+//   console.log("This array contains 100.");
+// }
+
+//* Array.findOf()
+// const beasts = ["ant", "bison", "camel", "duck", "bison"];
+// console.log("beasts.indexOf('bison'):", beasts.indexOf("bison")); // Expected output: 1
+
+//* find()
+// const array1 = [5, 12, 8, 130, 44];
+// const found = array1.find((element) => element > 10); // 12
+// console.log({ found });
+
+// const scores = ["80", 90, "55", 60, 100, 85, 95, 25, "100"];
+// const topScore = scores.find(function (val) {
+//   return val === 100;
+// });
+// console.log({ topScore });
+
+// const users = [
+//   { name: "Steve", q1: 45, q2: 85 },
+//   { name: "Ignacio", q1: 100, q2: 100 },
+//   { name: "Alvin", q1: 95, q2: 100 },
+//   { name: "Brianna", q1: 100, q2: 85 },
+//   { name: "Andrea", q1: 75, q2: 95 },
+// ];
+
+// const both = users.find((val) => val.q1 === 100 && val.q2 === 100);
+// console.log({ both });
+
+//* findIndex()
+const array1 = [5, 12, 8, 130, 44];
+const isLargeNumber = (element: number) => element > 13;
+console.log("array1.findIndex(isLargeNumber):", array1.findIndex(isLargeNumber)); // Expected output: 3
+
+const scores = ["80", 90, "55", 60, 100, 85, 95, 25, "100"];
+const topScore = scores.findIndex(function (val) {
+  return val === 100;
+});
+console.log({ topScore });
+
+const users = [
+  { name: "Steve", q1: 45, q2: 85 },
+  { name: "Ignacio", q1: 100, q2: 100 },
+  { name: "Alvin", q1: 95, q2: 100 },
+  { name: "Brianna", q1: 100, q2: 85 },
+  { name: "Andrea", q1: 75, q2: 95 },
+];
+
+const both = users.findIndex((val) => val.q1 === 100 && val.q2 === 100);
+console.log({ both });
+
+//* Exercises

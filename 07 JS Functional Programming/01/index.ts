@@ -210,3 +210,101 @@
 // console.log("mushrooms1.amanita:", mushrooms1.amanita); // ["muscaria"]
 
 //* Exercises
+// interface User {
+//   name: string;
+//   score: number;
+//   tries: number;
+// }
+
+// const users = [
+//   { name: "James", score: 30, tries: 1 },
+//   { name: "Mary", score: 110, tries: 4 },
+//   { name: "Henry", score: 80, tries: 3 },
+// ];
+// console.log("users:", users);
+
+// //Modifies Data
+// const storeUser = function (arr: User[], user: User) {
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i].name.toLowerCase() === user.name.toLowerCase()) {
+//       arr[i] = user;
+//       break;
+//     }
+//   }
+// };
+
+// //Pure Functions
+// const cloneObj = function (obj: object) {
+//   return JSON.parse(JSON.stringify(obj));
+// };
+
+// const getUser = function (arr: User[], name: string) {
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i].name.toLowerCase() === name.toLowerCase()) {
+//       return arr[i];
+//     }
+//   }
+//   return null;
+// };
+
+// const updateScore = function (user: User, newAmt: number) {
+//   if (user) {
+//     user.score += newAmt;
+//     return user;
+//   }
+// };
+
+// const updateTries = function (user: User) {
+//   if (user) {
+//     user.tries++;
+//     return user;
+//   }
+// };
+
+// const usr = getUser(users, "Henry");
+// const usr1 = updateScore(cloneObj(usr!), 30);
+// const usr2 = updateTries(cloneObj(usr1!));
+// storeUser(users, usr2!);
+// console.log("users:", users);
+
+// interface User {
+//   name: string;
+//   score: number;
+//   tries: number;
+// }
+
+// const users = [
+//   { name: "James", score: 30, tries: 1 },
+//   { name: "Mary", score: 110, tries: 4 },
+//   { name: "Henry", score: 80, tries: 3 },
+// ];
+// console.log("users:", users);
+
+// const cloneObj = function (obj: object) {
+//   return JSON.parse(JSON.stringify(obj));
+// };
+
+// const newScore = function (arr: User[], name: string, amt: number) {
+//   arr.forEach(function (val) {
+//     if (val.name.toLowerCase() === name.toLowerCase()) {
+//       val.score = val.score + amt;
+//     }
+//   });
+//   return arr;
+// };
+
+// const newTries = function (arr: User[], name: string) {
+//   arr.forEach(function (val) {
+//     if (val.name.toLowerCase() === name.toLowerCase()) {
+//       val.tries++;
+//     }
+//   });
+//   return arr;
+// };
+
+// const newArray1 = newScore(cloneObj(users), "Henry", 30);
+// const newArray2 = newTries(cloneObj(newArray1), "Henry");
+
+// console.log("users:", users);
+// console.log("newArray1:", newArray1);
+// console.log("newArray2:", newArray2);

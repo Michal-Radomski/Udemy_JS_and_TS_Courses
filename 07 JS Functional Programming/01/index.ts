@@ -308,3 +308,112 @@
 // console.log("users:", users);
 // console.log("newArray1:", newArray1);
 // console.log("newArray2:", newArray2);
+
+//* Reduce, Map and Filter
+// const arr = [1, 2, 3, 4, 5];
+
+// const total = arr.reduce(function (accumulator, elem) {
+//   return accumulator + elem;
+// }, 0);
+
+// const newArray = arr.map(function (val, _index, _array) {
+//   // console.log(val);
+//   // console.log(_index);
+//   // console.log(_array);
+//   return val ** 2;
+// });
+
+// const filterArray = arr.filter(function (val) {
+//   return val < 3;
+// });
+
+// console.log({ total, newArray, filterArray });
+
+//* Exercises
+// const scores = [50, 6, 100, 0, 10, 75, 8, 60, 90, 80, 0, 30, 110];
+// // Any scores that are below 10 needs to be multiplied by 10 and the new value included.
+// const boostSingleScores = scores.map(function (val) {
+//   return val < 10 ? val * 10 : val;
+// });
+
+// // Remove any scores that are over 100.
+// const rmvOverScores = boostSingleScores.filter(function (val) {
+//   return val <= 100;
+// });
+
+// // Remove any scores that are 0 or below.
+// const rmvZeroScores = rmvOverScores.filter(function (val) {
+//   return val > 0;
+// });
+
+// // Sum the scores.
+// const scoresSum = rmvZeroScores.reduce(function (sum, val) {
+//   return sum + val;
+// }, 0);
+
+// // Provide a count for the number of scores still remaining.
+// const scoresCnt = rmvZeroScores.reduce(function (cnt, val) {
+//   console.log({ val });
+//   return cnt + 1;
+// }, 0);
+
+// console.log({ scores, scoresSum, scoresCnt });
+
+interface User {
+  name: string;
+  score: number;
+  tries: number;
+}
+
+const users = [
+  { name: "James", score: 30, tries: 1 },
+  { name: "Mary", score: 110, tries: 4 },
+  { name: "Henry", score: 80, tries: 3 },
+] as User[];
+
+//Modifies Data
+const storeUser = function (arr: User[], user: User) {
+  return arr.map(function (val) {
+    if (val.name.toLowerCase() === user.name.toLowerCase()) {
+      return user;
+    } else {
+      return val;
+    }
+  });
+};
+
+//Pure Functions
+const cloneObj = function (obj: object) {
+  return JSON.parse(JSON.stringify(obj));
+};
+
+const getUser = function (arr: User[], name: string) {
+  return arr.reduce(function (obj: any, val: User) {
+    console.log({ obj });
+    if (val.name.toLowerCase() === name.toLowerCase()) {
+      return val;
+    } else {
+      return obj;
+    }
+  }, null);
+};
+
+const updateScore = function (user: User, newAmt: number) {
+  if (user) {
+    user.score += newAmt;
+    return user;
+  }
+};
+
+const updateTries = function (user: User) {
+  if (user) {
+    user.tries++;
+    return user;
+  }
+};
+
+const usr = getUser(users, "Henry");
+const usr1 = updateScore(cloneObj(usr), 30);
+const usr2 = updateTries(cloneObj(usr1!));
+const newArray = storeUser(users, usr2!);
+console.log("newArray:", newArray);

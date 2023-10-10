@@ -389,7 +389,7 @@ const cloneObj = function (obj: object) {
 
 const getUser = function (arr: User[], name: string) {
   return arr.reduce(function (obj: any, val: User) {
-    console.log({ obj });
+    // console.log({ obj });
     if (val.name.toLowerCase() === name.toLowerCase()) {
       return val;
     } else {

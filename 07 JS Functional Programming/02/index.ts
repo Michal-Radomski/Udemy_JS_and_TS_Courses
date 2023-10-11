@@ -13,14 +13,14 @@
 // console.log({ scoresSum, scoresCnt });
 
 //* Function Composition
-const str: string = "Innovation distinguishes between a leader and a follower.";
+// const str: string = "Innovation distinguishes between a leader and a follower.";
 
-const trim = (str: string) => str.replace(/^\s*|\s*$/g, "");
-const noPunct = (str: string) => str.replace(/[?.,!]/g, "");
-const capitalize = (str: string) => str.toUpperCase();
-const breakout = (str: string) => str.split(" ");
-const noArticles = (str: string) => str !== "A" && str !== "AN" && str !== "THE";
-const filterArticles = (arr: string[]) => arr.filter(noArticles);
+// const trim = (str: string) => str.replace(/^\s*|\s*$/g, "");
+// const noPunct = (str: string) => str.replace(/[?.,!]/g, "");
+// const capitalize = (str: string) => str.toUpperCase();
+// const breakout = (str: string) => str.split(" ");
+// const noArticles = (str: string) => str !== "A" && str !== "AN" && str !== "THE";
+// const filterArticles = (arr: string[]) => arr.filter(noArticles);
 
 // console.log(
 //   "filterArticles(breakout(capitalize(noPunct(trim(str))))):",
@@ -28,25 +28,72 @@ const filterArticles = (arr: string[]) => arr.filter(noArticles);
 // );
 
 //* From right to left!
-const compose = function (...functions: Function[]) {
-  return (str: string) => {
-    return functions.reduceRight((value: string, func: Function) => {
-      return func(value);
-    }, str);
-  };
-};
+// const compose = function (...functions: Function[]) {
+//   return (str: string) => {
+//     return functions.reduceRight((value: string, func: Function) => {
+//       return func(value);
+//     }, str);
+//   };
+// };
 
 //* From left to right!
-const pipe = function (...functions: Function[]) {
-  return (str: string) => {
-    return functions.reduce((value: string, func: Function) => {
+// const pipe = function (...functions: Function[]) {
+//   return (str: string) => {
+//     return functions.reduce((value: string, func: Function) => {
+//       return func(value);
+//     }, str);
+//   };
+// };
+
+// const prepareStringPipe = pipe(trim, noPunct, capitalize, breakout, filterArticles);
+// const prepareStringCompose = compose(filterArticles, breakout, capitalize, noPunct, trim);
+
+// console.log("prepareStringCompose(str):", prepareStringCompose(str));
+// console.log("prepareStringCompose(str):", prepareStringCompose(str));
+
+//* Exercise
+const scores = [50, 6, 100, 0, 10, 75, 8, 60, 90, 80, 0, 30, 110];
+
+const pipeFunc = (...functions: Function[]) => {
+  return (x: number[]) => {
+    return functions.reduce((value, func) => {
       return func(value);
-    }, str);
+    }, x);
   };
 };
 
-const prepareStringPipe = pipe(trim, noPunct, capitalize, breakout, filterArticles);
-const prepareStringCompose = compose(filterArticles, breakout, capitalize, noPunct, trim);
+const singleScoresByTen = (array: number[]) => {
+  return array.map((val) => (val < 10 ? val * 10 : val));
+};
 
-console.log("prepareStringCompose(str):", prepareStringCompose(str));
-console.log("prepareStringCompose(str):", prepareStringCompose(str));
+const rmvOverScores = (array: number[]) => {
+  return array.filter((val) => val <= 100);
+};
+
+const rmvZeroScores = (array: number[]) => {
+  return array.filter((val) => val > 0);
+};
+
+const sumScores = (array: number[]) => {
+  return array.reduce((sum, val) => sum + val, 0);
+};
+
+const countScores = (array: number[]) => {
+  return array.reduce((cnt, _val) => cnt + 1, 0);
+};
+
+const rmvBothHighLow = pipeFunc(rmvOverScores, rmvZeroScores);
+
+const noHighLowArray = rmvBothHighLow(scores);
+
+const prepareScores = pipeFunc(rmvBothHighLow, singleScoresByTen);
+
+const preparedArray = prepareScores(scores);
+
+const computeAverage = (array: number[]) => {
+  return sumScores(array) / array.length;
+};
+
+const prepareAndComputeAve = pipeFunc(prepareScores, computeAverage);
+const average = prepareAndComputeAve(scores);
+console.log({ average }, "countScores(scores):", countScores(scores));

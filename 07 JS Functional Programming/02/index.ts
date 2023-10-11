@@ -112,75 +112,91 @@
 // console.log("boundGetX():", boundGetX()); // Expected output: 42
 
 //* Arity
-interface User {
-  name: string;
-  score: number;
-  tries: number;
-}
-const users = [
-  { name: "James", score: 30, tries: 1 },
-  { name: "Mary", score: 110, tries: 4 },
-  { name: "Henry", score: 80, tries: 3 },
-];
+// interface User {
+//   name: string;
+//   score: number;
+//   tries: number;
+// }
+// const users = [
+//   { name: "James", score: 30, tries: 1 },
+//   { name: "Mary", score: 110, tries: 4 },
+//   { name: "Henry", score: 80, tries: 3 },
+// ];
 
-const pipe = function (...functions: Function[]) {
-  return (str: string) => {
-    return functions.reduce((value: string, func: Function) => {
-      return func(value);
-    }, str);
+// const pipe = function (...functions: Function[]) {
+//   return (str: string) => {
+//     return functions.reduce((value: string, func: Function) => {
+//       return func(value);
+//     }, str);
+//   };
+// };
+
+// // Modifies Data
+// var storeUser = function (arr: User[], user: User) {
+//   return arr.map(function (val) {
+//     if (val.name.toLowerCase() === user.name.toLowerCase()) {
+//       return user;
+//     } else {
+//       return val;
+//     }
+//   });
+// };
+
+// // Pure Functions
+// const cloneObj = function (obj: object) {
+//   return JSON.parse(JSON.stringify(obj));
+// };
+
+// const getUser = function (arr: User[], name: string) {
+//   return arr.reduce(function (obj: any, val: User) {
+//     if (val.name.toLowerCase() === name.toLowerCase()) {
+//       return val;
+//     } else {
+//       return obj;
+//     }
+//   }, null);
+// };
+
+// const updateScore = function (newAmt: number, user: User) {
+//   if (user) {
+//     user.score += newAmt;
+//     return user;
+//   }
+// };
+
+// const updateTries = function (user: User) {
+//   if (user) {
+//     user.tries++;
+//     return user;
+//   }
+// };
+
+// const partGetUser = getUser.bind(null, users);
+// const partUpdateScore30 = updateScore.bind(null, 30);
+
+// // const usr = getUser(users, "Henry");
+// // const usr1 = updateScore(30, cloneObj(usr));
+// // const usr2 = updateTries(cloneObj(usr1 as User));
+// // const newArray = storeUser(users, usr2 as User);
+// // console.log("newArray:", newArray);
+
+// const updateUser = pipe(partGetUser, cloneObj, partUpdateScore30, updateTries);
+
+// const newestUser = updateUser("Henry");
+// console.log("newestUser:", newestUser);
+
+//* Currying Concepts
+const curryGreeting = (greeting: string) => {
+  return function (name: string) {
+    // console.log(greeting + " " + name);
+    console.log(`${greeting} ${name}`);
   };
 };
 
-// Modifies Data
-var storeUser = function (arr: User[], user: User) {
-  return arr.map(function (val) {
-    if (val.name.toLowerCase() === user.name.toLowerCase()) {
-      return user;
-    } else {
-      return val;
-    }
-  });
-};
+const welcomeGreet = curryGreeting("Welcome");
+const welcomeGreet2 = curryGreeting("Hello");
 
-// Pure Functions
-const cloneObj = function (obj: object) {
-  return JSON.parse(JSON.stringify(obj));
-};
-
-const getUser = function (arr: User[], name: string) {
-  return arr.reduce(function (obj: any, val: User) {
-    if (val.name.toLowerCase() === name.toLowerCase()) {
-      return val;
-    } else {
-      return obj;
-    }
-  }, null);
-};
-
-const updateScore = function (newAmt: number, user: User) {
-  if (user) {
-    user.score += newAmt;
-    return user;
-  }
-};
-
-const updateTries = function (user: User) {
-  if (user) {
-    user.tries++;
-    return user;
-  }
-};
-
-const partGetUser = getUser.bind(null, users);
-const partUpdateScore30 = updateScore.bind(null, 30);
-
-// const usr = getUser(users, "Henry");
-// const usr1 = updateScore(30, cloneObj(usr));
-// const usr2 = updateTries(cloneObj(usr1 as User));
-// const newArray = storeUser(users, usr2 as User);
-// console.log("newArray:", newArray);
-
-const updateUser = pipe(partGetUser, cloneObj, partUpdateScore30, updateTries);
-
-const newestUser = updateUser("Henry");
-console.log("newestUser:", newestUser);
+welcomeGreet("Steve");
+welcomeGreet("Mary");
+welcomeGreet2("Steve");
+welcomeGreet2("Mary");

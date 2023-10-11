@@ -22,24 +22,26 @@ const breakout = (str: string) => str.split(" ");
 const noArticles = (str: string) => str !== "A" && str !== "AN" && str !== "THE";
 const filterArticles = (arr: string[]) => arr.filter(noArticles);
 
-console.log(
-  "filterArticles(breakout(capitalize(noPunct(trim(str))))):",
-  filterArticles(breakout(capitalize(noPunct(trim(str)))))
-);
+// console.log(
+//   "filterArticles(breakout(capitalize(noPunct(trim(str))))):",
+//   filterArticles(breakout(capitalize(noPunct(trim(str)))))
+// );
 
-const compose = function (...fns: Function[]) {
-  return function (x: string) {
-    return fns.reduceRight(function (v, f) {
-      return f(v);
-    }, x);
+//* From right to left!
+const compose = function (...functions: Function[]) {
+  return (str: string) => {
+    return functions.reduceRight((value: string, func: Function) => {
+      return func(value);
+    }, str);
   };
 };
 
-const pipe = function (...fns: Function[]) {
-  return function (x: string) {
-    return fns.reduce(function (v, f) {
-      return f(v);
-    }, x);
+//* From left to right!
+const pipe = function (...functions: Function[]) {
+  return (str: string) => {
+    return functions.reduce((value: string, func: Function) => {
+      return func(value);
+    }, str);
   };
 };
 

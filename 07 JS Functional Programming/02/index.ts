@@ -27,6 +27,14 @@ console.log(
   filterArticles(breakout(capitalize(noPunct(trim(str)))))
 );
 
+const compose = function (...fns: Function[]) {
+  return function (x: string) {
+    return fns.reduceRight(function (v, f) {
+      return f(v);
+    }, x);
+  };
+};
+
 const pipe = function (...fns: Function[]) {
   return function (x: string) {
     return fns.reduce(function (v, f) {
@@ -35,13 +43,8 @@ const pipe = function (...fns: Function[]) {
   };
 };
 
-const prepareString = pipe(trim, noPunct, capitalize, breakout, filterArticles);
+const prepareStringPipe = pipe(trim, noPunct, capitalize, breakout, filterArticles);
+const prepareStringCompose = compose(filterArticles, breakout, capitalize, noPunct, trim);
 
-// const prepareString = compose(
-//     filterArticles,
-//     breakout,
-//     capitalize,
-//     noPunct,
-//     trim);
-
-console.log("prepareString(str):", prepareString(str));
+console.log("prepareStringCompose(str):", prepareStringCompose(str));
+console.log("prepareStringCompose(str):", prepareStringCompose(str));

@@ -1,3 +1,8 @@
+//^ Object vs object vs {}
+console.log("Object as object:", Object as object);
+console.log("{} as object:", {} as object); //*  like: { [key: string]: string }
+console.log("typeof Object:", typeof Object);
+
 //^ List of JS constructors
 const a = new String();
 const b = new Number();

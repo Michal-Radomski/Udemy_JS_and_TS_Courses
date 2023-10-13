@@ -401,6 +401,7 @@
 // return result;
 
 //* Imperative vs Declarative Programming
+//* OOP Approach -> index.js
 // * Functional Approach
 const clone = (obj: object) => JSON.parse(JSON.stringify(obj));
 
@@ -433,7 +434,7 @@ const createUser = function (id: number) {
 };
 
 interface Questions {
-  qID: number;
+  qID: string;
   response: string;
   result: boolean;
   weight: number;
@@ -443,7 +444,7 @@ interface User {
   questions: Questions[];
 }
 
-const addQuestion = function (qID: number, response: string, result: boolean, weight: number, user: User) {
+const addQuestion = function (qID: string, response: string, result: boolean, weight: number, user: User) {
   const questions = clone(user.questions);
   const newQuestion = {
     qID: qID,
@@ -457,24 +458,12 @@ const addQuestion = function (qID: number, response: string, result: boolean, we
   };
 };
 
-const calcScore = function (user: User) {
-  return user.questions.reduce((tot, quest) => tot + (quest.result ? quest.weight : 0), 0);
-};
-
-const calcPossible = function (user: User) {
-  return user.questions.reduce((tot, quest) => tot + quest.weight, 0);
-};
-
-const formatResults = (user: User) => calcScore(user) + " out of " + calcPossible(user);
-
-const getProp = (prop: string, obj: { [x: string]: any }) => obj[prop];
-
-const updateScore = function (user: User, qID: number, response: string, result: boolean, weight: number) {
-  let usr = addQuestion(qID, response, result, weight, user);
+const updateScore = function (user: User, qID: string, response: string, result: boolean, weight: number) {
+  const usr = addQuestion(qID, response, result, weight, user);
   return usr;
 };
 
 const user1 = createUser(1);
-const user2 = updateScore(user1, 1, "answer", true, 1);
-const user3 = updateScore(user2, 1, "wrong answer", false, 2);
+const user2 = updateScore(user1, "q1", "answer", true, 1);
+const user3 = updateScore(user2, "q2", "wrong answer", false, 2);
 console.log({ user1, user2, user3 });

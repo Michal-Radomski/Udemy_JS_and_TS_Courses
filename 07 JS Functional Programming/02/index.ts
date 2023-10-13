@@ -202,10 +202,68 @@
 // welcomeGreet2("Mary");
 
 //* Currying
+// function curry(fn: any, arity = fn.length) {
+//   return (function nextCurried(prevArgs: any[]) {
+//     return function curried(nextArg: any) {
+//       const args = [...prevArgs, nextArg];
+//       if (args.length >= arity) {
+//         return fn(...args);
+//       } else {
+//         return nextCurried(args);
+//       }
+//     };
+//   })([]);
+// }
+
+// const pipe = function (...fns: Function[]) {
+//   return function (arg: any) {
+//     return fns.reduce(function (value, func) {
+//       return func(value);
+//     }, arg);
+//   };
+// };
+
+// const fFunc = function (a: number, b: number, c: number) {
+//   return a + b + c;
+// };
+
+// const gFunc = function (d: number, e: number) {
+//   return d + e;
+// };
+
+// const hFunc = function (f: number, g: number, h: number) {
+//   return f + g + h;
+// };
+
+// const curriedF = curry(fFunc);
+// const curriedG = curry(gFunc);
+// const curriedH = curry(hFunc);
+// const newFunc1 = pipe(curriedF(1)(2), curriedG(4), curriedH(5)(6));
+// console.log("newFunc1(3):", newFunc1(3));
+
+// const newFunc2 = pipe(curry(fFunc)(1)(2), curry(gFunc)(4), curry(hFunc)(5)(6));
+// console.log("newFunc2(4):", newFunc2(4));
+
+// const doubleNum = function (num: number) {
+//   return num + num;
+// };
+
+// const totalIt = function (n1: number, n2: number, n3: number, n4: number) {
+//   return n1 + n2 + n3 + n4;
+// };
+
+// const doArray = function (num1: number, num2: number) {
+//   return [num1, num2];
+// };
+
+// const newFunction = pipe(doubleNum, curry(totalIt)(3)(2)(1), curry(doArray)(50));
+// console.log("newFunction(3):", newFunction(3));
+
+//* Currying - part 2
 function curry(fn: any, arity = fn.length) {
   return (function nextCurried(prevArgs: any[]) {
     return function curried(nextArg: any) {
-      var args = [...prevArgs, nextArg];
+      const args = [...prevArgs, nextArg];
       if (args.length >= arity) {
         return fn(...args);
       } else {
@@ -223,35 +281,6 @@ const pipe = function (...fns: Function[]) {
   };
 };
 
-const compose = function (...fns: Function[]) {
-  return function (arg: any) {
-    return fns.reduceRight(function (value, func) {
-      return func(value);
-    }, arg);
-  };
-};
-
-const fFunc = function (a: number, b: number, c: number) {
-  return a + b + c;
-};
-
-const gFunc = function (d: number, e: number) {
-  return d + e;
-};
-
-const hFunc = function (f: number, g: number, h: number) {
-  return f + g + h;
-};
-
-const curriedF = curry(fFunc);
-const curriedG = curry(gFunc);
-const curriedH = curry(hFunc);
-const newFunc1 = pipe(curriedF(1)(2), curriedG(4), curriedH(5)(6));
-console.log("newFunc1:", newFunc1);
-
-const newFunc2 = pipe(curry(fFunc)(1)(2), curry(gFunc)(4), curry(hFunc)(5)(6));
-console.log("newFunc2:", newFunc2);
-
 const doubleNum = function (num: number) {
   return num + num;
 };
@@ -264,5 +293,8 @@ const doArray = function (num1: number, num2: number) {
   return [num1, num2];
 };
 
-const newFunction = pipe(doubleNum, curry(totalIt)(3)(2)(1), curry(doArray)(50));
-console.log("newFunction:", newFunction);
+const curriedTotalIt = curry(totalIt);
+const curriedDoArray = curry(doArray);
+
+const newFunction = pipe(doubleNum, curriedTotalIt(3)(2)(1), curriedDoArray(50));
+console.log("newFunction(4):", newFunction(4));

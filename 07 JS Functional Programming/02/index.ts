@@ -401,3 +401,80 @@
 // return result;
 
 //* Imperative vs Declarative Programming
+// * Functional Approach
+const clone = (obj: object) => JSON.parse(JSON.stringify(obj));
+
+function curry(fn: Function, arity = fn.length) {
+  return (function nextCurried(prevArgs: any[]) {
+    return function curried(nextArg: any) {
+      const args = [...prevArgs, nextArg];
+      if (args.length >= arity) {
+        return fn(...args);
+      } else {
+        return nextCurried(args);
+      }
+    };
+  })([]);
+}
+
+const pipe = function (...fns: Function[]) {
+  return function (arg: any) {
+    return fns.reduce(function (value, func) {
+      return func(value);
+    }, arg);
+  };
+};
+
+const createUser = function (id: number) {
+  return {
+    userId: id,
+    questions: [],
+  };
+};
+
+interface Questions {
+  qID: number;
+  response: string;
+  result: boolean;
+  weight: number;
+}
+interface User {
+  userId: number;
+  questions: Questions[];
+}
+
+const addQuestion = function (qID: number, response: string, result: boolean, weight: number, user: User) {
+  const questions = clone(user.questions);
+  const newQuestion = {
+    qID: qID,
+    response: response,
+    result: result,
+    weight: weight,
+  };
+  return {
+    userId: user.userId,
+    questions: [...questions, newQuestion],
+  };
+};
+
+const calcScore = function (user: User) {
+  return user.questions.reduce((tot, quest) => tot + (quest.result ? quest.weight : 0), 0);
+};
+
+const calcPossible = function (user: User) {
+  return user.questions.reduce((tot, quest) => tot + quest.weight, 0);
+};
+
+const formatResults = (user: User) => calcScore(user) + " out of " + calcPossible(user);
+
+const getProp = (prop: string, obj: { [x: string]: any }) => obj[prop];
+
+const updateScore = function (user: User, qID: number, response: string, result: boolean, weight: number) {
+  let usr = addQuestion(qID, response, result, weight, user);
+  return usr;
+};
+
+const user1 = createUser(1);
+const user2 = updateScore(user1, 1, "answer", true, 1);
+const user3 = updateScore(user2, 1, "wrong answer", false, 2);
+console.log({ user1, user2, user3 });

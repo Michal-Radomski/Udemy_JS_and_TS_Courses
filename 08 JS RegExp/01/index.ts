@@ -22,7 +22,15 @@
 // console.log("txt.split(regex1):", txt.split(regex1));
 // console.log("txt.split(regex2):", txt.split(regex2));
 
-const txt = "Programming courses always starts with a hello world example.";
-const regex1: RegExp = /\s/; //* Space
-console.log("txt.split(regex1):", txt.split(regex1));
-console.log("regex1.toString():", regex1.toString());
+// const txt = "Programming courses alwayS starts with a hello world example.";
+// const regex1: RegExp = /\s/; //* Space
+// console.log("txt.split(regex1):", txt.split(regex1));
+// console.log("regex1.toString():", regex1.toString());
+
+// const regex1: RegExp = /s\s/gis; //* letter s + space, g - globally, i - case insensitive, s - dotAll flag
+// console.log("txt.match(regex1):", txt.match(regex1));
+
+//* RegexPal: https://www.regexpal.com/
+
+//* Characters
+// "." - any character

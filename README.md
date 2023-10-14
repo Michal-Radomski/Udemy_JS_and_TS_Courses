@@ -15,3 +15,5 @@ Files created during Udemy.com JS and TS courses:
 6. [Mastering JavaScript Arrays](https://www.udemy.com/course/mastering-javascript-arrays)
 
 7. [Functional Programming in JavaScript](https://www.udemy.com/course/functional-programming-in-javascript-a-practical-guide)
+
+8. [Regular Expressions in JavaScript](https://www.udemy.com/course/mastering-regular-expressions-in-javascript)

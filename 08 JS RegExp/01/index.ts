@@ -58,7 +58,11 @@
 //* [a-g] 	character between a & g
 //* [1-4] 	character between 1 and 4
 //* /[1-6a-zA-Z]/g -> 1-6 + a-z + A-Z
-const re = /gr[ae]y/g; //* // grey or gray -> a or e
-const str = "I like grey and gray.";
-const matches = [...str.matchAll(re)];
-console.log({ matches });
+// const re = /gr[ae]y/g; //* // grey or gray -> a or e
+// const str = "I like grey and gray.";
+// const matches = [...str.matchAll(re)];
+// console.log({ matches });
+
+const str = "Exception 0xF89F";
+const re = /[^a-z]/g;
+console.log(str.match(re));

@@ -2,7 +2,7 @@
 // const txt = "Programming courses always starts with a hello world example.";
 
 // const regex1: RegExp = new RegExp("hello");
-// const regex2: RegExp = /worlds/; //* there is world not words!
+// const regex2: RegExp = /worlds/; //* There is world NOT words!
 
 // console.log("regex1.test(txt):", regex1.test(txt));
 // console.log("regex2.test(txt):", regex2.test(txt));
@@ -27,10 +27,27 @@
 // console.log("txt.split(regex1):", txt.split(regex1));
 // console.log("regex1.toString():", regex1.toString());
 
-// const regex1: RegExp = /s\s/gis; //* letter s + space, g - globally, i - case insensitive, s - dotAll flag
+// const regex1: RegExp = /s\s/gis; //* letter s + space, g - globally, i - case insensitive, s - dotAll flag (dot -> any character)
 // console.log("txt.match(regex1):", txt.match(regex1));
 
 //* RegexPal: https://www.regexpal.com/
 
 //* Characters
 // "." - any character
+// "/" - escape metacharacter;
+
+//* Exercise
+const phoneNums = [
+  "801-766-9754",
+  "801-545-5454",
+  "435-666-1212",
+  "801-796-8010",
+  "435-555-9801",
+  "801-009-0909",
+  "435-222-8013",
+  "801-777-6655",
+];
+
+const regEx = /801-/;
+const newArray = phoneNums.filter((elem) => regEx.test(elem));
+console.log("newArray:", newArray);

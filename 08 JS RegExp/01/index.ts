@@ -30,7 +30,7 @@
 // const regex1: RegExp = /s\s/gis; //* letter s + space, g - globally, i - case insensitive, s - dotAll flag (dot -> any character)
 // console.log("txt.match(regex1):", txt.match(regex1));
 
-//* RegexPal: https://www.regexpal.com/
+//* Regex tester: https://www.regexpal.com/
 
 //* Characters
 // "." - any character
@@ -63,6 +63,44 @@
 // const matches = [...str.matchAll(re)];
 // console.log({ matches });
 
-const str = "Exception 0xF89F";
-const re = /[^a-z]/g;
-console.log(str.match(re));
+// const str = "Exception 0xF89F";
+// const re = /[^a-z]/g;
+// console.log("str.match(re):", str.match(re));
+
+// const str = "A string that contains numbers (12345)";
+
+// const regExp = new RegExp("\\w", "g");
+// const regExp2 = new RegExp("\\d", "g");
+// const regExp3 = new RegExp("\\W", "g");
+// const regExp4 = new RegExp("\\D", "g");
+// console.log("str.match(regExp):", str.match(regExp));
+// console.log("str.match(regExp2):", str.match(regExp2));
+// console.log("str.match(regExp3):", str.match(regExp3));
+// console.log("str.match(regExp4):", str.match(regExp4));
+
+//* Exercise
+const phoneNums = [
+  "801-766-9754",
+  "801-545-5454",
+  "435-666-1212",
+  "801-796-8010",
+  "435-555-9801",
+  "801-009-0909",
+  "435-222-8013",
+  "801-777-66553",
+  "801-777-665-",
+  "801-77A-6655",
+  "801-778-665",
+];
+
+//* Format: nnn-nnn-nnnn
+const regEx = /801-\d\d\d-\d\d\d\d/,
+  newArray = [];
+// const newArray = phoneNums.filter(elem => regEx.test(elem));
+
+for (let i = 0; i < phoneNums.length; i++) {
+  if (regEx.test(phoneNums[i])) {
+    newArray.push(phoneNums[i]);
+  }
+}
+console.log("newArray:", newArray);

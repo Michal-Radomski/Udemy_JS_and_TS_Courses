@@ -37,17 +37,28 @@
 // "/" - escape metacharacter;
 
 //* Exercise
-const phoneNums = [
-  "801-766-9754",
-  "801-545-5454",
-  "435-666-1212",
-  "801-796-8010",
-  "435-555-9801",
-  "801-009-0909",
-  "435-222-8013",
-  "801-777-6655",
-];
+// const phoneNums = [
+//   "801-766-9754",
+//   "801-545-5454",
+//   "435-666-1212",
+//   "801-796-8010",
+//   "435-555-9801",
+//   "801-009-0909",
+//   "435-222-8013",
+//   "801-777-6655",
+// ];
 
-const regEx = /801-/;
-const newArray = phoneNums.filter((elem) => regEx.test(elem));
-console.log("newArray:", newArray);
+// const regEx = /801-/;
+// const newArray = phoneNums.filter((elem) => regEx.test(elem));
+// console.log("newArray:", newArray);
+
+//* Character Sets
+//* [abc] 	any of a, b, or c
+//* [^abc] 	not a, b, or c
+//* [a-g] 	character between a & g
+//* [1-4] 	character between 1 and 4
+//* /[1-6a-zA-Z]/g -> 1-6 + a-z + A-Z
+const re = /gr[ae]y/g; //* // grey or gray -> a or e
+const str = "I like grey and gray.";
+const matches = [...str.matchAll(re)];
+console.log({ matches });

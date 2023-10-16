@@ -94,13 +94,20 @@ const phoneNums = [
 ];
 
 //* Format: nnn-nnn-nnnn
-const regEx = /801-\d\d\d-\d\d\d\d/,
-  newArray = [];
-// const newArray = phoneNums.filter(elem => regEx.test(elem));
+// const regEx = /801-\d\d\d-\d\d\d\d/, //* Bad validation: "801-777-66553"
+//   newArray = [];
+// // const newArray = phoneNums.filter(elem => regEx.test(elem));
 
-for (let i = 0; i < phoneNums.length; i++) {
-  if (regEx.test(phoneNums[i])) {
-    newArray.push(phoneNums[i]);
-  }
-}
-console.log("newArray:", newArray);
+// for (let i = 0; i < phoneNums.length; i++) {
+//   if (regEx.test(phoneNums[i])) {
+//     newArray.push(phoneNums[i]);
+//   }
+// }
+// console.log("newArray:", newArray);
+
+//* Repetition
+const str = "She sells seashells on a seashore. The shells she sells are seashells, I'm sure.";
+// const regExp = new RegExp("[A-Z]+", "g");
+const regExp = /[A-Z]+/g;
+// console.log("regExp.test(str):", regExp.test(str)); // true
+console.log("str.match(regExp):", str.match(regExp));

@@ -41,6 +41,12 @@
 //* Characters
 // "." - any character
 // "/" - escape metacharacter;
+// const str = "Test string Test string";
+// const re = /T.st/g;
+// console.log("str.match(re):", str.match(re)); //* [ 'Test', 'Test' ]
+// const str2 = "bar\nexample foo example";
+// const regex2 = /bar.example/s; //* s -> dotAll flag -> the s "dotAll" flag allows the dot to also match line terminators
+// console.log("str2.match(regex2):", str2.match(regex2));
 
 //* Exercise
 // const phoneNums = [
@@ -73,9 +79,9 @@
 // const re = /[^a-z]/g;
 // console.log("str.match(re):", str.match(re));
 
-//* \d = [0-9]
+//* \d = [0-9] -> any single digit
 //* \D = [^0-9]
-//* \w = [A-Za-z0-9_]
+//* \w = [A-Za-z0-9_] -> any  single letter, digit or underscore
 //* \W = [^A-Za-z0-9_]
 //* \s = single space
 //* \S = a single character other than white space
@@ -119,11 +125,12 @@
 // console.log("newArray:", newArray);
 
 //* Repetition
-
 //* x* -> matches the preceding item "x" 0 or more times
 //* x+ -> matches the preceding item "x" 1 or more times
 //* x? -> matches the preceding item "x" 0 or 1 times
 //* x{n} -> where "n" is a positive integer, matches exactly "n" occurrences of the preceding item "x"
+//* x{min, max} -> matched min to max occurrences
+//* x{min, } -> at least min occurrences (min or more)
 
 // const str = "She sells seashells on a seashore. The shells she sells are seashells, I'm sure.";
 // //* regExp = regExp2
@@ -136,10 +143,32 @@
 // console.log("str.match(regExp3):", str.match(regExp3));
 // console.log("str.match(regExp4):", str.match(regExp4));
 
-const re = /apples?/g;
-const str = "He picked apples of the apple tree";
-console.log("str.match(re):", str.match(re)); //* [ 'apples', 'apple' ]
+// const re = /apples?/g;
+// const str = "He picked apples of the apple tree";
+// console.log("str.match(re):", str.match(re)); //* [ 'apples', 'apple' ]
 
-const re2 = /warning!*/g;
-const str2 = "warning!, warning!!, warning!!!";
-console.log("str2.match(re2):", str2.match(re2)); //* [ 'warning!', 'warning!!', 'warning!!!' ]
+// const re2 = /warning!*/g;
+// const str2 = "warning!, warning!!, warning!!!";
+// console.log("str2.match(re2):", str2.match(re2)); //* [ 'warning!', 'warning!!', 'warning!!!' ]
+
+// const str = "My telephone number is as follows: 801-555-6789.";
+// const re = /\w{3,5}/g;
+// const re2 = /\w{3}/g;
+// const re3 = /\d{4,}/g;
+// console.log("str.match(re):", str.match(re)); //* 3-5
+// console.log("str.match(re2):", str.match(re2)); //* exactly 3
+// console.log("str.match(re3):", str.match(re3)); //* 4 or more
+
+const str = "#ff0000  #C0C0C0 these are hex numbers";
+const re = /#[0-9A-F]{6}/gi;
+console.log("str.match(re):", str.match(re)); //* [ '#ff0000', '#C0C0C0' ]
+const str2 = "529-66-9898";
+const re2 = /\d{3}-\d{2}-\d{4}/g;
+console.log("str2.match(re2):", str2.match(re2)); //* [ '529-66-9898' ]
+
+//* Greediness and Laziness
+// const str = "<p>This is the first paragraph.</p><p>Paragraph number two.</p>";
+// const re = /<p>.*<\/p>/;
+// const re2 = /<p>.*?<\/p>/;
+// console.log("str.match(re):", str.match(re)); //* Greediness by default! -> it grabs everything!
+// console.log("str.match(re2):", str.match(re2)); //* Laziness! -> it grabs as little as possible! Done by question mark (?)

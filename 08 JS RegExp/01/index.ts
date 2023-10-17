@@ -1,3 +1,9 @@
+//* RegExp.prototype.test() -> true or false
+//* String.prototype.match() ->  found item array or null
+//* RegExp.prototype.exec() -> array or null
+//* String.prototype.search() -> first index of found item or -1
+//* String.prototype.matchAll() -> An iterable iterator object (which is not restartable) of matches
+
 //* RegExp
 // const txt = "Programming courses always starts with a hello world example.";
 
@@ -27,8 +33,8 @@
 // console.log("txt.split(regex1):", txt.split(regex1));
 // console.log("regex1.toString():", regex1.toString());
 
-// const regex1: RegExp = /s\s/gis; //* letter s + space, g - globally, i - case insensitive, s - dotAll flag (dot -> any character)
-// console.log("txt.match(regex1):", txt.match(regex1));
+// const regex2: RegExp = /s\s/gis; //* letter s + space, g - globally, i - case insensitive, s - dotAll flag (dot -> any character)
+// console.log("txt.match(regex2):", txt.match(regex2));
 
 //* Regex tester: https://www.regexpal.com/
 
@@ -67,6 +73,13 @@
 // const re = /[^a-z]/g;
 // console.log("str.match(re):", str.match(re));
 
+//* \d = [0-9]
+//* \D = [^0-9]
+//* \w = [A-Za-z0-9_]
+//* \W = [^A-Za-z0-9_]
+//* \s = single space
+//* \S = a single character other than white space
+
 // const str = "A string that contains numbers (12345)";
 
 // const regExp = new RegExp("\\w", "g");
@@ -79,22 +92,22 @@
 // console.log("str.match(regExp4):", str.match(regExp4));
 
 //* Exercise
-const phoneNums = [
-  "801-766-9754",
-  "801-545-5454",
-  "435-666-1212",
-  "801-796-8010",
-  "435-555-9801",
-  "801-009-0909",
-  "435-222-8013",
-  "801-777-66553",
-  "801-777-665-",
-  "801-77A-6655",
-  "801-778-665",
-];
+// const phoneNums = [
+//   "801-766-9754",
+//   "801-545-5454",
+//   "435-666-1212",
+//   "801-796-8010",
+//   "435-555-9801",
+//   "801-009-0909",
+//   "435-222-8013",
+//   "801-777-66553",
+//   "801-777-665-",
+//   "801-77A-6655",
+//   "801-778-665",
+// ];
 
 //* Format: nnn-nnn-nnnn
-// const regEx = /801-\d\d\d-\d\d\d\d/, //* Bad validation: "801-777-66553"
+// const regEx = /801-\d\d\d-\d\d\d\d/, //* Bad validation: "801-777-66553" !
 //   newArray = [];
 // // const newArray = phoneNums.filter(elem => regEx.test(elem));
 
@@ -106,8 +119,27 @@ const phoneNums = [
 // console.log("newArray:", newArray);
 
 //* Repetition
-const str = "She sells seashells on a seashore. The shells she sells are seashells, I'm sure.";
+
+//* x* -> matches the preceding item "x" 0 or more times
+//* x+ -> matches the preceding item "x" 1 or more times
+//* x? -> matches the preceding item "x" 0 or 1 times
+//* x{n} -> where "n" is a positive integer, matches exactly "n" occurrences of the preceding item "x"
+
+// const str = "She sells seashells on a seashore. The shells she sells are seashells, I'm sure.";
+// //* regExp = regExp2
 // const regExp = new RegExp("[A-Z]+", "g");
-const regExp = /[A-Z]+/g;
-// console.log("regExp.test(str):", regExp.test(str)); // true
-console.log("str.match(regExp):", str.match(regExp));
+// const regExp2 = /[A-Z]+/g;
+// console.log("regExp.test(str):", regExp.test(str)); //* true
+// console.log("str.match(regExp2):", str.match(regExp2)); //* [ 'S', 'T', 'I' ]
+// const regExp3 = /[A-Z]*/g;
+// const regExp4 = /[A-Z]?/g;
+// console.log("str.match(regExp3):", str.match(regExp3));
+// console.log("str.match(regExp4):", str.match(regExp4));
+
+const re = /apples?/g;
+const str = "He picked apples of the apple tree";
+console.log("str.match(re):", str.match(re)); //* [ 'apples', 'apple' ]
+
+const re2 = /warning!*/g;
+const str2 = "warning!, warning!!, warning!!!";
+console.log("str2.match(re2):", str2.match(re2)); //* [ 'warning!', 'warning!!', 'warning!!!' ]

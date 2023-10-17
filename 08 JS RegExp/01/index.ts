@@ -159,12 +159,12 @@
 // console.log("str.match(re2):", str.match(re2)); //* exactly 3
 // console.log("str.match(re3):", str.match(re3)); //* 4 or more
 
-const str = "#ff0000  #C0C0C0 these are hex numbers";
-const re = /#[0-9A-F]{6}/gi;
-console.log("str.match(re):", str.match(re)); //* [ '#ff0000', '#C0C0C0' ]
-const str2 = "529-66-9898";
-const re2 = /\d{3}-\d{2}-\d{4}/g;
-console.log("str2.match(re2):", str2.match(re2)); //* [ '529-66-9898' ]
+// const str = "#ff0000  #C0C0C0 these are hex numbers";
+// const re = /#[0-9A-F]{6}/gi;
+// console.log("str.match(re):", str.match(re)); //* [ '#ff0000', '#C0C0C0' ]
+// const str2 = "529-66-9898";
+// const re2 = /\d{3}-\d{2}-\d{4}/g;
+// console.log("str2.match(re2):", str2.match(re2)); //* [ '529-66-9898' ]
 
 //* Greediness and Laziness
 // const str = "<p>This is the first paragraph.</p><p>Paragraph number two.</p>";
@@ -172,3 +172,9 @@ console.log("str2.match(re2):", str2.match(re2)); //* [ '529-66-9898' ]
 // const re2 = /<p>.*?<\/p>/;
 // console.log("str.match(re):", str.match(re)); //* Greediness by default! -> it grabs everything!
 // console.log("str.match(re2):", str.match(re2)); //* Laziness! -> it grabs as little as possible! Done by question mark (?)
+
+const str = "32-6678, 45-668778, 65-454";
+const re = /\d{2}-\d{3,4}/g; //* Greediness by default!
+const re2 = /\d{2}-\d{3,4}?/g; //* Laziness
+console.log("str.match(re):", str.match(re)); //* [ '32-6678', '45-6687', '65-454' ]
+console.log("str.match(re2):", str.match(re2)); //* [ '32-667', '45-668', '65-454' ]

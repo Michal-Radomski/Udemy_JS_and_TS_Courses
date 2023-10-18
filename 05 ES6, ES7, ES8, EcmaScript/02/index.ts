@@ -42,7 +42,11 @@ const handler = {
 };
 const y = new Proxy(target, handler);
 const z = new TypeError();
-// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x, y, z });
+
+const a_2 = new URL("/", "https://developer.mozilla.org");
+const b_2 = new URLSearchParams("foo=1&bar=2");
+
+// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x, y, z, a_2, b_2 });
 
 //* Example
 // const date = new Date(Date.UTC(2020, 11, 20, 3, 23, 16, 738));

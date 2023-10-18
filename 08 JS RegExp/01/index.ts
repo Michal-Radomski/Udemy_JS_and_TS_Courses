@@ -173,8 +173,17 @@
 // console.log("str.match(re):", str.match(re)); //* Greediness by default! -> it grabs everything!
 // console.log("str.match(re2):", str.match(re2)); //* Laziness! -> it grabs as little as possible! Done by question mark (?)
 
-const str = "32-6678, 45-668778, 65-454";
-const re = /\d{2}-\d{3,4}/g; //* Greediness by default!
-const re2 = /\d{2}-\d{3,4}?/g; //* Laziness
-console.log("str.match(re):", str.match(re)); //* [ '32-6678', '45-6687', '65-454' ]
-console.log("str.match(re2):", str.match(re2)); //* [ '32-667', '45-668', '65-454' ]
+// const str = "32-6678, 45-668778, 65-454";
+// const re = /\d{2}-\d{3,4}/g; //* Greediness by default!
+// const re2 = /\d{2}-\d{3,4}?/g; //* Laziness
+// console.log("str.match(re):", str.match(re)); //* [ '32-6678', '45-6687', '65-454' ]
+// console.log("str.match(re2):", str.match(re2)); //* [ '32-667', '45-668', '65-454' ]
+
+//* Exercise
+// Formats: (nnn)-nnn-nnnn, nnn.nnn.nnnn, nnn-nnn-nnnn, nnnnnnnnnn, (nnn)nnn-nnnn
+(function () {
+  const phone = "801-766-9754",
+    regPhone = /\(?\d{3}\)?[-.]?\d{3}[-.]?\d{4}/;
+  // console.log("phone.match(regPhone):", phone.match(regPhone));
+  console.log("regPhone.test(phone):", regPhone.test(phone));
+})();

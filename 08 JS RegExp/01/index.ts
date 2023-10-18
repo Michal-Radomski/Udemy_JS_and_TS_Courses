@@ -181,9 +181,32 @@
 
 //* Exercise
 // Formats: (nnn)-nnn-nnnn, nnn.nnn.nnnn, nnn-nnn-nnnn, nnnnnnnnnn, (nnn)nnn-nnnn
-(function () {
-  const phone = "801-766-9754",
-    regPhone = /\(?\d{3}\)?[-.]?\d{3}[-.]?\d{4}/;
-  // console.log("phone.match(regPhone):", phone.match(regPhone));
-  console.log("regPhone.test(phone):", regPhone.test(phone));
-})();
+// (function () {
+//   const phone = "801-766-9754",
+//     regPhone = /\(?\d{3}\)?[-.]?\d{3}[-.]?\d{4}/;
+//   // console.log("phone.match(regPhone):", phone.match(regPhone));
+//   console.log("regPhone.test(phone):", regPhone.test(phone));
+// })();
+
+//* Anchored Expressions
+//* ^ - start of line
+//* $ - end of line
+//* m - multiline flag
+
+// const str =
+//   "The dot is a very powerful regex metacharacter. It allows you to be lazy. Put in a dot, and everything matches just fine when you test the regex on valid data. The problem is that the regex also matches in cases where it should not match. If you are new to regular expressions, some of these cases may not be so obvious at first."; //* Here is one line!
+// const re = /^The/gim; //* Only the first the!
+// const re2 = /first.$/gim;
+
+// console.log("str.match(re):", str.match(re));
+// console.log("str.match(re2):", str.match(re2));
+
+//* Word Boundaries
+//* \b - pattern bounded by non-word character -> " 'plan' "
+//* \B - pattern bounded by word character -> "In'plan't"
+
+const str = "Inplant this idea: plan to plant multiple trees on this planet.";
+const re = /\bplan\b/g;
+const re2 = /\Bplan\B/g;
+console.log("str.match(re):", str.match(re)); //*  [ 'plan' ]
+console.log("str.match(re2):", str.match(re2)); //*  [ 'plan' ]

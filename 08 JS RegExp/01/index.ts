@@ -205,8 +205,13 @@
 //* \b - pattern bounded by non-word character -> " 'plan' "
 //* \B - pattern bounded by word character -> "In'plan't"
 
-const str = "Inplant this idea: plan to plant multiple trees on this planet.";
-const re = /\bplan\b/g;
-const re2 = /\Bplan\B/g;
-console.log("str.match(re):", str.match(re)); //*  [ 'plan' ]
-console.log("str.match(re2):", str.match(re2)); //*  [ 'plan' ]
+// const str = "Inplant this idea: plan to plant multiple trees on this planet.";
+// const re = /\bplan\b/g;
+// const re2 = /\Bplan\B/g;
+// console.log("str.match(re):", str.match(re)); //*  [ 'plan' ]
+// console.log("str.match(re2):", str.match(re2)); //*  [ 'plan' ]
+
+//* Accurate Regular Expression
+const str = "84432-4456";
+const re = /^\d{5}-\d{4}$/g;
+console.log("str.match(re):", str.match(re));

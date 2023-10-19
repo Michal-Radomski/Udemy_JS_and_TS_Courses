@@ -212,6 +212,29 @@
 // console.log("str.match(re2):", str.match(re2)); //*  [ 'plan' ]
 
 //* Accurate Regular Expression
-const str = "84432-4456";
-const re = /^\d{5}-\d{4}$/g;
-console.log("str.match(re):", str.match(re));
+// const str = "84432-4456";
+// const re = /^\d{5}-\d{4}$/g;
+// console.log("str.match(re):", str.match(re));
+
+//* Exercise
+// const text =
+//   "Each and every Tuesday, at the beginning of the day, we hold a staff meeting. At the Tuesday staff meeting, you will need to make a report on the past weeks progress, and you will receive assignments for the following Tuesday. Just be aware that somedays this Tuesday meeting might not occur. When that happens, we will make an announcement.";
+
+// const regExp = /\b[mtwfs][a-z]{1,4}[nsir]day\b/gi;
+// const newText = text.replace(regExp, "+Monday+");
+// console.log("newText:", newText);
+
+//* Options
+// const text2 =
+//   "Each and every Tuesday, at the beginning of the day, we hold a staff meeting. At the Tuesday staff meeting, you will need to make a report on the past weeks progress, and you will receive assignments for the following Tuesday. Just be aware that somedays this Tuesday meeting might not occur. When that happens, we will make an announcement.";
+// //* or -> |
+// // const regExp2 = /\bmonday|tuesday\b/gi;
+// // const regExp2 = /\b[a-z]{3}day\b|\b[a-z]{4}day\b/gi;
+// const regExp2 = /\b([a-z]{3}day|[a-z]{4}day)\b/gi;
+// const newText2 = text2.replace(regExp2, "+Monday+");
+// console.log("newText2:", newText2);
+
+//* Grouping
+const re = /([a-d][1-5]){5}/g;
+const str = "a5c3a2b1d1 d5c3a2d1c1";
+console.log("str.match(re):", str.match(re)); //* [ 'a5c3a2b1d1', 'd5c3a2d1c1' ]

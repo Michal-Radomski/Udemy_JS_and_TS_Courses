@@ -235,6 +235,33 @@
 // console.log("newText2:", newText2);
 
 //* Grouping
-const re = /([a-d][1-5]){5}/g;
-const str = "a5c3a2b1d1 d5c3a2d1c1";
-console.log("str.match(re):", str.match(re)); //* [ 'a5c3a2b1d1', 'd5c3a2d1c1' ]
+// const re = /([a-d][1-5]){5}/g;
+// const str = "a5c3a2b1d1 d5c3a2d1c1";
+// console.log("str.match(re):", str.match(re)); //* [ 'a5c3a2b1d1', 'd5c3a2d1c1' ]
+
+//* Grouping in JS
+const data = "2018-3-9";
+const data1 = "2018/03/09";
+const data2 = "2018.03.09";
+
+let reg: RegExp = /^(\d\d\d\d)[-./](\d{1,2})[-./](\d{1,2})$/,
+  arr = reg.exec(data),
+  year: string,
+  month: string,
+  day: string;
+// console.log({ arr });
+
+// if (reg.test(data)) {
+//   year = arr![1]; //* arr[0] -> original data
+//   month = arr![2];
+//   day = arr![3];
+// } else {
+//   console.log("Wrong format");
+// }
+
+console.log("reg.test(data):", reg.test(data));
+console.log("reg.test(data1):", reg.test(data1));
+console.log("reg.test(data2):", reg.test(data2));
+
+const reg2: RegExp = /^(?:\d\d\d\d)([-./])(\d{1,2})\1(\d{1,2})$/;
+console.log("reg2.test(data):", reg2.test(data));

@@ -287,10 +287,33 @@
 // console.log("re2.test(password2):", re2.test(password2)); // true
 
 //* Lookbehind Groups
-const str = "There are 59 items for a price of $199 or €173.";
-//* (?<=) - Positive lookbehind group
-//* (?<!) - Negative lookbehind group
-const re = /(?<=\$|€)\d+/g;
-const re2 = /(?<!\$|€)\d+/g;
-console.log("str.match(re):", str.match(re)); //* [ '199', '173' ]
-console.log("str.match(re2):", str.match(re2)); //* [ '59', '99', '73' ]
+// const str = "There are 59 items for a price of $199 or €173.";
+// //* (?<=) - Positive lookbehind group
+// //* (?<!) - Negative lookbehind group
+// const re = /(?<=\$|€)\d+/g;
+// const re2 = /(?<!\$|€)\d+/g;
+// console.log("str.match(re):", str.match(re)); //* [ '199', '173' ]
+// console.log("str.match(re2):", str.match(re2)); //* [ '59', '99', '73' ]
+
+//* Named capturing group: (?<name>pattern)
+// function parseLog(entry: string) {
+//   const { author, timestamp } = /^(?<timestamp>\d+),(?<author>.+)$/.exec(entry)!.groups as {
+//     [key: string]: string;
+//   };
+//   return `${author} committed on ${new Date(parseInt(timestamp) * 1000).toLocaleString()}`;
+// }
+// console.log('parseLog("1560979912,Caroline"):', parseLog("1560979912,Caroline"));
+
+//* Exercise
+const data = ["Jensen, Dale", "Smith, Andrea", "Jorgensen, Michael", "Vasefi, Annika", "Lopez, Monica", "Crockett, Steven"];
+const reg = /(?<last>\w+), (?<first>\w+)/;
+const newData = data.map((val: string) => {
+  const arr = reg.exec(val) as RegExpExecArray;
+  // console.log({ arr });
+  if (arr !== null) {
+    return arr.groups?.first + " " + arr.groups?.last;
+  } else {
+    return null;
+  }
+});
+console.log("newData:", newData);

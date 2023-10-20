@@ -287,3 +287,10 @@
 // console.log("re2.test(password2):", re2.test(password2)); // true
 
 //* Lookbehind Groups
+const str = "There are 59 items for a price of $199 or €173.";
+//* (?<=) - Positive lookbehind group
+//* (?<!) - Negative lookbehind group
+const re = /(?<=\$|€)\d+/g;
+const re2 = /(?<!\$|€)\d+/g;
+console.log("str.match(re):", str.match(re)); //* [ '199', '173' ]
+console.log("str.match(re2):", str.match(re2)); //* [ '59', '99', '73' ]

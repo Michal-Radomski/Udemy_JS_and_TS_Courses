@@ -240,15 +240,15 @@
 // console.log("str.match(re):", str.match(re)); //* [ 'a5c3a2b1d1', 'd5c3a2d1c1' ]
 
 //* Grouping in JS
-const data = "2018-3-9";
-const data1 = "2018/03/09";
-const data2 = "2018.03.09";
+// const data = "2018-3-9";
+// const data1 = "2018/03/09";
+// const data2 = "2018.03.09";
 
-let reg: RegExp = /^(\d\d\d\d)[-./](\d{1,2})[-./](\d{1,2})$/,
-  arr = reg.exec(data),
-  year: string,
-  month: string,
-  day: string;
+// let reg: RegExp = /^(\d\d\d\d)[-./](\d{1,2})[-./](\d{1,2})$/,
+//   arr = reg.exec(data),
+//   year: string,
+//   month: string,
+//   day: string;
 // console.log({ arr });
 
 // if (reg.test(data)) {
@@ -259,9 +259,31 @@ let reg: RegExp = /^(\d\d\d\d)[-./](\d{1,2})[-./](\d{1,2})$/,
 //   console.log("Wrong format");
 // }
 
-console.log("reg.test(data):", reg.test(data));
-console.log("reg.test(data1):", reg.test(data1));
-console.log("reg.test(data2):", reg.test(data2));
+// console.log("reg.test(data):", reg.test(data));
+// console.log("reg.test(data1):", reg.test(data1));
+// console.log("reg.test(data2):", reg.test(data2));
 
-const reg2: RegExp = /^(?:\d\d\d\d)([-./])(\d{1,2})\1(\d{1,2})$/;
-console.log("reg2.test(data):", reg2.test(data));
+// const reg2: RegExp = /^(?:\d\d\d\d)([-./])(\d{1,2})\1(\d{1,2})$/;
+// console.log("reg2.test(data):", reg2.test(data));
+
+//* Lookahead Groups
+//* Positive Lookahead Group:(?=\.com)
+
+// const data = "http://javascript.com google.com youtube.com";
+
+// const reg = /\w+(?=\.com)/g, //* one or more words, Lookahead Group:(?=\.com)
+//   arr = data.match(reg);
+// console.log({ arr }); //*[ 'javascript', 'google', 'youtube' ]
+
+// const re = /^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$/g; //* min 8 characters, min 1 uppercase letter, lowercase letter and digit
+// const password = "qawsed12QA";
+// const password2 = "qawsed__QA";
+// console.log("re.test(password):", re.test(password)); // true
+// console.log("re.test(password2):", re.test(password2)); // false
+
+//* Negative Lookahead Group:(!=\.com)
+// const re2 = /^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?!.*[0-9]).*$/g; //* can't have a uppercase letter
+// console.log("re2.test(password):", re2.test(password)); // false
+// console.log("re2.test(password2):", re2.test(password2)); // true
+
+//* Lookbehind Groups

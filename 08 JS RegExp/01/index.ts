@@ -305,15 +305,35 @@
 // console.log('parseLog("1560979912,Caroline"):', parseLog("1560979912,Caroline"));
 
 //* Exercise
-const data = ["Jensen, Dale", "Smith, Andrea", "Jorgensen, Michael", "Vasefi, Annika", "Lopez, Monica", "Crockett, Steven"];
-const reg = /(?<last>\w+), (?<first>\w+)/;
-const newData = data.map((val: string) => {
-  const arr = reg.exec(val) as RegExpExecArray;
-  // console.log({ arr });
-  if (arr !== null) {
-    return arr.groups?.first + " " + arr.groups?.last;
-  } else {
-    return null;
-  }
-});
-console.log("newData:", newData);
+// const data = ["Jensen, Dale", "Smith, Andrea", "Jorgensen, Michael", "Vasefi, Annika", "Lopez, Monica", "Crockett, Steven"];
+// const reg = /(?<last>\w+), (?<first>\w+)/;
+// const newData = data.map((val: string) => {
+//   const arr = reg.exec(val) as RegExpExecArray;
+//   // console.log({ arr });
+//   if (arr !== null) {
+//     return arr.groups?.first + " " + arr.groups?.last;
+//   } else {
+//     return null;
+//   }
+// });
+// console.log("newData:", newData);
+
+//* Working with Unicode
+//* \u0065 -> e
+// const re = /[\u0061-\u0067]/gi;
+// const str = "Smith, Andrea";
+// console.log("str.match(re):", str.match(re)); // [ 'A', 'd', 'e', 'a' ]
+// const re = /£|¥|©|®/g;
+// const str = "50£ + 50¥";
+// console.log("str.match(re):", str.match(re)); // [ '£', '¥' ]
+// const str = "“Here is a quote”";
+// const re = /[\u201C\u201D]/g;
+// console.log("str.match(re):", str.match(re)); //  [ '“', '”' ]
+
+//* Understanding ES6 Unicode Features
+//* u - unicode flag
+// const re = /\u{1D11E}/gu;
+// const str = "𝄞+𝄞";
+// console.log("str.match(re):", str.match(re)); //  [ '𝄞', '𝄞' ]
+
+//* Applying Regular Expressions

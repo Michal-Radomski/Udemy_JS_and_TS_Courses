@@ -29,7 +29,7 @@
 // console.log("txt.split(regex2):", txt.split(regex2));
 
 // const txt = "Programming courses alwayS starts with a hello world example.";
-// const regex1: RegExp = /\s/; //* Space
+// const regex1: RegExp = /\s/; //* WhiteSpace e.g. space, nest line
 // console.log("txt.split(regex1):", txt.split(regex1));
 // console.log("regex1.toString():", regex1.toString());
 
@@ -332,8 +332,6 @@
 
 //* Understanding ES6 Unicode Features
 //* u - unicode flag
-// const re = /\u{1D11E}/gu;
-// const str = "𝄞+𝄞";
-// console.log("str.match(re):", str.match(re)); //  [ '𝄞', '𝄞' ]
-
-//* Applying Regular Expressions
+const re = /\u{1D11E}/gu;
+const str = "𝄞+𝄞";
+console.log("str.match(re):", str.match(re)); //  [ '𝄞', '𝄞' ]

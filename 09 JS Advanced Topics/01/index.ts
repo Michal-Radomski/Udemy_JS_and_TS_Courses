@@ -19,20 +19,34 @@
 // console.dir("report1:", report1);
 
 //*  First Class Functions
-const sum = function (x: number, y: number) {
-  return x + y;
+// const sum = function (x: number, y: number) {
+//   return x + y;
+// };
+
+// const run = function (fn: Function, a: number, b: number) {
+//   console.log("fn(a, b):", fn(a, b));
+// };
+
+// run(sum, 10, 5);
+
+// run(
+//   function (x: number, y: number) {
+//     return x * y;
+//   },
+//   10,
+//   5
+// );
+
+//* Invoking Functions
+//@ "strict": false
+const sumIt = function (...arguments: number[]) {
+  console.log({ arguments });
+  console.log("this:", this);
+  let sum = 0;
+  for (let i = 0; i < arguments.length; i++) {
+    sum += arguments[i];
+  }
+  console.log({ sum });
 };
-
-const run = function (fn: Function, a: number, b: number) {
-  console.log("fn(a, b):", fn(a, b));
-};
-
-run(sum, 10, 5);
-
-run(
-  function (x: number, y: number) {
-    return x * y;
-  },
-  10,
-  5
-);
+sumIt(1, 2, 3, 4, 5);
+sumIt();

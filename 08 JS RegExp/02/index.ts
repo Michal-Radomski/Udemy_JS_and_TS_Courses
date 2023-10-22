@@ -93,17 +93,31 @@ console.log("testIP:", testIP);
 //   }
 // })();
 
+// const phrase = "First number: 32, and a second number 100. Here is the last number 15.";
+// let matchStart, matchLength, match;
+
+// const result = /\d+/.exec(phrase);
+
+// (function printResult() {
+//   if (result) {
+//     console.log("result:", result);
+//     matchStart = result.index;
+//     matchLength = result[0].length;
+//     match = result[0];
+//     console.log({ matchStart, matchLength, match });
+//   }
+// })();
+
+//* Iterating
 const phrase = "First number: 32, and a second number 100. Here is the last number 15.";
-let matchStart, matchLength, match;
 
-const result = /\d+/.exec(phrase);
+const regex = /\d+/g;
+let match = null;
 
-(function printResult() {
-  if (result) {
-    console.log("result:", result);
-    matchStart = result.index;
-    matchLength = result[0].length;
-    match = result[0];
-    console.log({ matchStart, matchLength, match });
+(function printMatch() {
+  while ((match = regex.exec(phrase))) {
+    if (match.index == regex.lastIndex) regex.lastIndex++;
+    console.log({ match });
+    console.log("regex.lastIndex:", regex.lastIndex);
   }
 })();

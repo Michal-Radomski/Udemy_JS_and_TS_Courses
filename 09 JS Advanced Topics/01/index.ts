@@ -1,3 +1,4 @@
+export {};
 //* Functions are Objects!
 // const report1 = function (val: string) {
 //   console.log({ val });
@@ -79,4 +80,37 @@
 // console.log("print" in obj2);
 // console.log('obj.hasOwnProperty("name"):', obj.hasOwnProperty("name"));
 
-//* This
+//* This (is determined in run time!)
+// function getThis(this: any) {
+//   return this;
+// }
+
+// const obj1 = { name: "obj1" } as { name: string; getThis: Function };
+// const obj2 = { name: "obj2" } as { name: string; getThis: Function };
+
+// obj1.getThis = getThis;
+// obj2.getThis = getThis;
+
+// console.log(obj1.getThis()); // { name: 'obj1', getThis: [Function: getThis] }
+// console.log(obj2.getThis()); // { name: 'obj2', getThis: [Function: getThis] }
+
+//* Examining this with Normal Function Invocation
+const name = "global";
+console.log({ name });
+
+const runIt = function (this: any, fn: Function) {
+  const name = "runIt";
+  console.log({ name });
+  console.log("From runIt ---");
+  console.log(this);
+  console.log(this?.name);
+  fn();
+};
+
+runIt(function fun2(this: any) {
+  const name = "fun2";
+  console.log({ name });
+  console.log("From fun2 --");
+  console.log(this);
+  console.log(this?.name);
+});

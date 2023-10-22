@@ -39,14 +39,44 @@
 
 //* Invoking Functions
 //@ "strict": false
-const sumIt = function (...arguments: number[]) {
-  console.log({ arguments });
-  console.log("this:", this);
-  let sum = 0;
-  for (let i = 0; i < arguments.length; i++) {
-    sum += arguments[i];
-  }
-  console.log({ sum });
-};
-sumIt(1, 2, 3, 4, 5);
-sumIt();
+// //* Better method - pass argument then arguments as below
+// const test = (num: number) => {
+//   console.log({ num });
+// };
+// test(6);
+
+// const sumIt = function (...arguments: number[]) {
+//   console.log({ arguments });
+//   console.log("this:", this);
+//   let sum = 0;
+//   for (let i = 0; i < arguments.length; i++) {
+//     sum += arguments[i];
+//   }
+//   console.log({ sum });
+// };
+// sumIt(1, 2, 3, 4, 5);
+// sumIt();
+
+//* Defining Objects: object literal or object contractor
+// const obj = {
+//   name: "Michal",
+//   print: function () {
+//     console.log("this:", this);
+//   },
+// };
+
+// const obj2 = new Object() as { name: string; print: () => void };
+// obj2.name = "Michal";
+// obj2.print = function () {
+//   console.log("this:", this);
+// };
+
+// console.log({ obj, obj2 }, typeof obj, typeof obj2, obj === obj2, obj.name === obj2.name);
+// obj.print();
+// obj2.print();
+
+// console.log("name" in obj);
+// console.log("print" in obj2);
+// console.log('obj.hasOwnProperty("name"):', obj.hasOwnProperty("name"));
+
+//* This

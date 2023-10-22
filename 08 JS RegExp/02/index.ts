@@ -73,4 +73,37 @@ const regExpIP =
   /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 const arr_IP = [IP_num1, IP_num2, IP_num3, IP_num4, IP_num5];
 const testIP = arr_IP.map((IP) => regExpIP.test(IP));
-console.log(testIP);
+console.log("testIP:", testIP);
+
+//* Capturing Matched Text
+// const phrase = "First number: 32, and a second number 100. Here is the last number 15.";
+// let total = 0;
+
+// const result = phrase.match(/\d+/g);
+
+// (function printResult() {
+//   console.log("result:", result);
+//   if (result) {
+//     const num1 = result[0],
+//       num2 = result[1],
+//       num3 = result[2];
+//     console.log({ num1, num2, num3 });
+//     total = result.reduce((sum, val) => sum + parseInt(val, 10), 0);
+//     console.log({ total });
+//   }
+// })();
+
+const phrase = "First number: 32, and a second number 100. Here is the last number 15.";
+let matchStart, matchLength, match;
+
+const result = /\d+/.exec(phrase);
+
+(function printResult() {
+  if (result) {
+    console.log("result:", result);
+    matchStart = result.index;
+    matchLength = result[0].length;
+    match = result[0];
+    console.log({ matchStart, matchLength, match });
+  }
+})();

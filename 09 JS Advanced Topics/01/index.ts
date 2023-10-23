@@ -1,3 +1,12 @@
+//* Currying
+// const function1 = function () {
+//   console.log("function1");
+//   return function function2() {
+//     console.log("function2");
+//   };
+// };
+// function1()();
+
 export {};
 //* Functions are Objects!
 // const report1 = function (val: string) {
@@ -95,22 +104,38 @@ export {};
 // console.log(obj2.getThis()); // { name: 'obj2', getThis: [Function: getThis] }
 
 //* Examining this with Normal Function Invocation
-const name = "global";
+//@ "strict": false
+// var name = "global";
+// console.log({ name });
+
+// var runIt = function (fn: Function) {
+//   var name = "runIt";
+//   console.log({ name });
+//   console.log("From runIt ---");
+//   console.log(1, "this:", this);
+//   console.log(this?.name);
+//   fn();
+// };
+
+// runIt(function fun2() {
+//   var name = "fun2";
+//   console.log({ name });
+//   console.log("From fun2 --");
+//   console.log(2, "this:", this);
+//   console.log(this?.name);
+// });
+
+// console.log("this:", this);
+
+//* Normal Function Invocation Using strict mode
+("use strict");
+var name = "global";
 console.log({ name });
 
-const runIt = function (this: any, fn: Function) {
-  const name = "runIt";
+var fun = function (this: any) {
+  var name = "fun";
   console.log({ name });
-  console.log("From runIt ---");
-  console.log(this);
+  console.log("this:", this);
   console.log(this?.name);
-  fn();
 };
-
-runIt(function fun2(this: any) {
-  const name = "fun2";
-  console.log({ name });
-  console.log("From fun2 --");
-  console.log(this);
-  console.log(this?.name);
-});
+fun();

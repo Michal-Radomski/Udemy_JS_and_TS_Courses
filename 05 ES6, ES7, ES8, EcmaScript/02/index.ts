@@ -46,7 +46,16 @@ const z = new TypeError();
 const a_2 = new URL("/", "https://developer.mozilla.org");
 const b_2 = new URLSearchParams("foo=1&bar=2");
 
-// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x, y, z, a_2, b_2 });
+const buffer = new ArrayBuffer(16);
+const c_2 = new DataView(buffer);
+
+const d_2 = new SharedArrayBuffer(8);
+// console.log({ d_2 }, d_2.byteLength);
+
+const e_2 = new Int32Array(2);
+// console.log({ e_2 }, e_2.length);
+
+// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x, y, z, a_2, b_2, c_2, d_2, e_2 });
 
 //* Example
 // const date = new Date(Date.UTC(2020, 11, 20, 3, 23, 16, 738));

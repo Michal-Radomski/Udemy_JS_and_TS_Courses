@@ -141,70 +141,118 @@ export {};
 // fun();
 
 //* Method Invocation
-const name = "global";
+// const name = "global";
 
-const obj1 = {
-  name: "obj1",
-  fun1: function () {
-    console.log("From fun1 in obj1 --");
-    console.log(1, this);
-    console.log(2, this.name);
+// const obj1 = {
+//   name: "obj1",
+//   fun1: function () {
+//     console.log("From fun1 in obj1 --");
+//     console.log(1, this);
+//     console.log(2, this.name);
+//   },
+// };
+// obj1.fun1();
+
+// const obj2 = {
+//   name: "obj2",
+//   fun2: obj1.fun1,
+// };
+// obj2.fun2();
+
+// const fun3 = function (this: any) {
+//   console.log("From fun3 --");
+//   console.log(3, this);
+//   console.log(4, this?.name);
+// };
+// // this?.fun3();
+// fun3();
+
+// var obj3 = {
+//   name: "obj3",
+//   fun3: fun3,
+// };
+// obj3.fun3();
+
+// console.log(5, this);
+
+// const obj4 = {
+//   name: "obj4",
+//   obj5: {
+//     name: "obj5",
+//     fun5: function () {
+//       console.log("From fun5 in obj 5 --");
+//       console.log(6, this);
+//       console.log(7, this.name);
+//     },
+//   },
+// };
+// obj4.obj5.fun5();
+
+// const fun6 = function () {
+//   console.log(8, "fun6");
+// };
+
+// Object.defineProperties(fun6, {
+//   name: {
+//     value: "fun6",
+//     writable: true,
+//   },
+// });
+// fun6.name = "fun6_2";
+// fun6();
+
+// fun6.fun7 = function () {
+//   console.log(9, "From fun7 in fun6 --");
+//   console.log(10, this);
+//   console.log(11, this.name);
+// };
+
+// fun6.fun7();
+
+//* Understanding Prototypes
+const myObject = {
+  city: "Madrid",
+  greet() {
+    console.log(`Greetings from ${this.city}`);
   },
 };
-obj1.fun1();
+myObject.greet(); // Greetings from Madrid
 
-const obj2 = {
-  name: "obj2",
-  fun2: obj1.fun1,
-};
-obj2.fun2();
+const myDate = new Date();
+let object = myDate;
+do {
+  object = Object.getPrototypeOf(object);
+  console.log("object:", object);
+} while (object);
 
-const fun3 = function (this: any) {
-  console.log("From fun3 --");
-  console.log(3, this);
-  console.log(4, this?.name);
-};
-// this?.fun3();
-fun3();
+console.log("typeof null, typeof undefined:", typeof null, typeof undefined);
 
-var obj3 = {
-  name: "obj3",
-  fun3: fun3,
-};
-obj3.fun3();
+const obj = {};
+console.log("obj:", obj);
+console.log(obj.toString); // [Function: toString]
+console.log(obj.hasOwnProperty); // [Function: hasOwnProperty]
+console.log(obj.valueOf); // [Function: valueOf]
+console.log(obj.constructor); // [Function: Object]
+console.log((obj as any).__proto__); // [Object: null prototype] {}
+console.log("toString" in obj);
+console.log(obj.hasOwnProperty("toString"));
 
-console.log(5, this);
+const obj2 = Object.create(null);
+console.log("obj2:", obj2);
+console.log(obj2.toString); // undefined
+console.log(obj2.hasOwnProperty); // undefined
+console.log(obj2.valueOf); // undefined
+console.log(obj2.constructor); // undefined
+console.log(obj2.__proto__); // undefined
+console.log("toString" in obj2);
 
-const obj4 = {
-  name: "obj4",
-  obj5: {
-    name: "obj5",
-    fun5: function () {
-      console.log("From fun5 in obj 5 --");
-      console.log(6, this);
-      console.log(7, this.name);
-    },
-  },
-};
-obj4.obj5.fun5();
+const arr = [] as any[];
+console.log("arr.toString():", arr.toString(), JSON.stringify(arr));
+console.log("arr.__proto__:", (arr as any).__proto__);
+console.log("arr.__proto__.__proto__:", (arr as any).__proto__.__proto__);
+console.log("arr.__proto__.__proto__.__proto__:", (arr as any).__proto__.__proto__.__proto__);
 
-const fun6 = function () {
-  console.log(8, "fun6");
-};
-
-Object.defineProperties(fun6, {
-  name: {
-    value: "fun6",
-    writable: true,
-  },
-});
-fun6();
-// fun6.name = "fun6";
-
-fun6.fun7 = function () {
-  console.log(8, "From fun7 in fun6 --");
-  console.log(9, this);
-  console.log(10, this.name);
-};
-
-fun6.fun7();
+const obj3 = {};
+console.log("obj3.toString():", obj3.toString(), JSON.stringify(obj3));
+console.log("obj3.__proto__:", (obj3 as any).__proto__);
+console.log("obj3.__proto__.__proto__:", (obj3 as any).__proto__.__proto__);

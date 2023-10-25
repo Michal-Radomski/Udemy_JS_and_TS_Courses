@@ -128,14 +128,51 @@ export {};
 // console.log("this:", this);
 
 //* Normal Function Invocation Using strict mode
-("use strict");
-var name = "global";
-console.log({ name });
+// ("use strict");
+// var name = "global";
+// console.log({ name });
 
-var fun = function (this: any) {
-  var name = "fun";
-  console.log({ name });
-  console.log("this:", this);
-  console.log(this?.name);
+// var fun = function (this: any) {
+//   var name = "fun";
+//   console.log({ name });
+//   console.log("this:", this);
+//   console.log(this?.name);
+// };
+// fun();
+
+//* Method Invocation
+const name = "global";
+
+const obj1 = {
+  name: "obj1",
+  fun1: function () {
+    console.log("From fun1 in obj1 --");
+    console.log(1, this);
+    console.log(2, this.name);
+  },
 };
-fun();
+
+obj1.fun1();
+
+const obj2 = {
+  name: "obj2",
+  fun2: obj1.fun1,
+};
+
+obj2.fun2();
+
+const fun3 = function (this: any) {
+  console.log("From fun3 --");
+  console.log(3, this);
+  console.log(4, this?.name);
+};
+
+// this?.fun3();
+fun3();
+
+var obj3 = {
+  name: "obj3",
+  fun3: fun3,
+};
+
+obj3.fun3();

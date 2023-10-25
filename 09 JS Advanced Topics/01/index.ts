@@ -210,49 +210,58 @@ export {};
 // fun6.fun7();
 
 //* Understanding Prototypes
-const myObject = {
-  city: "Madrid",
-  greet() {
-    console.log(`Greetings from ${this.city}`);
-  },
+// const myObject = {
+//   city: "Madrid",
+//   greet() {
+//     console.log(`Greetings from ${this.city}`);
+//   },
+// };
+// myObject.greet(); // Greetings from Madrid
+
+// const myDate = new Date();
+// let object = myDate;
+// do {
+//   object = Object.getPrototypeOf(object);
+//   console.log("object:", object);
+// } while (object);
+
+// console.log("typeof null, typeof undefined:", typeof null, typeof undefined);
+
+// const obj = {};
+// console.log("obj:", obj);
+// console.log(obj.toString); // [Function: toString]
+// console.log(obj.hasOwnProperty); // [Function: hasOwnProperty]
+// console.log(obj.valueOf); // [Function: valueOf]
+// console.log(obj.constructor); // [Function: Object]
+// console.log((obj as any).__proto__); // [Object: null prototype] {}
+// console.log("toString" in obj);
+// console.log(obj.hasOwnProperty("toString"));
+
+// const obj2 = Object.create(null);
+// console.log("obj2:", obj2);
+// console.log(obj2.toString); // undefined
+// console.log(obj2.hasOwnProperty); // undefined
+// console.log(obj2.valueOf); // undefined
+// console.log(obj2.constructor); // undefined
+// console.log(obj2.__proto__); // undefined
+// console.log("toString" in obj2);
+
+// const arr = [] as any[];
+// console.log("arr.toString():", arr.toString(), JSON.stringify(arr));
+// console.log("arr.__proto__:", (arr as any).__proto__);
+// console.log("arr.__proto__.__proto__:", (arr as any).__proto__.__proto__);
+// console.log("arr.__proto__.__proto__.__proto__:", (arr as any).__proto__.__proto__.__proto__);
+
+// const obj3 = {};
+// console.log("obj3.toString():", obj3.toString(), JSON.stringify(obj3));
+// console.log("obj3.__proto__:", (obj3 as any).__proto__);
+// console.log("obj3.__proto__.__proto__:", (obj3 as any).__proto__.__proto__);
+
+//* Prototype of Functions
+const test = function () {
+  console.log("test");
 };
-myObject.greet(); // Greetings from Madrid
-
-const myDate = new Date();
-let object = myDate;
-do {
-  object = Object.getPrototypeOf(object);
-  console.log("object:", object);
-} while (object);
-
-console.log("typeof null, typeof undefined:", typeof null, typeof undefined);
-
-const obj = {};
-console.log("obj:", obj);
-console.log(obj.toString); // [Function: toString]
-console.log(obj.hasOwnProperty); // [Function: hasOwnProperty]
-console.log(obj.valueOf); // [Function: valueOf]
-console.log(obj.constructor); // [Function: Object]
-console.log((obj as any).__proto__); // [Object: null prototype] {}
-console.log("toString" in obj);
-console.log(obj.hasOwnProperty("toString"));
-
-const obj2 = Object.create(null);
-console.log("obj2:", obj2);
-console.log(obj2.toString); // undefined
-console.log(obj2.hasOwnProperty); // undefined
-console.log(obj2.valueOf); // undefined
-console.log(obj2.constructor); // undefined
-console.log(obj2.__proto__); // undefined
-console.log("toString" in obj2);
-
-const arr = [] as any[];
-console.log("arr.toString():", arr.toString(), JSON.stringify(arr));
-console.log("arr.__proto__:", (arr as any).__proto__);
-console.log("arr.__proto__.__proto__:", (arr as any).__proto__.__proto__);
-console.log("arr.__proto__.__proto__.__proto__:", (arr as any).__proto__.__proto__.__proto__);
-
-const obj3 = {};
-console.log("obj3.toString():", obj3.toString(), JSON.stringify(obj3));
-console.log("obj3.__proto__:", (obj3 as any).__proto__);
-console.log("obj3.__proto__.__proto__:", (obj3 as any).__proto__.__proto__);
+test();
+console.log("test.__proto__:", (test as any).__proto__);
+console.log("test.__proto__.__proto__:", (test as any).__proto__.__proto__);
+console.log("test.__proto__.__proto__.__proto__:", (test as any).__proto__.__proto__.__proto__);

@@ -151,14 +151,12 @@ const obj1 = {
     console.log(2, this.name);
   },
 };
-
 obj1.fun1();
 
 const obj2 = {
   name: "obj2",
   fun2: obj1.fun1,
 };
-
 obj2.fun2();
 
 const fun3 = function (this: any) {
@@ -166,7 +164,6 @@ const fun3 = function (this: any) {
   console.log(3, this);
   console.log(4, this?.name);
 };
-
 // this?.fun3();
 fun3();
 
@@ -174,5 +171,40 @@ var obj3 = {
   name: "obj3",
   fun3: fun3,
 };
-
 obj3.fun3();
+
+console.log(5, this);
+
+const obj4 = {
+  name: "obj4",
+  obj5: {
+    name: "obj5",
+    fun5: function () {
+      console.log("From fun5 in obj 5 --");
+      console.log(6, this);
+      console.log(7, this.name);
+    },
+  },
+};
+obj4.obj5.fun5();
+
+const fun6 = function () {
+  console.log(8, "fun6");
+};
+
+Object.defineProperties(fun6, {
+  name: {
+    value: "fun6",
+    writable: true,
+  },
+});
+fun6();
+// fun6.name = "fun6";
+
+fun6.fun7 = function () {
+  console.log(8, "From fun7 in fun6 --");
+  console.log(9, this);
+  console.log(10, this.name);
+};
+
+fun6.fun7();

@@ -265,3 +265,13 @@ test();
 console.log("test.__proto__:", (test as any).__proto__);
 console.log("test.__proto__.__proto__:", (test as any).__proto__.__proto__);
 console.log("test.__proto__.__proto__.__proto__:", (test as any).__proto__.__proto__.__proto__);
+console.log("typeof test:", typeof test);
+
+const test2 = () => {
+  console.log("test2");
+};
+test2();
+console.log("test2.__proto__:", (test2 as any).__proto__);
+console.log("test2.__proto__.__proto__:", (test2 as any).__proto__.__proto__);
+console.log("test2.__proto__.__proto__.__proto__:", (test2 as any).__proto__.__proto__.__proto__);
+console.log("typeof test2:", typeof test2);

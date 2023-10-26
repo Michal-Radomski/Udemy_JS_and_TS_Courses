@@ -276,7 +276,7 @@ export {};
 // console.log("test2.__proto__.__proto__.__proto__:", (test2 as any).__proto__.__proto__.__proto__);
 // console.log("typeof test2:", typeof test2);
 
-//* Call and Apply
+//* Call and Apply -> to define this!
 // const greetingsFunk = function (this: any, name: string) {
 //   console.log("Good Morning");
 //   console.log("this:", this);
@@ -286,6 +286,31 @@ export {};
 // greetingsFunk.call(this, "call");
 // greetingsFunk.apply(this, ["apply"]);
 
+// const user1 = {
+//   firstName: "John",
+//   lastName: "Anderson",
+//   fullName: function () {
+//     return this.firstName + " " + this.lastName;
+//   },
+// };
+
+// const user2 = {
+//   firstName: "Sarah",
+//   lastName: "West",
+//   fullName: function () {
+//     return this.firstName + " " + this.lastName;
+//   },
+// };
+
+// const greeting = function (this: any, term: string, punct: string) {
+//   console.log(term + " " + this.firstName + punct);
+// };
+// greeting.apply(user1, ["Good Morning", "!"]);
+// greeting.apply(user2, ["Good Afternoon", "!"]);
+
+// console.log("user1.fullName.call(user2):", user1.fullName.call(user2));
+
+//* Bind -> to determine value of this!
 const user1 = {
   firstName: "John",
   lastName: "Anderson",
@@ -305,7 +330,10 @@ const user2 = {
 const greeting = function (this: any, term: string, punct: string) {
   console.log(term + " " + this.firstName + punct);
 };
-greeting.apply(user1, ["Good Morning", "!"]);
-greeting.apply(user2, ["Good Afternoon", "!"]);
 
-console.log("user1.fullName.call(user2):", user1.fullName.call(user2));
+const morningGreet = greeting.bind(user1, "Good Morning");
+const afternoonGreet = greeting.bind(user1, "Good Afternoon");
+
+morningGreet("!");
+afternoonGreet(".");
+morningGreet.call(user2, "!");

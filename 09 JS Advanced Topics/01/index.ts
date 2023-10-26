@@ -339,16 +339,33 @@ export {};
 // morningGreet.call(user2, "!"); //* Apply doesn't work here!!!
 
 //* Functions as Constructors: The Magic of new
-const Greeting = function (this: any, name: string) {
-  this.name = name;
-  this.greet = function () {
-    console.log(`Hi ${name}!`);
+// const Greeting = function (this: any, name: string) {
+//   this.name = name;
+//   this.greet = function () {
+//     console.log(`Hi ${name}!`);
+//   };
+// };
+
+// const greet1 = new (Greeting as any)("Michal");
+// const greet2 = new (Greeting as any)("Michal2");
+// greet1.greet();
+// greet2.greet();
+
+// console.log({ greet1, greet2 }, typeof greet1, greet2 instanceof Greeting);
+
+//* Constructor Invocation and the Value of this
+function Users(this: any, fName: string, lName: string) {
+  this.firstName = fName;
+  this.lastName = lName;
+  this.fullName = function () {
+    return this.firstName + " " + this.lastName;
   };
-};
+}
 
-const greet1 = new (Greeting as any)("Michal");
-const greet2 = new (Greeting as any)("Michal2");
-greet1.greet();
-greet2.greet();
+const user1 = new (Users as any)("James", "Johnson");
+const user2 = new (Users as any)("Mary", "Smith");
+console.log("user1.fullName():", user1.fullName());
+console.log("user2.fullName():", user2.fullName());
 
-console.log({ greet1, greet2 }, typeof greet1, greet2 instanceof Greeting);
+console.log("user1:", user1, typeof user1, user1 instanceof Users);
+console.log("user2.__proto__.__proto__.__proto__:", (user2 as any).__proto__.__proto__.__proto__);

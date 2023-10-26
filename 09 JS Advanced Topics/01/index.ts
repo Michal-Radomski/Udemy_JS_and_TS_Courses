@@ -258,20 +258,54 @@ export {};
 // console.log("obj3.__proto__.__proto__:", (obj3 as any).__proto__.__proto__);
 
 //* Prototype of Functions
-const test = function () {
-  console.log("test");
-};
-test();
-console.log("test.__proto__:", (test as any).__proto__);
-console.log("test.__proto__.__proto__:", (test as any).__proto__.__proto__);
-console.log("test.__proto__.__proto__.__proto__:", (test as any).__proto__.__proto__.__proto__);
-console.log("typeof test:", typeof test);
+// const test = function () {
+//   console.log("test");
+// };
+// test();
+// console.log("test.__proto__:", (test as any).__proto__);
+// console.log("test.__proto__.__proto__:", (test as any).__proto__.__proto__);
+// console.log("test.__proto__.__proto__.__proto__:", (test as any).__proto__.__proto__.__proto__);
+// console.log("typeof test:", typeof test);
 
-const test2 = () => {
-  console.log("test2");
+// const test2 = () => {
+//   console.log("test2");
+// };
+// test2();
+// console.log("test2.__proto__:", (test2 as any).__proto__);
+// console.log("test2.__proto__.__proto__:", (test2 as any).__proto__.__proto__);
+// console.log("test2.__proto__.__proto__.__proto__:", (test2 as any).__proto__.__proto__.__proto__);
+// console.log("typeof test2:", typeof test2);
+
+//* Call and Apply
+// const greetingsFunk = function (this: any, name: string) {
+//   console.log("Good Morning");
+//   console.log("this:", this);
+//   console.log({ name });
+// };
+// greetingsFunk("function");
+// greetingsFunk.call(this, "call");
+// greetingsFunk.apply(this, ["apply"]);
+
+const user1 = {
+  firstName: "John",
+  lastName: "Anderson",
+  fullName: function () {
+    return this.firstName + " " + this.lastName;
+  },
 };
-test2();
-console.log("test2.__proto__:", (test2 as any).__proto__);
-console.log("test2.__proto__.__proto__:", (test2 as any).__proto__.__proto__);
-console.log("test2.__proto__.__proto__.__proto__:", (test2 as any).__proto__.__proto__.__proto__);
-console.log("typeof test2:", typeof test2);
+
+const user2 = {
+  firstName: "Sarah",
+  lastName: "West",
+  fullName: function () {
+    return this.firstName + " " + this.lastName;
+  },
+};
+
+const greeting = function (this: any, term: string, punct: string) {
+  console.log(term + " " + this.firstName + punct);
+};
+greeting.apply(user1, ["Good Morning", "!"]);
+greeting.apply(user2, ["Good Afternoon", "!"]);
+
+console.log("user1.fullName.call(user2):", user1.fullName.call(user2));

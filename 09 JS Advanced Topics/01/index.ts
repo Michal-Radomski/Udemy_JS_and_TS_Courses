@@ -311,29 +311,44 @@ export {};
 // console.log("user1.fullName.call(user2):", user1.fullName.call(user2));
 
 //* Bind -> to determine value of this!
-const user1 = {
-  firstName: "John",
-  lastName: "Anderson",
-  fullName: function () {
-    return this.firstName + " " + this.lastName;
-  },
+// const user1 = {
+//   firstName: "John",
+//   lastName: "Anderson",
+//   fullName: function () {
+//     return this.firstName + " " + this.lastName;
+//   },
+// };
+
+// const user2 = {
+//   firstName: "Sarah",
+//   lastName: "West",
+//   fullName: function () {
+//     return this.firstName + " " + this.lastName;
+//   },
+// };
+
+// const greeting = function (this: any, term: string, punct: string) {
+//   console.log(term + " " + this.firstName + punct);
+// };
+
+// const morningGreet = greeting.bind(user1, "Good Morning");
+// const afternoonGreet = greeting.bind(user1, "Good Afternoon");
+
+// morningGreet("!");
+// afternoonGreet(".");
+// morningGreet.call(user2, "!"); //* Apply doesn't work here!!!
+
+//* Functions as Constructors: The Magic of new
+const Greeting = function (this: any, name: string) {
+  this.name = name;
+  this.greet = function () {
+    console.log(`Hi ${name}!`);
+  };
 };
 
-const user2 = {
-  firstName: "Sarah",
-  lastName: "West",
-  fullName: function () {
-    return this.firstName + " " + this.lastName;
-  },
-};
+const greet1 = new (Greeting as any)("Michal");
+const greet2 = new (Greeting as any)("Michal2");
+greet1.greet();
+greet2.greet();
 
-const greeting = function (this: any, term: string, punct: string) {
-  console.log(term + " " + this.firstName + punct);
-};
-
-const morningGreet = greeting.bind(user1, "Good Morning");
-const afternoonGreet = greeting.bind(user1, "Good Afternoon");
-
-morningGreet("!");
-afternoonGreet(".");
-morningGreet.call(user2, "!");
+console.log({ greet1, greet2 }, typeof greet1, greet2 instanceof Greeting);

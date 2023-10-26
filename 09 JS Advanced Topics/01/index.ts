@@ -354,18 +354,43 @@ export {};
 // console.log({ greet1, greet2 }, typeof greet1, greet2 instanceof Greeting);
 
 //* Constructor Invocation and the Value of this
-function Users(this: any, fName: string, lName: string) {
-  this.firstName = fName;
-  this.lastName = lName;
-  this.fullName = function () {
-    return this.firstName + " " + this.lastName;
-  };
-}
+// function Users(this: any, fName: string, lName: string) {
+//   this.firstName = fName;
+//   this.lastName = lName;
+//   this.fullName = function () {
+//     return this.firstName + " " + this.lastName;
+//   };
+// }
 
-const user1 = new (Users as any)("James", "Johnson");
-const user2 = new (Users as any)("Mary", "Smith");
-console.log("user1.fullName():", user1.fullName());
-console.log("user2.fullName():", user2.fullName());
+// const user1 = new (Users as any)("James", "Johnson");
+// const user2 = new (Users as any)("Mary", "Smith");
+// console.log("user1.fullName():", user1.fullName());
+// console.log("user2.fullName():", user2.fullName());
 
-console.log("user1:", user1, typeof user1, user1 instanceof Users);
-console.log("user2.__proto__.__proto__.__proto__:", (user2 as any).__proto__.__proto__.__proto__);
+// console.log("user1:", user1, typeof user1, user1 instanceof Users);
+// console.log("user2.__proto__.__proto__.__proto__:", (user2 as any).__proto__.__proto__.__proto__);
+
+//* Higher Order Functions, Callbacks and the Problem with this
+const firstName = "James",
+  lastName = "West";
+
+const that: any = this;
+console.log({ that }, that === this);
+
+const user = {
+  firstName: "Mich",
+  lastName: "Rad",
+  fullName: function () {
+    console.log(this.firstName + " " + this.lastName);
+  },
+  fullName2: function () {
+    console.log(firstName + " " + lastName);
+  },
+  fullName3: function () {
+    console.log(that?.firstName + " " + that?.lastName);
+  },
+};
+
+user.fullName();
+user.fullName2();
+user.fullName3();

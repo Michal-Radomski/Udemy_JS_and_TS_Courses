@@ -395,7 +395,7 @@ export {};
 // user.fullName2();
 // user.fullName3();
 
-//* Arrow Functions -> lexical this!
+//* Arrow Functions -> lexical this! -> where is this!
 // const user1 = {
 //   firstName: "Cory",
 //   lastName: "Sikahema",
@@ -418,3 +418,25 @@ export {};
 // console.log("globalThis:", globalThis, typeof globalThis);
 
 //* DRY coding
+const sum = function (arr: number[]): number {
+  console.log("arr:", arr);
+  let total = 0;
+  while (arr.length > 0) {
+    total += arr.pop()!;
+  }
+  return total;
+};
+
+const findMultiple = function (start: number, end: number, multiple: number): number[] {
+  const results = [] as number[];
+
+  while (start <= end) {
+    if (start % multiple === 0) {
+      results.push(start);
+    }
+    start++;
+  }
+  return results;
+};
+
+console.log("sum(findMultiple(1, 100, 3)):", sum(findMultiple(1, 100, 3)));

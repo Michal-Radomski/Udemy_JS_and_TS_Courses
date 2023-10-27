@@ -395,24 +395,26 @@ export {};
 // user.fullName2();
 // user.fullName3();
 
-//* Arrow Functions
-const user1 = {
-  firstName: "Cory",
-  lastName: "Sikahema",
-};
+//* Arrow Functions -> lexical this!
+// const user1 = {
+//   firstName: "Cory",
+//   lastName: "Sikahema",
+// };
 
-const user2 = {
-  firstName: "Hailey",
-  lastName: "Smith",
-};
+// const user2 = {
+//   firstName: "Hailey",
+//   lastName: "Smith",
+// };
 
-const fullName = function (this: any) {
-  setTimeout(() => {
-    console.log(this?.firstName + " " + this?.lastName);
-  }, 2000);
-};
+// const fullName = function (this: any) {
+//   setTimeout(() => {
+//     console.log(this?.firstName + " " + this?.lastName);
+//   }, 2000);
+// };
 
-fullName.call(user1);
-fullName.call(user2);
+// fullName.call(user1);
+// fullName.call(user2);
 
-console.log("globalThis:", globalThis, typeof globalThis);
+// console.log("globalThis:", globalThis, typeof globalThis);
+
+//* DRY coding

@@ -418,25 +418,73 @@ export {};
 // console.log("globalThis:", globalThis, typeof globalThis);
 
 //* DRY coding
-const sum = function (arr: number[]): number {
-  console.log("arr:", arr);
-  let total = 0;
-  while (arr.length > 0) {
-    total += arr.pop()!;
-  }
-  return total;
+// const sum = function (arr: number[]): number {
+//   console.log("arr:", arr);
+//   let total = 0;
+//   while (arr.length > 0) {
+//     total += arr.pop()!;
+//   }
+//   return total;
+// };
+
+// const findMultiple = function (start: number, end: number, multiple: number): number[] {
+//   const results = [] as number[];
+
+//   while (start <= end) {
+//     if (start % multiple === 0) {
+//       results.push(start);
+//     }
+//     start++;
+//   }
+//   return results;
+// };
+
+// console.log("sum(findMultiple(1, 100, 3)):", sum(findMultiple(1, 100, 3)));
+
+//* Working with Objects
+//* Properties
+// const person = {
+//   firstName: "Steven",
+//   lastName: "Hancock",
+//   email: "shancock@allthingsjavascript.com",
+//   type: "admin",
+//   active: true,
+//   address: {
+//     street: "100 N. Main",
+//     zip: 10001,
+//   },
+// };
+
+// for (let prop in person) {
+//   console.log("Name: " + prop);
+//   console.log("Value: " + person[prop as keyof typeof person].toString());
+// }
+
+// console.log("Object.keys(person):", Object.keys(person));
+// console.log("Object.values(person):", Object.values(person));
+// console.log("Object.entries(person):", Object.entries(person));
+
+// console.log('person.propertyIsEnumerable("firstName"):', person.propertyIsEnumerable("firstName"));
+
+//* Changing Property Attributes
+const obj = {
+  type: "rectangle",
+  width: 10,
+  height: 5,
 };
+console.log("obj:", obj);
+console.log('obj.propertyIsEnumerable("type"):', obj.propertyIsEnumerable("type"));
 
-const findMultiple = function (start: number, end: number, multiple: number): number[] {
-  const results = [] as number[];
+for (let prop in obj) {
+  console.log(1, "Name: " + prop);
+  console.log(1, "Value: " + obj[prop as keyof typeof obj]);
+}
 
-  while (start <= end) {
-    if (start % multiple === 0) {
-      results.push(start);
-    }
-    start++;
-  }
-  return results;
-};
+Object.defineProperty(obj, "type", { enumerable: false });
 
-console.log("sum(findMultiple(1, 100, 3)):", sum(findMultiple(1, 100, 3)));
+console.log('obj.propertyIsEnumerable("type"):', obj.propertyIsEnumerable("type"));
+
+for (let prop in obj) {
+  console.log(2, "Name: " + prop);
+  console.log(2, "Value: " + obj[prop as keyof typeof obj]);
+}

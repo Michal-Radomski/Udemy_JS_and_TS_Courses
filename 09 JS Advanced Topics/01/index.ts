@@ -488,3 +488,8 @@ for (let prop in obj) {
   console.log(2, "Name: " + prop);
   console.log(2, "Value: " + obj[prop as keyof typeof obj]);
 }
+
+console.log("Object.keys(obj):", Object.keys(obj)); //* "type" not listed because it is not enumerable!
+
+Object.defineProperty(obj, "type", { writable: false });
+Object.defineProperty(obj, "type", { configurable: false });

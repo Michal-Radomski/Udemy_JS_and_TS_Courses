@@ -371,26 +371,48 @@ export {};
 // console.log("user2.__proto__.__proto__.__proto__:", (user2 as any).__proto__.__proto__.__proto__);
 
 //* Higher Order Functions, Callbacks and the Problem with this
-const firstName = "James",
-  lastName = "West";
+// const firstName = "James",
+//   lastName = "West";
 
-const that: any = this;
-console.log({ that }, that === this);
+// const that: any = this;
+// console.log({ that }, that === this);
 
-const user = {
-  firstName: "Mich",
-  lastName: "Rad",
-  fullName: function () {
-    console.log(this.firstName + " " + this.lastName);
-  },
-  fullName2: function () {
-    console.log(firstName + " " + lastName);
-  },
-  fullName3: function () {
-    console.log(that?.firstName + " " + that?.lastName);
-  },
+// const user = {
+//   firstName: "Mich",
+//   lastName: "Rad",
+//   fullName: function () {
+//     console.log(this.firstName + " " + this.lastName);
+//   },
+//   fullName2: function () {
+//     console.log(firstName + " " + lastName);
+//   },
+//   fullName3: function () {
+//     console.log(that?.firstName + " " + that?.lastName);
+//   },
+// };
+
+// user.fullName();
+// user.fullName2();
+// user.fullName3();
+
+//* Arrow Functions
+const user1 = {
+  firstName: "Cory",
+  lastName: "Sikahema",
 };
 
-user.fullName();
-user.fullName2();
-user.fullName3();
+const user2 = {
+  firstName: "Hailey",
+  lastName: "Smith",
+};
+
+const fullName = function (this: any) {
+  setTimeout(() => {
+    console.log(this?.firstName + " " + this?.lastName);
+  }, 2000);
+};
+
+fullName.call(user1);
+fullName.call(user2);
+
+console.log("globalThis:", globalThis, typeof globalThis);

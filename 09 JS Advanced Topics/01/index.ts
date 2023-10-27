@@ -467,29 +467,55 @@ export {};
 // console.log('person.propertyIsEnumerable("firstName"):', person.propertyIsEnumerable("firstName"));
 
 //* Changing Property Attributes
-const obj = {
-  type: "rectangle",
-  width: 10,
-  height: 5,
+// const obj = {
+//   type: "rectangle",
+//   width: 10,
+//   height: 5,
+// };
+// console.log("obj:", obj);
+// console.log('obj.propertyIsEnumerable("type"):', obj.propertyIsEnumerable("type"));
+
+// for (let prop in obj) {
+//   console.log(1, "Name: " + prop);
+//   console.log(1, "Value: " + obj[prop as keyof typeof obj]);
+// }
+
+// Object.defineProperty(obj, "type", { enumerable: false });
+
+// console.log('obj.propertyIsEnumerable("type"):', obj.propertyIsEnumerable("type"));
+
+// for (let prop in obj) {
+//   console.log(2, "Name: " + prop);
+//   console.log(2, "Value: " + obj[prop as keyof typeof obj]);
+// }
+
+// console.log("Object.keys(obj):", Object.keys(obj)); //* "type" not listed because it is not enumerable!
+
+// Object.defineProperty(obj, "type", { writable: false });
+// Object.defineProperty(obj, "type", { configurable: false });
+
+//* Exercise
+function Human(this: any, name: string, level: number) {
+  this.name = name;
+  this.level = level;
+}
+
+function SuperHero(this: any, name: string, level: number) {
+  Human.call(this, name, level);
+}
+
+//* instead of: class SuperHero extends Human {}
+Object.setPrototypeOf(SuperHero.prototype, Human.prototype);
+
+Human.prototype.speak = function () {
+  return `${this.name} says hello.`;
 };
-console.log("obj:", obj);
-console.log('obj.propertyIsEnumerable("type"):', obj.propertyIsEnumerable("type"));
 
-for (let prop in obj) {
-  console.log(1, "Name: " + prop);
-  console.log(1, "Value: " + obj[prop as keyof typeof obj]);
-}
+SuperHero.prototype.fly = function () {
+  return `${this.name} is flying.`;
+};
 
-Object.defineProperty(obj, "type", { enumerable: false });
+const superMan = new (SuperHero as any)("Clark Kent", 1);
 
-console.log('obj.propertyIsEnumerable("type"):', obj.propertyIsEnumerable("type"));
-
-for (let prop in obj) {
-  console.log(2, "Name: " + prop);
-  console.log(2, "Value: " + obj[prop as keyof typeof obj]);
-}
-
-console.log("Object.keys(obj):", Object.keys(obj)); //* "type" not listed because it is not enumerable!
-
-Object.defineProperty(obj, "type", { writable: false });
-Object.defineProperty(obj, "type", { configurable: false });
+console.log("superMan.fly():", superMan.fly());
+console.log("superMan.speak():", superMan.speak());

@@ -528,31 +528,87 @@ export {};
 // console.log("object1.hasOwnProperty('hasOwnProperty'):", object1.hasOwnProperty("hasOwnProperty")); // Expected output: false
 
 //* Making Objects Immutable
+// interface Obj {
+//   firstName: string;
+//   lastName: string;
+//   startDate: string;
+//   type?: string;
+//   newProp?: boolean;
+// }
+
+// const obj: Obj = {
+//   firstName: "Steven",
+//   lastName: "Smith",
+//   startDate: "January 10, 2015",
+//   type: "admin",
+// };
+
+// // Object.defineProperty(obj, "startDate", {
+// //   writable: false,
+// // });
+// // obj.startDate = "new start";
+
+// // Object.seal(obj);
+// // obj.firstName = "Steve"; //* Ok
+
+// Object.freeze(obj);
+// // obj.newProp = true;
+// // delete obj.type;
+
+// console.log("obj:", obj);
+
+//* ES6 Object Features
+// const multiple = 5;
+// const objES5 = {
+//   start: 1,
+//   end: 100,
+//   multiple: multiple,
+//   print: function () {
+//     console.log("this.start, this.end ,this.multiple:", this.start, this.end, this.multiple);
+//   },
+// };
+// console.log({ objES5 });
+// objES5.print();
+
+//* ES6
 interface Obj {
-  firstName: string;
-  lastName: string;
-  startDate: string;
-  type?: string;
-  newProp?: boolean;
+  firstName?: string;
+  lastName?: string;
+  fullName?: Function;
 }
 
-const obj: Obj = {
-  firstName: "Steven",
-  lastName: "Smith",
-  startDate: "January 10, 2015",
-  type: "admin",
+const objProto: Obj = {
+  fullName() {
+    console.log(`${this.firstName!} ${this.lastName!}`);
+  },
+};
+const objChild: Obj = { firstName: "Michal", lastName: "Rad" };
+Object.setPrototypeOf(objChild, objProto);
+//* V1
+// if (objChild.fullName) {
+//   objChild.fullName();
+// }
+//* V2
+objChild.fullName?.();
+
+const test = "test";
+const obj = {
+  start: 0,
+  test,
+  print() {
+    console.log("this.start, this.test:", this.start, this.test);
+  },
+};
+const obj1 = {
+  a: 5,
+};
+const obj2 = {
+  b: 10,
+};
+const obj3 = {
+  c: 15,
 };
 
-// Object.defineProperty(obj, "startDate", {
-//   writable: false,
-// });
-// obj.startDate = "new start";
-
-// Object.seal(obj);
-// obj.firstName = "Steve"; //* Ok
-
-Object.freeze(obj);
-// obj.newProp = true;
-// delete obj.type;
-
-console.log("obj:", obj);
+Object.assign(obj, obj1, obj2, obj3);
+console.log({ obj });
+obj.print();

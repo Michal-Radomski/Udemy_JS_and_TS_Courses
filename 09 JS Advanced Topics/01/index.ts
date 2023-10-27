@@ -495,27 +495,64 @@ export {};
 // Object.defineProperty(obj, "type", { configurable: false });
 
 //* Exercise
-function Human(this: any, name: string, level: number) {
-  this.name = name;
-  this.level = level;
+// function Human(this: any, name: string, level: number) {
+//   this.name = name;
+//   this.level = level;
+// }
+
+// function SuperHero(this: any, name: string, level: number) {
+//   Human.call(this, name, level);
+// }
+
+// //* instead of: class SuperHero extends Human {}
+// Object.setPrototypeOf(SuperHero.prototype, Human.prototype);
+
+// Human.prototype.speak = function () {
+//   return `${this.name} says hello.`;
+// };
+
+// SuperHero.prototype.fly = function () {
+//   return `${this.name} is flying.`;
+// };
+
+// const superMan = new (SuperHero as any)("Clark Kent", 1);
+
+// console.log("superMan.fly():", superMan.fly());
+// console.log("superMan.speak():", superMan.speak());
+
+// const object1 = {} as { property1: number };
+// object1.property1 = 42;
+
+// console.log("object1.hasOwnProperty('property1'):", object1.hasOwnProperty("property1")); // Expected output: true
+// console.log("object1.hasOwnProperty('toString'):", object1.hasOwnProperty("toString")); // Expected output: false
+// console.log("object1.hasOwnProperty('hasOwnProperty'):", object1.hasOwnProperty("hasOwnProperty")); // Expected output: false
+
+//* Making Objects Immutable
+interface Obj {
+  firstName: string;
+  lastName: string;
+  startDate: string;
+  type?: string;
+  newProp?: boolean;
 }
 
-function SuperHero(this: any, name: string, level: number) {
-  Human.call(this, name, level);
-}
-
-//* instead of: class SuperHero extends Human {}
-Object.setPrototypeOf(SuperHero.prototype, Human.prototype);
-
-Human.prototype.speak = function () {
-  return `${this.name} says hello.`;
+const obj: Obj = {
+  firstName: "Steven",
+  lastName: "Smith",
+  startDate: "January 10, 2015",
+  type: "admin",
 };
 
-SuperHero.prototype.fly = function () {
-  return `${this.name} is flying.`;
-};
+// Object.defineProperty(obj, "startDate", {
+//   writable: false,
+// });
+// obj.startDate = "new start";
 
-const superMan = new (SuperHero as any)("Clark Kent", 1);
+// Object.seal(obj);
+// obj.firstName = "Steve"; //* Ok
 
-console.log("superMan.fly():", superMan.fly());
-console.log("superMan.speak():", superMan.speak());
+Object.freeze(obj);
+// obj.newProp = true;
+// delete obj.type;
+
+console.log("obj:", obj);

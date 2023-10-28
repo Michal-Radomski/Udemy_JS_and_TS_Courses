@@ -618,31 +618,31 @@ export {};
 // const str1 = str.replace("2018", "2020").toUpperCase().trim();
 // console.log({ str1 });
 
-const fruits = ["apple", "pear", "peach"];
-const fruitsStr = fruits.concat("oranges", "kiwi").sort().join(" - ").toUpperCase();
-console.log({ fruitsStr });
+// const fruits = ["apple", "pear", "peach"];
+// const fruitsStr = fruits.concat("oranges", "kiwi").sort().join(" - ").toUpperCase();
+// console.log({ fruitsStr });
 
-const student = {
-  fName: "Steven",
-  lName: "Hancock",
-  score: [] as number[],
-  total: 0,
-  average: 0,
-  addScore: function (val: number) {
-    this.score.push(val);
-    return this;
-  },
-  doTotal: function () {
-    this.total = this.score.reduce(function (x: number, y: number) {
-      return x + y;
-    }, 0);
-    return this;
-  },
-  doAverage: function () {
-    this.average = Number((this.total / this.score.length).toFixed(1));
-    return this;
-  },
-};
+// const student = {
+//   fName: "Steven",
+//   lName: "Hancock",
+//   score: [] as number[],
+//   total: 0,
+//   average: 0,
+//   addScore: function (val: number) {
+//     this.score.push(val);
+//     return this;
+//   },
+//   doTotal: function () {
+//     this.total = this.score.reduce(function (x: number, y: number) {
+//       return x + y;
+//     }, 0);
+//     return this;
+//   },
+//   doAverage: function () {
+//     this.average = Number((this.total / this.score.length).toFixed(1));
+//     return this;
+//   },
+// };
 
 // student.addScore(100);
 // student.addScore(80);
@@ -651,57 +651,78 @@ const student = {
 // student.doAverage();
 // console.log("student:", student.score, student.average, student.total);
 
-student.addScore(100).addScore(80).addScore(95).doTotal().doAverage();
-console.log("student:", student.score, student.average, student.total);
+// student.addScore(100).addScore(80).addScore(95).doTotal().doAverage();
+// console.log("student:", student.score, student.average, student.total);
 
 //* ES2020 Optional Chaining + Nullish Coalescing
-interface Char {
-  name: string;
-  getName?(): Function;
-  id: number;
-  settings: {
-    maxAmt: number;
-    minAmt: number;
-    characteristics: {
-      life: number;
-      strength: number;
-      intelligence: number;
-      speed?: number;
-    };
-  };
+// interface Char {
+//   name: string;
+//   getName?(): Function;
+//   id: number;
+//   settings: {
+//     maxAmt: number;
+//     minAmt: number;
+//     characteristics: {
+//       life: number;
+//       strength: number;
+//       intelligence: number;
+//       speed?: number;
+//     };
+//   };
+// }
+
+// const char = {
+//   name: "name",
+//   id: 1,
+//   settings: {
+//     maxAmt: 12,
+//     minAmt: 0,
+//     characteristics: {
+//       life: 8,
+//       strength: 12,
+//       intelligence: 12,
+//     },
+//   },
+// } as Char;
+
+// // Old way
+// console.log("char.settings.characteristics.life:", char.settings.characteristics.life);
+// console.log(
+//   "char && char.settings && char.settings.characteristics && char.settings.characteristics.speed:",
+//   char && char.settings && char.settings.characteristics && char.settings.characteristics.speed
+// );
+
+// // ES2020 way
+// console.log("char?.settings?.characteristics?.speed:", char?.settings?.characteristics?.speed);
+// console.log(
+//   'char?.settings?.characteristics?.speed ?? "Speed not found":',
+//   char?.settings?.characteristics?.speed ?? "Speed not found"
+// );
+
+// console.log("char?.getName?.():", char?.getName?.());
+// console.log("char?.name?.[0]:", char?.name?.[0]);
+
+// let initialValue;
+// let anotherValue = false;
+// console.log("initialValue ?? anotherValue ?? 100:", initialValue ?? anotherValue ?? 100);
+
+//* Functions
+//* Immediately Invoked Function Expressions (IIFEs)
+
+// Function Declaration
+function powerDecl(num: number) {
+  console.log(num * num);
 }
 
-const char = {
-  name: "name",
-  id: 1,
-  settings: {
-    maxAmt: 12,
-    minAmt: 0,
-    characteristics: {
-      life: 8,
-      strength: 12,
-      intelligence: 12,
-    },
-  },
-} as Char;
+// Function Expression
+var powerExp = function (num: number) {
+  console.log(num * num);
+};
 
-// Old way
-console.log("char.settings.characteristics.life:", char.settings.characteristics.life);
-console.log(
-  "char && char.settings && char.settings.characteristics && char.settings.characteristics.speed:",
-  char && char.settings && char.settings.characteristics && char.settings.characteristics.speed
-);
+powerDecl(5);
+powerExp(5);
 
-// ES2020 way
-console.log("char?.settings?.characteristics?.speed:", char?.settings?.characteristics?.speed);
-console.log(
-  'char?.settings?.characteristics?.speed ?? "Speed not found":',
-  char?.settings?.characteristics?.speed ?? "Speed not found"
-);
-
-console.log("char?.getName?.():", char?.getName?.());
-console.log("char?.name?.[0]:", char?.name?.[0]);
-
-let initialValue;
-let anotherValue = false;
-console.log("initialValue ?? anotherValue ?? 100:", initialValue ?? anotherValue ?? 100);
+// IIFE
+(function (num: number) {
+  console.log(num * num);
+})(5);

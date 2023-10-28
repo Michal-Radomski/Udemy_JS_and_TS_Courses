@@ -786,48 +786,114 @@ export {};
 // })();
 
 //* Namespace Pattern
-var MYAPP: any = MYAPP || {};
-// console.log(1, "MYAPP:", MYAPP, typeof MYAPP);
+// var MYAPP: any = MYAPP || {};
+// // console.log(1, "MYAPP:", MYAPP, typeof MYAPP);
 
-(function (namespace) {
-  let prompt = "Welcome,",
-    prompt2 = "How are you?",
-    prompt3 = "Good to see you again.",
-    counter = 0,
-    users: any[] = [];
+// (function (namespace) {
+//   let prompt = "Welcome,",
+//     prompt2 = "How are you?",
+//     prompt3 = "Good to see you again.",
+//     counter = 0,
+//     users: any[] = [];
 
-  namespace.greeting = function (user: any) {
-    let greeting = prompt + " ";
-    if (newUser(user)) {
-      greeting += prompt2;
-    } else {
-      greeting += prompt3;
-    }
-    console.log(greeting);
-    counter++;
+//   namespace.greeting = function (user: any) {
+//     let greeting = prompt + " ";
+//     if (newUser(user)) {
+//       greeting += prompt2;
+//     } else {
+//       greeting += prompt3;
+//     }
+//     console.log(greeting);
+//     counter++;
+//   };
+
+//   const newUser = function (user: any) {
+//     for (let i = 0; i < users.length; i++) {
+//       if (users[i].toUpperCase() === user.toUpperCase()) {
+//         return false;
+//       }
+//     }
+//     namespace.addUser(user);
+//     return true;
+//   };
+
+//   namespace.addUser = function (user: any) {
+//     users.push(user);
+//   };
+
+//   namespace.numberOfGreetings = function () {
+//     console.log("Total number of greetings: " + counter);
+//   };
+// })(MYAPP);
+
+// MYAPP.addUser("Michal");
+// MYAPP.greeting("Michal");
+// MYAPP.numberOfGreetings();
+// // console.log(2, "MYAPP:", MYAPP, typeof MYAPP);
+// console.log("MYAPP.users:", MYAPP.users); //* undefined
+
+//* The Module Pattern
+const myHeroes = (function () {
+  const heroes: string[] = [];
+
+  return {
+    addHero: function (hero: string) {
+      heroes.push(hero);
+    },
+    getHero: function () {
+      return heroes;
+    },
   };
+})();
 
-  const newUser = function (user: any) {
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].toUpperCase() === user.toUpperCase()) {
-        return false;
-      }
-    }
-    namespace.addUser(user);
-    return true;
+myHeroes.addHero("Superman");
+myHeroes.addHero("Batman");
+myHeroes.addHero("Rumcajs");
+console.log("myHeroes.getHero():", myHeroes.getHero()); //* ["Superman", "Batman", "Rumcajs"]
+// console.log(myHeroes?.heroes); //* Undefined
+
+//* Revealing Module Pattern
+const myHeroes2 = (function () {
+  const heroes: string[] = [];
+  function addItem(hero: string) {
+    heroes.push(hero);
+  }
+  function getItems() {
+    return heroes;
+  }
+
+  return {
+    addHero: addItem,
+    getHero: getItems,
   };
+})(); // natychmiastowe wywołanie funkcji
 
-  namespace.addUser = function (user: any) {
-    users.push(user);
-  };
+myHeroes2.addHero("Superman");
+myHeroes2.addHero("Batman");
+myHeroes2.addHero("Rumcajs");
+console.log("myHeroes2.getHero():", myHeroes2.getHero()); //* ["Superman", "Batman", "Rumcajs"]
+// console.log(myHeroes2?.heroes); //* Undefined
 
-  namespace.numberOfGreetings = function () {
-    console.log("Total number of greetings: " + counter);
-  };
-})(MYAPP);
+//* -----------------------------
+//^ Only Info!
+// * CommonJS:
+// module.exports = {
+//   addHero: addItem,
+//   getHero: getItems,
+// };
 
-MYAPP.addUser("Michal");
-MYAPP.greeting("Michal");
-MYAPP.numberOfGreetings();
-// console.log(2, "MYAPP:", MYAPP, typeof MYAPP);
-console.log("MYAPP.users:", MYAPP.users); //* undefined
+// const myHeroes = require("./myHeroes");
+
+//* ES6 Modules
+// export function getItems() { // named export
+//   return heroes;
+// }
+//  export default heroSlogan; // default export
+
+// import slogan, { addItem as addHero, getItems } from "./myHero2";
+
+//* ES6 Modules 2
+// import * as bigModule from "./bigModuleFile.js";
+// bigModule.method1();
+// bigModule.method99();
+//* -----------------------------

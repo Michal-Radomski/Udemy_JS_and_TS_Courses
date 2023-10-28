@@ -571,44 +571,85 @@ export {};
 // objES5.print();
 
 //* ES6
-interface Obj {
-  firstName?: string;
-  lastName?: string;
-  fullName?: Function;
-}
-
-const objProto: Obj = {
-  fullName() {
-    console.log(`${this.firstName!} ${this.lastName!}`);
-  },
-};
-const objChild: Obj = { firstName: "Michal", lastName: "Rad" };
-Object.setPrototypeOf(objChild, objProto);
-//* V1
-// if (objChild.fullName) {
-//   objChild.fullName();
+// interface Obj {
+//   firstName?: string;
+//   lastName?: string;
+//   fullName?: Function;
 // }
-//* V2
-objChild.fullName?.();
 
-const test = "test";
-const obj = {
-  start: 0,
-  test,
-  print() {
-    console.log("this.start, this.test:", this.start, this.test);
+// const objProto: Obj = {
+//   fullName() {
+//     console.log(`${this.firstName!} ${this.lastName!}`);
+//   },
+// };
+// const objChild: Obj = { firstName: "Michal", lastName: "Rad" };
+// Object.setPrototypeOf(objChild, objProto);
+// //* V1
+// // if (objChild.fullName) {
+// //   objChild.fullName();
+// // }
+// //* V2
+// objChild.fullName?.();
+
+// const test = "test";
+// const obj = {
+//   start: 0,
+//   test,
+//   print() {
+//     console.log("this.start, this.test:", this.start, this.test);
+//   },
+// };
+// const obj1 = {
+//   a: 5,
+// };
+// const obj2 = {
+//   b: 10,
+// };
+// const obj3 = {
+//   c: 15,
+// };
+
+// Object.assign(obj, obj1, obj2, obj3);
+// console.log({ obj });
+// obj.print();
+
+//* Method Chaining
+// const str = "The course starts in October, 2018. ";
+// const str1 = str.replace("2018", "2020").toUpperCase().trim();
+// console.log({ str1 });
+
+const fruits = ["apple", "pear", "peach"];
+const fruitsStr = fruits.concat("oranges", "kiwi").sort().join(" - ").toUpperCase();
+console.log({ fruitsStr });
+
+const student = {
+  fName: "Steven",
+  lName: "Hancock",
+  score: [] as number[],
+  total: 0,
+  average: 0,
+  addScore: function (val: number) {
+    this.score.push(val);
+    return this;
+  },
+  doTotal: function () {
+    this.total = this.score.reduce(function (x, y) {
+      return x + y;
+    }, 0);
+    return this;
+  },
+  doAverage: function () {
+    this.average = Number((this.total / this.score.length).toFixed(1));
+    return this;
   },
 };
-const obj1 = {
-  a: 5,
-};
-const obj2 = {
-  b: 10,
-};
-const obj3 = {
-  c: 15,
-};
 
-Object.assign(obj, obj1, obj2, obj3);
-console.log({ obj });
-obj.print();
+// student.addScore(100);
+// student.addScore(80);
+// student.addScore(95);
+// student.doTotal();
+// student.doAverage();
+// console.log("student:", student.score, student.average, student.total);
+
+student.addScore(100).addScore(80).addScore(95).doTotal().doAverage();
+console.log("student:", student.score, student.average, student.total);

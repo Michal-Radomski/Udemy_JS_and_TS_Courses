@@ -752,12 +752,76 @@ export {};
 // init();
 
 //* Closure
-const func1 = function () {
-  const a = 2,
-    b = 3;
-  const func2 = function () {
-    console.log("a + b:", a + b);
+// const func1 = function () {
+//   const a = 2,
+//     b = 3;
+//   const func2 = function () {
+//     console.log("a + b:", a + b);
+//   };
+//   setTimeout(func2, 3000);
+// };
+// func1();
+
+//* Avoid Global Variables - example below - only function scope
+// (function (this: any) {
+//   let counter = 0,
+//     doc = this.document,
+//     content = doc.getElementById("content"),
+//     quotes = content.querySelectorAll(".quote");
+
+//   window.addEventListener(
+//     "keydown",
+//     function (e) {
+//       switch (e.keyCode) {
+//         case 40:
+//           if (counter < quotes.length) {
+//             quotes[counter].style.visibility = "visible";
+//             counter++;
+//           }
+//           break;
+//       }
+//     },
+//     false
+//   );
+// })();
+
+//* Namespace Pattern
+var MYAPP: any = MYAPP || {};
+console.log("MYAPP:", MYAPP, typeof MYAPP);
+
+(function (namespace) {
+  let prompt = "Welcome,",
+    prompt2 = "How are you?",
+    prompt3 = "Good to see you again.",
+    counter = 0,
+    users: any[] = [];
+
+  namespace.greeting = function (user: any) {
+    let greeting = prompt + " ";
+    if (newUser(user)) {
+      greeting += prompt2;
+    } else {
+      greeting += prompt3;
+    }
+    console.log(greeting);
+    counter++;
   };
-  setTimeout(func2, 3000);
-};
-func1();
+
+  const newUser = function (user: any) {
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].toUpperCase() === user.toUpperCase()) {
+        return false;
+      }
+    }
+    namespace.addUser(user);
+    return true;
+  };
+
+  namespace.addUser = function (user: any) {
+    users.push(user);
+  };
+
+  namespace.numberOfGreetings = function () {
+    console.log("Total number of greetings: " + counter);
+  };
+})(MYAPP);

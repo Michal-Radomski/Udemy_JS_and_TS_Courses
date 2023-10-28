@@ -710,19 +710,54 @@ export {};
 //* Immediately Invoked Function Expressions (IIFEs)
 
 // Function Declaration
-function powerDecl(num: number) {
-  console.log(num * num);
-}
+// function powerDecl(num: number) {
+//   console.log(num * num);
+// }
 
-// Function Expression
-var powerExp = function (num: number) {
-  console.log(num * num);
+// // Function Expression
+// var powerExp = function (num: number) {
+//   console.log(num * num);
+// };
+
+// powerDecl(5);
+// powerExp(5);
+
+// //* IIFE
+// (function (num: number) {
+//   console.log(num * num);
+// })(5);
+
+// //* IIFE - Exercise
+// const number1 = (function add(x, y) {
+//   return x + y;
+// })(1, 2);
+
+// const number2 = (function multiply(x) {
+//   return x * x;
+// })(number1);
+
+// (function print() {
+//   console.log(number2);
+// })();
+
+//* Closure
+// function init() {
+//   const name = "Mozilla"; // name is a local variable created by init
+//   function displayName() {
+//     // displayName() is the inner function, that forms the closure
+//     console.log({ name }); // use variable declared in the parent function
+//   }
+//   displayName();
+// }
+// init();
+
+//* Closure
+const func1 = function () {
+  const a = 2,
+    b = 3;
+  const func2 = function () {
+    console.log("a + b:", a + b);
+  };
+  setTimeout(func2, 3000);
 };
-
-powerDecl(5);
-powerExp(5);
-
-// IIFE
-(function (num: number) {
-  console.log(num * num);
-})(5);
+func1();

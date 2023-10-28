@@ -787,7 +787,7 @@ export {};
 
 //* Namespace Pattern
 var MYAPP: any = MYAPP || {};
-console.log("MYAPP:", MYAPP, typeof MYAPP);
+// console.log(1, "MYAPP:", MYAPP, typeof MYAPP);
 
 (function (namespace) {
   let prompt = "Welcome,",
@@ -825,3 +825,9 @@ console.log("MYAPP:", MYAPP, typeof MYAPP);
     console.log("Total number of greetings: " + counter);
   };
 })(MYAPP);
+
+MYAPP.addUser("Michal");
+MYAPP.greeting("Michal");
+MYAPP.numberOfGreetings();
+// console.log(2, "MYAPP:", MYAPP, typeof MYAPP);
+console.log("MYAPP.users:", MYAPP.users); //* undefined

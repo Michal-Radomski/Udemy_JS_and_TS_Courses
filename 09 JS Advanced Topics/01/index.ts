@@ -633,7 +633,7 @@ const student = {
     return this;
   },
   doTotal: function () {
-    this.total = this.score.reduce(function (x, y) {
+    this.total = this.score.reduce(function (x: number, y: number) {
       return x + y;
     }, 0);
     return this;
@@ -653,3 +653,55 @@ const student = {
 
 student.addScore(100).addScore(80).addScore(95).doTotal().doAverage();
 console.log("student:", student.score, student.average, student.total);
+
+//* ES2020 Optional Chaining + Nullish Coalescing
+interface Char {
+  name: string;
+  getName?(): Function;
+  id: number;
+  settings: {
+    maxAmt: number;
+    minAmt: number;
+    characteristics: {
+      life: number;
+      strength: number;
+      intelligence: number;
+      speed?: number;
+    };
+  };
+}
+
+const char = {
+  name: "name",
+  id: 1,
+  settings: {
+    maxAmt: 12,
+    minAmt: 0,
+    characteristics: {
+      life: 8,
+      strength: 12,
+      intelligence: 12,
+    },
+  },
+} as Char;
+
+// Old way
+console.log("char.settings.characteristics.life:", char.settings.characteristics.life);
+console.log(
+  "char && char.settings && char.settings.characteristics && char.settings.characteristics.speed:",
+  char && char.settings && char.settings.characteristics && char.settings.characteristics.speed
+);
+
+// ES2020 way
+console.log("char?.settings?.characteristics?.speed:", char?.settings?.characteristics?.speed);
+console.log(
+  'char?.settings?.characteristics?.speed ?? "Speed not found":',
+  char?.settings?.characteristics?.speed ?? "Speed not found"
+);
+
+console.log("char?.getName?.():", char?.getName?.());
+console.log("char?.name?.[0]:", char?.name?.[0]);
+
+let initialValue;
+let anotherValue = false;
+console.log("initialValue ?? anotherValue ?? 100:", initialValue ?? anotherValue ?? 100);

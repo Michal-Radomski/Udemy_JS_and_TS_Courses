@@ -899,11 +899,45 @@ export {};
 //* -----------------------------
 
 //* Objects and JSON
-const json = '{"name":"Michal"}';
-console.log({ json }, typeof json);
-const obj = JSON.parse(json);
-console.log({ obj }, typeof obj);
-console.log("obj.name:", obj.name);
-const str = JSON.stringify(obj);
-console.log({ str }, typeof str);
-console.log("json === str:", json === str); // True
+// const json = '{"name":"Michal"}';
+// console.log({ json }, typeof json);
+// const obj = JSON.parse(json);
+// console.log({ obj }, typeof obj);
+// console.log("obj.name:", obj.name);
+// const str = JSON.stringify(obj);
+// console.log({ str }, typeof str);
+// console.log("json === str:", json === str); // True
+
+//* Importing JSON file
+// import dataJson from "./data.json";
+// console.log("dataJson:", dataJson);
+
+//* Loading JSON data
+const XMLHttpRequest = require("xhr2");
+// var xhr = new XMLHttpRequest();
+// console.log("xhr:", xhr);
+
+var MAINAPP: any = (function (app) {
+  const jsonObj = {};
+
+  const loadJSON = function (path: string) {
+    const xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open("GET", path);
+    xobj.onreadystatechange = function () {
+      if (xobj.readyState === 4) {
+        app.jsonObj = JSON.parse(xobj.responseText);
+        // console.log("xobj:", xobj);
+        console.log("xobj.responseText:", xobj.responseText);
+      }
+    };
+    xobj.send(null);
+  };
+
+  app.jsonObj = jsonObj;
+  app.loadJSON = loadJSON;
+  return app;
+})(MAINAPP || {});
+
+// MAINAPP.loadJSON("https://jsonplaceholder.typicode.com/todos/1");
+MAINAPP.loadJSON("http://localhost:3004/data");

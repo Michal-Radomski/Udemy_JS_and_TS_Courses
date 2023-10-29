@@ -833,45 +833,45 @@ export {};
 // console.log("MYAPP.users:", MYAPP.users); //* undefined
 
 //* The Module Pattern
-const myHeroes = (function () {
-  const heroes: string[] = [];
+// const myHeroes = (function () {
+//   const heroes: string[] = [];
 
-  return {
-    addHero: function (hero: string) {
-      heroes.push(hero);
-    },
-    getHero: function () {
-      return heroes;
-    },
-  };
-})();
+//   return {
+//     addHero: function (hero: string) {
+//       heroes.push(hero);
+//     },
+//     getHero: function () {
+//       return heroes;
+//     },
+//   };
+// })();
 
-myHeroes.addHero("Superman");
-myHeroes.addHero("Batman");
-myHeroes.addHero("Rumcajs");
-console.log("myHeroes.getHero():", myHeroes.getHero()); //* ["Superman", "Batman", "Rumcajs"]
-// console.log(myHeroes?.heroes); //* Undefined
+// myHeroes.addHero("Superman");
+// myHeroes.addHero("Batman");
+// myHeroes.addHero("Rumcajs");
+// console.log("myHeroes.getHero():", myHeroes.getHero()); //* ["Superman", "Batman", "Rumcajs"]
+// // console.log(myHeroes?.heroes); //* Undefined
 
-//* Revealing Module Pattern
-const myHeroes2 = (function () {
-  const heroes: string[] = [];
-  function addItem(hero: string) {
-    heroes.push(hero);
-  }
-  function getItems() {
-    return heroes;
-  }
+// //* Revealing Module Pattern
+// const myHeroes2 = (function () {
+//   const heroes: string[] = [];
+//   function addItem(hero: string) {
+//     heroes.push(hero);
+//   }
+//   function getItems() {
+//     return heroes;
+//   }
 
-  return {
-    addHero: addItem,
-    getHero: getItems,
-  };
-})(); // natychmiastowe wywołanie funkcji
+//   return {
+//     addHero: addItem,
+//     getHero: getItems,
+//   };
+// })(); // natychmiastowe wywołanie funkcji
 
-myHeroes2.addHero("Superman");
-myHeroes2.addHero("Batman");
-myHeroes2.addHero("Rumcajs");
-console.log("myHeroes2.getHero():", myHeroes2.getHero()); //* ["Superman", "Batman", "Rumcajs"]
+// myHeroes2.addHero("Superman");
+// myHeroes2.addHero("Batman");
+// myHeroes2.addHero("Rumcajs");
+// console.log("myHeroes2.getHero():", myHeroes2.getHero()); //* ["Superman", "Batman", "Rumcajs"]
 // console.log(myHeroes2?.heroes); //* Undefined
 
 //* -----------------------------
@@ -897,3 +897,13 @@ console.log("myHeroes2.getHero():", myHeroes2.getHero()); //* ["Superman", "Batm
 // bigModule.method1();
 // bigModule.method99();
 //* -----------------------------
+
+//* Objects and JSON
+const json = '{"name":"Michal"}';
+console.log({ json }, typeof json);
+const obj = JSON.parse(json);
+console.log({ obj }, typeof obj);
+console.log("obj.name:", obj.name);
+const str = JSON.stringify(obj);
+console.log({ str }, typeof str);
+console.log("json === str:", json === str); // True

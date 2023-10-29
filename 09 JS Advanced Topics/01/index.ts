@@ -912,32 +912,67 @@ export {};
 // import dataJson from "./data.json";
 // console.log("dataJson:", dataJson);
 
-//* Loading JSON data
-const XMLHttpRequest = require("xhr2");
-// var xhr = new XMLHttpRequest();
-// console.log("xhr:", xhr);
+//* Loading JSON data -> 1
+// const XMLHttpRequest = require("xhr2");
+// // var xhr = new XMLHttpRequest();
+// // console.log("xhr:", xhr);
 
-var MAINAPP: any = (function (app) {
-  const jsonObj = {};
+// var MAINAPP: any = (function (app) {
+//   const jsonObj = {};
 
-  const loadJSON = function (path: string) {
-    const xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open("GET", path);
-    xobj.onreadystatechange = function () {
-      if (xobj.readyState === 4) {
-        app.jsonObj = JSON.parse(xobj.responseText);
-        // console.log("xobj:", xobj);
-        console.log("xobj.responseText:", xobj.responseText);
-      }
-    };
-    xobj.send(null);
-  };
+//   const loadJSON = function (path: string) {
+//     const xobj = new XMLHttpRequest();
+//     xobj.overrideMimeType("application/json");
+//     xobj.open("GET", path);
+//     xobj.onreadystatechange = function () {
+//       if (xobj.readyState === 4) {
+//         app.jsonObj = JSON.parse(xobj.responseText);
+//         // console.log("xobj:", xobj);
+//         // console.log("xobj.responseText:", xobj.responseText);
+//         displayData(xobj);
+//       }
+//     };
+//     xobj.send(null);
+//   };
 
-  app.jsonObj = jsonObj;
-  app.loadJSON = loadJSON;
-  return app;
-})(MAINAPP || {});
+//   const displayData = (xobj: any) => {
+//     const dataJSON = JSON.parse(xobj.responseText);
+//     console.log("dataJSON.questions:", dataJSON.questions);
+//   };
 
-// MAINAPP.loadJSON("https://jsonplaceholder.typicode.com/todos/1");
-MAINAPP.loadJSON("http://localhost:3004/data");
+//   app.jsonObj = jsonObj;
+//   app.loadJSON = loadJSON;
+//   return app;
+// })(MAINAPP || {});
+
+// // MAINAPP.loadJSON("https://jsonplaceholder.typicode.com/todos/1");
+// MAINAPP.loadJSON("http://localhost:3004/data");
+
+//* Loading JSON data -> 2
+// const myInit = {
+//   method: "GET",
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+//   mode: "cors",
+//   cache: "no-cache",
+// };
+
+// const myRequest = new Request("http://localhost:3000/data", myInit as RequestInit);
+
+// fetch(myRequest)
+//   .then(function (resp) {
+//     return resp.json();
+//   })
+//   .then(function (data) {
+//     console.log("data.students:", data.students);
+//   });
+
+//* Loading JSON data  -> 3
+// const url = "http://localhost:3000/data";
+
+// fetch(url)
+//   .then((resp) => resp.json())
+//   .then((data: any) => console.log("data.students:", data.students));
+
+//* Using ECMAScript Native Modules

@@ -84,37 +84,78 @@
 // console.log("obj.constructor === Greeting:", obj.constructor === Greeting);
 
 //* Classes
-class Greeting {
-  morningGreet: string;
-  eveningGreet: string;
-  dayTime: string;
-  greeting?: string;
-  constructor(mGreet: string, nGreet: string) {
-    this.morningGreet = mGreet;
-    this.eveningGreet = nGreet;
-    this.dayTime = "morning";
+// class Greeting {
+//   morningGreet: string;
+//   eveningGreet: string;
+//   dayTime: string;
+//   greeting?: string;
+//   constructor(mGreet: string, nGreet: string) {
+//     this.morningGreet = mGreet;
+//     this.eveningGreet = nGreet;
+//     this.dayTime = "morning";
+//   }
+//   greet() {
+//     if (this.dayTime === "morning") {
+//       return this.morningGreet;
+//     } else if (this.dayTime === "evening") {
+//       return this.eveningGreet;
+//     } else {
+//       return this.greeting;
+//     }
+//   }
+// }
+
+// class CommonGreeting extends Greeting {
+//   constructor(mGreet: string, nGreet: string) {
+//     super(mGreet, nGreet);
+//     this.greeting = "Howdy";
+//     this.dayTime = "day";
+//   }
+// }
+
+// const aGreet = new CommonGreeting("Morning", "Evening");
+// console.log('aGreet.greet() + " neighbor.":', aGreet.greet() + " neighbor.");
+
+// aGreet.dayTime = "morning";
+// console.log('aGreet.greet() + " neighbor.":', aGreet.greet() + " neighbor.");
+
+//* Using Classes in JS
+const MeetingRoom = function (this: any, name: string, capacity: number) {
+  this.name = name;
+  this.capacity = capacity;
+  this.available = true;
+  this.schedule = [];
+};
+MeetingRoom.prototype.reserve = function (dtm: string, len: string) {
+  this.schedule.push({ dtm, len });
+};
+MeetingRoom.prototype.company = "ABC Coop";
+// console.log("MeetingRoom.toString():", MeetingRoom.toString());
+const boardRoom = new (MeetingRoom as any)("Board Room", 20);
+console.log("boardRoom:", boardRoom);
+console.log("boardRoom.company:", boardRoom.company);
+console.log("boardRoom.__proto__:", boardRoom.__proto__);
+
+class MeetingRoomClass {
+  name: string;
+  capacity: number;
+  available: boolean;
+  schedule: any[];
+  company?: string;
+  constructor(name: string, capacity: number) {
+    this.name = name;
+    this.capacity = capacity;
+    this.available = true;
+    this.schedule = [];
   }
-  greet() {
-    if (this.dayTime === "morning") {
-      return this.morningGreet;
-    } else if (this.dayTime === "evening") {
-      return this.eveningGreet;
-    } else {
-      return this.greeting;
-    }
+  reserve(dtm: string, len: string) {
+    this.schedule.push({ dtm, len });
   }
 }
+MeetingRoomClass.prototype.company = "ABC Coop";
 
-class CommonGreeting extends Greeting {
-  constructor(mGreet: string, nGreet: string) {
-    super(mGreet, nGreet);
-    this.greeting = "Howdy";
-    this.dayTime = "day";
-  }
-}
-
-const aGreet = new CommonGreeting("Morning", "Evening");
-console.log('aGreet.greet() + " neighbor.":', aGreet.greet() + " neighbor.");
-
-aGreet.dayTime = "morning";
-console.log('aGreet.greet() + " neighbor.":', aGreet.greet() + " neighbor.");
+const boardRoomClass = new MeetingRoomClass("Board Room", 20);
+// const trainingRoomAClass = new MeetingRoomClass("Training Room A", 35);
+console.log("boardRoomClass:", boardRoomClass);
+console.log("boardRoomClass.company:", boardRoomClass.company);
+console.log("Object.getPrototypeOf(boardRoomClass):", Object.getPrototypeOf(boardRoomClass));

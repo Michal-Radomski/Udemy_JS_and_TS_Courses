@@ -974,5 +974,3 @@ export {};
 // fetch(url)
 //   .then((resp) => resp.json())
 //   .then((data: any) => console.log("data.students:", data.students));
-
-//* Using ECMAScript Native Modules

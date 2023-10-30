@@ -74,7 +74,11 @@ const Greeting = function (this: any, term: string) {
 };
 
 Greeting.prototype = objProto;
+//* Set the constructor!!!
 Greeting.prototype.constructor = Greeting;
 
-const obj1a = new (Greeting as any)("Hi");
-obj1a.greet();
+const obj = new (Greeting as any)("Hi");
+obj.greet();
+console.log("obj.constructor:", obj.constructor.toString());
+console.log("obj instanceof Greeting:", obj instanceof Greeting);
+console.log("obj.constructor === Greeting:", obj.constructor === Greeting);

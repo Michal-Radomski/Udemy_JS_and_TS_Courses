@@ -59,26 +59,62 @@
 // obj3.greet?.();
 
 //* Constructor property
-interface Obj {
+// interface Obj {
+//   greeting?: string;
+//   greet?: Function;
+// }
+// const objProto = {
+//   greet: function () {
+//     console.log(this.greeting + " World");
+//   },
+// } as Obj;
+
+// const Greeting = function (this: any, term: string) {
+//   this.greeting = term;
+// };
+
+// Greeting.prototype = objProto;
+// //* Set the constructor!!!
+// Greeting.prototype.constructor = Greeting;
+
+// const obj = new (Greeting as any)("Hi");
+// obj.greet();
+// console.log("obj.constructor:", obj.constructor.toString());
+// console.log("obj instanceof Greeting:", obj instanceof Greeting);
+// console.log("obj.constructor === Greeting:", obj.constructor === Greeting);
+
+//* Classes
+class Greeting {
+  morningGreet: string;
+  eveningGreet: string;
+  dayTime: string;
   greeting?: string;
-  greet?: Function;
+  constructor(mGreet: string, nGreet: string) {
+    this.morningGreet = mGreet;
+    this.eveningGreet = nGreet;
+    this.dayTime = "morning";
+  }
+  greet() {
+    if (this.dayTime === "morning") {
+      return this.morningGreet;
+    } else if (this.dayTime === "evening") {
+      return this.eveningGreet;
+    } else {
+      return this.greeting;
+    }
+  }
 }
-const objProto = {
-  greet: function () {
-    console.log(this.greeting + " World");
-  },
-} as Obj;
 
-const Greeting = function (this: any, term: string) {
-  this.greeting = term;
-};
+class CommonGreeting extends Greeting {
+  constructor(mGreet: string, nGreet: string) {
+    super(mGreet, nGreet);
+    this.greeting = "Howdy";
+    this.dayTime = "day";
+  }
+}
 
-Greeting.prototype = objProto;
-//* Set the constructor!!!
-Greeting.prototype.constructor = Greeting;
+const aGreet = new CommonGreeting("Morning", "Evening");
+console.log('aGreet.greet() + " neighbor.":', aGreet.greet() + " neighbor.");
 
-const obj = new (Greeting as any)("Hi");
-obj.greet();
-console.log("obj.constructor:", obj.constructor.toString());
-console.log("obj instanceof Greeting:", obj instanceof Greeting);
-console.log("obj.constructor === Greeting:", obj.constructor === Greeting);
+aGreet.dayTime = "morning";
+console.log('aGreet.greet() + " neighbor.":', aGreet.greet() + " neighbor.");

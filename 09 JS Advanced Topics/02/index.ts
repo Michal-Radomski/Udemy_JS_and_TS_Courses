@@ -119,30 +119,55 @@
 // aGreet.dayTime = "morning";
 // console.log('aGreet.greet() + " neighbor.":', aGreet.greet() + " neighbor.");
 
-//* Using Classes in JS
-const MeetingRoom = function (this: any, name: string, capacity: number) {
-  this.name = name;
-  this.capacity = capacity;
-  this.available = true;
-  this.schedule = [];
-};
-MeetingRoom.prototype.reserve = function (dtm: string, len: string) {
-  this.schedule.push({ dtm, len });
-};
-MeetingRoom.prototype.company = "ABC Coop";
-// console.log("MeetingRoom.toString():", MeetingRoom.toString());
-const boardRoom = new (MeetingRoom as any)("Board Room", 20);
-console.log("boardRoom:", boardRoom);
-console.log("boardRoom.company:", boardRoom.company);
-console.log("boardRoom.__proto__:", boardRoom.__proto__);
+//* Using Classes in JS - creating object
+// const MeetingRoom = function (this: any, name: string, capacity: number) {
+//   this.name = name;
+//   this.capacity = capacity;
+//   this.available = true;
+//   this.schedule = [];
+// };
+// MeetingRoom.prototype.reserve = function (dtm: string, len: string) {
+//   this.schedule.push({ dtm, len });
+// };
+// MeetingRoom.prototype.company = "ABC Coop";
+// // console.log("MeetingRoom.toString():", MeetingRoom.toString());
+// const boardRoom = new (MeetingRoom as any)("Board Room", 20);
+// console.log("boardRoom:", boardRoom);
+// console.log("boardRoom.company:", boardRoom.company);
+// console.log("boardRoom.__proto__:", boardRoom.__proto__);
 
-class MeetingRoomClass {
+// class MeetingRoomClass {
+//   name: string;
+//   capacity: number;
+//   available: boolean;
+//   schedule: any[];
+//   company?: string;
+//   constructor(name: string, capacity: number) {
+//     this.name = name;
+//     this.capacity = capacity;
+//     this.available = true;
+//     this.schedule = [];
+//   }
+//   reserve(dtm: string, len: string) {
+//     this.schedule.push({ dtm, len });
+//   }
+// }
+// MeetingRoomClass.prototype.company = "ABC Coop";
+
+// const boardRoomClass = new MeetingRoomClass("Board Room", 20);
+// // const trainingRoomAClass = new MeetingRoomClass("Training Room A", 35);
+// console.log("boardRoomClass:", boardRoomClass);
+// console.log("boardRoomClass.company:", boardRoomClass.company);
+// console.log("Object.getPrototypeOf(boardRoomClass):", Object.getPrototypeOf(boardRoomClass));
+
+//* Subclasses: Setting Up Inheritance Chains
+class Room {
   name: string;
   capacity: number;
   available: boolean;
   schedule: any[];
-  company?: string;
-  constructor(name: string, capacity: number) {
+  company!: string;
+  constructor(name: string, capacity = 1) {
     this.name = name;
     this.capacity = capacity;
     this.available = true;
@@ -151,11 +176,59 @@ class MeetingRoomClass {
   reserve(dtm: string, len: string) {
     this.schedule.push({ dtm, len });
   }
+  getInfo() {
+    return `Name: ${this.name}${this.capacity > 1 ? " - Capacity: " + this.capacity : ""} - Available: ${this.available}`;
+  }
 }
-MeetingRoomClass.prototype.company = "ABC Coop";
 
-const boardRoomClass = new MeetingRoomClass("Board Room", 20);
-// const trainingRoomAClass = new MeetingRoomClass("Training Room A", 35);
-console.log("boardRoomClass:", boardRoomClass);
-console.log("boardRoomClass.company:", boardRoomClass.company);
-console.log("Object.getPrototypeOf(boardRoomClass):", Object.getPrototypeOf(boardRoomClass));
+Room.prototype.company = "ABC Coop";
+
+class MeetingRoom extends Room {}
+class MeetingRoom2 extends Room {
+  floor: number;
+  constructor(name: string, capacity: number, floor: number) {
+    super(name, capacity);
+    this.floor = floor;
+  }
+}
+
+class BreakRoom extends Room {
+  kitchen: boolean;
+  tables: number;
+  constructor(name: string, capacity: number, kitchen: boolean, tables: number) {
+    super(name, capacity);
+    this.kitchen = kitchen;
+    this.tables = tables;
+  }
+}
+
+class MeetingPod extends Room {
+  phone: boolean;
+  constructor(name: string, phone: boolean) {
+    super(name);
+    this.phone = phone;
+  }
+  reserve(dtm: string) {
+    this.schedule.push({ dtm, len: 30 });
+  }
+}
+
+const boardRoom = new MeetingRoom("Board Room", 20);
+const trainingRoomA = new MeetingRoom2("Training Room A", 35, 11);
+const lunchRoomA = new BreakRoom("Lunch Room A", 200, true, 10);
+const pod201 = new MeetingPod("Pod 201", true);
+
+console.log("boardRoom:", boardRoom);
+console.log("trainingRoomA:", trainingRoomA);
+console.log("lunchRoomA:", lunchRoomA);
+console.log("pod201:", pod201);
+console.log("pod201.company:", pod201.company);
+
+// @ts-ignore
+console.log("boardRoom.__proto__:", boardRoom.__proto__);
+// @ts-ignore
+console.log("boardRoom.__proto__.__proto__:", boardRoom.__proto__.__proto__);
+// @ts-ignore
+console.log("boardRoom.__proto__.__proto__.__proto__:", boardRoom.__proto__.__proto__.__proto__);
+// @ts-ignore
+console.log("boardRoom.__proto__.__proto__.__proto__.__proto__:", boardRoom.__proto__.__proto__.__proto__.__proto__);

@@ -83,6 +83,48 @@
 // console.log("obj instanceof Greeting:", obj instanceof Greeting);
 // console.log("obj.constructor === Greeting:", obj.constructor === Greeting);
 
+//* Private Data in Constructors
+// const Greeting = function (this: any, term: string) {
+//   const date = new Date();
+//   console.log({ date });
+//   this.getDate = function () {
+//     return date;
+//   };
+//   this.greeting = term;
+// };
+
+// const obj1 = new (Greeting as any)("Hello");
+
+// setTimeout(function () {
+//   const obj2 = new (Greeting as any)("Hi");
+//   console.log({ obj2 });
+// }, 3000);
+// console.log({ obj1 });
+
+// console.log("obj1.date:", obj1.date);
+
+//* Creating Safe Constructors
+// const Users = function (this: any, fName: string, lName: string) {
+//   //* new keyword is used
+//   if (this instanceof Users) {
+//     (this as any).firstName = fName;
+//     (this as any).lastName = lName;
+//   } else {
+//     return new (Users as any)(fName, lName);
+//   }
+// };
+
+// const user1 = Users("Sam", "Smith");
+// const user2 = new (Users as any)("Tom", "Smith");
+// console.log({ user1, user2 });
+
+//* Can I Modify the Built-in Prototypes? -> Yes but don't do it!
+(String as any).prototype.capitalize = function () {
+  return this.charAt(0).toUpperCase() + this.substring(1);
+};
+const greeting = "good morning everyone.";
+console.log("(greeting as any).capitalize():", (greeting as any).capitalize());
+
 //* Classes
 // class Greeting {
 //   morningGreet: string;
@@ -242,36 +284,36 @@
 // );
 
 //* Making Data Private
-class MeetingRoom {
-  #name; //* JS private method!
-  #capacity; //* JS private method!
-  available = true;
-  schedule: any[] = [];
-  company!: string;
-  constructor(name: string, capacity: number) {
-    this.#name = name;
-    this.#capacity = capacity;
-  }
+// class MeetingRoom {
+//   #name; //* JS private method!
+//   #capacity; //* JS private method!
+//   available = true;
+//   schedule: any[] = [];
+//   company!: string;
+//   constructor(name: string, capacity: number) {
+//     this.#name = name;
+//     this.#capacity = capacity;
+//   }
 
-  reserve(dtm: Date, len: number) {
-    this.schedule.push({ dtm, len });
-  }
-  get capacity() {
-    return this.#capacity;
-  }
-  get name() {
-    return this.#name;
-  }
-  set capacity(num) {
-    if (num < this.#capacity) this.#capacity = num;
-  }
-}
+//   reserve(dtm: Date, len: number) {
+//     this.schedule.push({ dtm, len });
+//   }
+//   get capacity() {
+//     return this.#capacity;
+//   }
+//   get name() {
+//     return this.#name;
+//   }
+//   set capacity(num) {
+//     if (num < this.#capacity) this.#capacity = num;
+//   }
+// }
 
-MeetingRoom.prototype.company = "ABC Coop";
+// MeetingRoom.prototype.company = "ABC Coop";
 
-const boardRoom = new MeetingRoom("Board Room", 20);
-const trainingRoomA = new MeetingRoom("Training Room A", 35);
-console.log("boardRoom:", boardRoom);
-console.log("trainingRoomA:", trainingRoomA);
-console.log("trainingRoomA.name:", trainingRoomA.name);
-console.log("trainingRoomA.company:", trainingRoomA.company);
+// const boardRoom = new MeetingRoom("Board Room", 20);
+// const trainingRoomA = new MeetingRoom("Training Room A", 35);
+// console.log("boardRoom:", boardRoom);
+// console.log("trainingRoomA:", trainingRoomA);
+// console.log("trainingRoomA.name:", trainingRoomA.name);
+// console.log("trainingRoomA.company:", trainingRoomA.company);

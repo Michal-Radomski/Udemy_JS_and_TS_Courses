@@ -341,5 +341,108 @@
 // console.log("firstWord(stmt):", firstWord(stmt));
 // console.log("lastWord(stmt):", lastWord(stmt));
 
-const err = new Error("Test error");
-console.log("err.name, err.message, err.stack:", err.name, err.message, err.stack);
+// const err = new Error("Test error");
+// console.log("err.name, err.message, err.stack:", err.name, err.message, err.stack);
+
+//* Try catch statement
+// let stmt = "Error handling in JavaScript is critical.";
+
+// const firstWord = function (str: string) {
+//   try {
+//     console.log("lastWord(str):", lastWord(str));
+//     return str.split(" ")[0];
+//   } catch (err) {
+//     // console.log({ err });
+//     console.log("err.name, err.message, err.stack:", (err as Error).name, (err as Error).message, (err as Error).stack);
+//     console.error("No communication string provided.");
+//     return null;
+//   } finally {
+//     console.log("First word function completed. Close comm.");
+//   }
+// };
+
+// const lastWord = function (str: string) {
+//   let wordArray = str.split(" ");
+//   return wordArray[wordArray.length - 1];
+// };
+
+// console.log(firstWord(stmt));
+// console.log(lastWord(stmt));
+
+//* Handling Asynchronous Errors
+// const obj = {
+//   data: 32345,
+//   getData() {
+//     return this.data;
+//   },
+// };
+
+// function asyncTest(bool: boolean) {
+//   return new Promise((resolve, reject) => {
+//     let a = obj.getData();
+//     if (bool) {
+//       resolve(`Success-${a}`);
+//     } else {
+//       reject("Failure");
+//     }
+//   });
+// }
+
+// asyncTest(false).then(
+//   (resp) => console.log(1, "Resolved: ", resp),
+//   (err) => console.error(2, "Rejected: ", err)
+// );
+
+// asyncTest(true)
+//   .then((resp) => console.log(3, "Resolved: ", resp))
+//   .catch((msg) => console.warn(4, msg));
+
+// (async function data() {
+//   try {
+//     let resp = await asyncTest(true);
+//     console.log(5, { resp });
+//   } catch (err) {
+//     console.warn(6, { err });
+//   }
+// })();
+
+// (async function data() {
+//   try {
+//     let resp = await asyncTest(false);
+//     console.log(7, { resp });
+//   } catch (err) {
+//     console.warn(8, { err });
+//   }
+// })();
+
+const checkFetch = function (response: Response) {
+  if (!response.ok) {
+    throw new Error(response.statusText + " - " + response.url);
+  }
+  return response;
+};
+
+const retrieveToDo = function (num: number) {
+  fetch("https://jsonplaceholder.typicode.com/todos/" + num)
+    .then(checkFetch)
+    .then((response) => {
+      // console.log({ response });
+      return response.json();
+    })
+    .then((json) => console.log(1, { json }))
+    .catch((err) => console.warn(2, { err }));
+};
+
+const retrieveToDo2 = async function (num: number) {
+  try {
+    let resp = await fetch("https://jsonplaceholder.typicode.com/todos/" + num);
+    resp = await checkFetch(resp);
+    const data = await resp.json();
+    console.log(3, { data });
+  } catch (err) {
+    console.warn(4, { err });
+  }
+};
+
+retrieveToDo(500);
+retrieveToDo2(500);

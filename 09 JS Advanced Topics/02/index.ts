@@ -119,13 +119,13 @@
 // console.log({ user1, user2 });
 
 //* Can I Modify the Built-in Prototypes? -> Yes but don't do it!
-(String as any).prototype.capitalize = function () {
-  return this.charAt(0).toUpperCase() + this.substring(1);
-};
-const greeting = "good morning everyone.";
-console.log("(greeting as any).capitalize():", (greeting as any).capitalize());
+// (String as any).prototype.capitalize = function () {
+//   return this.charAt(0).toUpperCase() + this.substring(1);
+// };
+// const greeting = "good morning everyone.";
+// console.log("(greeting as any).capitalize():", (greeting as any).capitalize());
 
-//* Classes
+//@ Classes
 // class Greeting {
 //   morningGreet: string;
 //   eveningGreet: string;
@@ -317,3 +317,29 @@ console.log("(greeting as any).capitalize():", (greeting as any).capitalize());
 // console.log("trainingRoomA:", trainingRoomA);
 // console.log("trainingRoomA.name:", trainingRoomA.name);
 // console.log("trainingRoomA.company:", trainingRoomA.company);
+
+//@ Handling Errors
+// const stmt = "Error handling in JavaScript is critical.";
+
+// const firstWord = function (str: string) {
+//   console.log("lastWord(str):", lastWord(str));
+//   // let newStr = comm.getString();
+//   // const err = new Error("comm is not defined");
+//   const err = new SyntaxError("comm is not defined");
+//   // const err = new ReferenceError("comm is not defined");
+//   // err.writtenBy = 'Steven';
+//   console.log("err.name, err.message, err.stack:", err.name, err.message, err.stack);
+//   // throw err;
+//   // return err;
+//   // return str.split(" ")[0];
+// };
+
+// const lastWord = function (str: string) {
+//   let wordArray = str.split(" ");
+//   return wordArray[wordArray.length - 1];
+// };
+// console.log("firstWord(stmt):", firstWord(stmt));
+// console.log("lastWord(stmt):", lastWord(stmt));
+
+const err = new Error("Test error");
+console.log("err.name, err.message, err.stack:", err.name, err.message, err.stack);

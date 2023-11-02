@@ -415,34 +415,104 @@
 //   }
 // })();
 
-const checkFetch = function (response: Response) {
-  if (!response.ok) {
-    throw new Error(response.statusText + " - " + response.url);
+//* Error - fetching data
+// const checkFetch = function (response: Response) {
+//   if (!response.ok) {
+//     throw new Error(response.statusText + " - " + response.url);
+//   }
+//   return response;
+// };
+
+// const retrieveToDo = function (num: number) {
+//   fetch("https://jsonplaceholder.typicode.com/todos/" + num)
+//     .then(checkFetch)
+//     .then((response) => {
+//       // console.log({ response });
+//       return response.json();
+//     })
+//     .then((json) => console.log(1, { json }))
+//     .catch((err) => console.warn(2, { err }));
+// };
+
+// const retrieveToDo2 = async function (num: number) {
+//   try {
+//     let resp = await fetch("https://jsonplaceholder.typicode.com/todos/" + num);
+//     resp = await checkFetch(resp);
+//     const data = await resp.json();
+//     console.log(3, { data });
+//   } catch (err) {
+//     console.warn(4, { err });
+//   }
+// };
+
+// retrieveToDo(500);
+// retrieveToDo2(500);
+
+//*  Using the Error Event for Handling Errors
+// const btn = document.querySelector("#btn") as Element;
+
+// btn.addEventListener("click", function () {
+//   throw new Error("Problem in button click");
+// });
+
+// btn.addEventListener("error", function (err) {
+//   console.log({ err });
+//   console.warn("Error occurred");
+// });
+
+// window.onerror = function (message, url, line) {
+//   console.warn("and error has occurred", message);
+//   console.log({ url, line });
+//   return true;
+// };
+
+//* Throwing Errors -> throw stops code execution!
+// throw "This message";
+// throw new Error("This error");
+
+// const formatScores = function (scores: number[]) {
+//   if (!Array.isArray(scores)) {
+//     throw new Error("formatScores(): This function requires an array as an argument.");
+//   }
+//   scores.sort((a, b) => a - b);
+//   return scores.join(", ");
+// };
+
+// console.log("formatScores([100, 0, 50, 70, 85, 30]):", formatScores([100, 0, 50, 70, 85, 30]));
+// // console.log('formatScores("string"):', formatScores("string"));
+
+//* Error Handling Strategies
+{
+  const modules = [
+    { name: "module1", init() {} },
+    {
+      name: "module2",
+      init() {
+        throw new Error("init(): Critical data missing.");
+      },
+    },
+  ];
+
+  const reportError = function (critical: boolean, msg: string, userMsg: string) {
+    if (critical) {
+      console.log({ userMsg });
+    }
+    logError(critical, msg);
+  };
+
+  function logError(sev: boolean, msg: string) {
+    console.log({ sev, msg });
   }
-  return response;
-};
 
-const retrieveToDo = function (num: number) {
-  fetch("https://jsonplaceholder.typicode.com/todos/" + num)
-    .then(checkFetch)
-    .then((response) => {
-      // console.log({ response });
-      return response.json();
-    })
-    .then((json) => console.log(1, { json }))
-    .catch((err) => console.warn(2, { err }));
-};
-
-const retrieveToDo2 = async function (num: number) {
-  try {
-    let resp = await fetch("https://jsonplaceholder.typicode.com/todos/" + num);
-    resp = await checkFetch(resp);
-    const data = await resp.json();
-    console.log(3, { data });
-  } catch (err) {
-    console.warn(4, { err });
+  for (let mod of modules) {
+    try {
+      mod.init();
+    } catch (err) {
+      reportError(
+        true,
+        `${mod.name} did not load. ${(err as Error).message}`,
+        `The ${mod.name} module did not load and the application will not run. Reload page to try again.`
+      );
+    }
   }
-};
-
-retrieveToDo(500);
-retrieveToDo2(500);
+}

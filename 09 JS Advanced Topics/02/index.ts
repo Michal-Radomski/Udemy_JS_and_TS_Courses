@@ -519,47 +519,66 @@
 
 //@ Factory Functions
 //* Factory Function
-const factoryFun = function (newNum: number) {
-  const num = 100;
-  return {
-    sum() {
-      const sum = num + newNum;
-      return sum;
-    },
-  };
-};
+// const factoryFun = function (newNum: number) {
+//   const num = 100;
+//   return {
+//     sum() {
+//       const sum = num + newNum;
+//       return sum;
+//     },
+//   };
+// };
 
-const facFun = factoryFun(5);
-facFun.sum();
-console.log("facFun.sum():", facFun.sum(), facFun);
+// const facFun = factoryFun(5);
+// facFun.sum();
+// console.log("facFun.sum():", facFun.sum(), facFun);
 
-class Greeting1 {
-  greeting: string;
-  constructor(greet: string) {
-    this.greeting = greet;
-  }
+// class Greeting1 {
+//   greeting: string;
+//   constructor(greet: string) {
+//     this.greeting = greet;
+//   }
+//   greet() {
+//     console.log(1, "this.greeting:", this.greeting);
+//   }
+// }
+
+// const Greeting2 = function (this: any, greet: string) {
+//   this.greeting = greet;
+//   this.greet = () => console.log(2, "this.greeting:", this.greeting);
+// };
+
+// //* Factory Function
+// const greeting3 = function (greeting: string) {
+//   return {
+//     greet() {
+//       console.log(3, { greeting });
+//     },
+//   };
+// };
+
+// const greet1 = new Greeting1("Hi");
+// const greet2 = new (Greeting2 as any)("Hello");
+// const greet3 = greeting3("Hello World");
+
+// greet1.greet();
+// greet2.greet();
+// greet3.greet();
+
+//* Using a Prototype with Factory Functions
+const objProto = {
   greet() {
-    console.log(1, "this.greeting:", this.greeting);
-  }
-}
-
-const Greeting2 = function (this: any, greet: string) {
-  this.greeting = greet;
-  this.greet = () => console.log(2, "this.greeting:", this.greeting);
-};
+    console.log(this.greeting);
+  },
+} as any;
 
 const greeting3 = function (greeting: string) {
-  return {
-    greet() {
-      console.log(3, { greeting });
-    },
-  };
+  let obj = Object.create(objProto);
+  obj.greeting = greeting;
+  return obj;
 };
 
-const greet1 = new Greeting1("Hi");
-const greet2 = new (Greeting2 as any)("Hello");
 const greet3 = greeting3("Hello World");
-
-greet1.greet();
-greet2.greet();
 greet3.greet();
+
+//@ Using AI with JS

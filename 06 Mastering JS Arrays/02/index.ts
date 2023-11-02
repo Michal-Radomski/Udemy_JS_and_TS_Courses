@@ -472,6 +472,8 @@
 
 // const str = [...strArray1.flatMap((val) => val.split(" ")), ...strArray2.flatMap((val) => val.split(" "))].join(" ");
 // console.log("str:", str);
+// const str2 = strArray1.concat(strArray2).join(" ");
+// console.log({ str2 });
 
 //* Searching
 //* indexOf(), lastIndexOf()

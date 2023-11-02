@@ -101,27 +101,35 @@
 // };
 
 // var getScore = function (arr: any[], name: string) {
-//   let score;
+//   //* V1
+//   //  let score;
+//   // for (let i = 0; i < arr.length; i++) {
+//   //   if (arr[i].name.toLowerCase() === name.toLowerCase()) {
+//   //     score = arr[i].score;
+//   //     break;
+//   //   }
+//   // }
 
-//   for (let i = 0; i < arr.length; i++) {
-//     if (arr[i].name.toLowerCase() === name.toLowerCase()) {
-//       score = arr[i].score;
-//       break;
-//     }
-//   }
-//   return [name, score];
+//   //*V2
+//   const targetObj = arr.find((obj) => obj.name.toLowerCase() === name.toLowerCase());
+//   // return [name, score];
+//   return [name, targetObj.score];
 // };
 
 // var getTries = function (arr: any[], name: string) {
-//   let tries;
+//   //* V1
+//   // let tries;
+//   // for (let i = 0; i < arr.length; i++) {
+//   //   if (arr[i].name.toLowerCase() === name.toLowerCase()) {
+//   //     tries = arr[i].tries;
+//   //     break;
+//   //   }
+//   // }
 
-//   for (let i = 0; i < arr.length; i++) {
-//     if (arr[i].name.toLowerCase() === name.toLowerCase()) {
-//       tries = arr[i].tries;
-//       break;
-//     }
-//   }
-//   return [name, tries];
+//   // *V2
+//   const targetObj = arr.find((obj) => obj.name.toLowerCase() === name.toLowerCase());
+//   // return [name, tries];
+//   return [name, targetObj.tries];
 // };
 
 // var updateScore = function (arr: any[], amt: number) {

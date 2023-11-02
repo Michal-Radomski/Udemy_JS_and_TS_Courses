@@ -482,37 +482,84 @@
 // // console.log('formatScores("string"):', formatScores("string"));
 
 //* Error Handling Strategies
-{
-  const modules = [
-    { name: "module1", init() {} },
-    {
-      name: "module2",
-      init() {
-        throw new Error("init(): Critical data missing.");
-      },
+// {
+//   const modules = [
+//     { name: "module1", init() {} },
+//     {
+//       name: "module2",
+//       init() {
+//         throw new Error("init(): Critical data missing.");
+//       },
+//     },
+//   ];
+
+//   const reportError = function (critical: boolean, msg: string, userMsg: string) {
+//     if (critical) {
+//       console.log({ userMsg });
+//     }
+//     logError(critical, msg);
+//   };
+
+//   function logError(sev: boolean, msg: string) {
+//     console.log({ sev, msg });
+//   }
+
+//   for (let mod of modules) {
+//     try {
+//       mod.init();
+//     } catch (err) {
+//       reportError(
+//         true,
+//         `${mod.name} did not load. ${(err as Error).message}`,
+//         `The ${mod.name} module did not load and the application will not run. Reload page to try again.`
+//       );
+//     }
+//   }
+// }
+
+//@ Factory Functions
+//* Factory Function
+const factoryFun = function (newNum: number) {
+  const num = 100;
+  return {
+    sum() {
+      const sum = num + newNum;
+      return sum;
     },
-  ];
-
-  const reportError = function (critical: boolean, msg: string, userMsg: string) {
-    if (critical) {
-      console.log({ userMsg });
-    }
-    logError(critical, msg);
   };
+};
 
-  function logError(sev: boolean, msg: string) {
-    console.log({ sev, msg });
+const facFun = factoryFun(5);
+facFun.sum();
+console.log("facFun.sum():", facFun.sum(), facFun);
+
+class Greeting1 {
+  greeting: string;
+  constructor(greet: string) {
+    this.greeting = greet;
   }
-
-  for (let mod of modules) {
-    try {
-      mod.init();
-    } catch (err) {
-      reportError(
-        true,
-        `${mod.name} did not load. ${(err as Error).message}`,
-        `The ${mod.name} module did not load and the application will not run. Reload page to try again.`
-      );
-    }
+  greet() {
+    console.log(1, "this.greeting:", this.greeting);
   }
 }
+
+const Greeting2 = function (this: any, greet: string) {
+  this.greeting = greet;
+  this.greet = () => console.log(2, "this.greeting:", this.greeting);
+};
+
+const greeting3 = function (greeting: string) {
+  return {
+    greet() {
+      console.log(3, { greeting });
+    },
+  };
+};
+
+const greet1 = new Greeting1("Hi");
+const greet2 = new (Greeting2 as any)("Hello");
+const greet3 = greeting3("Hello World");
+
+greet1.greet();
+greet2.greet();
+greet3.greet();

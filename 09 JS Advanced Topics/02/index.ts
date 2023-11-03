@@ -566,19 +566,48 @@
 // greet3.greet();
 
 //* Using a Prototype with Factory Functions
-const objProto = {
-  greet() {
-    console.log(this.greeting);
-  },
-} as any;
+// const objProto = {
+//   greet() {
+//     console.log(this.greeting);
+//   },
+// } as any;
 
-const greeting3 = function (greeting: string) {
-  let obj = Object.create(objProto);
-  obj.greeting = greeting;
-  return obj;
-};
+// const greeting3 = function (greeting: string) {
+//   let obj = Object.create(objProto);
+//   obj.greeting = greeting;
+//   return obj;
+// };
 
-const greet3 = greeting3("Hello World");
-greet3.greet();
+// const greet3 = greeting3("Hello World");
+// greet3.greet();
 
 //@ Using AI with JS
+// https://echatgpt.org/chat
+// function convertToRoman(num: number) {
+//   if (typeof num !== "number") {
+//     return "Invalid input. Please enter a number.";
+//   }
+
+//   // Create arrays to store Roman numerals and their corresponding Arabic values
+//   const romanNumerals = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"];
+//   const arabicValues = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+
+//   // Initialize an empty string to store the Roman numeral
+//   let roman = "";
+
+//   // Iterate through each element in the arabicValues array
+//   for (let i = 0; i < arabicValues.length; i++) {
+//     // Repeat the current Roman numeral until the remaining number is less than the current Arabic value
+//     while (num >= arabicValues[i]) {
+//       roman += romanNumerals[i];
+//       num -= arabicValues[i];
+//     }
+//   }
+//   return roman;
+// }
+
+// console.log("convertToRoman(58):", convertToRoman(58));
+// console.log("convertToRoman(1):", convertToRoman(1));
+// console.log("convertToRoman(3999):", convertToRoman(3999));
+
+//@ Functional Programming

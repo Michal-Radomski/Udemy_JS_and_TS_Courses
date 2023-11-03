@@ -611,3 +611,39 @@
 // console.log("convertToRoman(3999):", convertToRoman(3999));
 
 //@ Functional Programming
+//* Avoiding side-effect -> Pure Function
+// const average = function (scores: number[]) {
+//   let total = 0;
+//   for (let i = 0; i < scores.length; i++) {
+//     total += scores[i];
+//   }
+//   return total / scores.length;
+// };
+// console.log("average([90, 30, 40, 50, 60]):", average([90, 30, 40, 50, 60]));
+
+//* Avoiding Shared State -> avoid global variables
+// const arr = [3, 4, 2, 5, 1, 6];
+// Object.freeze(arr);
+
+// const sortArray = function (arr1: number[]) {
+//   return arr1.sort(); //* Error
+// };
+
+// const newNums = sortArray(arr);
+
+// console.log({ arr });
+// console.log({ newNums });
+
+//* Avoiding Mutable Data -> Cloning Objects
+//* A shallow copy means the first level is copied, deeper levels are referenced. Deep Clone where object in object;
+const arr = [3, 4, 2, 5, 1, 6];
+Object.freeze(arr);
+
+// Deep copy
+const cloneObj = function (obj: number[]) {
+  return JSON.parse(JSON.stringify(obj));
+};
+
+const newNums = cloneObj(arr).sort();
+console.log({ arr });
+console.log({ newNums });

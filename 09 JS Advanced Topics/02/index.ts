@@ -649,40 +649,115 @@
 // console.log({ newNums });
 
 //* Function Composition -> Pipe + compose
-const str: string = "Innovation distinguishes between a leader and a follower.";
+// const str: string = "Innovation distinguishes between a leader and a follower.";
 
-const trim = (str: string) => str.replace(/^\s*|\s*$/g, "");
-const noPunct = (str: string) => str.replace(/[?.,!]/g, "");
-const capitalize = (str: string) => str.toUpperCase();
-const breakout = (str: string) => str.split(" ");
-const noArticles = (str: string) => str !== "A" && str !== "AN" && str !== "THE";
-const filterArticles = (arr: string[]) => arr.filter(noArticles);
+// const trim = (str: string) => str.replace(/^\s*|\s*$/g, "");
+// const noPunct = (str: string) => str.replace(/[?.,!]/g, "");
+// const capitalize = (str: string) => str.toUpperCase();
+// const breakout = (str: string) => str.split(" ");
+// const noArticles = (str: string) => str !== "A" && str !== "AN" && str !== "THE";
+// const filterArticles = (arr: string[]) => arr.filter(noArticles);
 
-console.log(
-  "filterArticles(breakout(capitalize(noPunct(trim(str))))):",
-  filterArticles(breakout(capitalize(noPunct(trim(str)))))
-);
+// console.log(
+//   "filterArticles(breakout(capitalize(noPunct(trim(str))))):",
+//   filterArticles(breakout(capitalize(noPunct(trim(str)))))
+// );
 
-//* From right to left!
-const compose = function (...functions: Function[]) {
-  return (str: string) => {
-    return functions.reduceRight((value: string, func: Function) => {
-      return func(value);
-    }, str);
-  };
+// //* From right to left!
+// const compose = function (...functions: Function[]) {
+//   return (str: string) => {
+//     return functions.reduceRight((value: string, func: Function) => {
+//       return func(value);
+//     }, str);
+//   };
+// };
+
+// //* From left to right!
+// const pipe = function (...functions: Function[]) {
+//   return (str: string) => {
+//     return functions.reduce((value: string, func: Function) => {
+//       return func(value);
+//     }, str);
+//   };
+// };
+
+// const prepareStringPipe = pipe(trim, noPunct, capitalize, breakout, filterArticles);
+// const prepareStringCompose = compose(filterArticles, breakout, capitalize, noPunct, trim);
+
+// console.log("prepareStringPipe(str):", prepareStringPipe(str));
+// console.log("prepareStringCompose(str):", prepareStringCompose(str));
+
+//* Reduce, Map and Filter
+// const arr = [1, 2, 3, 4, 5];
+
+// const total = arr.reduce(function (accumulator, elem) {
+//   return accumulator + elem;
+// }, 0);
+
+// const newArray = arr.map(function (val, _index, _array) {
+//   // console.log(val);
+//   // console.log(_index);
+//   // console.log(_array);
+//   return val ** 2;
+// });
+
+// const filterArray = arr.filter(function (val) {
+//   return val < 3;
+// });
+
+// console.log({ total, newArray, filterArray });
+
+//* Exercises
+const array = [10, 0, 90, 80, 50, 0, 60];
+
+interface StudentData {
+  studentID: number;
+  activityID: number;
+  score: number;
+}
+
+const mapStudentData = function (array: number[], sID: number) {
+  return array.map(function (val, index) {
+    return {
+      studentID: sID,
+      activityID: index,
+      score: val,
+    };
+  });
 };
 
-//* From left to right!
-const pipe = function (...functions: Function[]) {
-  return (str: string) => {
-    return functions.reduce((value: string, func: Function) => {
-      return func(value);
-    }, str);
-  };
+const removeLowScore = function (arr: StudentData[]) {
+  const min = Math.min(...arr.map((val) => val.score));
+  // console.log({ min });
+  return arr.filter((elem) => elem.score !== min);
 };
 
-const prepareStringPipe = pipe(trim, noPunct, capitalize, breakout, filterArticles);
-const prepareStringCompose = compose(filterArticles, breakout, capitalize, noPunct, trim);
+const sumScoreAttribute = function (arr: StudentData[]) {
+  return arr.reduce((result, elem) => result + elem.score, 0);
+};
 
-console.log("prepareStringPipe(str):", prepareStringPipe(str));
-console.log("prepareStringCompose(str):", prepareStringCompose(str));
+const computeAverage = function (arr: StudentData[]) {
+  return sumScoreAttribute(arr) / arr.length;
+};
+
+const filterZeroScores = function (arr: StudentData[]) {
+  return arr.filter((elem) => elem.score === 0);
+};
+
+const fullData = mapStudentData(array, 1001);
+console.log({ fullData });
+
+console.log("sumScoreAttribute(fullData):", sumScoreAttribute(fullData));
+console.log("computeAverage(fullData):", computeAverage(fullData));
+
+const lowValueRemoved = removeLowScore(fullData);
+console.log({ lowValueRemoved });
+
+const highAverage = computeAverage(lowValueRemoved);
+console.log({ highAverage });
+
+const lowAverage = computeAverage(fullData);
+console.log({ lowAverage });
+
+const zeroAssignments = filterZeroScores(fullData);
+console.log({ zeroAssignments });

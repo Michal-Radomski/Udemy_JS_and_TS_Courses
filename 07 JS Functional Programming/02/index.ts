@@ -27,7 +27,7 @@
 //   filterArticles(breakout(capitalize(noPunct(trim(str)))))
 // );
 
-//* From right to left!
+// * From right to left!
 // const compose = function (...functions: Function[]) {
 //   return (str: string) => {
 //     return functions.reduceRight((value: string, func: Function) => {
@@ -36,7 +36,7 @@
 //   };
 // };
 
-//* From left to right!
+// * From left to right!
 // const pipe = function (...functions: Function[]) {
 //   return (str: string) => {
 //     return functions.reduce((value: string, func: Function) => {
@@ -48,7 +48,7 @@
 // const prepareStringPipe = pipe(trim, noPunct, capitalize, breakout, filterArticles);
 // const prepareStringCompose = compose(filterArticles, breakout, capitalize, noPunct, trim);
 
-// console.log("prepareStringCompose(str):", prepareStringCompose(str));
+// console.log("prepareStringPipe(str):", prepareStringPipe(str));
 // console.log("prepareStringCompose(str):", prepareStringCompose(str));
 
 //* Exercise

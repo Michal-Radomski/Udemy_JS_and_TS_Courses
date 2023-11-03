@@ -636,14 +636,53 @@
 
 //* Avoiding Mutable Data -> Cloning Objects
 //* A shallow copy means the first level is copied, deeper levels are referenced. Deep Clone where object in object;
-const arr = [3, 4, 2, 5, 1, 6];
-Object.freeze(arr);
+// const arr = [3, 4, 2, 5, 1, 6];
+// Object.freeze(arr);
 
-// Deep copy
-const cloneObj = function (obj: number[]) {
-  return JSON.parse(JSON.stringify(obj));
+// // Deep copy
+// const cloneObj = function (obj: number[]) {
+//   return JSON.parse(JSON.stringify(obj));
+// };
+
+// const newNums = cloneObj(arr).sort();
+// console.log({ arr });
+// console.log({ newNums });
+
+//* Function Composition -> Pipe + compose
+const str: string = "Innovation distinguishes between a leader and a follower.";
+
+const trim = (str: string) => str.replace(/^\s*|\s*$/g, "");
+const noPunct = (str: string) => str.replace(/[?.,!]/g, "");
+const capitalize = (str: string) => str.toUpperCase();
+const breakout = (str: string) => str.split(" ");
+const noArticles = (str: string) => str !== "A" && str !== "AN" && str !== "THE";
+const filterArticles = (arr: string[]) => arr.filter(noArticles);
+
+console.log(
+  "filterArticles(breakout(capitalize(noPunct(trim(str))))):",
+  filterArticles(breakout(capitalize(noPunct(trim(str)))))
+);
+
+//* From right to left!
+const compose = function (...functions: Function[]) {
+  return (str: string) => {
+    return functions.reduceRight((value: string, func: Function) => {
+      return func(value);
+    }, str);
+  };
 };
 
-const newNums = cloneObj(arr).sort();
-console.log({ arr });
-console.log({ newNums });
+//* From left to right!
+const pipe = function (...functions: Function[]) {
+  return (str: string) => {
+    return functions.reduce((value: string, func: Function) => {
+      return func(value);
+    }, str);
+  };
+};
+
+const prepareStringPipe = pipe(trim, noPunct, capitalize, breakout, filterArticles);
+const prepareStringCompose = compose(filterArticles, breakout, capitalize, noPunct, trim);
+
+console.log("prepareStringPipe(str):", prepareStringPipe(str));
+console.log("prepareStringCompose(str):", prepareStringCompose(str));

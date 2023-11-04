@@ -19,3 +19,5 @@ Files created during Udemy.com JS and TS courses:
 8. [Regular Expressions in JavaScript](https://www.udemy.com/course/mastering-regular-expressions-in-javascript)
 
 9. [JS - Advanced Topics](https://www.udemy.com/course/learn-modern-javascript-advanced-topics)
+
+10. [JS: The Critical Parts Masterclass](https://www.udemy.com/course/javascript-the-critical-parts-masterclass)

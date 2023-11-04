@@ -707,57 +707,74 @@
 
 // console.log({ total, newArray, filterArray });
 
-//* Exercises
-const array = [10, 0, 90, 80, 50, 0, 60];
+//* Exercise
+// const array = [10, 0, 90, 80, 50, 0, 60];
 
-interface StudentData {
-  studentID: number;
-  activityID: number;
-  score: number;
-}
+// interface StudentData {
+//   studentID: number;
+//   activityID: number;
+//   score: number;
+// }
 
-const mapStudentData = function (array: number[], sID: number) {
-  return array.map(function (val, index) {
-    return {
-      studentID: sID,
-      activityID: index,
-      score: val,
-    };
-  });
+// const mapStudentData = function (array: number[], sID: number) {
+//   return array.map(function (val, index) {
+//     return {
+//       studentID: sID,
+//       activityID: index,
+//       score: val,
+//     };
+//   });
+// };
+
+// const removeLowScore = function (arr: StudentData[]) {
+//   const min = Math.min(...arr.map((val) => val.score));
+//   // console.log({ min });
+//   return arr.filter((elem) => elem.score !== min);
+// };
+
+// const sumScoreAttribute = function (arr: StudentData[]) {
+//   return arr.reduce((result, elem) => result + elem.score, 0);
+// };
+
+// const computeAverage = function (arr: StudentData[]) {
+//   return sumScoreAttribute(arr) / arr.length;
+// };
+
+// const filterZeroScores = function (arr: StudentData[]) {
+//   return arr.filter((elem) => elem.score === 0);
+// };
+
+// const fullData = mapStudentData(array, 1001);
+// console.log({ fullData });
+
+// console.log("sumScoreAttribute(fullData):", sumScoreAttribute(fullData));
+// console.log("computeAverage(fullData):", computeAverage(fullData));
+
+// const lowValueRemoved = removeLowScore(fullData);
+// console.log({ lowValueRemoved });
+
+// const highAverage = computeAverage(lowValueRemoved);
+// console.log({ highAverage });
+
+// const lowAverage = computeAverage(fullData);
+// console.log({ lowAverage });
+
+// const zeroAssignments = filterZeroScores(fullData);
+// console.log({ zeroAssignments });
+
+//* Currying
+const curryGreeting = function (greeting: string) {
+  return function (name: string) {
+    console.log(`${greeting} ${name}`);
+  };
 };
+const welcomeGreet = curryGreeting("Welcome");
 
-const removeLowScore = function (arr: StudentData[]) {
-  const min = Math.min(...arr.map((val) => val.score));
-  // console.log({ min });
-  return arr.filter((elem) => elem.score !== min);
-};
+welcomeGreet("Steve");
+welcomeGreet("Mary");
 
-const sumScoreAttribute = function (arr: StudentData[]) {
-  return arr.reduce((result, elem) => result + elem.score, 0);
-};
+//* Recursion
+const factorial: Function = (num: number) => (num === 1 ? 1 : num * factorial(num - 1));
 
-const computeAverage = function (arr: StudentData[]) {
-  return sumScoreAttribute(arr) / arr.length;
-};
-
-const filterZeroScores = function (arr: StudentData[]) {
-  return arr.filter((elem) => elem.score === 0);
-};
-
-const fullData = mapStudentData(array, 1001);
-console.log({ fullData });
-
-console.log("sumScoreAttribute(fullData):", sumScoreAttribute(fullData));
-console.log("computeAverage(fullData):", computeAverage(fullData));
-
-const lowValueRemoved = removeLowScore(fullData);
-console.log({ lowValueRemoved });
-
-const highAverage = computeAverage(lowValueRemoved);
-console.log({ highAverage });
-
-const lowAverage = computeAverage(fullData);
-console.log({ lowAverage });
-
-const zeroAssignments = filterZeroScores(fullData);
-console.log({ zeroAssignments });
+const factorial_5 = factorial(5);
+console.log({ factorial_5 });

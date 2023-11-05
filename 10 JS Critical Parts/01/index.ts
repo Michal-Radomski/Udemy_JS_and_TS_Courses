@@ -248,28 +248,69 @@
 // console.log({ c }, typeof c);
 
 //* Objects
-const obj = {
-  name: "Steven",
-  address: {
-    street: "main",
-    number: 445,
-  },
-};
-const test = function () {
-  //* function is an object!
-  console.log("test");
-};
-const test2 = () => {
-  //* function is an object!
-  console.log("test");
-};
-const arr = [1, 2, 3, 4];
-const date = new Date();
-const map = new Map();
-// object function function object object object
-console.log(typeof obj, typeof test, typeof test2, typeof arr, typeof date, typeof map);
+// const obj = {
+//   name: "Steven",
+//   address: {
+//     street: "main",
+//     number: 445,
+//   },
+// };
+// const test = function () {
+//   //* function is an object!
+//   console.log("test");
+// };
+// const test2 = () => {
+//   //* function is an object!
+//   console.log("test");
+// };
+// const arr = [1, 2, 3, 4];
+// const date = new Date();
+// const map = new Map();
+// // object function function object object object
+// console.log(typeof obj, typeof test, typeof test2, typeof arr, typeof date, typeof map);
 
-// @ts-ignore
-console.log("test.__proto__:", test.__proto__); //* {}
-// @ts-ignore
-console.log("test2.__proto__:", test2.__proto__); //* {}
+// // @ts-ignore
+// console.log("test.__proto__:", test.__proto__); //* {}
+// // @ts-ignore
+// console.log("test2.__proto__:", test2.__proto__); //* {}
+
+//* Type Coercion
+// String Coercion
+// console.log("String(123):", String(123)); // explicit
+// console.log('123 + "":', 123 + ""); // implicit
+
+// const arr = ["an objectives", "another objective", "one more objective"];
+// for (let i = 0; i < arr.length; i++) {
+//   console.log(i + 1 + "_" + arr[i]);
+// }
+
+// // Boolean Coercion
+// console.log("Boolean(54):", Boolean(54)); //Explicit
+// console.log("Boolean({}):", Boolean({})); //Explicit
+// console.log("Boolean(!!{}):", Boolean(!!{})); //* true
+
+// //Implicit
+// let val;
+// if (!val) {
+//   val = 10;
+//   console.log(1, { val });
+// }
+// console.log(2, { val });
+
+// // Numeric Coercion
+// console.log('Number("1"):', Number("1")); // Explicit;
+// // The unary plus (+)
+// console.log("+'123':", +"123"); // Implicit
+// // The unary negation (-)
+// const x = 3;
+// const y = -x;
+// console.log({ x, y }); //* x=3, y=-3
+// // @ts-ignore
+// console.log('"15" * 15:', "15" * 15);
+
+//* Making Use of Truthy and Falsy
+let newVar;
+// newVar = "Steve";
+// newVar = null;
+newVar = 0;
+console.log("!!'Steve', !!null, !!0:", !!"Steve", !!null, !!0); //* true false false

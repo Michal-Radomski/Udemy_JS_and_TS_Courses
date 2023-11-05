@@ -222,18 +222,54 @@
 // };
 // fun();
 
-const sumIt = function () {
-  let num = 10;
-  const sum2 = function () {
-    return num * 2;
-  };
-  return sum2();
-};
-console.log("sumIt():", sumIt()); //* 20
+// const sumIt = function () {
+//   let num = 10;
+//   const sum2 = function () {
+//     return num * 2;
+//   };
+//   return sum2();
+// };
+// console.log("sumIt():", sumIt()); //* 20
 
-// What is wrong with the following function and how can you fix it?
-const sumIt2 = function () {
-  let num = 100;
-  return num * 2;
+// // What is wrong with the following function and how can you fix it?
+// const sumIt2 = function () {
+//   let num = 100;
+//   return num * 2;
+// };
+// console.log("sumIt2():", sumIt2()); //* 200
+
+//* JS data types
+// Types: boolean, string, number, null, undefined, symbol, bigInt
+// const a = undefined; //* absence of definition -> by system!
+// const b = null; //* absence of value -> by developer //* typeof null -> object - this is error!!!
+// console.log({ a }, typeof a, { b }, typeof b);
+
+// const c = BigInt(100);
+// console.log({ c }, typeof c);
+
+//* Objects
+const obj = {
+  name: "Steven",
+  address: {
+    street: "main",
+    number: 445,
+  },
 };
-console.log("sumIt2():", sumIt2()); //* 200
+const test = function () {
+  //* function is an object!
+  console.log("test");
+};
+const test2 = () => {
+  //* function is an object!
+  console.log("test");
+};
+const arr = [1, 2, 3, 4];
+const date = new Date();
+const map = new Map();
+// object function function object object object
+console.log(typeof obj, typeof test, typeof test2, typeof arr, typeof date, typeof map);
+
+// @ts-ignore
+console.log("test.__proto__:", test.__proto__); //* {}
+// @ts-ignore
+console.log("test2.__proto__:", test2.__proto__); //* {}

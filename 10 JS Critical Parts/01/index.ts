@@ -192,3 +192,48 @@
 // scores[4] = 90;
 // scores.push(65);
 // console.log("scores:", scores);
+
+//* Exercise
+// const playingWithLoops = function () {
+//   let total = 0;
+//   for (let i = 0; i < 100; i++) {
+//     total += i;
+//     // console.log(1, total);
+//     // console.log({ i });
+//   }
+//   for (let j = 0; j < 1000; j++) {
+//     total += j;
+//     // console.log(2, total);
+//     // console.log({ j });
+//   }
+//   console.log({ total });
+// };
+// playingWithLoops(); //* { total: 504450 }
+
+// const fun = function () {
+//   let num = 10;
+//   console.log(0, { num });
+//   if (num) {
+//     num = 1000;
+//     console.log(1, { num });
+//   }
+//   num = 100;
+//   console.log(2, { num });
+// };
+// fun();
+
+const sumIt = function () {
+  let num = 10;
+  const sum2 = function () {
+    return num * 2;
+  };
+  return sum2();
+};
+console.log("sumIt():", sumIt()); //* 20
+
+// What is wrong with the following function and how can you fix it?
+const sumIt2 = function () {
+  let num = 100;
+  return num * 2;
+};
+console.log("sumIt2():", sumIt2()); //* 200

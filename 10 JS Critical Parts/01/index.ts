@@ -361,19 +361,72 @@
 // console.log("5===5':", 5 === 5n); //* false
 
 //* Passing Primitives and Objects: Value or Reference?
-let num1 = 10;
-let num2 = num1;
-num1++;
-console.log({ num1, num2 }); //* { num1: 11, num2: 10 }
+// let num1 = 10;
+// let num2 = num1;
+// num1++;
+// console.log({ num1, num2 }); //* { num1: 11, num2: 10 }
 
-const obj1 = {
-  number: 10,
+// const obj1 = {
+//   number: 10,
+// };
+// const obj2 = obj1;
+// obj1.number++;
+// console.log({ obj1, obj2 }); //* { obj1: { number: 11 }, obj2: { number: 11 } }
+
+// const arr1 = [1, 2, 3];
+// const arr2 = arr1;
+// arr1.push(4);
+// console.log({ arr1, arr2 }); //* { arr1: [ 1, 2, 3, 4 ], arr2: [ 1, 2, 3, 4 ] }
+
+//* Cloning JS Objects
+// const obj = {
+//   isHuman: true,
+//   name: "Steven",
+//   number: 0,
+//   settings: {
+//     role: "user",
+//   },
+// };
+
+// const obj1 = Object.assign({}, obj); //* Shallow Copy!
+// const obj2 = { ...obj }; //* Shallow Copy!
+// const obj3 = JSON.parse(JSON.stringify(obj)); //* Deep Copy!
+// obj.number = 10;
+// obj.settings.role = "admin";
+// obj.isHuman = false;
+// console.log({ obj, obj1, obj2, obj3 });
+// //* obj: { name: 'Steven', number: 10, settings: { role: 'admin' }, isHuman: false },
+// //* obj1: { name: 'Steven', number: 0, settings: { role: 'admin' }, isHuman: true },
+// //* obj2: { name: 'Steven', number: 0, settings: { role: 'admin' }, isHuman: true },
+// //* obj3: { name: 'Steven', number: 0, settings: { role: 'user' }, isHuman: true }
+
+//* Exercise
+// const scores = [90, 75, 80, 40];
+// const updateScores = function (arr: number[], newScores: number[]) {
+//   const newScoresArray = arr;
+//   newScoresArray.push(...newScores);
+//   return newScoresArray;
+// };
+
+// const finalScores = updateScores(scores, [50, 65, 100]);
+// console.log("scores.length:", scores.length); //* 7
+// console.log("finalScores.length:", finalScores.length); //* 7
+
+// const scores = [90, 75, 80, 40];
+// const updateScores = function (arr: number[], newScores: number[]) {
+//   const newScoresArray = [...arr];
+//   newScoresArray.push(...newScores);
+//   return newScoresArray;
+// };
+
+// const finalScores = updateScores(scores, [50, 65, 100]);
+// console.log("scores.length:", scores.length); //* 4
+// console.log("finalScores.length:", finalScores.length); //* 7
+
+//* Strict Mode
+"use strict";
+const test = function (j1: number) {
+  const x = j1;
+  console.log({ x });
 };
-const obj2 = obj1;
-obj1.number++;
-console.log({ obj1, obj2 }); //* { obj1: { number: 11 }, obj2: { number: 11 } }
-
-const arr1 = [1, 2, 3];
-const arr2 = arr1;
-arr1.push(4);
-console.log({ arr1, arr2 }); //* { arr1: [ 1, 2, 3, 4 ], arr2: [ 1, 2, 3, 4 ] }
+test(90); //* 90

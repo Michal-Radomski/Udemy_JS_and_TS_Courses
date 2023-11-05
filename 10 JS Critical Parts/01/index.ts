@@ -134,31 +134,61 @@
 // };
 // add5(3);
 
-//* Block Scope
-let a = 10;
-const add5 = function (num: number) {
-  let b = 5;
-  console.log("num + b:", num + b);
+//* Block Scope: let and const
+// let a = 10;
+// const add5 = function (num: number) {
+//   let b = 5;
+//   console.log("num + b:", num + b);
 
-  const add10 = function (num2: number) {
-    console.log("num2 + a:", num2 + a);
-  };
-  add10(3);
+//   const add10 = function (num2: number) {
+//     console.log("num2 + a:", num2 + a);
+//   };
+//   add10(3);
 
-  const add15 = function (num3: number) {
-    let c = 15;
-    console.log("num3 + c:", num3 + c);
-  };
-  add15(3);
-};
-add5(3);
+//   const add15 = function (num3: number) {
+//     let c = 15;
+//     console.log("num3 + c:", num3 + c);
+//   };
+//   add15(3);
+// };
+// add5(3);
 
-const sumIt = function (num1: number) {
-  let num2 = 20;
-  if (num1 > num2) {
-    let num3 = 10;
-    console.log("num1 + num3:", num1 + num3);
-  }
-  console.log("num1 + num2:", num1 + num2);
-};
-sumIt(100);
+// const sumIt = function (num1: number) {
+//   let num2 = 20;
+//   if (num1 > num2) {
+//     let num3 = 10;
+//     console.log("num1 + num3:", num1 + num3);
+//   }
+//   console.log("num1 + num2:", num1 + num2);
+// };
+// sumIt(100);
+
+//* Exercise
+// for (var i = 0; i < 3; i++) {
+//   setTimeout(function () {
+//     console.log({ i });
+//   }, 1000 * i);
+// }
+// var = 3
+// { i: 3 }
+// { i: 3 }
+// { i: 3 }
+
+// for (let i = 0; i < 3; i++) {
+//   setTimeout(function () {
+//     console.log({ i });
+//   }, 1000 * i);
+// }
+// let = 1,2,3
+// { i: 0 }
+// { i: 1 }
+// { i: 2 }
+
+// const num = 3.14;
+// // num = 3.1415; //* Error
+
+// const scores = [100, 90, 85, 70, 0, 0, 60];
+// // scores = [100, 90, 85, 70, 0]; //* Error
+// scores[4] = 90;
+// scores.push(65);
+// console.log("scores:", scores);

@@ -424,9 +424,52 @@
 // console.log("finalScores.length:", finalScores.length); //* 7
 
 //* Strict Mode
-"use strict";
-const test = function (j1: number) {
-  const x = j1;
-  console.log({ x });
+// "use strict";
+// const test = function (j1: number) {
+//   const x = j1;
+//   console.log({ x });
+// };
+// test(90); //* 90
+
+//@ Tricky Fundamentals
+//* Callback
+// const message = function () {
+//   console.log("This message is shown after 3 seconds");
+// };
+// setTimeout(message, 3000);
+
+//* Keyword this
+// const getThis = function () {
+//   console.log({ globalThis });
+// };
+// getThis();
+//* JS Browser code! -> this is window object
+// function getThis() {
+//   console.log(this);
+// }
+// window.getThis();
+
+//* Keyword this with objects
+interface CustomDate extends Date {
+  showThis: () => void;
+}
+
+const date = new Date() as CustomDate;
+date.showThis = function () {
+  console.log("this:", this);
 };
-test(90); //* 90
+date.showThis();
+
+const obj = {
+  name: "Steven",
+  greeting() {
+    console.log(`Hello ${this.name}!`);
+  },
+};
+obj.greeting(); // Hello Steven!
+
+const obj2 = {
+  name: "Lynette",
+  greeting: obj.greeting,
+};
+obj2.greeting(); // Hello Lynette!

@@ -450,26 +450,50 @@
 // window.getThis();
 
 //* Keyword this with objects
-interface CustomDate extends Date {
-  showThis: () => void;
-}
+// interface CustomDate extends Date {
+//   showThis: () => void;
+// }
 
-const date = new Date() as CustomDate;
-date.showThis = function () {
-  console.log("this:", this);
-};
-date.showThis();
+// const date = new Date() as CustomDate;
+// date.showThis = function () {
+//   console.log("this:", this);
+// };
+// date.showThis();
 
-const obj = {
-  name: "Steven",
-  greeting() {
-    console.log(`Hello ${this.name}!`);
-  },
-};
-obj.greeting(); // Hello Steven!
+// const obj = {
+//   name: "Steven",
+//   greeting() {
+//     console.log(`Hello ${this.name}!`);
+//   },
+// };
+// obj.greeting(); // Hello Steven!
 
-const obj2 = {
-  name: "Lynette",
-  greeting: obj.greeting,
-};
-obj2.greeting(); // Hello Lynette!
+// const obj2 = {
+//   name: "Lynette",
+//   greeting: obj.greeting,
+// };
+// obj2.greeting(); // Hello Lynette!
+
+//* Exercise
+// const func1 = function (this: any) {
+//   console.log(1, this); // undefined
+//   const func2 = function (this: any) {
+//     console.log(2, this); // undefined
+//     const obj = {
+//       name: "Steven",
+//       func3() {
+//         console.log(3, this); // { name: 'Steven', func3: [Function: func3] }
+//         const func4 = () => {
+//           console.log(4, this); // { name: 'Steven', func3: [Function: func3] }
+//         };
+//         func4();
+//       },
+//     };
+//     obj.func3();
+//   };
+
+//   func2();
+// };
+// func1();
+
+//* Common Issues with the Keyword this

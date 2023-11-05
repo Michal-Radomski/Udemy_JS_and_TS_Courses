@@ -497,3 +497,58 @@
 // func1();
 
 //* Common Issues with the Keyword this
+// const obj = {
+//   name: "Steven",
+//   func3() {
+//     console.log(3, this); // { name: 'Steven', func3: [Function: func3] }
+//     const func4 = () => {
+//       console.log(4, this); // { name: 'Steven', func3: [Function: func3] }
+//     };
+//     func4();
+//   },
+// };
+// obj.func3();
+
+// const displayName = function (this: any) {
+//   console.log(this.name);
+// };
+
+// const obj = {
+//   name: "Steve",
+//   displayName: displayName,
+// };
+// // obj.displayName(); // Steve
+
+// console.log(obj.displayName());
+// // const showName = obj.displayName;
+// // console.log(showName()); // Error
+
+// Callback Example 1
+// const obj = {
+//   name: "Steve",
+//   displayName() {
+//     // console.log(this.name);
+//     console.log(this);
+//   },
+// };
+// // obj.displayName();
+
+// const doFunction = function (callback: Function) {
+//   if (typeof callback === "function") {
+//     callback();
+//   }
+// };
+
+// doFunction(obj.displayName);
+
+// Callback Example 2
+// const obj = {
+//   name: "Steve",
+//   displayName() {
+//     // console.log(this.name);  // undefined
+//     console.log(this);
+//   },
+// };
+// setTimeout(obj.displayName, 2000);
+
+//* Using call() and apply()

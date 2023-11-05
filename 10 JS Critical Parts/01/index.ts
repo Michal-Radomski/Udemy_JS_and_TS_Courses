@@ -309,8 +309,71 @@
 // console.log('"15" * 15:', "15" * 15);
 
 //* Making Use of Truthy and Falsy
-let newVar;
-// newVar = "Steve";
-// newVar = null;
-newVar = 0;
-console.log("!!'Steve', !!null, !!0:", !!"Steve", !!null, !!0); //* true false false
+// let newVar;
+// // newVar = "Steve";
+// // newVar = null;
+// newVar = 0;
+// console.log("!!'Steve', !!null, !!0:", !!"Steve", !!null, !!0); //* true false false
+
+//* Loose equality and strict equality -> always use strict equality
+// // @ts-ignore
+// console.log('1=="1":', 1 == "1"); //* true
+// // @ts-ignore
+// console.log("false==0:", false == 0); //* true
+// // @ts-ignore
+// console.log("true==1:", true == 1); //* true
+// console.log("undefined == null:", undefined == null); //* true
+// console.log("undefined === null:", undefined === null); //* false
+
+//* Exercise
+// const useTruthy = function () {
+//   // let val = 0;
+//   let val = -10;
+//   if (val || val === 0) {
+//     val += 5;
+//     console.log({ val });
+//   }
+// };
+// useTruthy();
+
+// const useConcat = function () {
+//   const codes = [0, 5, "10", "15"];
+//   const strings = ["first item", "second item", "third item", "fourth item"];
+//   for (let i = 0; i < codes.length; i++) {
+//     console.log(`${Number(codes[i]) + 5}_${strings[i]}`);
+//   }
+// };
+// useConcat();
+
+//* BigInt
+// console.log(Number.MIN_SAFE_INTEGER); //* -9007199254740991
+// console.log(Number.MAX_SAFE_INTEGER); //* 9007199254740991
+// let x = 999999999999999;
+// let y = 9999999999999999;
+// console.log({ x, y }); //* { x: 999999999999999, y: 10000000000000000 }
+// const z = BigInt("9999999999999999");
+// console.log({ z }); //* 9999999999999999n
+// console.log(Number.EPSILON); //*2.220446049250313e-16 (2^-52)
+// console.log(1 + Number.EPSILON); //* 1.0000000000000002
+// // @ts-ignore
+// console.log("5==5n:", 5 == 5n); //* true
+// // @ts-ignore
+// console.log("5===5':", 5 === 5n); //* false
+
+//* Passing Primitives and Objects: Value or Reference?
+let num1 = 10;
+let num2 = num1;
+num1++;
+console.log({ num1, num2 }); //* { num1: 11, num2: 10 }
+
+const obj1 = {
+  number: 10,
+};
+const obj2 = obj1;
+obj1.number++;
+console.log({ obj1, obj2 }); //* { obj1: { number: 11 }, obj2: { number: 11 } }
+
+const arr1 = [1, 2, 3];
+const arr2 = arr1;
+arr1.push(4);
+console.log({ arr1, arr2 }); //* { arr1: [ 1, 2, 3, 4 ], arr2: [ 1, 2, 3, 4 ] }

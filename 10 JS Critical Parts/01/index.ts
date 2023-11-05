@@ -115,21 +115,50 @@
 
 //* Lexical Environment -> where variable is placed!
 
-//* Scope
-var a = 10;
+//* Scope + Scope Chain
+// var a = 10;
 
-var add5 = function (num: number) {
-  var b = 5;
+// var add5 = function (num: number) {
+//   var b = 5;
+//   console.log("num + b:", num + b);
+//   var add10 = function (num2: number) {
+//     console.log("num2 + a:", num2 + a);
+//   };
+//   add10(3);
+
+//   var add15 = function (num3: number) {
+//     var c = 15;
+//     console.log("num3 + c:", num3 + c);
+//   };
+//   add15(3);
+// };
+// add5(3);
+
+//* Block Scope
+let a = 10;
+const add5 = function (num: number) {
+  let b = 5;
   console.log("num + b:", num + b);
-  var add10 = function (num2: number) {
+
+  const add10 = function (num2: number) {
     console.log("num2 + a:", num2 + a);
   };
   add10(3);
 
-  var add15 = function (num3: number) {
-    var c = 15;
+  const add15 = function (num3: number) {
+    let c = 15;
     console.log("num3 + c:", num3 + c);
   };
   add15(3);
 };
 add5(3);
+
+const sumIt = function (num1: number) {
+  let num2 = 20;
+  if (num1 > num2) {
+    let num3 = 10;
+    console.log("num1 + num3:", num1 + num3);
+  }
+  console.log("num1 + num2:", num1 + num2);
+};
+sumIt(100);

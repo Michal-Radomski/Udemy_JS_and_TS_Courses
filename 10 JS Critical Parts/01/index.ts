@@ -551,4 +551,47 @@
 // };
 // setTimeout(obj.displayName, 2000);
 
-//* Using call() and apply()
+//* Call and Apply -> to define this!
+// function test() {
+//   console.log("test");
+// }
+
+// test(); // test
+// test.call(this); // test
+// test.apply(this); // test
+
+// const obj = {
+//   name: "Steve",
+//   displayName(greet: string, punct: string) {
+//     console.log(`${greet} ${this.name}${punct}`);
+//   },
+// };
+
+// const obj2 = {
+//   name: "Lynette",
+// };
+
+// // Borrowing method from obj to obj2
+// obj.displayName.call(obj2, "Hi", "!"); // Hi Lynette!
+// obj.displayName.apply(obj2, ["Hello", "."]); // Hello Lynette.
+
+//* Bind -> to determine value of this! -> returns a function
+// function test() {
+//   console.log("test");
+// }
+// const newFun = test.bind(this); // test
+// newFun();
+
+const obj = {
+  name: "Steve",
+  displayName(greet: string, punct: string) {
+    console.log(`${greet} ${this.name}${punct}`);
+  },
+};
+
+const obj2 = {
+  name: "Lynette",
+};
+
+const display = obj.displayName.bind(obj2, "Hi", "!");
+display(); // Hi Lynette!

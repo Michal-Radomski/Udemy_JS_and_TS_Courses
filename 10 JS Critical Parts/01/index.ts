@@ -688,16 +688,64 @@
 
 //* Arrow Functions are NOT for Every Occasion -> where NOT to use arrow functions
 // Don't use arrow functions for methods!
-const obj = {
-  firstName: "Steven",
-  lastName: "Hancock",
-  fullName() {
-    return `${this.firstName} ${this.lastName}`;
-  },
-  // @ts-ignore
-  fullName2: () => `${this.firstName} ${this.lastName}`,
-};
-console.log("obj.fullName():", obj.fullName()); // Steven Hancock
-console.log("obj.fullName2():", obj.fullName2()); // undefined undefined
+// const obj = {
+//   firstName: "Steven",
+//   lastName: "Hancock",
+//   fullName() {
+//     return `${this.firstName} ${this.lastName}`;
+//   },
+//   // @ts-ignore
+//   fullName2: () => `${this.firstName} ${this.lastName}`,
+// };
+// console.log("obj.fullName():", obj.fullName()); // Steven Hancock
+// console.log("obj.fullName2():", obj.fullName2()); // undefined undefined
 
 //@ Critical Principles and Techniques for Functions
+//* Functions are First Class Citizens because they are treated as values!
+// A function can be assigned to a variable.
+// const fun10 = function () {
+//   return 10;
+// };
+// const fun10a = fun10;
+// console.log("fun10a === fun10:", fun10a === fun10);
+// console.log("fun10():", fun10());
+// console.log("fun10a():", fun10a());
+
+// A function can be assigned to a property of an Object.
+// const obj = {
+//   fun() {
+//     console.log("fun");
+//   },
+// };
+// obj.fun();
+
+// A function can be stored in an array.
+// const arr = [10, () => 10];
+// console.log("arr[1]():", (arr[1] as Function)());
+
+// A function can be part of an expression.
+// console.log(
+//   30 +
+//     (function () {
+//       return 10;
+//     })()
+// );
+// console.log("30 + (() => 10)():", 30 + (() => 10)());
+
+// A function can be passed to a function - think callbacks
+// setTimeout(() => console.log("time is up"), 1000);
+
+// A function can be returned from a function.
+// const getFun = function () {
+//   return function () {
+//     console.log("I was returned");
+//   };
+// };
+// getFun()();
+// const newFun = getFun();
+// newFun();
+// getFun(); //* No console.log!
+
+//* Higher Order Functions -> take function as parameter or returns a function (e.g. callback)
+setTimeout(() => console.log("logging"), 1000);
+setTimeout(() => console.log(2 + 2), 2000);

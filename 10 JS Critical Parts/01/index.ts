@@ -551,7 +551,7 @@
 // };
 // setTimeout(obj.displayName, 2000);
 
-//* Call and Apply -> to define this!
+//* Call and Apply -> to define this! -> invoke function right now!
 // function test() {
 //   console.log("test");
 // }
@@ -575,7 +575,7 @@
 // obj.displayName.call(obj2, "Hi", "!"); // Hi Lynette!
 // obj.displayName.apply(obj2, ["Hello", "."]); // Hello Lynette.
 
-//* Bind -> to determine value of this! -> returns a function
+//* Bind -> to determine value of this! -> returns a function!
 // function test() {
 //   console.log("test");
 // }
@@ -630,16 +630,74 @@
 // }, 2000);
 
 // Example 3: Original problem we used to show how keyword this worked.
+// const obj = {
+//   name: "Steven",
+//   func3() {
+//     console.log(3, this); // { name: 'Steven', func3: [Function: func3] }
+//     const func4 = function (this: any) {
+//       console.log(4, this); // { name: 'Steven', func3: [Function: func3] }
+//     }.bind(this);
+//     func4.apply(this); // { name: 'Steven', func3: [Function: func3] }
+//     func4.call(this); // { name: 'Steven', func3: [Function: func3] }
+//     func4();
+//   },
+// };
+// obj.func3();
+
+//* Exercise
+// const obj = {
+//   name: "Steve",
+//   displayName() {
+//     console.log(this?.name);
+//   },
+// };
+
+// const doFunction = function (callback: Function) {
+//   if (typeof callback === "function") {
+//     callback();
+//   }
+// };
+// doFunction(obj.displayName.bind(obj)); // Steve;
+
+//* Arrow Functions
+//  const sum = function(num1: number, num2: number) {
+//   return num1 + num2;
+// };
+// const sum = (num1: number, num2: number) => num1 + num2;
+
+// const sum = (num1: number, num2: number) => {
+//   // console.log(num1, num2);
+//   console.log("num1+ num2:", num1 + num2);
+//   return num1 + num2;
+// };
+// sum(2, 4);
+
+//* Solving this Binding with Arrow Functions -> where to use arrow functions
+// lexical this: where is this!
+// const obj = {
+//   name: "Steven",
+//   func3() {
+//     console.log(3, this.name); //* Steven
+//     const func4 = () => {
+//       console.log(4, this.name); //* Steven
+//     };
+//     func4();
+//   },
+// };
+// obj.func3();
+
+//* Arrow Functions are NOT for Every Occasion -> where NOT to use arrow functions
+// Don't use arrow functions for methods!
 const obj = {
-  name: "Steven",
-  func3() {
-    console.log(3, this); // { name: 'Steven', func3: [Function: func3] }
-    const func4 = function (this: any) {
-      console.log(4, this); // { name: 'Steven', func3: [Function: func3] }
-    }.bind(this);
-    func4.apply(this); // { name: 'Steven', func3: [Function: func3] }
-    func4.call(this); // { name: 'Steven', func3: [Function: func3] }
-    func4();
+  firstName: "Steven",
+  lastName: "Hancock",
+  fullName() {
+    return `${this.firstName} ${this.lastName}`;
   },
+  // @ts-ignore
+  fullName2: () => `${this.firstName} ${this.lastName}`,
 };
-obj.func3();
+console.log("obj.fullName():", obj.fullName()); // Steven Hancock
+console.log("obj.fullName2():", obj.fullName2()); // undefined undefined
+
+//@ Critical Principles and Techniques for Functions

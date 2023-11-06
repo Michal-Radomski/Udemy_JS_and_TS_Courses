@@ -582,16 +582,64 @@
 // const newFun = test.bind(this); // test
 // newFun();
 
+// const obj = {
+//   name: "Steve",
+//   displayName(greet: string, punct: string) {
+//     console.log(`${greet} ${this.name}${punct}`);
+//   },
+// };
+
+// const obj2 = {
+//   name: "Lynette",
+// };
+
+// // V1
+// const display = obj.displayName.bind(obj2, "Hi", "!");
+// display(); // Hi Lynette!
+// // V2
+// const display2 = obj.displayName.bind(obj2);
+// display2("Hi", "!"); // Hi Lynette!
+
+//* Taking Control of the Keyword this
+// Example 1: Passing a reference to a method
+// const displayName = function (this: any) {
+//   console.log(this.name);
+// };
+
+// const obj = {
+//   name: "Steve",
+//   displayName,
+// };
+
+// const showName = obj.displayName;
+// console.log(showName.apply(obj));
+
+// Example 2: Callback with setTimeout
+// const obj = {
+//   name: "Steve",
+//   displayName() {
+//     console.log(this.name);
+//   },
+// };
+// // obj.displayName(); // Steve
+
+// setTimeout(obj.displayName, 2000); // undefined
+// setTimeout(obj.displayName.bind(obj), 2000); // Steve
+// setTimeout(function () {
+//   obj.displayName(); // Steve
+// }, 2000);
+
+// Example 3: Original problem we used to show how keyword this worked.
 const obj = {
-  name: "Steve",
-  displayName(greet: string, punct: string) {
-    console.log(`${greet} ${this.name}${punct}`);
+  name: "Steven",
+  func3() {
+    console.log(3, this); // { name: 'Steven', func3: [Function: func3] }
+    const func4 = function (this: any) {
+      console.log(4, this); // { name: 'Steven', func3: [Function: func3] }
+    }.bind(this);
+    func4.apply(this); // { name: 'Steven', func3: [Function: func3] }
+    func4.call(this); // { name: 'Steven', func3: [Function: func3] }
+    func4();
   },
 };
-
-const obj2 = {
-  name: "Lynette",
-};
-
-const display = obj.displayName.bind(obj2, "Hi", "!");
-display(); // Hi Lynette!
+obj.func3();

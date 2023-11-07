@@ -788,33 +788,67 @@
 // console.log({ greeting, greeting1, greeting2 });
 
 //* Closure
-function init() {
-  var name = "Mozilla";
-  function displayName() {
-    // displayName() is the inner function, that forms the closure
-    console.log(1, { name });
-  }
-  displayName();
-}
-init();
+// function init() {
+//   var name = "Mozilla";
+//   function displayName() {
+//     // displayName() is the inner function, that forms the closure
+//     console.log(1, { name });
+//   }
+//   displayName();
+// }
+// init();
 
-function makeFunc() {
-  const name = "Mozilla";
-  function displayName() {
-    console.log(2, { name });
-  }
-  return displayName;
-}
-const myFunc = makeFunc();
-myFunc();
+// function makeFunc() {
+//   const name = "Mozilla";
+//   function displayName() {
+//     console.log(2, { name });
+//   }
+//   return displayName;
+// }
+// const myFunc = makeFunc();
+// myFunc();
 
-function makeAdder(x: number) {
-  return function (y: number) {
-    return x + y;
+// function makeAdder(x: number) {
+//   return function (y: number) {
+//     return x + y;
+//   };
+// }
+// const add5 = makeAdder(5);
+// console.log("add5(2):", add5(2)); // 7
+
+// const add10 = makeAdder(10);
+// console.log("add10(2):", add10(2)); // 12
+
+// const delayedGreeting = function (name: string) {
+//   const greet = "Good morning",
+//     punct = "!";
+
+//   setTimeout(function () {
+//     console.log(`${greet} ${name}${punct}`);
+//   }, 3000);
+// };
+// delayedGreeting("Steve");
+
+const getFunction = function (num1: number) {
+  const logOut = function (msg: string) {
+    console.log(msg);
   };
-}
-const add5 = makeAdder(5);
-console.log("add5(2):", add5(2)); // 7
+  const addPunct = function (str: string) {
+    return str + "!";
+  };
+  const multiply = function (n1: number, n2: number) {
+    return n1 * n2;
+  };
+  return function (n2: number) {
+    logOut(addPunct(String(multiply(num1, n2))));
+  };
+};
 
-const add10 = makeAdder(10);
-console.log("add10(2):", add10(2)); // 12
+const multiplyBy5AndDisplay = getFunction(5);
+const multiplyBy10AndDisplay = getFunction(10);
+
+multiplyBy5AndDisplay(1);
+getFunction(5)(1);
+
+multiplyBy10AndDisplay(1);
+getFunction(10)(1);

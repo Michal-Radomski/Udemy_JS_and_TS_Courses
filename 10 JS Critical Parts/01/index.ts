@@ -829,26 +829,69 @@
 // };
 // delayedGreeting("Steve");
 
-const getFunction = function (num1: number) {
+//* Using Closure with Returned Functions
+// const getFunction = function (num1: number) {
+//   const logOut = function (msg: string) {
+//     console.log(msg);
+//   };
+//   const addPunct = function (str: string) {
+//     return str + "!";
+//   };
+//   const multiply = function (n1: number, n2: number) {
+//     return n1 * n2;
+//   };
+//   return function (n2: number) {
+//     logOut(addPunct(String(multiply(num1, n2))));
+//   };
+// };
+
+// const multiplyBy5AndDisplay = getFunction(5);
+// const multiplyBy10AndDisplay = getFunction(10);
+
+// multiplyBy5AndDisplay(1);
+// getFunction(5)(1);
+
+// multiplyBy10AndDisplay(1);
+// getFunction(10)(1);
+
+//* Important Features of Closures
+const getFunction = function (index: number) {
+  const hugeArray = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
+
   const logOut = function (msg: string) {
     console.log(msg);
   };
+
   const addPunct = function (str: string) {
     return str + "!";
   };
+
   const multiply = function (n1: number, n2: number) {
     return n1 * n2;
   };
-  return function (n2: number) {
-    logOut(addPunct(String(multiply(num1, n2))));
+
+  const updateArray = function (newNum: number) {
+    if (newNum > 100) {
+      hugeArray.push(newNum);
+    }
+  };
+
+  const createFun = function (n2: number) {
+    logOut(addPunct(String(multiply(hugeArray[index], n2))));
+  };
+
+  return {
+    updateArray: updateArray,
+    createFun: createFun,
   };
 };
 
+// const obj = getFunction(1);
+// // console.log({ obj });
+// obj.createFun(1);
+// obj.createFun(2);
+
 const multiplyBy5AndDisplay = getFunction(5);
 const multiplyBy10AndDisplay = getFunction(10);
-
-multiplyBy5AndDisplay(1);
-getFunction(5)(1);
-
-multiplyBy10AndDisplay(1);
-getFunction(10)(1);
+multiplyBy5AndDisplay.createFun(1);
+multiplyBy10AndDisplay.createFun(2);

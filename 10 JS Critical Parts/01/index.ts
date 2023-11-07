@@ -774,14 +774,47 @@
 // console.log({ str2 });
 
 //* Exercise - Higher Order Function
-const createGreeting = function (term: string, name: string, fn?: Function) {
-  const greeting = `${term} ${name}`;
-  if (typeof fn === "function") {
-    return fn(greeting);
-  }
-  return greeting;
-};
+// const createGreeting = function (term: string, name: string, fn?: (arg0: string) => string) {
+//   const greeting = `${term} ${name}`;
+//   if (typeof fn === "function") {
+//     return fn(greeting);
+//   }
+//   return greeting;
+// };
 
-const greeting = createGreeting("Good Morning", "Annika", (greet: string) => `${greet}!!!!`);
-const greeting2 = createGreeting("Good Morning", "Annika");
-console.log({ greeting, greeting2 });
+// const greeting = createGreeting("Good Morning", "Annika", (greet: string) => `${greet}!!!!`);
+// const greeting1 = createGreeting("Good Morning", "Annika", (greet: string) => greet.toUpperCase());
+// const greeting2 = createGreeting("Good Morning", "Annika");
+// console.log({ greeting, greeting1, greeting2 });
+
+//* Closure
+function init() {
+  var name = "Mozilla";
+  function displayName() {
+    // displayName() is the inner function, that forms the closure
+    console.log(1, { name });
+  }
+  displayName();
+}
+init();
+
+function makeFunc() {
+  const name = "Mozilla";
+  function displayName() {
+    console.log(2, { name });
+  }
+  return displayName;
+}
+const myFunc = makeFunc();
+myFunc();
+
+function makeAdder(x: number) {
+  return function (y: number) {
+    return x + y;
+  };
+}
+const add5 = makeAdder(5);
+console.log("add5(2):", add5(2)); // 7
+
+const add10 = makeAdder(10);
+console.log("add10(2):", add10(2)); // 12

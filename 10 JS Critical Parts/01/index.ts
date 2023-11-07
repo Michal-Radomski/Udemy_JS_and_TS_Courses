@@ -747,5 +747,41 @@
 // getFun(); //* No console.log!
 
 //* Higher Order Functions -> take function as parameter or returns a function (e.g. callback)
-setTimeout(() => console.log("logging"), 1000);
-setTimeout(() => console.log(2 + 2), 2000);
+// setTimeout(() => console.log("logging"), 1000);
+// setTimeout(() => console.log(2 + 2), 2000);
+
+// const names = ["Steven", "Adam", "Jose", "Brianna", "Dora"];
+// const nums = [100, 95, 45, 10, 25, 5, 70];
+
+// names.sort();
+// nums.sort(function (a, b) {
+//   return a - b;
+// });
+// console.log({ names, nums });
+
+// const str1 = "This is a string.";
+// const processString = function (str: string, callback: Function) {
+//   let newStr = str.toUpperCase();
+//   if (typeof callback === "function") {
+//     return callback(newStr);
+//   }
+//   return newStr;
+// };
+
+// const str2 = processString(str1, function (val: string) {
+//   return val.split(" ");
+// });
+// console.log({ str2 });
+
+//* Exercise - Higher Order Function
+const createGreeting = function (term: string, name: string, fn?: Function) {
+  const greeting = `${term} ${name}`;
+  if (typeof fn === "function") {
+    return fn(greeting);
+  }
+  return greeting;
+};
+
+const greeting = createGreeting("Good Morning", "Annika", (greet: string) => `${greet}!!!!`);
+const greeting2 = createGreeting("Good Morning", "Annika");
+console.log({ greeting, greeting2 });

@@ -968,4 +968,48 @@
 // multiplyBy5AndDisplay.createFun(1);
 // multiplyBy10AndDisplay.createFun(2);
 
-//* Exercise1
+//* Exercise
+const learners = ["Oswald", "Tara", "Lana", "Nelson", "Sabrina"];
+
+// Output: 5x undefined -> i = 5
+// for (var i = 0; i < learners.length; i++) {
+//   // console.log({ i });
+//   setTimeout(function () {
+//     console.log(learners[i]);
+//   }, 2000);
+// }
+
+// My Solution
+// setTimeout(function () {
+//   for (var i = 0; i < learners.length; i++) {
+//     console.log(learners[i]);
+//   }
+// }, 2000);
+
+// Using Closure
+// for (var i = 0; i < learners.length; i++) {
+//   function showLearner() {
+//     let learner = learners[i];
+//     setTimeout(function () {
+//       console.log(learner);
+//     }, 2000);
+//   }
+//   showLearner();
+// }
+
+// for (var i = 0; i < learners.length; i++) {
+//   function showLearner() {
+//     let idx = i;
+//     setTimeout(function () {
+//       console.log(learners[idx]);
+//     }, 2000);
+//   }
+//   showLearner();
+// }
+
+// Using let
+for (let i = 0; i < learners.length; i++) {
+  setTimeout(function () {
+    console.log(learners[i]);
+  }, 2000);
+}

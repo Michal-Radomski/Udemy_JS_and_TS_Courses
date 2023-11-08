@@ -1008,8 +1008,34 @@ const learners = ["Oswald", "Tara", "Lana", "Nelson", "Sabrina"];
 // }
 
 // Using let
-for (let i = 0; i < learners.length; i++) {
-  setTimeout(function () {
-    console.log(learners[i]);
-  }, 2000);
-}
+// for (let i = 0; i < learners.length; i++) {
+//   setTimeout(function () {
+//     console.log(learners[i]);
+//   }, 2000);
+// }
+
+//* Immediately Invoked Function Expressions (IIFEs)
+// Use Cases: Private Data and Avoid global variables and variable collision
+(function print(name: string): void {
+  console.log({ name });
+})("Michal");
+
+(function (): number {
+  const res = 5 + 5;
+  console.log({ res });
+  return res;
+})();
+
+const sum: number = (function (): number {
+  const res = 5 + 5;
+  console.log({ res });
+  return res;
+})();
+console.log("sum:", sum, typeof sum);
+
+const sum10: number = (function (num): number {
+  const num1 = 10;
+  const res = num + num1;
+  console.log({ res });
+  return res;
+})(5);

@@ -1,3 +1,75 @@
+//# Refreshment: Encapsulation - using closure
+// function BankAccount(accountNumber: string, accountHolderName: string, balance: number) {
+//   const _accountNumber = accountNumber;
+//   const _accountHolderName = accountHolderName;
+//   let _balance = balance;
+
+//   function showAccountDetails() {
+//     console.log(`Account Number: ${_accountNumber}`);
+//     console.log(`Account Holder Name: ${_accountHolderName}`);
+//     console.log(`Balance: ${_balance}`);
+//   }
+
+//   function deposit(amount: number) {
+//     _balance += amount;
+//     showAccountDetails();
+//   }
+
+//   function withdraw(amount: number) {
+//     if (_balance >= amount) {
+//       _balance -= amount;
+//       showAccountDetails();
+//     } else {
+//       console.log("Insufficient Balance");
+//     }
+//   }
+
+//   return {
+//     deposit: deposit,
+//     withdraw: withdraw,
+//   };
+// }
+
+// const myBankAccount = BankAccount("123456", "John Doe", 1000);
+// myBankAccount.deposit(2500); //* Account Number: 123456 Account Holder Name: John Doe Balance: 3500
+// myBankAccount.withdraw(2000); //* Account Number: 123456 Account Holder Name: John Doe Balance: 1500
+
+//# Refreshment: Encapsulation - using classes
+// class BankAccount {
+//   private _accountNumber: string;
+//   private _accountHolderName: string;
+//   private _balance: number;
+//   constructor(accountNumber: string, accountHolderName: string, balance: number) {
+//     this._accountNumber = accountNumber;
+//     this._accountHolderName = accountHolderName;
+//     this._balance = balance;
+//   }
+
+//   showAccountDetails() {
+//     console.log(`Account Number: ${this._accountNumber}`);
+//     console.log(`Account Holder Name: ${this._accountHolderName}`);
+//     console.log(`Balance: ${this._balance}`);
+//   }
+
+//   deposit(amount: number) {
+//     this._balance += amount;
+//     this.showAccountDetails();
+//   }
+
+//   withdraw(amount: number) {
+//     if (this._balance >= amount) {
+//       this._balance -= amount;
+//       this.showAccountDetails();
+//     } else {
+//       console.log("Insufficient Balance");
+//     }
+//   }
+// }
+
+// const myBankAccount = new BankAccount("123456", "John Doe", 1000);
+// myBankAccount.deposit(2500); //* Account Number: 123456 Account Holder Name: John Doe Balance: 3500
+// myBankAccount.withdraw(2000); //* Account Number: 123456 Account Holder Name: John Doe Balance: 1500
+
 //@ Critical JS Concepts
 // console.log("globalThis:", globalThis);
 
@@ -855,43 +927,45 @@
 // getFunction(10)(1);
 
 //* Important Features of Closures
-const getFunction = function (index: number) {
-  const hugeArray = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
+// const getFunction = function (index: number) {
+//   const hugeArray = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
 
-  const logOut = function (msg: string) {
-    console.log(msg);
-  };
+//   const logOut = function (msg: string) {
+//     console.log(msg);
+//   };
 
-  const addPunct = function (str: string) {
-    return str + "!";
-  };
+//   const addPunct = function (str: string) {
+//     return str + "!";
+//   };
 
-  const multiply = function (n1: number, n2: number) {
-    return n1 * n2;
-  };
+//   const multiply = function (n1: number, n2: number) {
+//     return n1 * n2;
+//   };
 
-  const updateArray = function (newNum: number) {
-    if (newNum > 100) {
-      hugeArray.push(newNum);
-    }
-  };
+//   const updateArray = function (newNum: number) {
+//     if (newNum > 100) {
+//       hugeArray.push(newNum);
+//     }
+//   };
 
-  const createFun = function (n2: number) {
-    logOut(addPunct(String(multiply(hugeArray[index], n2))));
-  };
+//   const createFun = function (n2: number) {
+//     logOut(addPunct(String(multiply(hugeArray[index], n2))));
+//   };
 
-  return {
-    updateArray: updateArray,
-    createFun: createFun,
-  };
-};
+//   return {
+//     updateArray: updateArray,
+//     createFun: createFun,
+//   };
+// };
 
 // const obj = getFunction(1);
 // // console.log({ obj });
 // obj.createFun(1);
 // obj.createFun(2);
 
-const multiplyBy5AndDisplay = getFunction(5);
-const multiplyBy10AndDisplay = getFunction(10);
-multiplyBy5AndDisplay.createFun(1);
-multiplyBy10AndDisplay.createFun(2);
+// const multiplyBy5AndDisplay = getFunction(5);
+// const multiplyBy10AndDisplay = getFunction(10);
+// multiplyBy5AndDisplay.createFun(1);
+// multiplyBy10AndDisplay.createFun(2);
+
+//* Exercise1

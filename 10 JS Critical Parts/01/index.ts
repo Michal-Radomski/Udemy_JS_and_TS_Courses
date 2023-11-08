@@ -1016,26 +1016,36 @@ const learners = ["Oswald", "Tara", "Lana", "Nelson", "Sabrina"];
 
 //* Immediately Invoked Function Expressions (IIFEs)
 // Use Cases: Private Data and Avoid global variables and variable collision
-(function print(name: string): void {
-  console.log({ name });
-})("Michal");
+// (function print(name: string): void {
+//   console.log({ name });
+// })("Michal");
 
-(function (): number {
-  const res = 5 + 5;
-  console.log({ res });
-  return res;
-})();
+// (function (): number {
+//   const res = 5 + 5;
+//   console.log({ res });
+//   return res;
+// })();
 
-const sum: number = (function (): number {
-  const res = 5 + 5;
-  console.log({ res });
-  return res;
-})();
-console.log("sum:", sum, typeof sum);
+// const sum: number = (function (): number {
+//   const res = 5 + 5;
+//   console.log({ res });
+//   return res;
+// })();
+// console.log("sum:", sum, typeof sum);
 
-const sum10: number = (function (num): number {
-  const num1 = 10;
-  const res = num + num1;
-  console.log({ res });
-  return res;
-})(5);
+// const sum10: number = (function (num): number {
+//   const num1 = 10;
+//   const res = num + num1;
+//   console.log({ res });
+//   return res;
+// })(5);
+
+//* Exercise
+// (function () {
+//   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+//     now = new Date(),
+//     message = "Today is " + days[now.getDay()] + ", " + now.getDate() + "!";
+//   console.log("message:", message);
+// })();
+
+//@ Critical Fundamentals for Objects

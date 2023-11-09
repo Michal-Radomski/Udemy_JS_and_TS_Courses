@@ -969,7 +969,7 @@
 // multiplyBy10AndDisplay.createFun(2);
 
 //* Exercise
-const learners = ["Oswald", "Tara", "Lana", "Nelson", "Sabrina"];
+// const learners = ["Oswald", "Tara", "Lana", "Nelson", "Sabrina"];
 
 // Output: 5x undefined -> i = 5
 // for (var i = 0; i < learners.length; i++) {
@@ -1049,3 +1049,68 @@ const learners = ["Oswald", "Tara", "Lana", "Nelson", "Sabrina"];
 // })();
 
 //@ Critical Fundamentals for Objects
+//* Computed property names
+// let i = 0;
+// const a = {
+//   [`foo${++i}`]: i,
+//   [`foo${++i}`]: i,
+//   [`foo${++i}`]: i,
+// };
+
+// console.log({ a });
+// console.log("a.foo1:", a.foo1); // 1
+// console.log("a.foo2:", a.foo2); // 2
+// console.log("a.foo3:", a.foo3); // 3
+
+// const items = ["A", "B", "C"];
+// const obj = {
+//   [items as unknown as string]: "Hello",
+// };
+// console.log(obj); // A,B,C: "Hello"
+// console.log(obj["A,B,C" as keyof typeof obj]); // "Hello"
+
+//* The Nature of Objects
+const param = "size";
+const config = {
+  [param]: 12,
+  [`mobile${param.charAt(0).toUpperCase()}${param.slice(1)}`]: 4,
+};
+console.log("config:", config); // {size: 12, mobileSize: 4}
+
+const dataName = "final";
+const dataVal = 80;
+
+const obj = {
+  newValue: "",
+  fName: "Steve",
+  lName: "Hancock",
+  score: 90,
+  pass: true,
+  quizzes: ["q1", "q2", "q3"],
+  created: new Date(),
+  address: {
+    street: "45 main",
+    city: "Lehi",
+  },
+  fullName() {
+    return `${this.fName} ${this.lName}`;
+  },
+  [dataName]: dataVal,
+  dateName: dataVal,
+};
+
+obj.newValue = "newValue";
+
+Object.defineProperty(obj, "bDay", {
+  value: "May 25",
+  writable: false,
+  configurable: false,
+  enumerable: true,
+});
+
+console.log("obj.fullName():", obj.fullName());
+console.log("obj:", obj);
+console.log("obj.created:", obj.created, typeof obj.created);
+console.log("obj.pass:", obj.pass);
+console.log('obj["pass"]:', obj["pass"]);
+console.log("[dataName]:", [dataName]);

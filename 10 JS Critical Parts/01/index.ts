@@ -1082,6 +1082,7 @@ const dataVal = 80;
 
 const obj = {
   newValue: "",
+  newValue2: "",
   fName: "Steve",
   lName: "Hancock",
   score: 90,
@@ -1100,17 +1101,29 @@ const obj = {
 };
 
 obj.newValue = "newValue";
+obj["newValue2"] = "newValue2";
+obj[dataName] = 123;
 
 Object.defineProperty(obj, "bDay", {
   value: "May 25",
   writable: false,
   configurable: false,
+  // enumerable: false,
   enumerable: true,
 });
 
-console.log("obj.fullName():", obj.fullName());
-console.log("obj:", obj);
-console.log("obj.created:", obj.created, typeof obj.created);
-console.log("obj.pass:", obj.pass);
-console.log('obj["pass"]:', obj["pass"]);
-console.log("[dataName]:", [dataName]);
+// console.log("obj.fullName():", obj.fullName());
+// console.log("obj:", obj);
+// console.log("obj.created:", obj.created, typeof obj.created);
+// console.log("obj.pass:", obj.pass);
+// console.log('obj["pass"]:', obj["pass"]);
+// console.log("[dataName]:", [dataName]);
+
+// @ts-ignore
+console.log("obj.__proto__:", obj.__proto__); //* This shouldn't be used!
+console.log("Object.getPrototypeOf(obj):", Object.getPrototypeOf(obj));
+
+const date = new Date();
+console.log({ date });
+console.dir(date);
+console.log("date.getDate():", date.getDate());

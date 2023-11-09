@@ -1070,47 +1070,47 @@
 // console.log(obj["A,B,C" as keyof typeof obj]); // "Hello"
 
 //* The Nature of Objects
-const param = "size";
-const config = {
-  [param]: 12,
-  [`mobile${param.charAt(0).toUpperCase()}${param.slice(1)}`]: 4,
-};
-console.log("config:", config); // {size: 12, mobileSize: 4}
+// const param = "size";
+// const config = {
+//   [param]: 12,
+//   [`mobile${param.charAt(0).toUpperCase()}${param.slice(1)}`]: 4,
+// };
+// console.log("config:", config); // {size: 12, mobileSize: 4}
 
-const dataName = "final";
-const dataVal = 80;
+// const dataName = "final";
+// const dataVal = 80;
 
-const obj = {
-  newValue: "",
-  newValue2: "",
-  fName: "Steve",
-  lName: "Hancock",
-  score: 90,
-  pass: true,
-  quizzes: ["q1", "q2", "q3"],
-  created: new Date(),
-  address: {
-    street: "45 main",
-    city: "Lehi",
-  },
-  fullName() {
-    return `${this.fName} ${this.lName}`;
-  },
-  [dataName]: dataVal,
-  dateName: dataVal,
-};
+// const obj = {
+//   newValue: "",
+//   newValue2: "",
+//   fName: "Steve",
+//   lName: "Hancock",
+//   score: 90,
+//   pass: true,
+//   quizzes: ["q1", "q2", "q3"],
+//   created: new Date(),
+//   address: {
+//     street: "45 main",
+//     city: "Lehi",
+//   },
+//   fullName() {
+//     return `${this.fName} ${this.lName}`;
+//   },
+//   [dataName]: dataVal,
+//   dateName: dataVal,
+// };
 
-obj.newValue = "newValue";
-obj["newValue2"] = "newValue2";
-obj[dataName] = 123;
+// obj.newValue = "newValue";
+// obj["newValue2"] = "newValue2";
+// obj[dataName] = 123;
 
-Object.defineProperty(obj, "bDay", {
-  value: "May 25",
-  writable: false,
-  configurable: false,
-  // enumerable: false,
-  enumerable: true,
-});
+// Object.defineProperty(obj, "bDay", {
+//   value: "May 25",
+//   writable: false,
+//   configurable: false,
+//   // enumerable: false,
+//   enumerable: true,
+// });
 
 // console.log("obj.fullName():", obj.fullName());
 // console.log("obj:", obj);
@@ -1120,10 +1120,70 @@ Object.defineProperty(obj, "bDay", {
 // console.log("[dataName]:", [dataName]);
 
 // @ts-ignore
-console.log("obj.__proto__:", obj.__proto__); //* This shouldn't be used!
-console.log("Object.getPrototypeOf(obj):", Object.getPrototypeOf(obj));
+// console.log("obj.__proto__:", obj.__proto__); //* This shouldn't be used!
+// console.log("Object.getPrototypeOf(obj):", Object.getPrototypeOf(obj));
 
-const date = new Date();
-console.log({ date });
-console.dir(date);
-console.log("date.getDate():", date.getDate());
+// const date = new Date();
+// console.log({ date });
+// console.dir(date);
+// console.log("date.getDate():", date.getDate());
+
+//* Prototype Chains
+// const arr = [1, 2, 3, 4, 5];
+// console.log(
+//   "Object.getPrototypeOf(Object.getPrototypeOf(Object.getPrototypeOf(arr))):",
+//   Object.getPrototypeOf(Object.getPrototypeOf(Object.getPrototypeOf(arr)))
+// );
+
+// interface Obj {
+//   fName?: string;
+//   lName?: string;
+//   fullName?(): Function;
+// }
+
+// const obj = {
+//   fName: "Steven",
+//   lName: "Hancock",
+// } as Obj;
+
+// const obj2 = {
+//   fullName() {
+//     return `${this.fName} ${this.lName}`;
+//   },
+// } as Obj | any;
+
+// const obj3 = Object.create(obj2) as Obj;
+// obj3.fName = "Lynette";
+// obj3.lName = "Jorgensen";
+// console.log({ obj3 });
+
+//* Object.valueOf()
+// const obj = { foo: 1 };
+// console.log("obj.valueOf() === obj:", obj.valueOf() === obj); // true
+// console.log("obj.valueOf():", obj.valueOf());
+
+//* Object Properties have Precedence
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_precedence#table
+// const obj2 = {
+//   fName: "Jorge",
+//   age: 45,
+// };
+
+// console.log("obj2.toString(), obj2.valueOf():", obj2.toString(), obj2.valueOf());
+
+// const obj = {
+//   fName: "Jorge",
+//   age: 45,
+//   //* Overwritten methods!
+//   toString() {
+//     return this.fName;
+//   },
+//   valueOf() {
+//     return this.age;
+//   },
+// };
+
+// console.log("obj.toString(), obj.valueOf():", obj.toString(), obj.valueOf());
+// console.log("10+obj.valueOf():", 10 + obj.valueOf());
+
+//@ Object Oriented Programming

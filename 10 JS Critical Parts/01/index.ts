@@ -1187,3 +1187,37 @@
 // console.log("10+obj.valueOf():", 10 + obj.valueOf());
 
 //@ Object Oriented Programming
+//* Function Factory
+// const createRoom = function (name: string, capacity: number) {
+//   return {
+//     name,
+//     capacity,
+//     available: true,
+//     schedule: [] as { dtm: Date; len: number }[],
+//     reserve(dtm: Date, len: number) {
+//       this.schedule.push({ dtm, len });
+//     },
+//   };
+// };
+
+// const boardRoom = createRoom("Board Room", 20);
+// const trainingRoomA = createRoom("Training Room A", 35);
+// boardRoom.reserve(new Date("2023-11-11T15:00"), 60);
+
+// console.log("boardRoom, trainingRoomA:", boardRoom, trainingRoomA);
+
+//* Object.create()
+interface Obj {
+  greet: Function;
+  name?: string;
+}
+
+const objProto = {
+  greet() {
+    console.log(`Hi ${this.name}!`);
+  },
+} as Obj;
+
+const obj = Object.create(objProto);
+obj.name = "Michal";
+console.log({ obj });

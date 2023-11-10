@@ -1207,17 +1207,62 @@
 // console.log("boardRoom, trainingRoomA:", boardRoom, trainingRoomA);
 
 //* Object.create()
-interface Obj {
-  greet: Function;
+// interface Obj {
+//   greet: Function;
+//   name?: string;
+// }
+
+// const objProto = {
+//   greet() {
+//     console.log(`Hi ${this.name}!`);
+//   },
+// } as Obj;
+
+// const obj = Object.create(objProto);
+// obj.name = "Michal";
+// console.log({ obj });
+// obj.greet(); //* Hi Michal!
+
+//* Prototypes with Factory Function
+
+interface ObjProto {
   name?: string;
+  capacity?: number;
+  available?: boolean;
+  schedule?: {
+    dtm: Date;
+    len: number;
+  }[];
+  reserve?: Function;
 }
 
 const objProto = {
-  greet() {
-    console.log(`Hi ${this.name}!`);
+  reserve(dtm: Date, len: number) {
+    this.schedule!.push({ dtm, len });
   },
-} as Obj;
+} as ObjProto;
 
-const obj = Object.create(objProto);
-obj.name = "Michal";
-console.log({ obj });
+const createRoom = function (name: string, capacity: number): ObjProto {
+  const obj = Object.create(objProto);
+
+  //* V1
+  // obj.name = name;
+  // obj.capacity = capacity;
+  // obj.available = true;
+  // obj.schedule = [];
+  // return obj;
+
+  //* V2
+  return Object.assign(obj, {
+    name,
+    capacity,
+    available: true,
+    schedule: [],
+  });
+};
+
+const boardRoom = createRoom("Board Room", 20);
+const trainingRoomA = createRoom("Training Room A", 35);
+boardRoom.reserve!(new Date(), 60);
+
+console.log("boardRoom, trainingRoomA:", boardRoom, trainingRoomA);

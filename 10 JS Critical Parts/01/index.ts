@@ -1336,12 +1336,12 @@
 // console.log("post1.getAge():", post1.getAge());
 
 //* Gotchas That Could Trip You Up
-const MeetingRoom = function (this: any, name: string, capacity: number) {
-  this.name = name;
-  this.capacity = capacity;
-  this.available = true;
-  this.schedule = [];
-};
+// const MeetingRoom = function (this: any, name: string, capacity: number) {
+//   this.name = name;
+//   this.capacity = capacity;
+//   this.available = true;
+//   this.schedule = [];
+// };
 
 // Don't use arrow functions!
 // MeetingRoom.prototype.reserve = function (dtm: Date, len: number) {
@@ -1356,15 +1356,149 @@ const MeetingRoom = function (this: any, name: string, capacity: number) {
 // };
 // MeetingRoom.prototype.company = "ABC Coop";
 
-MeetingRoom.prototype = {
-  constructor: MeetingRoom,
+// // MeetingRoom.prototype = {
+// //   constructor: MeetingRoom,
+// //   reserve(dtm: Date, len: number) {
+// //     this.schedule.push({ dtm, len });
+// //   },
+// //   company: "ABC",
+// // };
+
+// const boardRoom = new (MeetingRoom as any)("Board Room", 20);
+// const trainingRoomA = new (MeetingRoom as any)("Training Room A", 35);
+// boardRoom.reserve(new Date(), 60);
+// console.log({ boardRoom, trainingRoomA });
+
+// console.log("MeetingRoom.constructor.toString():", MeetingRoom.constructor.toString());
+// console.log("boardRoom.constructor.toString():", boardRoom.constructor.toString());
+
+//@ Using Classes in JS - creating object (repeating)
+// class MeetingRoomClass {
+//   name: string;
+//   capacity: number;
+//   available: boolean;
+//   schedule: any[];
+//   company?: string;
+//   constructor(name: string, capacity: number) {
+//     this.name = name;
+//     this.capacity = capacity;
+//     this.available = true;
+//     this.schedule = [];
+//   }
+//   reserve(dtm: string, len: string) {
+//     this.schedule.push({ dtm, len });
+//   }
+// }
+// MeetingRoomClass.prototype.company = "ABC Coop";
+
+// const boardRoomClass = new MeetingRoomClass("Board Room", 20);
+// console.log("boardRoomClass:", boardRoomClass);
+// console.log("boardRoomClass.company:", boardRoomClass.company);
+// console.log("Object.getPrototypeOf(boardRoomClass):", Object.getPrototypeOf(boardRoomClass));
+
+//* Subclasses: Setting Up Inheritance Chains (repeating)
+// class Room {
+//   name: string;
+//   capacity: number;
+//   available: boolean;
+//   schedule: any[];
+//   company!: string;
+//   constructor(name: string, capacity = 1) {
+//     this.name = name;
+//     this.capacity = capacity;
+//     this.available = true;
+//     this.schedule = [];
+//   }
+//   reserve(dtm: Date, len: string) {
+//     this.schedule.push({ dtm, len });
+//   }
+//   getInfo() {
+//     return `Name: ${this.name}${this.capacity > 1 ? " - Capacity: " + this.capacity : ""} - Available: ${this.available}`;
+//   }
+// }
+
+// Room.prototype.company = "ABC Coop";
+
+// class MeetingRoom extends Room {
+//   [x: string]: any; //* Is this correct?
+// }
+
+// class MeetingRoom2 extends Room {
+//   floor: number;
+//   constructor(name: string, capacity: number, floor: number) {
+//     super(name, capacity); //* super before this.floor!
+//     this.floor = floor;
+//   }
+// }
+
+// class BreakRoom extends Room {
+//   kitchen: boolean;
+//   tables: number;
+//   constructor(name: string, capacity: number, kitchen: boolean, tables: number) {
+//     super(name, capacity);
+//     this.kitchen = kitchen;
+//     this.tables = tables;
+//   }
+// }
+
+// class MeetingPod extends Room {
+//   phone: boolean;
+//   constructor(name: string, phone: boolean) {
+//     super(name);
+//     this.phone = phone;
+//   }
+//   reserve(dtm: Date) {
+//     this.schedule.push({ dtm, len: 30 });
+//   }
+// }
+
+// const boardRoom = new MeetingRoom("Board Room", 20);
+// const trainingRoomA = new MeetingRoom2("Training Room A", 35, 11);
+// const lunchRoomA = new BreakRoom("Lunch Room A", 200, true, 10);
+
+// const pod201 = new MeetingPod("Pod 201", true);
+// pod201.reserve(new Date());
+
+// console.log("boardRoom:", boardRoom);
+// console.log("trainingRoomA:", trainingRoomA);
+// console.log("lunchRoomA:", lunchRoomA);
+// console.log("pod201:", pod201);
+// console.log("pod201.company:", pod201.company);
+
+// console.log("boardRoom.getInfo():", boardRoom.getInfo());
+// console.log("pod201.getInfo():", pod201.getInfo());
+
+//* Making Data Private (repeating)
+class MeetingRoom {
+  #name; //* JS private method!
+  #capacity; //* JS private method!
+  available = true;
+  schedule: any[] = [];
+  company!: string;
+  constructor(name: string, capacity: number) {
+    this.#name = name;
+    this.#capacity = capacity;
+  }
+
   reserve(dtm: Date, len: number) {
     this.schedule.push({ dtm, len });
-  },
-  company: "ABC",
-};
+  }
+  get capacity() {
+    return this.#capacity;
+  }
+  get name() {
+    return this.#name;
+  }
+  set capacity(num) {
+    if (num < this.#capacity) this.#capacity = num;
+  }
+}
 
-const boardRoom = new (MeetingRoom as any)("Board Room", 20);
-const trainingRoomA = new (MeetingRoom as any)("Training Room A", 35);
-boardRoom.reserve(new Date(), 60);
-console.log({ boardRoom, trainingRoomA });
+MeetingRoom.prototype.company = "ABC Coop";
+
+const boardRoom = new MeetingRoom("Board Room", 20);
+const trainingRoomA = new MeetingRoom("Training Room A", 35);
+console.log("boardRoom:", boardRoom);
+console.log("trainingRoomA:", trainingRoomA);
+console.log("trainingRoomA.name:", trainingRoomA.name);
+console.log("trainingRoomA.company:", trainingRoomA.company);

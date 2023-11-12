@@ -1296,27 +1296,41 @@
 // }, 3000);
 
 //* Constructor Function
-const MeetingRoom = function (this: any, name: string, capacity: number) {
-  this.name = name;
-  this.capacity = capacity;
-  this.available = true;
-  this.schedule = [];
-};
-
-//* V1
-// MeetingRoom.prototype.reserve = function (dtm: Date, len: number) {
-//   this.schedule.push({ dtm, len });
+// const MeetingRoom = function (this: any, name: string, capacity: number) {
+//   this.name = name;
+//   this.capacity = capacity;
+//   this.available = true;
+//   this.schedule = [];
 // };
-// MeetingRoom.prototype.company = "ABC Coop";
 
-//* V2
-MeetingRoom.prototype = {
-  reserve(dtm: Date, len: number) {
-    this.schedule.push({ dtm, len });
-  },
-  company: "ABC",
+// //* V1
+// // MeetingRoom.prototype.reserve = function (dtm: Date, len: number) {
+// //   this.schedule.push({ dtm, len });
+// // };
+// // MeetingRoom.prototype.company = "ABC Coop";
+
+// //* V2
+// MeetingRoom.prototype = {
+//   reserve(dtm: Date, len: number) {
+//     this.schedule.push({ dtm, len });
+//   },
+//   company: "ABC",
+// };
+
+// const boardRoom = new (MeetingRoom as any)("Board Room", 20);
+// const trainingRoomA = new (MeetingRoom as any)("Training Room A", 35);
+// console.log({ boardRoom, trainingRoomA });
+
+//* Exercise
+const Post = function (this: any, text: string, dept: string) {
+  this.text = text;
+  this.dept = dept;
+  this.date = new Date();
 };
 
-const boardRoom = new (MeetingRoom as any)("Board Room", 20);
-const trainingRoomA = new (MeetingRoom as any)("Training Room A", 35);
-console.log({ boardRoom, trainingRoomA });
+Post.prototype.getAge = function () {
+  return Date.now() - this.date;
+};
+
+const post1 = new (Post as any)("Lorem ipsum", "HR");
+console.log("post1.getAge():", post1.getAge());

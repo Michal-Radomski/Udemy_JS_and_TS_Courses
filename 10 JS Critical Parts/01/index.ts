@@ -1322,15 +1322,49 @@
 // console.log({ boardRoom, trainingRoomA });
 
 //* Exercise
-const Post = function (this: any, text: string, dept: string) {
-  this.text = text;
-  this.dept = dept;
-  this.date = new Date();
+// const Post = function (this: any, text: string, dept: string) {
+//   this.text = text;
+//   this.dept = dept;
+//   this.date = new Date();
+// };
+
+// Post.prototype.getAge = function () {
+//   return Date.now() - this.date;
+// };
+
+// const post1 = new (Post as any)("Lorem ipsum", "HR");
+// console.log("post1.getAge():", post1.getAge());
+
+//* Gotchas That Could Trip You Up
+const MeetingRoom = function (this: any, name: string, capacity: number) {
+  this.name = name;
+  this.capacity = capacity;
+  this.available = true;
+  this.schedule = [];
 };
 
-Post.prototype.getAge = function () {
-  return Date.now() - this.date;
+// Don't use arrow functions!
+// MeetingRoom.prototype.reserve = function (dtm: Date, len: number) {
+//   this.schedule.push({ dtm, len });
+//   // const that = this;
+//   const hasSchedule = () => {
+//     console.log("this:", this);
+//     // console.log("that:", that);
+//     this.hasSchedule = true;
+//   };
+//   hasSchedule.bind(this)();
+// };
+// MeetingRoom.prototype.company = "ABC Coop";
+
+MeetingRoom.prototype = {
+  constructor: MeetingRoom,
+  reserve(dtm: Date, len: number) {
+    this.schedule.push({ dtm, len });
+  },
+  company: "ABC",
 };
 
-const post1 = new (Post as any)("Lorem ipsum", "HR");
-console.log("post1.getAge():", post1.getAge());
+const boardRoom = new (MeetingRoom as any)("Board Room", 20);
+const trainingRoomA = new (MeetingRoom as any)("Training Room A", 35);
+boardRoom.reserve(new Date(), 60);
+console.log({ boardRoom, trainingRoomA });

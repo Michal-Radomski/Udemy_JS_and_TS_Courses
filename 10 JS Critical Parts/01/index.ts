@@ -1396,6 +1396,27 @@
 // console.log("boardRoomClass.company:", boardRoomClass.company);
 // console.log("Object.getPrototypeOf(boardRoomClass):", Object.getPrototypeOf(boardRoomClass));
 
+//* Exercises
+// class Post {
+//   text: string;
+//   dept: string;
+//   date: number | Date;
+//   constructor(text: string, dept: string) {
+//     this.text = text;
+//     this.dept = dept;
+//     this.date = new Date();
+//   }
+//   getAge() {
+//     return Date.now() - (this.date as number);
+//   }
+// }
+
+// const post = new Post("Lorem ipsum", "HR");
+// setTimeout(() => {
+//   console.log("post.getAge():", post.getAge());
+// }, 3000);
+// console.log({ post });
+
 //* Subclasses: Setting Up Inheritance Chains (repeating)
 // class Room {
 //   name: string;

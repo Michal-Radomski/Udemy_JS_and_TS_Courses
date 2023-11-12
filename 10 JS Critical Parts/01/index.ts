@@ -1224,45 +1224,73 @@
 // obj.greet(); //* Hi Michal!
 
 //* Prototypes with Factory Function
+// interface ObjProto {
+//   name?: string;
+//   capacity?: number;
+//   available?: boolean;
+//   schedule?: {
+//     dtm: Date;
+//     len: number;
+//   }[];
+//   reserve?: Function;
+// }
 
-interface ObjProto {
-  name?: string;
-  capacity?: number;
-  available?: boolean;
-  schedule?: {
-    dtm: Date;
-    len: number;
-  }[];
-  reserve?: Function;
+// const objProto = {
+//   reserve(dtm: Date, len: number) {
+//     this.schedule!.push({ dtm, len });
+//   },
+// } as ObjProto;
+
+// const createRoom = function (name: string, capacity: number): ObjProto {
+//   const obj = Object.create(objProto);
+
+//* V1
+// obj.name = name;
+// obj.capacity = capacity;
+// obj.available = true;
+// obj.schedule = [];
+// return obj;
+
+//* V2
+//   return Object.assign(obj, {
+//     name,
+//     capacity,
+//     available: true,
+//     schedule: [],
+//   });
+// };
+
+// const boardRoom = createRoom("Board Room", 20);
+// const trainingRoomA = createRoom("Training Room A", 35);
+// boardRoom.reserve!(new Date(), 60);
+
+// console.log("boardRoom, trainingRoomA:", boardRoom, trainingRoomA);
+
+//* Exercise
+interface PostProto {
+  text?: string;
+  dept?: string;
+  date?: number;
+  getAge?: Function;
 }
 
-const objProto = {
-  reserve(dtm: Date, len: number) {
-    this.schedule!.push({ dtm, len });
+const postProto = {
+  getAge() {
+    return Date.now() - (this?.date as number);
   },
-} as ObjProto;
+} as PostProto;
 
-const createRoom = function (name: string, capacity: number): ObjProto {
-  const obj = Object.create(objProto);
+const createPost = function (text: string, dept: string) {
+  const obj = Object.create(postProto);
 
-  //* V1
-  // obj.name = name;
-  // obj.capacity = capacity;
-  // obj.available = true;
-  // obj.schedule = [];
-  // return obj;
-
-  //* V2
   return Object.assign(obj, {
-    name,
-    capacity,
-    available: true,
-    schedule: [],
+    text,
+    dept,
+    date: new Date(),
   });
 };
 
-const boardRoom = createRoom("Board Room", 20);
-const trainingRoomA = createRoom("Training Room A", 35);
-boardRoom.reserve!(new Date(), 60);
-
-console.log("boardRoom, trainingRoomA:", boardRoom, trainingRoomA);
+const post = createPost("Lorem ipsum", "HR");
+setTimeout(() => {
+  console.log("post.getAge():", post.getAge());
+}, 3000);

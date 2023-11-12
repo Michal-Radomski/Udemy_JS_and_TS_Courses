@@ -1267,30 +1267,56 @@
 // console.log("boardRoom, trainingRoomA:", boardRoom, trainingRoomA);
 
 //* Exercise
-interface PostProto {
-  text?: string;
-  dept?: string;
-  date?: number;
-  getAge?: Function;
-}
+// interface PostProto {
+//   text?: string;
+//   dept?: string;
+//   date?: number;
+//   getAge?: Function;
+// }
 
-const postProto = {
-  getAge() {
-    return Date.now() - (this?.date as number);
-  },
-} as PostProto;
+// const postProto = {
+//   getAge() {
+//     return Date.now() - (this?.date as number);
+//   },
+// } as PostProto;
 
-const createPost = function (text: string, dept: string) {
-  const obj = Object.create(postProto);
+// const createPost = function (text: string, dept: string) {
+//   const obj = Object.create(postProto);
 
-  return Object.assign(obj, {
-    text,
-    dept,
-    date: new Date(),
-  });
+//   return Object.assign(obj, {
+//     text,
+//     dept,
+//     date: new Date(),
+//   });
+// };
+
+// const post = createPost("Lorem ipsum", "HR");
+// setTimeout(() => {
+//   console.log("post.getAge():", post.getAge());
+// }, 3000);
+
+//* Constructor Function
+const MeetingRoom = function (this: any, name: string, capacity: number) {
+  this.name = name;
+  this.capacity = capacity;
+  this.available = true;
+  this.schedule = [];
 };
 
-const post = createPost("Lorem ipsum", "HR");
-setTimeout(() => {
-  console.log("post.getAge():", post.getAge());
-}, 3000);
+//* V1
+// MeetingRoom.prototype.reserve = function (dtm: Date, len: number) {
+//   this.schedule.push({ dtm, len });
+// };
+// MeetingRoom.prototype.company = "ABC Coop";
+
+//* V2
+MeetingRoom.prototype = {
+  reserve(dtm: Date, len: number) {
+    this.schedule.push({ dtm, len });
+  },
+  company: "ABC",
+};
+
+const boardRoom = new (MeetingRoom as any)("Board Room", 20);
+const trainingRoomA = new (MeetingRoom as any)("Training Room A", 35);
+console.log({ boardRoom, trainingRoomA });

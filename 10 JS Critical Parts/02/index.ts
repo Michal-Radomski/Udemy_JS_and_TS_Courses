@@ -57,36 +57,64 @@
 // console.log({ scores3 });
 
 //* FP Example
-const countSession = () => {
-  console.log("Session was counted.");
+// const countSession = () => {
+//   console.log("Session was counted.");
+// };
+
+// const sessionCounted = () => {
+//   console.log("Already done.");
+// };
+
+// const onlyOnce = (fn: Function) => {
+//   let once = false;
+//   return (...args: any) => {
+//     console.log(1, { args });
+//     if (!once) {
+//       once = true;
+//       fn(...args);
+//     }
+//   };
+// };
+
+// const onlyOnceAndThen = (fn1: Function, fn2: Function) => {
+//   let once = false;
+//   return (...args: any) => {
+//     console.log(2, { args });
+//     if (once) {
+//       fn2(...args);
+//     } else {
+//       once = true;
+//       fn1(...args);
+//     }
+//   };
+// };
+
+// const countSessionOnce = onlyOnce(countSession);
+// const countSessionAndThen = onlyOnceAndThen(countSession, sessionCounted);
+// // console.log({ countSessionOnce, countSessionAndThen });
+// countSessionOnce();
+// countSessionAndThen();
+
+//* Pure Functions
+let globalNum = 9;
+const newNum = (num: number) => num * globalNum;
+
+const newNum2 = (num: number) => {
+  if (globalNum !== 9) {
+    globalNum = 9;
+  }
+  return num * globalNum;
 };
 
-const sessionCounted = () => {
-  console.log("Already done.");
-};
+const newNumPure = (factor: number) => (num: number) => num * factor;
+const newNumNew = newNumPure(9);
 
-const onlyOnce = (fn: Function) => {
-  let once = false;
-  return (...args: any) => {
-    if (!once) {
-      once = true;
-      fn(...args);
-    }
-  };
-};
+const scores = [90, 50, 70, 60];
 
-const onlyOnceAndThen = (fn1: Function, fn2: Function) => {
-  let once = false;
-  return (...args: any) => {
-    if (once) {
-      fn2(...args);
-    } else {
-      once = true;
-      fn1(...args);
-    }
-  };
-};
+const removeLastScore = (score: number[]) => score.pop();
+const lastScore = removeLastScore(scores);
+console.log({ lastScore });
 
-const countSessionOnce = onlyOnce(countSession);
-const countSessionAndThen = onlyOnceAndThen(countSession, sessionCounted);
-console.log({ countSessionOnce, countSessionAndThen });
+const removeLastScorePure = (score: number[]) => [...score].pop();
+let lastScore2 = removeLastScorePure(scores);
+console.log({ lastScore2 });

@@ -96,28 +96,32 @@
 // countSessionAndThen();
 
 //* Pure Functions
-// let globalNum = 9;
-// const newNum = (num: number) => num * globalNum;
+// // let globalNum = 9;
+// // const newNum = (num: number) => num * globalNum;
 
-// const newNum2 = (num: number) => {
-//   if (globalNum !== 9) {
-//     globalNum = 9;
-//   }
-//   return num * globalNum;
-// };
-// console.log("newNum(5):", newNum(5));
-// console.log("newNum2(5):", newNum2(5));
+// // const newNum2 = (num: number) => {
+// //   if (globalNum !== 9) {
+// //     globalNum = 9;
+// //   }
+// //   return num * globalNum;
+// // };
+// // console.log("newNum(5):", newNum(5));
+// // console.log("newNum2(5):", newNum2(5));
 
 // const newNumPure = (factor: number) => (num: number) => num * factor;
 // const newNumNew = newNumPure(9);
 // console.log("newNumNew(2):", newNumNew(2));
 
-const scores = [90, 50, 70, 60];
+// const scores = [90, 50, 70, 60];
 
-// const removeLastScore = (score: number[]) => score.pop();
-// const lastScore = removeLastScore(scores);
-// console.log({ lastScore, scores });
+// // const removeLastScore = (score: number[]) => score.pop();
+// // const lastScore = removeLastScore(scores);
+// // console.log({ lastScore, scores });
 
-const removeLastScorePure = (score: number[]) => [...score].pop();
-let lastScore2 = removeLastScorePure(scores);
-console.log({ lastScore2, scores });
+// const removeLastScorePure = (score: number[]) => [...score].pop();
+// let lastScore2 = removeLastScorePure(scores);
+// console.log({ lastScore2, scores });
+
+//* Pure Function2
+const logging = (str: string) => console.log(str);
+logging("Hello World!");

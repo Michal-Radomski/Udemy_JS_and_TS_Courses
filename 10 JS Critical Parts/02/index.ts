@@ -123,5 +123,34 @@
 // console.log({ lastScore2, scores });
 
 //* Pure Function2
-const logging = (str: string) => console.log(str);
-logging("Hello World!");
+// const logging = (str: string) => console.log(str);
+// logging("Hello World!");
+
+//* Using Reduce, Map and Filter
+const scores = [90, 30, 60, 75, 80, 95, 20, 100];
+
+// let sum = 0;
+// for (let i = 0; i < scores.length; i++) {
+//   sum += scores[i];
+// }
+// console.log({ sum });
+
+// const sumFun = (accum: number, curVal: number) => accum + curVal;
+// const sum2 = scores.reduce(sumFun, 0);
+// console.log({ sum2 });
+
+const sumCountAverage = (accumObj: { sum: number; count: number }, curVal: number) => ({
+  sum: accumObj.sum + curVal,
+  count: accumObj.count + 1,
+  average: (accumObj.sum + curVal) / (accumObj.count + 1),
+});
+const result = scores.reduce(sumCountAverage, { sum: 0, count: 0, average: 0 });
+console.log({ result });
+
+const decimalScore = (val: number) => val / 100;
+const decimalScores = scores.map(decimalScore);
+console.log({ decimalScores });
+
+const passingScores = (val: number) => val >= 70;
+const passScores = scores.filter(passingScores);
+console.log({ passScores });

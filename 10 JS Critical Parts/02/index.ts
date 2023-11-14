@@ -217,7 +217,39 @@
 // console.log({ decimalScores });
 
 //* Partial Application
-const composeResults = (str: string, amount: number, max: number) => `${str} ${amount} out of ${max}`;
-const finalScoreMsg = composeResults.bind(null, "You earned a score of");
-const result = finalScoreMsg(75, 100);
-console.log({ result }); // You earned a score of 75 out of 100
+// const composeResults = (str: string, amount: number, max: number) => `${str} ${amount} out of ${max}`;
+// const finalScoreMsg = composeResults.bind(null, "You earned a score of");
+// const result = finalScoreMsg(75, 100);
+// console.log({ result }); // You earned a score of 75 out of 100
+
+//* Composing Functions
+const words =
+  "hockey suggest garlic key fence loop coin attend mobile bird effort bulk suggest trial agree garlic fence bird little garlic";
+
+// 1. make uppercase
+const makeUpperCase = (str: string) => str.toUpperCase();
+
+// 2. convert string to array of words
+const stringToArray = (str: string) => str.split(" ");
+
+// 3. remove duplicates from Array
+const removeArrayDuplicates = (array: string[]) => new Set(array);
+
+// 4. convert array like to array
+const arrayLikeToArray = (arr: Set<string>) => [...arr];
+
+// 5. convert array to string
+const arrayToString = (array: string[]) => array.join(" ");
+
+const results = arrayToString(arrayLikeToArray(removeArrayDuplicates(stringToArray(makeUpperCase(words)))));
+console.log({ results });
+
+const compose =
+  (...fns: Function[]) =>
+  (data: string) =>
+    fns.reduceRight((acc, fun) => fun(acc), data);
+
+const uniquePassPhrase = compose(arrayToString, arrayLikeToArray, removeArrayDuplicates, stringToArray, makeUpperCase);
+const passPhrase = uniquePassPhrase(words);
+console.log({ passPhrase });
+console.log("results===passPhrase:", results === passPhrase);

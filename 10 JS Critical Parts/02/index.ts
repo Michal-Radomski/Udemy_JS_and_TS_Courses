@@ -255,34 +255,71 @@
 // console.log("results===passPhrase:", results === passPhrase);
 
 //* Piping
-const words =
-  "hockey suggest garlic key fence loop coin attend mobile bird effort bulk suggest trial agree garlic fence bird little garlic";
+// const words =
+//   "hockey suggest garlic key fence loop coin attend mobile bird effort bulk suggest trial agree garlic fence bird little garlic";
 
-// 1. make uppercase
-const makeUpperCase = (str: string) => str.toUpperCase();
+// // 1. make uppercase
+// const makeUpperCase = (str: string) => str.toUpperCase();
 
-// 2. convert string to array of words
-const stringToArray = (str: string) => str.split(" ");
+// // 2. convert string to array of words
+// const stringToArray = (str: string) => str.split(" ");
 
-// 3. remove duplicates from Array
-const removeArrayDuplicates = (array: string[]) => new Set(array);
+// // 3. remove duplicates from Array
+// const removeArrayDuplicates = (array: string[]) => new Set(array);
 
-// 4. convert array like to array
-const arrayLikeToArray = (arr: Set<string>) => [...arr];
+// // 4. convert array like to array
+// const arrayLikeToArray = (arr: Set<string>) => [...arr];
 
-// 5. convert array to string
-const arrayToString = (array: string[]) => array.join(" ");
+// // 5. convert array to string
+// const arrayToString = (array: string[]) => array.join(" ");
 
-const results = arrayToString(arrayLikeToArray(removeArrayDuplicates(stringToArray(makeUpperCase(words)))));
-console.log({ results });
+// const results = arrayToString(arrayLikeToArray(removeArrayDuplicates(stringToArray(makeUpperCase(words)))));
+// console.log({ results });
 
-const pipe =
+// const pipe =
+//   (...fns: Function[]) =>
+//   (data: string) =>
+//     fns.reduce((acc, fun) => fun(acc), data);
+
+// const uniquePassPhrase = pipe(makeUpperCase, stringToArray, removeArrayDuplicates, arrayLikeToArray, arrayToString);
+
+// const passPhrase = uniquePassPhrase(words);
+// console.log({ passPhrase });
+// console.log("results===passPhrase:", results === passPhrase);
+
+//* Arity
+interface Post {
+  id: number;
+  txt: string;
+}
+
+const posts = [
+  { id: 1, txt: "First post for testing purposes." },
+  { id: 2, txt: "Second post for testing purposes." },
+  { id: 3, txt: "Third post for testing purposes." },
+  { id: 4, txt: "Fourth post for testing purposes." },
+];
+
+const compose =
   (...fns: Function[]) =>
-  (data: string) =>
-    fns.reduce((acc, fun) => fun(acc), data);
+  (data: Post) =>
+    fns.reduceRight((acc, fun) => fun(acc), data);
 
-const uniquePassPhrase = pipe(makeUpperCase, stringToArray, removeArrayDuplicates, arrayLikeToArray, arrayToString);
+const cloneObj = (obj: Post[]) => {
+  return { ...obj };
+};
 
-const passPhrase = uniquePassPhrase(words);
-console.log({ passPhrase });
-console.log("results===passPhrase:", results === passPhrase);
+const doEllipseHead = (len: number, txt: string) => txt.slice(0, len - 3) + "...";
+
+const doEllipseHead20 = doEllipseHead.bind(null, 20);
+
+const doHtmlHead = (cls: string, txt: string) => `<p class='${cls}'>${txt}</p>`;
+
+const doHtmlHeadPost = doHtmlHead.bind(null, "post");
+
+const extractTxt = (obj: Post) => obj.txt;
+
+const createPostHead = compose(doHtmlHeadPost, doEllipseHead20, extractTxt, cloneObj);
+
+const postHeadings = posts.map(createPostHead);
+console.log({ postHeadings });

@@ -200,18 +200,24 @@
 // console.log({ user, newObj, newObj2 });
 
 //* Currying
-const scores = [0.9, 0.3, 0.6, 0.75, 0.8, 0.95, 0.2, 1];
+// const scores = [0.9, 0.3, 0.6, 0.75, 0.8, 0.95, 0.2, 1];
 
-// const multiplyTwoNumbers = (num1: number, num2: number) => num1 * num2;
+// // const multiplyTwoNumbers = (num1: number, num2: number) => num1 * num2;
 
-// const curriedMultiply = function (num1: number) {
-//   return function (num2: number) {
-//     return num1 * num2;
-//   };
-// };
-const curriedMultiply = (num1: number) => (num2: number) => num1 * num2;
-// console.log("curriedMultiply(100)(5):", curriedMultiply(100)(5));
+// // const curriedMultiply = function (num1: number) {
+// //   return function (num2: number) {
+// //     return num1 * num2;
+// //   };
+// // };
+// const curriedMultiply = (num1: number) => (num2: number) => num1 * num2;
+// // console.log("curriedMultiply(100)(5):", curriedMultiply(100)(5));
 
-const multiplyBy100 = curriedMultiply(100);
-const decimalScores = scores.map(multiplyBy100);
-console.log({ decimalScores });
+// const multiplyBy100 = curriedMultiply(100);
+// const decimalScores = scores.map(multiplyBy100);
+// console.log({ decimalScores });
+
+//* Partial Application
+const composeResults = (str: string, amount: number, max: number) => `${str} ${amount} out of ${max}`;
+const finalScoreMsg = composeResults.bind(null, "You earned a score of");
+const result = finalScoreMsg(75, 100);
+console.log({ result }); // You earned a score of 75 out of 100

@@ -170,31 +170,48 @@
 // console.log({ scores }); //* No change in existing data!
 // console.log({ lastScore });
 
-interface User {
-  name: string;
-  attempts: number;
-  scores: number[];
-}
+// interface User {
+//   name: string;
+//   attempts: number;
+//   scores: number[];
+// }
 
-const user = {
-  name: "Steve",
-  attempts: 1,
-  scores: [90, 80],
-};
+// const user = {
+//   name: "Steve",
+//   attempts: 1,
+//   scores: [90, 80],
+// };
 
-// const cloneObj = (obj: User) => {
-//   return { ...obj };
-// }; //* Shallow copy!
-// const cloneObj = (obj: User) => Object.assign({}, obj); //* Shallow copy!
-const cloneObj = (obj: User) => JSON.parse(JSON.stringify(obj)); //* Deep copy!
+// // const cloneObj = (obj: User) => {
+// //   return { ...obj };
+// // }; //* Shallow copy!
+// // const cloneObj = (obj: User) => Object.assign({}, obj); //* Shallow copy!
+// const cloneObj = (obj: User) => JSON.parse(JSON.stringify(obj)); //* Deep copy!
 
-const updateAttempts = (obj: { attempts: number }) => {
-  obj.attempts += 1;
-  return obj;
-};
+// const updateAttempts = (obj: { attempts: number }) => {
+//   obj.attempts += 1;
+//   return obj;
+// };
 
-const newObj = updateAttempts(cloneObj(user));
-const newObj2 = cloneObj(user);
-newObj2.scores.push(80);
+// const newObj = updateAttempts(cloneObj(user));
+// const newObj2 = cloneObj(user);
+// newObj2.scores.push(80);
 
-console.log({ user, newObj, newObj2 });
+// console.log({ user, newObj, newObj2 });
+
+//* Currying
+const scores = [0.9, 0.3, 0.6, 0.75, 0.8, 0.95, 0.2, 1];
+
+// const multiplyTwoNumbers = (num1: number, num2: number) => num1 * num2;
+
+// const curriedMultiply = function (num1: number) {
+//   return function (num2: number) {
+//     return num1 * num2;
+//   };
+// };
+const curriedMultiply = (num1: number) => (num2: number) => num1 * num2;
+// console.log("curriedMultiply(100)(5):", curriedMultiply(100)(5));
+
+const multiplyBy100 = curriedMultiply(100);
+const decimalScores = scores.map(multiplyBy100);
+console.log({ decimalScores });

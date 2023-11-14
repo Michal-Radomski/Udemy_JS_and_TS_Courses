@@ -288,38 +288,65 @@
 // console.log("results===passPhrase:", results === passPhrase);
 
 //* Arity
-interface Post {
-  id: number;
-  txt: string;
-}
+// interface Post {
+//   id: number;
+//   txt: string;
+// }
 
-const posts = [
-  { id: 1, txt: "First post for testing purposes." },
-  { id: 2, txt: "Second post for testing purposes." },
-  { id: 3, txt: "Third post for testing purposes." },
-  { id: 4, txt: "Fourth post for testing purposes." },
-];
+// const posts = [
+//   { id: 1, txt: "First post for testing purposes." },
+//   { id: 2, txt: "Second post for testing purposes." },
+//   { id: 3, txt: "Third post for testing purposes." },
+//   { id: 4, txt: "Fourth post for testing purposes." },
+// ];
 
+// const compose =
+//   (...fns: Function[]) =>
+//   (data: Post) =>
+//     fns.reduceRight((acc, fun) => fun(acc), data);
+
+// const cloneObj = (obj: Post[]) => {
+//   return { ...obj };
+// };
+
+// const doEllipseHead = (len: number, txt: string) => txt.slice(0, len - 3) + "...";
+
+// const doEllipseHead20 = doEllipseHead.bind(null, 20);
+
+// const doHtmlHead = (cls: string, txt: string) => `<p class='${cls}'>${txt}</p>`;
+
+// const doHtmlHeadPost = doHtmlHead.bind(null, "post");
+
+// const extractTxt = (obj: Post) => obj.txt;
+
+// const createPostHead = compose(doHtmlHeadPost, doEllipseHead20, extractTxt, cloneObj);
+
+// const postHeadings = posts.map(createPostHead);
+// console.log({ postHeadings });
+
+//* Exercise
 const compose =
   (...fns: Function[]) =>
-  (data: Post) =>
+  (data: string) =>
     fns.reduceRight((acc, fun) => fun(acc), data);
 
-const cloneObj = (obj: Post[]) => {
-  return { ...obj };
-};
+const pipe =
+  (...fns: Function[]) =>
+  (data: string) =>
+    fns.reduce((acc, fun) => fun(acc), data);
 
-const doEllipseHead = (len: number, txt: string) => txt.slice(0, len - 3) + "...";
+const str = "Make THIS string title Case.";
 
-const doEllipseHead20 = doEllipseHead.bind(null, 20);
+const stringToArray = (str: string) => str.split(" ");
+const arrayToString = (array: string[]) => array.join(" ");
+const makeLowerCase = (str: string) => str.toLowerCase();
+const capFirstLetter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+const capEachWord = (array: string[]) => array.map(capFirstLetter);
 
-const doHtmlHead = (cls: string, txt: string) => `<p class='${cls}'>${txt}</p>`;
+const makeTitleCaseCompose = compose(arrayToString, capEachWord, stringToArray, makeLowerCase);
+const makeTitleCasePipe = pipe(makeLowerCase, stringToArray, capEachWord, arrayToString);
 
-const doHtmlHeadPost = doHtmlHead.bind(null, "post");
+const resultCompose = makeTitleCaseCompose(str);
+const resultPipe = makeTitleCasePipe(str);
 
-const extractTxt = (obj: Post) => obj.txt;
-
-const createPostHead = compose(doHtmlHeadPost, doEllipseHead20, extractTxt, cloneObj);
-
-const postHeadings = posts.map(createPostHead);
-console.log({ postHeadings });
+console.log({ resultCompose, resultPipe }, "resultCompose === resultPipe:", resultCompose === resultPipe);

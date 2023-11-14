@@ -127,7 +127,7 @@
 // logging("Hello World!");
 
 //* Using Reduce, Map and Filter
-const scores = [90, 30, 60, 75, 80, 95, 20, 100];
+// const scores = [90, 30, 60, 75, 80, 95, 20, 100];
 
 // let sum = 0;
 // for (let i = 0; i < scores.length; i++) {
@@ -139,18 +139,62 @@ const scores = [90, 30, 60, 75, 80, 95, 20, 100];
 // const sum2 = scores.reduce(sumFun, 0);
 // console.log({ sum2 });
 
-const sumCountAverage = (accumObj: { sum: number; count: number }, curVal: number) => ({
-  sum: accumObj.sum + curVal,
-  count: accumObj.count + 1,
-  average: (accumObj.sum + curVal) / (accumObj.count + 1),
-});
-const result = scores.reduce(sumCountAverage, { sum: 0, count: 0, average: 0 });
-console.log({ result });
+// const sumCountAverage = (accumObj: { sum: number; count: number }, curVal: number) => ({
+//   sum: accumObj.sum + curVal,
+//   count: accumObj.count + 1,
+//   average: (accumObj.sum + curVal) / (accumObj.count + 1),
+// });
+// const result = scores.reduce(sumCountAverage, { sum: 0, count: 0, average: 0 });
+// console.log({ result });
 
-const decimalScore = (val: number) => val / 100;
-const decimalScores = scores.map(decimalScore);
-console.log({ decimalScores });
+// const decimalScore = (val: number) => val / 100;
+// const decimalScores = scores.map(decimalScore);
+// console.log({ decimalScores });
 
-const passingScores = (val: number) => val >= 70;
-const passScores = scores.filter(passingScores);
-console.log({ passScores });
+// const passingScores = (val: number) => val >= 70;
+// const passScores = scores.filter(passingScores);
+// console.log({ passScores });
+
+//* The Importance of Immutability
+// const scores = [90, 30, 60, 75, 80, 95, 20, 100];
+// const decimalScore = (val: number) => val / 100;
+// const decimalScores = scores.map(decimalScore);
+// console.log({ decimalScores });
+
+// const passingScores = (val: number) => val >= 70;
+// const passScores = scores.filter(passingScores);
+// console.log({ passScores });
+
+// const removeLastScorePure = (score: number[]) => [...score].pop();
+// const lastScore = removeLastScorePure(scores);
+// console.log({ scores }); //* No change in existing data!
+// console.log({ lastScore });
+
+interface User {
+  name: string;
+  attempts: number;
+  scores: number[];
+}
+
+const user = {
+  name: "Steve",
+  attempts: 1,
+  scores: [90, 80],
+};
+
+// const cloneObj = (obj: User) => {
+//   return { ...obj };
+// }; //* Shallow copy!
+// const cloneObj = (obj: User) => Object.assign({}, obj); //* Shallow copy!
+const cloneObj = (obj: User) => JSON.parse(JSON.stringify(obj)); //* Deep copy!
+
+const updateAttempts = (obj: { attempts: number }) => {
+  obj.attempts += 1;
+  return obj;
+};
+
+const newObj = updateAttempts(cloneObj(user));
+const newObj2 = cloneObj(user);
+newObj2.scores.push(80);
+
+console.log({ user, newObj, newObj2 });

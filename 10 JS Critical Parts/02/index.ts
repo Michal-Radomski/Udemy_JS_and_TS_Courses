@@ -325,28 +325,72 @@
 // console.log({ postHeadings });
 
 //* Exercise
-const compose =
-  (...fns: Function[]) =>
-  (data: string) =>
-    fns.reduceRight((acc, fun) => fun(acc), data);
+// const compose =
+//   (...fns: Function[]) =>
+//   (data: string) =>
+//     fns.reduceRight((acc, fun) => fun(acc), data);
 
-const pipe =
-  (...fns: Function[]) =>
-  (data: string) =>
-    fns.reduce((acc, fun) => fun(acc), data);
+// const pipe =
+//   (...fns: Function[]) =>
+//   (data: string) =>
+//     fns.reduce((acc, fun) => fun(acc), data);
 
-const str = "Make THIS string title Case.";
+// const str = "Make THIS string title Case.";
 
-const stringToArray = (str: string) => str.split(" ");
-const arrayToString = (array: string[]) => array.join(" ");
-const makeLowerCase = (str: string) => str.toLowerCase();
-const capFirstLetter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
-const capEachWord = (array: string[]) => array.map(capFirstLetter);
+// const stringToArray = (str: string) => str.split(" ");
+// const arrayToString = (array: string[]) => array.join(" ");
+// const makeLowerCase = (str: string) => str.toLowerCase();
+// const capFirstLetter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+// const capEachWord = (array: string[]) => array.map(capFirstLetter);
 
-const makeTitleCaseCompose = compose(arrayToString, capEachWord, stringToArray, makeLowerCase);
-const makeTitleCasePipe = pipe(makeLowerCase, stringToArray, capEachWord, arrayToString);
+// const makeTitleCaseCompose = compose(arrayToString, capEachWord, stringToArray, makeLowerCase);
+// const makeTitleCasePipe = pipe(makeLowerCase, stringToArray, capEachWord, arrayToString);
 
-const resultCompose = makeTitleCaseCompose(str);
-const resultPipe = makeTitleCasePipe(str);
+// const resultCompose = makeTitleCaseCompose(str);
+// const resultPipe = makeTitleCasePipe(str);
 
-console.log({ resultCompose, resultPipe }, "resultCompose === resultPipe:", resultCompose === resultPipe);
+// console.log({ resultCompose, resultPipe }, "resultCompose === resultPipe:", resultCompose === resultPipe);
+
+//@ Critical Asynchronous Patterns
+// const asyncFunction = function (): Promise<string> {
+//   return new Promise((resolve, _reject) => {
+//     setTimeout(() => resolve("Promise Value"), 4000);
+//   });
+// };
+// asyncFunction().then((res) => {
+//   console.log({ res });
+// });
+
+//* Promise - part 1
+const asyncFunction = function (num: number) {
+  return new Promise((resolve, reject) => {
+    if (Number.isInteger(num)) {
+      setTimeout(() => resolve(`${num} is an integer`), num);
+    } else {
+      reject(`${num} is not an integer`);
+    }
+  });
+};
+
+// Golder Ratio
+asyncFunction((1 + Math.sqrt(5)) / 2).then(
+  (val) => console.log("Yes!! " + val),
+  (val) => console.log("Rejected! " + val)
+);
+
+asyncFunction(Math.PI).then(
+  (val) => console.log("Yes!! " + val),
+  (val) => console.log("Rejected! " + val)
+);
+
+asyncFunction(Math.E).then(
+  (val) => console.log("Yes!! " + val),
+  (val) => console.log("Rejected! " + val)
+);
+
+asyncFunction(2000).then(
+  (val) => console.log("Yes!! " + val),
+  (val) => console.log("Rejected! " + val)
+);
+
+console.log("This code is asynchronous!");

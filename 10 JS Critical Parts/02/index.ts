@@ -465,30 +465,59 @@
 // const promise4 = fetch("https://jsonplaceholder.typicode.com/photos").then((resp) => resp.json());
 // Promise.all([promise1, promise2, promise3, promise4]).then((arr) => console.log(arr));
 
-function timer(miliSec: number | string) {
-  return new Promise((resolve, reject) => {
-    if (!Number.isInteger(miliSec)) {
-      reject("You must enter a valid number.");
-    } else {
-      setTimeout(() => {
-        resolve(miliSec);
-      }, Number(miliSec));
-    }
-  });
+// function timer(miliSec: number | string) {
+//   return new Promise((resolve, reject) => {
+//     if (!Number.isInteger(miliSec)) {
+//       reject("You must enter a valid number.");
+//     } else {
+//       setTimeout(() => {
+//         resolve(miliSec);
+//       }, Number(miliSec));
+//     }
+//   });
+// }
+
+// Promise.all([timer(6000), timer(1000), timer("3000")])
+//   .then((val) => console.log(1, val))
+//   .catch((err) => console.warn(2, err));
+
+// Promise.allSettled([timer(6000), timer(1000), timer("3000")])
+//   .then((val) => console.log(3, val))
+//   .catch((err) => console.warn(4, err));
+
+// Promise.any([timer("6000"), timer("1000"), timer(3000)])
+//   .then((val) => console.log(5, val))
+//   .catch((err) => console.warn(6, err));
+
+// Promise.race([timer(6000), timer(1000), timer("3000")])
+//   .then((val) => console.log(7, val))
+//   .catch((err) => console.warn(8, err));
+
+//* The async await Pattern
+async function plainFunction1() {
+  console.log(1, "start");
+  return "done1";
 }
+const plainFunction2 = async () => {
+  await console.log(2, "start");
+  return "done2";
+};
 
-Promise.all([timer(6000), timer(1000), timer("3000")])
-  .then((val) => console.log(1, val))
-  .catch((err) => console.warn(2, err));
+const result = plainFunction1();
+console.log(3, { result });
 
-Promise.allSettled([timer(6000), timer(1000), timer("3000")])
-  .then((val) => console.log(3, val))
-  .catch((err) => console.warn(4, err));
+plainFunction2().then((val) => console.log(4, val));
 
-Promise.any([timer("6000"), timer("1000"), timer(3000)])
-  .then((val) => console.log(5, val))
-  .catch((err) => console.warn(6, err));
+const plainFunction = async function () {
+  console.log("start");
+  const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const json = await response.json();
+  console.log(1, json[0]);
 
-Promise.race([timer(6000), timer(1000), timer("3000")])
-  .then((val) => console.log(7, val))
-  .catch((err) => console.warn(8, err));
+  const completed = json.filter((obj: { completed: boolean }) => obj.completed);
+  console.log(2, completed[0]);
+};
+
+plainFunction();
+
+console.log("When will this display?");

@@ -396,14 +396,33 @@
 // console.log("This code is asynchronous!");
 
 //* Fetch
-const filterPostsByUser = function (arr: any[], userid: number) {
-  return arr.filter((obj) => obj.userId === userid);
-};
+// const filterPostsByUser = function (arr: any[], userid: number) {
+//   return arr.filter((obj) => obj.userId === userid);
+// };
 
-fetch("https://jsonplaceholder.typicode.com/posts/")
+// fetch("https://jsonplaceholder.typicode.com/posts/")
+//   .then((response) => response.json())
+//   .then((data) => {
+//     const user1posts = filterPostsByUser(data, 1);
+//     console.log("user1posts.length:", user1posts.length);
+//   })
+//   .catch((error) => console.error("Error: " + error));
+
+//* Exercise
+interface Post {
+  id: number;
+  userId: number;
+  title: string;
+  completed: boolean;
+}
+const isUser = (id: number, obj: Post) => obj.userId === id;
+const isNotComplete = (obj: Post) => !obj.completed;
+const getTitle = (obj: Post) => obj.title;
+
+fetch("https://jsonplaceholder.typicode.com/todos")
   .then((response) => response.json())
   .then((data) => {
-    const user1posts = filterPostsByUser(data, 1);
-    console.log("user1posts.length:", user1posts.length);
+    const posts = data.filter(isUser.bind(null, 2)).filter(isNotComplete).map(getTitle);
+    console.log("posts:", posts);
   })
-  .catch((error) => console.error("Error: " + error));
+  .catch((err) => console.error({ err }));

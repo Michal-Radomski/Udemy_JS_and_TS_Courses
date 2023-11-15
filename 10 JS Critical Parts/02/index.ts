@@ -409,20 +409,86 @@
 //   .catch((error) => console.error("Error: " + error));
 
 //* Exercise
-interface Post {
-  id: number;
-  userId: number;
-  title: string;
-  completed: boolean;
-}
-const isUser = (id: number, obj: Post) => obj.userId === id;
-const isNotComplete = (obj: Post) => !obj.completed;
-const getTitle = (obj: Post) => obj.title;
+// interface Post {
+//   id: number;
+//   userId: number;
+//   title: string;
+//   completed: boolean;
+// }
+// const isUser = (id: number, obj: Post) => obj.userId === id;
+// const isNotComplete = (obj: Post) => !obj.completed;
+// const getTitle = (obj: Post) => obj.title;
 
-fetch("https://jsonplaceholder.typicode.com/todos")
-  .then((response) => response.json())
-  .then((data) => {
-    const posts = data.filter(isUser.bind(null, 2)).filter(isNotComplete).map(getTitle);
-    console.log("posts:", posts);
-  })
-  .catch((err) => console.error({ err }));
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((response) => response.json())
+//   .then((data) => {
+//     const posts = data.filter(isUser.bind(null, 2)).filter(isNotComplete).map(getTitle);
+//     console.log("posts:", posts);
+//   })
+//   .catch((err) => console.error({ err }));
+
+//* Creating Promises
+// function inefficientSquaring(num: number): Promise<number> {
+//   return new Promise((resolve, reject) => {
+//     if (!Number.isInteger(num)) {
+//       reject("Not a valid Number.");
+//     } else {
+//       setTimeout(() => {
+//         let result = 0;
+//         for (let i = 1; i <= num; i++) {
+//           for (let j = 1; j <= num; j++) {
+//             result++;
+//           }
+//         }
+//         resolve(result);
+//       }, 0);
+//     }
+//   });
+// }
+
+// inefficientSquaring(66760).then(
+//   (val) => console.log(val),
+//   (err) => console.error(err)
+// );
+
+// // console.log(inefficientSquaring(201));
+// // console.log(inefficientSquaring(695));
+// // console.log(inefficientSquaring(3450));
+// // console.log(inefficientSquaring(66760));
+
+// console.log("Finally I can run.");
+
+//* Using Static Methods for Multiple Asynchronous Tasks
+// const promise1 = fetch("https://jsonplaceholder.typicode.com/todos").then((resp) => resp.json());
+// const promise2 = fetch("https://jsonplaceholder.typicode.com/posts").then((resp) => resp.json());
+// const promise3 = fetch("https://jsonplaceholder.typicode.com/comments").then((resp) => resp.json());
+// const promise4 = fetch("https://jsonplaceholder.typicode.com/photos").then((resp) => resp.json());
+// Promise.all([promise1, promise2, promise3, promise4]).then((arr) => console.log(arr));
+
+function timer(miliSec: number | string) {
+  return new Promise((resolve, reject) => {
+    if (!Number.isInteger(miliSec)) {
+      reject("You must enter a valid number.");
+    } else {
+      setTimeout(() => {
+        resolve(miliSec);
+      }, Number(miliSec));
+    }
+  });
+}
+
+Promise.all([timer(6000), timer(1000), timer("3000")])
+  .then((val) => console.log(1, val))
+  .catch((err) => console.warn(2, err));
+
+Promise.allSettled([timer(6000), timer(1000), timer("3000")])
+  .then((val) => console.log(3, val))
+  .catch((err) => console.warn(4, err));
+
+Promise.any([timer("6000"), timer("1000"), timer(3000)])
+  .then((val) => console.log(5, val))
+  .catch((err) => console.warn(6, err));
+
+Promise.race([timer(6000), timer(1000), timer("3000")])
+  .then((val) => console.log(7, val))
+  .catch((err) => console.warn(8, err));

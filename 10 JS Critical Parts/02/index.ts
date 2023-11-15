@@ -361,36 +361,49 @@
 //   console.log({ res });
 // });
 
-//* Promise - part 1
-const asyncFunction = function (num: number) {
-  return new Promise((resolve, reject) => {
-    if (Number.isInteger(num)) {
-      setTimeout(() => resolve(`${num} is an integer`), num);
-    } else {
-      reject(`${num} is not an integer`);
-    }
-  });
+//* Promise
+// const asyncFunction = function (num: number) {
+//   return new Promise((resolve, reject) => {
+//     if (Number.isInteger(num)) {
+//       setTimeout(() => resolve(`Number: ${num} is an integer`), num);
+//     } else {
+//       reject(`Number: ${num} is not an integer`);
+//     }
+//   });
+// };
+
+// // Golder Ratio
+// asyncFunction((1 + Math.sqrt(5)) / 2).then(
+//   (val) => console.log("Yes!! ->" + val),
+//   (val) => console.log("Rejected! ->" + val)
+// );
+
+// asyncFunction(Math.PI).then(
+//   (val) => console.log("Yes!! -> " + val),
+//   (val) => console.log("Rejected! -> " + val)
+// );
+
+// asyncFunction(Math.E).then(
+//   (val) => console.log("Yes!! -> " + val),
+//   (val) => console.log("Rejected! -> " + val)
+// );
+
+// asyncFunction(2000).then(
+//   (val) => console.log("Yes!! -> " + val),
+//   (val) => console.log("Rejected! -> " + val)
+// );
+
+// console.log("This code is asynchronous!");
+
+//* Fetch
+const filterPostsByUser = function (arr: any[], userid: number) {
+  return arr.filter((obj) => obj.userId === userid);
 };
 
-// Golder Ratio
-asyncFunction((1 + Math.sqrt(5)) / 2).then(
-  (val) => console.log("Yes!! " + val),
-  (val) => console.log("Rejected! " + val)
-);
-
-asyncFunction(Math.PI).then(
-  (val) => console.log("Yes!! " + val),
-  (val) => console.log("Rejected! " + val)
-);
-
-asyncFunction(Math.E).then(
-  (val) => console.log("Yes!! " + val),
-  (val) => console.log("Rejected! " + val)
-);
-
-asyncFunction(2000).then(
-  (val) => console.log("Yes!! " + val),
-  (val) => console.log("Rejected! " + val)
-);
-
-console.log("This code is asynchronous!");
+fetch("https://jsonplaceholder.typicode.com/posts/")
+  .then((response) => response.json())
+  .then((data) => {
+    const user1posts = filterPostsByUser(data, 1);
+    console.log("user1posts.length:", user1posts.length);
+  })
+  .catch((error) => console.error("Error: " + error));

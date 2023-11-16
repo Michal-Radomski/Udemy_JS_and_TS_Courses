@@ -680,17 +680,52 @@
 // }
 
 //* Short Circuit Evaluation
-let a = 5,
-  b = 6,
-  c;
+// let a = 5,
+//   b = 6,
+//   c;
 
-const val = c || b || a;
-const val2 = c && b && a;
-console.log({ val, val2 });
+// const val = c || b || a;
+// const val2 = c && b && a;
+// console.log({ val, val2 });
+
+// function fun1() {
+//   console.log("fun1");
+//   return true;
+// }
+
+// function fun2() {
+//   console.log("fun2");
+//   return false;
+// }
+
+// function fun3() {
+//   console.log("fun3");
+//   return true;
+// }
+
+// console.log("fun1() && fun3() && fun2():", fun1() && fun3() && fun2());
+
+// const user = {
+//   name: "Steven",
+//   isVerified: true,
+//   isMember: "",
+// };
+// console.log('user?.isMember || "Non-member":', user?.isMember || "Non-member");
+
+//* Nullish Coalescing -> only null and undefined (|| -> any falsy value)
+let val1,
+  val2 = 50,
+  val3 = "string",
+  val4 = null as any;
+
+const newVal1 = val1 ?? val2;
+const newVal2 = val2 ?? val3;
+const newVal3 = val4 ?? val1 ?? val3;
+console.log({ newVal1, newVal2, newVal3 });
 
 function fun1() {
   console.log("fun1");
-  return true;
+  return;
 }
 
 function fun2() {
@@ -698,16 +733,5 @@ function fun2() {
   return false;
 }
 
-function fun3() {
-  console.log("fun3");
-  return true;
-}
-
-console.log("fun1() && fun3() && fun2():", fun1() && fun3() && fun2());
-
-const user = {
-  name: "Steven",
-  isVerified: true,
-  isMember: "",
-};
-console.log('user.isMember || "Non-member":', user.isMember || "Non-member");
+const newVal4 = val4 ?? fun1() ?? fun2();
+console.log({ newVal4 });

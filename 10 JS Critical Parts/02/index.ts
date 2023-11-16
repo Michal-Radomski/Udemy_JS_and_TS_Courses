@@ -526,16 +526,16 @@
 // console.log("When will this display?");
 
 //* Using async await
-interface Post {
-  id: number;
-  userId: number;
-  title: string;
-  completed: boolean;
-}
+// interface Post {
+//   id: number;
+//   userId: number;
+//   title: string;
+//   completed: boolean;
+// }
 
-const filterPostsByUser = function (arr: Post[], userid: number) {
-  return arr.filter((obj) => obj.userId === userid);
-};
+// const filterPostsByUser = function (arr: Post[], userid: number) {
+//   return arr.filter((obj) => obj.userId === userid);
+// };
 
 // fetch("https://jsonplaceholder.typicode.com/posts/")
 //   .then((response) => response.json())
@@ -545,16 +545,49 @@ const filterPostsByUser = function (arr: Post[], userid: number) {
 //   })
 //   .catch((err) => console.error({err}));
 
-(async function () {
-  try {
-    const resp = await fetch("https://jsonplaceholder.typicode.com/posts/");
-    const json = await resp.json();
-    // throw new Error("Problem");
-    const user1posts = filterPostsByUser(json, 1);
-    console.log(2, user1posts[0]);
-  } catch (err) {
-    console.error({ err });
-  } finally {
-    console.log("Done");
-  }
-})();
+// (async function () {
+//   try {
+//     const resp = await fetch("https://jsonplaceholder.typicode.com/posts/");
+//     const json = await resp.json();
+//     // throw new Error("Problem");
+//     const user1posts = filterPostsByUser(json, 1);
+//     console.log(2, user1posts[0]);
+//   } catch (err) {
+//     console.error({ err });
+//   } finally {
+//     console.log("Done");
+//   }
+// })();
+
+//* Exercise
+// const fetchData = async (url: string): Promise<any> => {
+//   try {
+//     const resp = await fetch(url);
+//     return resp.json();
+//   } catch (err) {
+//     console.warn({ err });
+//   } finally {
+//     console.log("Done");
+//   }
+// };
+
+// fetchData("https://jsonplaceholder.typicode.com/comments").then(
+//   (data) => console.log("data[0]:", data[0]),
+//   (err) => console.log({ err })
+// );
+
+//* Static Methods with async await
+const urls = [
+  "https://jsonplaceholder.typicode.com/todos",
+  "https://jsonplaceholder.typicode.com/posts",
+  "https://jsonplaceholder.typicode.com/comments",
+];
+
+const retrieveData = async function (urls: string[]): Promise<void> {
+  const [todos, posts, comments] = await Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json())));
+  console.log("todos[0]:", todos[0]);
+  console.log("posts[0]:", posts[0]);
+  console.log("comments[0]:", comments[0]);
+};
+
+retrieveData(urls);

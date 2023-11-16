@@ -594,29 +594,86 @@
 
 //@ Critical JavaScript Shortcuts
 //* Destructuring Assignment Using Arrays
-const array1 = [10, 20, 30, 40, 50, 70, 100];
-const [a, b, c] = array1;
-console.log({ a, b, c });
+// const array1 = [10, 20, 30, 40, 50, 70, 100];
+// const [a, b, c] = array1;
+// console.log({ a, b, c });
 
-let d, e;
-[, , , d, e] = array1;
-console.log({ d, e });
+// let d, e;
+// [, , , d, e] = array1;
+// console.log({ d, e });
 
-let [, , , , , , , f = 60] = array1;
-console.log({ f });
+// let [, , , , , , , f = 60] = array1;
+// console.log({ f });
 
-const [g, h, ...others] = array1;
-console.log({ g, h, others });
+// const [g, h, ...others] = array1;
+// console.log({ g, h, others });
 
-function fun1() {
-  return [1, 2, 3];
+// function fun1() {
+//   return [1, 2, 3];
+// }
+
+// const [num1, num2, num3] = fun1();
+// console.log({ num1, num2, num3 });
+
+// let num4 = 100,
+//   num5 = 200;
+
+// [num4, num5] = [num5, num4];
+// console.log({ num4, num5 });
+
+//* Destructuring Assignment Using Objects
+const user1 = {
+  age: undefined,
+  id: 5,
+  firstName: "Steven",
+  lastName: "Hancock",
+  isVerified: true,
+  address: {
+    street: "West Main",
+    number: 54,
+    city: "Lehi",
+  },
+};
+
+const { firstName, lastName } = user1;
+console.log({ firstName, lastName });
+
+let id;
+
+({ id } = user1);
+console.log({ id });
+
+const { isVerified: verified } = user1;
+console.log({ verified });
+
+const { age = 40 } = user1;
+console.log({ age });
+
+const getFullName = function ({ firstName: fName, lastName: lName }: { firstName: string; lastName: string }) {
+  return `${fName} ${lName}`;
+};
+
+const fullName = getFullName(user1);
+console.log({ fullName });
+
+const {
+  address: { street, number, city },
+} = user1;
+console.log({ street, number, city });
+
+const { id: userId, firstName: fName, ...obj } = user1;
+console.log({ id, firstName, obj });
+
+const users = [
+  { id: 1, name: "Steve" },
+  { id: 2, name: "Evy" },
+  { id: 3, name: "Brooklyn" },
+  { id: 4, name: "Eliza" },
+];
+
+const [, , { name: u3name }] = users;
+console.log({ u3name });
+
+for (let { id: uId, name: uName } of users) {
+  console.log({ uId, uName });
 }
-
-const [num1, num2, num3] = fun1();
-console.log({ num1, num2, num3 });
-
-let num4 = 100,
-  num5 = 200;
-
-[num4, num5] = [num5, num4];
-console.log({ num4, num5 });

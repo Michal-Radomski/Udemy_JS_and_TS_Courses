@@ -494,30 +494,67 @@
 //   .catch((err) => console.warn(8, err));
 
 //* The async await Pattern
-async function plainFunction1() {
-  console.log(1, "start");
-  return "done1";
+// async function plainFunction1(): Promise<string> {
+//   console.log(1, "start");
+//   return "done1";
+// }
+// const plainFunction2 = async (): Promise<string> => {
+//   await console.log(2, "start");
+//   return "done2";
+// };
+
+// const result = plainFunction1();
+// console.log(3, { result });
+// plainFunction2().then((val) => console.log(4, val));
+
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((res) => res.json())
+//   .then((data) => console.log(data[0]))
+//   .catch((err) => console.error(err));
+
+// const plainFunction = async function () {
+//   console.log("start");
+//   const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+//   const json = await response.json();
+//   console.log(1, json[0]);
+
+//   const completed = json.filter((obj: { completed: boolean }) => obj.completed);
+//   console.log(2, completed[0]);
+// };
+
+// plainFunction();
+// console.log("When will this display?");
+
+//* Using async await
+interface Post {
+  id: number;
+  userId: number;
+  title: string;
+  completed: boolean;
 }
-const plainFunction2 = async () => {
-  await console.log(2, "start");
-  return "done2";
+
+const filterPostsByUser = function (arr: Post[], userid: number) {
+  return arr.filter((obj) => obj.userId === userid);
 };
 
-const result = plainFunction1();
-console.log(3, { result });
+// fetch("https://jsonplaceholder.typicode.com/posts/")
+//   .then((response) => response.json())
+//   .then((json) => {
+//     const user1posts = filterPostsByUser(json, 1);
+//     console.log(1, user1posts[0]);
+//   })
+//   .catch((err) => console.error({err}));
 
-plainFunction2().then((val) => console.log(4, val));
-
-const plainFunction = async function () {
-  console.log("start");
-  const response = await fetch("https://jsonplaceholder.typicode.com/todos");
-  const json = await response.json();
-  console.log(1, json[0]);
-
-  const completed = json.filter((obj: { completed: boolean }) => obj.completed);
-  console.log(2, completed[0]);
-};
-
-plainFunction();
-
-console.log("When will this display?");
+(async function () {
+  try {
+    const resp = await fetch("https://jsonplaceholder.typicode.com/posts/");
+    const json = await resp.json();
+    // throw new Error("Problem");
+    const user1posts = filterPostsByUser(json, 1);
+    console.log(2, user1posts[0]);
+  } catch (err) {
+    console.error({ err });
+  } finally {
+    console.log("Done");
+  }
+})();

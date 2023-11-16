@@ -577,17 +577,46 @@
 // );
 
 //* Static Methods with async await
-const urls = [
-  "https://jsonplaceholder.typicode.com/todos",
-  "https://jsonplaceholder.typicode.com/posts",
-  "https://jsonplaceholder.typicode.com/comments",
-];
+// const urls = [
+//   "https://jsonplaceholder.typicode.com/todos",
+//   "https://jsonplaceholder.typicode.com/posts",
+//   "https://jsonplaceholder.typicode.com/comments",
+// ];
 
-const retrieveData = async function (urls: string[]): Promise<void> {
-  const [todos, posts, comments] = await Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json())));
-  console.log("todos[0]:", todos[0]);
-  console.log("posts[0]:", posts[0]);
-  console.log("comments[0]:", comments[0]);
-};
+// const retrieveData = async function (urls: string[]): Promise<void> {
+//   const [todos, posts, comments] = await Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json())));
+//   console.log("todos[0]:", todos[0]);
+//   console.log("posts[0]:", posts[0]);
+//   console.log("comments[0]:", comments[0]);
+// };
 
-retrieveData(urls);
+// retrieveData(urls);
+
+//@ Critical JavaScript Shortcuts
+//* Destructuring Assignment Using Arrays
+const array1 = [10, 20, 30, 40, 50, 70, 100];
+const [a, b, c] = array1;
+console.log({ a, b, c });
+
+let d, e;
+[, , , d, e] = array1;
+console.log({ d, e });
+
+let [, , , , , , , f = 60] = array1;
+console.log({ f });
+
+const [g, h, ...others] = array1;
+console.log({ g, h, others });
+
+function fun1() {
+  return [1, 2, 3];
+}
+
+const [num1, num2, num3] = fun1();
+console.log({ num1, num2, num3 });
+
+let num4 = 100,
+  num5 = 200;
+
+[num4, num5] = [num5, num4];
+console.log({ num4, num5 });

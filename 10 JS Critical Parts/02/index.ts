@@ -622,58 +622,92 @@
 // console.log({ num4, num5 });
 
 //* Destructuring Assignment Using Objects
-const user1 = {
-  age: undefined,
-  id: 5,
-  firstName: "Steven",
-  lastName: "Hancock",
-  isVerified: true,
-  address: {
-    street: "West Main",
-    number: 54,
-    city: "Lehi",
-  },
-};
+// const user1 = {
+//   age1: undefined,
+//   age: undefined,
+//   id: 5,
+//   firstName: "Steven",
+//   lastName: "Hancock",
+//   isVerified: true,
+//   address: {
+//     street: "West Main",
+//     number: 54,
+//     city: "Lehi",
+//   },
+// };
 
-const { firstName, lastName } = user1;
-console.log({ firstName, lastName });
+// const { firstName, lastName } = user1;
+// console.log({ firstName, lastName });
 
-let id;
+// let id;
+// ({ id } = user1);
+// console.log({ id });
 
-({ id } = user1);
-console.log({ id });
+// const { isVerified: verified } = user1;
+// console.log({ verified });
 
-const { isVerified: verified } = user1;
-console.log({ verified });
+// const { age = 40 } = user1;
+// console.log({ age });
+// const { age1 } = user1;
+// console.log({ age1 });
 
-const { age = 40 } = user1;
-console.log({ age });
+// const getFullName = function ({ firstName: fName, lastName: lName }: { firstName: string; lastName: string }): string {
+//   return `${fName} ${lName}`;
+// };
+// const fullName = getFullName(user1);
+// console.log({ fullName });
 
-const getFullName = function ({ firstName: fName, lastName: lName }: { firstName: string; lastName: string }) {
-  return `${fName} ${lName}`;
-};
+// const {
+//   address: { street, number, city: town },
+// } = user1;
+// console.log({ street, number, town });
 
-const fullName = getFullName(user1);
-console.log({ fullName });
+// const { id: userId, firstName: fName, ...obj } = user1;
+// console.log({ id, firstName, obj });
 
-const {
-  address: { street, number, city },
-} = user1;
-console.log({ street, number, city });
+// const users = [
+//   { id: 1, name: "Steve" },
+//   { id: 2, name: "Evy" },
+//   { id: 3, name: "Brooklyn" },
+//   { id: 4, name: "Eliza" },
+// ];
 
-const { id: userId, firstName: fName, ...obj } = user1;
-console.log({ id, firstName, obj });
+// const [, , { name: u3name }] = users;
+// console.log({ u3name });
 
-const users = [
-  { id: 1, name: "Steve" },
-  { id: 2, name: "Evy" },
-  { id: 3, name: "Brooklyn" },
-  { id: 4, name: "Eliza" },
-];
+// for (let { id: uId, name: uName } of users) {
+//   console.log({ uId, uName });
+// }
 
-const [, , { name: u3name }] = users;
-console.log({ u3name });
+//* Short Circuit Evaluation
+let a = 5,
+  b = 6,
+  c;
 
-for (let { id: uId, name: uName } of users) {
-  console.log({ uId, uName });
+const val = c || b || a;
+const val2 = c && b && a;
+console.log({ val, val2 });
+
+function fun1() {
+  console.log("fun1");
+  return true;
 }
+
+function fun2() {
+  console.log("fun2");
+  return false;
+}
+
+function fun3() {
+  console.log("fun3");
+  return true;
+}
+
+console.log("fun1() && fun3() && fun2():", fun1() && fun3() && fun2());
+
+const user = {
+  name: "Steven",
+  isVerified: true,
+  isMember: "",
+};
+console.log('user.isMember || "Non-member":', user.isMember || "Non-member");

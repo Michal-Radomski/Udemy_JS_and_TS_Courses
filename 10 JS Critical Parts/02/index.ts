@@ -833,3 +833,13 @@ console.log("user.fullName?.():", user.fullName?.());
 const num = 2;
 const score4 = user.results?.["score" + num];
 console.log({ score4 }); //* undefined
+
+//* Converting Strings to Numbers
+let str = "100.1";
+console.log("parseInt(str, 10):", parseInt(str, 10)); //* 100
+console.log("parseFloat(str):", parseFloat(str)); //* 100.1
+console.log("Number(str):", Number(str)); //* 100.1
+// Unary plus (+)
+console.log("+str:", +str); //* 100.1
+// Unary negation (-)
+console.log("-str:", -str); //* -100.1

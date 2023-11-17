@@ -713,25 +713,67 @@
 // console.log('user?.isMember || "Non-member":', user?.isMember || "Non-member");
 
 //* Nullish Coalescing -> only null and undefined (|| -> any falsy value)
-let val1,
-  val2 = 50,
-  val3 = "string",
-  val4 = null as any;
+// let val1,
+//   val2 = 50,
+//   val3 = "string",
+//   val4 = null as any;
 
-const newVal1 = val1 ?? val2;
-const newVal2 = val2 ?? val3;
-const newVal3 = val4 ?? val1 ?? val3;
-console.log({ newVal1, newVal2, newVal3 });
+// const newVal1 = val1 ?? val2;
+// const newVal2 = val2 ?? val3;
+// const newVal3 = val4 ?? val1 ?? val3;
+// console.log({ newVal1, newVal2, newVal3 });
 
-function fun1() {
-  console.log("fun1");
-  return;
-}
+// function fun1() {
+//   console.log("fun1");
+//   return;
+// }
 
-function fun2() {
-  console.log("fun2");
-  return false;
-}
+// function fun2() {
+//   console.log("fun2");
+//   return false;
+// }
 
-const newVal4 = val4 ?? fun1() ?? fun2();
-console.log({ newVal4 });
+// const newVal4 = val4 ?? fun1() ?? fun2();
+// console.log({ newVal4 });
+
+//* Assignment Operator Shortcuts
+// let a = 4;
+// const c = ++a;
+// const b = a++;
+// console.log({ a, b, c });
+
+// let val1 = "",
+//   val2,
+//   val3 = 0,
+//   val4 = "string",
+//   val5 = 100,
+//   val6 = 50;
+
+// // Nullish Coalescing assignment - assigns the right hand operand only if the left is null or undefined.
+// val2 ??= val4;
+// console.log({ val2 });
+
+// // Logical OR assignment - assigns the right hand operand if the left hand operand is falsy.
+// val1 ||= val4;
+// val3 ||= 90;
+// console.log({ val1, val3 });
+
+// // Logical AND assignment - assigns the right hand operand if the left hand operand is truthy
+// val2 &&= val5;
+// val4 &&= "new string";
+// val6 &&= val5;
+// console.log({ val2, val4, val6 });
+
+//* The Double Bang
+const scores = [100, 0, 90, 50, 70, 0, 20];
+
+const hasScore = scores.map((score) => {
+  if (score) {
+    return true;
+  } else {
+    return false;
+  }
+});
+const hasScore1 = scores.map((score) => Boolean(score));
+const hasScore2 = scores.map((score) => !!score);
+console.log({ hasScore, hasScore1, hasScore2 });

@@ -765,15 +765,71 @@
 // console.log({ val2, val4, val6 });
 
 //* The Double Bang
-const scores = [100, 0, 90, 50, 70, 0, 20];
+// const scores = [100, 0, 90, 50, 70, 0, 20];
 
-const hasScore = scores.map((score) => {
-  if (score) {
-    return true;
-  } else {
-    return false;
-  }
-});
-const hasScore1 = scores.map((score) => Boolean(score));
-const hasScore2 = scores.map((score) => !!score);
-console.log({ hasScore, hasScore1, hasScore2 });
+// const hasScore = scores.map((score) => {
+//   if (score) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// });
+// const hasScore1 = scores.map((score) => Boolean(score));
+// const hasScore2 = scores.map((score) => !!score);
+// console.log({ hasScore, hasScore1, hasScore2 });
+
+//* Ternary Operator
+// const completedQuiz = 5;
+// const output =
+//   completedQuiz > 9
+//     ? "You have completed all quizzes."
+//     : completedQuiz > 6
+//     ? "You still have a few quizzes to complete."
+//     : "You still have several quizzes to complete.";
+// console.log({ output });
+
+//* Optional Chaining for Object Properties
+const user = {
+  results: null as any,
+  first: "Steven",
+  last: "Hancock",
+  verified: true,
+  address: {
+    street: "Main",
+    number: "50",
+    city: "Lehi",
+    former: {},
+  },
+  fullName() {
+    return this.first + " " + this.last;
+  },
+  quizzes: [50, , 60, 70, 80, , 100, 75],
+};
+
+// console.log("user.fullName():", user.fullName());
+
+// const finalScore = user.results.score;
+// console.log({finalScore}); //* Error!
+
+//* V1
+// let finalScore;
+// if (user.results) {
+//   finalScore = user.results.score;
+// }
+// console.log({ finalScore }); //* undefined
+
+//* V1
+// const finalScore = user.results && user.results.score;
+// console.log({ finalScore }); //* null
+
+//* V3
+const finalScore = user.results?.score ?? "empty";
+console.log({ finalScore }); //* empty
+const finalScore2 = user.results?.score;
+console.log({ finalScore2 }); //* undefined
+
+console.log("user.fullName?.():", user.fullName?.());
+
+const num = 2;
+const score4 = user.results?.["score" + num];
+console.log({ score4 }); //* undefined

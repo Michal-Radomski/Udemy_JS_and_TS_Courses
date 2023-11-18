@@ -32,22 +32,24 @@
 // console.log(MyApp.MyModule.publicFunction()); // 3
 
 //* Revealing Module Pattern
-const createSupplier = (function () {
-  // Private
-  const name = "General Motors";
-  const field = "automobile";
-  const getSupplierName = () => name;
-  const getSupplierField = () => field;
+// const createSupplier = (function () {
+//   // Private
+//   const name = "General Motors";
+//   const field = "automobile";
+//   const getSupplierName = () => name;
+//   const getSupplierField = () => field;
 
-  // Public
-  return {
-    name,
-    field,
-    getName: () => getSupplierName(),
-    getField: () => getSupplierField(),
-  };
-})();
+//   // Public
+//   return {
+//     name,
+//     field,
+//     getName: () => getSupplierName(),
+//     getField: () => getSupplierField(),
+//   };
+// })();
 
-console.log("createSupplier.name:", createSupplier.name);
-console.log("createSupplier.field:", createSupplier.field);
-console.log("createSupplier.getName():", createSupplier.getName());
+// console.log("createSupplier.name:", createSupplier.name);
+// console.log("createSupplier.field:", createSupplier.field);
+// console.log("createSupplier.getName():", createSupplier.getName());
+
+//* CommonJS Modules

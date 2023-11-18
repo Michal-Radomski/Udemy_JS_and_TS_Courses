@@ -52,4 +52,7 @@
 // console.log("createSupplier.field:", createSupplier.field);
 // console.log("createSupplier.getName():", createSupplier.getName());
 
-//* CommonJS Modules
+//* CommonJS Modules -> separate files
+//* CommonJS in Browsers -> using a bundler (webpack)
+
+//* AMD and UMD Modules -> separate files

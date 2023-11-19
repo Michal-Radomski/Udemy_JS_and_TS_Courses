@@ -314,43 +314,133 @@
 // console.log("stack.size:", stack.size);
 
 //* Queues Data Structure
-class Queue {
-  items: { [key: string]: number };
-  front: number;
-  back: number;
-  size: number;
-  constructor() {
-    this.items = {};
-    this.front = 0;
-    this.back = 0;
-    this.size = 0;
-  }
+// class Queue {
+//   items: { [key: string]: number };
+//   front: number;
+//   back: number;
+//   size: number;
+//   constructor() {
+//     this.items = {};
+//     this.front = 0;
+//     this.back = 0;
+//     this.size = 0;
+//   }
 
-  enqueue(item: number) {
-    this.items[this.back as keyof typeof this.items] = item;
-    this.back++;
-    return ++this.size;
-  }
+//   enqueue(item: number) {
+//     this.items[this.back as keyof typeof this.items] = item;
+//     this.back++;
+//     return ++this.size;
+//   }
 
-  dequeue() {
-    if (this.size === 0) return null;
-    const item = this.items[this.front as keyof typeof this.items];
-    delete this.items[this.front as keyof typeof this.items];
-    this.front++;
-    this.size--;
-    return item;
-  }
+//   dequeue() {
+//     if (this.size === 0) return null;
+//     const item = this.items[this.front as keyof typeof this.items];
+//     delete this.items[this.front as keyof typeof this.items];
+//     this.front++;
+//     this.size--;
+//     return item;
+//   }
 
-  check() {
-    return this.items[this.front as keyof typeof this.items];
+//   check() {
+//     return this.items[this.front as keyof typeof this.items];
+//   }
+// }
+
+// const queue = new Queue();
+// console.log("queue:", queue);
+// queue.enqueue(50);
+// queue.enqueue(60);
+// queue.enqueue(70);
+// console.log("queue:", queue);
+// queue.dequeue();
+// console.log("queue:", queue);
+
+//* Binary Search Tree
+//               23
+//          21        30
+//      10         25      36
+//  8       15
+//      12      17
+
+class NodeTree {
+  value: number;
+  left: NodeTree | null;
+  right: NodeTree | null;
+  constructor(val: number) {
+    this.value = val;
+    this.left = null;
+    this.right = null;
   }
 }
 
-const queue = new Queue();
-console.log("queue:", queue);
-queue.enqueue(50);
-queue.enqueue(60);
-queue.enqueue(70);
-console.log("queue:", queue);
-queue.dequeue();
-console.log("queue:", queue);
+class BinarySearchTree {
+  root: null | NodeTree;
+  constructor() {
+    this.root = null;
+  }
+
+  add(val: number) {
+    const newNode = new NodeTree(val);
+    if (this.root === null) {
+      this.root = newNode;
+      return this;
+    }
+    let node = this.root;
+    while (true) {
+      if (val === node.value) return this;
+      if (val < node.value) {
+        if (node.left === null) {
+          node.left = newNode;
+          return this;
+        }
+        node = node.left;
+      } else {
+        if (node.right === null) {
+          node.right = newNode;
+          return this;
+        }
+        node = node.right;
+      }
+    }
+  }
+
+  get(val: number) {
+    if (this.root === null) return null;
+    let node = this.root,
+      found = false;
+    while (node && !found) {
+      if (val < node.value) {
+        node = node.left as NodeTree;
+      } else if (val > node.value) {
+        node = node.right as NodeTree;
+      } else {
+        found = true;
+      }
+    }
+    if (!found) return null;
+    return node;
+  }
+
+  contains(val: number) {
+    if (this.root === null) return false;
+    let node = this.root,
+      found = false;
+    while (node && !found) {
+      if (val < node.value) {
+        node = node.left as NodeTree;
+      } else if (val > node.value) {
+        node = node.right as NodeTree;
+      } else {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+
+const tree = new BinarySearchTree();
+console.log("tree:", tree);
+tree.add(1);
+tree.add(2);
+tree.add(3);
+console.log("tree:", tree);

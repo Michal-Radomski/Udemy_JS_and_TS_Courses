@@ -56,3 +56,7 @@
 //* CommonJS in Browsers -> using a bundler (webpack)
 
 //* AMD and UMD Modules -> separate files
+import yellName from "./utilsTS";
+
+console.log("This is app.js.");
+console.log("yellName('Steven Hancock'):", yellName("Steven Hancock"));

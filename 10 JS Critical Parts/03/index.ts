@@ -280,34 +280,77 @@
 // })();
 
 //* Stack Data Structure
-class Stack {
-  items: number[];
+// class Stack {
+//   items: number[];
+//   size: number;
+//   constructor() {
+//     this.items = [];
+//     this.size = 0;
+//   }
+
+//   push(item: number) {
+//     this.items.push(item);
+//     return ++this.size;
+//   }
+//   pop() {
+//     if (this.size === 0) return null;
+//     this.size--;
+//     return this.items.pop();
+//   }
+
+//   check() {
+//     return this.items[this.size - 1];
+//   }
+// }
+
+// const stack = new Stack();
+// console.log(1, "stack:", stack);
+// stack.push(5);
+// stack.push(6);
+// stack.push(7);
+// console.log(2, "stack:", stack);
+// stack.pop();
+// console.log(3, "stack:", stack);
+// console.log("stack.size:", stack.size);
+
+//* Queues Data Structure
+class Queue {
+  items: { [key: string]: number };
+  front: number;
+  back: number;
   size: number;
   constructor() {
-    this.items = [];
+    this.items = {};
+    this.front = 0;
+    this.back = 0;
     this.size = 0;
   }
 
-  push(item: number) {
-    this.items.push(item);
+  enqueue(item: number) {
+    this.items[this.back as keyof typeof this.items] = item;
+    this.back++;
     return ++this.size;
   }
-  pop() {
+
+  dequeue() {
     if (this.size === 0) return null;
+    const item = this.items[this.front as keyof typeof this.items];
+    delete this.items[this.front as keyof typeof this.items];
+    this.front++;
     this.size--;
-    return this.items.pop();
+    return item;
   }
 
   check() {
-    return this.items[this.size - 1];
+    return this.items[this.front as keyof typeof this.items];
   }
 }
 
-const stack = new Stack();
-console.log(1, "stack:", stack);
-stack.push(5);
-stack.push(6);
-stack.push(7);
-console.log(2, "stack:", stack);
-stack.pop();
-console.log(3, "stack:", stack);
+const queue = new Queue();
+console.log("queue:", queue);
+queue.enqueue(50);
+queue.enqueue(60);
+queue.enqueue(70);
+console.log("queue:", queue);
+queue.dequeue();
+console.log("queue:", queue);

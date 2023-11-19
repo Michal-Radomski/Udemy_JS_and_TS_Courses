@@ -144,6 +144,7 @@ class LinkedList {
 
   // Add node to list
   add(val: number) {
+    // console.log({ val });
     const node = new LinkedNode(val);
     if (!this.head) {
       this.head = node;
@@ -181,27 +182,85 @@ class LinkedList {
 
   // Insert a node at a specific index
   insertAt(val: number, index: number) {
-    console.log({ val, index });
+    // console.log({ val, index });
+    if (index < 0 || index > this.size) return null;
+    if (index === this.size) return this.add(val);
+    const node = new LinkedNode(val);
+
+    if (index === 0) {
+      node.next = this.head as any;
+      this.head = node;
+    } else {
+      let prevNode: any = this.getNode(index - 1);
+      let tmpNode = prevNode.next;
+      node.next = tmpNode;
+      prevNode.next = node;
+    }
+    this.size++;
+    return node;
   }
 
   // Remove node from specific index
+
   removeAt(index: number) {
-    console.log({ index });
+    // console.log({ index });
+    if (index < 0 || index > this.size) return null;
+    if (index === this.size - 1) return this.remove();
+
+    let currentNode, nextNode, prevNode;
+    if (index === 0) {
+      currentNode = this.head;
+      nextNode = currentNode?.next;
+      currentNode!.next = null;
+      this.head = nextNode as any;
+    } else {
+      prevNode = this.getNode(index - 1);
+      currentNode = (prevNode as any).next;
+      (prevNode as any).next = currentNode.next;
+      currentNode.next = null;
+    }
+    this.size--;
+    return currentNode;
   }
 
   // Get index for specific node
+  // Not currently coded to work for objects; only primitives
   getIndex(val: number) {
-    console.log({ val });
+    // console.log({val})
+    let currentNode = this.head;
+    let cnt = 0;
+
+    while (currentNode !== null) {
+      if (currentNode.value === val) {
+        return cnt;
+      }
+      cnt++;
+      currentNode = currentNode.next;
+    }
+    return -1;
   }
 
   // Get node for specific index
   getNode(index: number) {
     console.log({ index });
+    if (index < 0 || index >= this.size) return null;
+    if (index === this.size - 1) return this.tail;
+
+    let cnt = 0,
+      currentNode = this.head;
+    // find node at index entered
+    while (cnt !== index) {
+      currentNode = currentNode!.next;
+      cnt++;
+    }
+    return currentNode;
   }
 }
 
 const list = new LinkedList();
 list.add(56);
 list.add(76);
-// list.add({ id: 1 });
+list.add(100);
+list.add(101);
+list.remove();
 console.log("list:", list, typeof list);

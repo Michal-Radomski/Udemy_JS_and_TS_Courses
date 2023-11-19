@@ -101,15 +101,15 @@
 // Searching  for (let prop in obj {})  -> O(n)
 // Access     obj.fName;                -> O(1)
 
-const obj = {
-  fName: "Steven",
-  lName: "Hancock",
-  fullName() {
-    return `${this.fName} ${this.lName}`;
-  },
-  instructor: true,
-};
-console.log("obj.instructor:", obj.instructor);
+// const obj = {
+//   fName: "Steven",
+//   lName: "Hancock",
+//   fullName() {
+//     return `${this.fName} ${this.lName}`;
+//   },
+//   instructor: true,
+// };
+// console.log("obj.instructor:", obj.instructor);
 
 //* Big O for Arrays
 // Insertion  array1.push(true);           -> O(1) depends
@@ -119,5 +119,89 @@ console.log("obj.instructor:", obj.instructor);
 // Searching  for (let elem of array1) {}  -> O(n)
 // Access     array1[2];                   -> O(1)
 
-const array = [1, 2, "string", {}];
-console.log("array[1]:", array[1]);
+// const array = [1, 2, "string", {}];
+// console.log("array[1]:", array[1]);
+
+//* Linked List Example + Exercise
+class LinkedNode {
+  value: number;
+  next: null;
+  constructor(val: number) {
+    this.value = val;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  head: LinkedNode | null;
+  tail: LinkedNode | null;
+  size: number;
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.size = 0;
+  }
+
+  // Add node to list
+  add(val: number) {
+    const node = new LinkedNode(val);
+    if (!this.head) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      this!.tail!.next = node as any;
+      this.tail = node;
+    }
+    this.size++;
+    return this;
+  }
+
+  // Remove the tail from list
+  remove() {
+    if (!this.head) return undefined;
+
+    // find the node right before the tail
+    let curNode = this.head;
+    let newTail = curNode;
+    while (curNode.next) {
+      newTail = curNode;
+      curNode = curNode.next;
+    }
+    // set the new tail
+    newTail.next = null;
+    this.tail = newTail;
+    // establish size
+    this.size--;
+    if (this.size === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+    return curNode;
+  }
+
+  // Insert a node at a specific index
+  insertAt(val: number, index: number) {
+    console.log({ val, index });
+  }
+
+  // Remove node from specific index
+  removeAt(index: number) {
+    console.log({ index });
+  }
+
+  // Get index for specific node
+  getIndex(val: number) {
+    console.log({ val });
+  }
+
+  // Get node for specific index
+  getNode(index: number) {
+    console.log({ index });
+  }
+}
+
+const list = new LinkedList();
+list.add(56);
+list.add(76);
+// list.add({ id: 1 });
+console.log("list:", list, typeof list);

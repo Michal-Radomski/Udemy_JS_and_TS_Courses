@@ -54,9 +54,10 @@
 
 //* CommonJS Modules -> separate files
 //* CommonJS in Browsers -> using a bundler (webpack)
-
 //* AMD and UMD Modules -> separate files
+
+//* Native Modules -> Module level scope, this is undefined
 import yellName from "./utilsTS";
 
-console.log("This is app.js.");
+console.log("This is index.ts");
 console.log("yellName('Steven Hancock'):", yellName("Steven Hancock"));

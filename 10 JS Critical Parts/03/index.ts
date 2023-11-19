@@ -57,7 +57,9 @@
 //* AMD and UMD Modules -> separate files
 
 //* Native Modules -> Module level scope, this is undefined
-import yellName from "./utilsTS";
+// import yellName from "./utilsTS";
 
-console.log("This is index.ts");
-console.log("yellName('Steven Hancock'):", yellName("Steven Hancock"));
+// console.log("This is index.ts");
+// console.log("yellName('Steven Hancock'):", yellName("Steven Hancock"));
+
+//@ Data Structures

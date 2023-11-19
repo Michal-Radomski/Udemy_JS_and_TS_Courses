@@ -440,7 +440,21 @@ class BinarySearchTree {
 
 const tree = new BinarySearchTree();
 console.log("tree:", tree);
-tree.add(1);
-tree.add(2);
-tree.add(3);
+tree.add(23);
+tree.add(21);
+tree.add(30);
 console.log("tree:", tree);
+tree.add(10);
+tree.add(25);
+tree.add(36);
+tree.add(8);
+tree.add(15);
+tree.add(12);
+tree.add(17);
+console.log("tree:", tree);
+
+console.log("tree.get(20):", tree.get(20)); // null
+console.log("tree.get(10):", tree.get(10));
+
+console.log("tree.contains(20):", tree.contains(20)); // null
+console.log("tree.contains(10):", tree.contains(10)); // true

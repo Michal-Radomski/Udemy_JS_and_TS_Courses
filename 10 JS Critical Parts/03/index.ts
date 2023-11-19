@@ -63,3 +63,32 @@
 // console.log("yellName('Steven Hancock'):", yellName("Steven Hancock"));
 
 //@ Data Structures
+//* The Big O Notation
+// O(n) -> Linear
+const factor = function (num: number) {
+  let result = num;
+  if (num === 0 || num === 1) return 1;
+  while (num > 1) {
+    num--;
+    result *= num;
+  }
+  return result;
+};
+console.log("factor(5):", factor(5));
+
+// O(1) -> Static
+const aBigint = function (num: number) {
+  return BigInt(num * Number.MAX_SAFE_INTEGER);
+};
+console.log("aBigint(1):", aBigint(1));
+
+// O(n^2) -> Square
+const multiplyMatrix = function (n: number) {
+  for (let i = 0; i <= n; i++) {
+    for (let j = 0; j <= n; j++) {
+      // console.log(i + " * " + j + " = " + i * j);
+      console.log(`${i}*${j} = ${i * j}`);
+    }
+  }
+};
+multiplyMatrix(5);

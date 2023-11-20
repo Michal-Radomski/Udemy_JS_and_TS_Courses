@@ -21,3 +21,7 @@ Files created during Udemy.com JS and TS courses:
 9. [JS - Advanced Topics](https://www.udemy.com/course/learn-modern-javascript-advanced-topics)
 
 10. [JS: The Critical Parts Masterclass](https://www.udemy.com/course/javascript-the-critical-parts-masterclass)
+
+11. [JS: Understanding the Weird Parts](https://www.udemy.com/course/understand-javascript)
+
+12. [JS: The Advanced Concepts](https://www.udemy.com/course/advanced-javascript-concepts)

@@ -355,7 +355,7 @@
 // queue.dequeue();
 // console.log("queue:", queue);
 
-//* Binary Search Tree
+//* Binary Search Tree -> is very efficient!
 //               23
 //          21        30
 //      10         25      36
@@ -458,3 +458,13 @@ console.log("tree.get(10):", tree.get(10));
 
 console.log("tree.contains(20):", tree.contains(20)); // null
 console.log("tree.contains(10):", tree.contains(10)); // true
+
+//@ Appendix
+// null -> variable assigned by developer;
+// undefined -> variable assigned by system;
+
+// console.log("Math.SQRT2:", Math.SQRT2);
+
+// const date = new Date();
+// const date2 = Date.now();
+// console.log({ date, date2 }, Number(date) - date2);

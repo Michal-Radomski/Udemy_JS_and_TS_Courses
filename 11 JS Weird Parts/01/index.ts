@@ -127,7 +127,31 @@
 // console.log(Object.is(null, null)); // true
 // console.log(Object.is(undefined, undefined)); // true
 
-// @ts-ignore
-console.log("" == 0); // true
-// @ts-ignore
-console.log("" === 0); // false
+// // @ts-ignore
+// console.log("" == 0); // true -> don't use!
+// // @ts-ignore
+// console.log("" === 0); // false -> use this!
+
+//* Existence and Booleans
+// let a;
+// let a = 0;
+// if (a) {
+//   console.log({ a });
+// } else {
+//   console.log("a is undefined");
+// }
+
+// let b = 0;
+// console.log(b || b === 0); // true
+
+// let c;
+// console.log(`Hello ${c}`); // Hello undefined
+
+//* Default Values
+function greet(name?: string) {
+  name = name || "<Your name here>";
+  console.log("Hello " + name);
+}
+
+greet("Tony");
+greet();

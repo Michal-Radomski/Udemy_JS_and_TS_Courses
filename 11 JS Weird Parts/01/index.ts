@@ -148,10 +148,43 @@
 // console.log(`Hello ${c}`); // Hello undefined
 
 //* Default Values
-function greet(name?: string) {
-  name = name || "<Your name here>";
-  console.log("Hello " + name);
-}
+// function greet(name?: string) {
+//   name = name || "<Your name here>";
+//   console.log("Hello " + name);
+// }
 
-greet("Tony");
-greet();
+// greet("Tony");
+// greet();
+
+//@ Objects and Functions
+
+interface Address {
+  street: string;
+  city: string;
+  state: string;
+}
+interface Person {
+  firstname: string;
+  lastname: string;
+  address: Address;
+}
+const person = new Object() as Person;
+person["firstname"] = "Tony";
+person["lastname"] = "Alicea";
+
+const firstNameProperty = "firstname";
+console.log("person:", person);
+console.log("person[firstNameProperty as keyof Person]:", person[firstNameProperty as keyof Person]);
+console.log("person[firstNameProperty as keyof typeof person]:", person[firstNameProperty as keyof typeof person]);
+
+console.log("person.firstname:", person.firstname);
+console.log("person.lastname:", person.lastname);
+
+person.address = new Object() as Address;
+person.address.street = "111 Main St.";
+person.address.city = "New York";
+person.address.state = "NY";
+
+console.log("person.address.street:", person.address.street);
+console.log("person.address.city:", person.address.city);
+console.log('person["address"]["state"]:', person["address"]["state"]);

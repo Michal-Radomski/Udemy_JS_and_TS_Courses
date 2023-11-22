@@ -191,40 +191,75 @@
 // console.log('person["address"].state:', person["address"].state);
 
 //* Objects and Object Literals
-interface Address {
-  street: string;
-  city?: string;
-  state?: string;
-}
-interface Person {
-  firstname: string;
-  lastname: string;
-  address?: Address;
-  address2?: Address;
-}
+// interface Address {
+//   street: string;
+//   city?: string;
+//   state?: string;
+// }
+// interface Person {
+//   firstname: string;
+//   lastname: string;
+//   address?: Address;
+//   address2?: Address;
+// }
 
-const Tony: Person = {
-  firstname: "Tony",
-  lastname: "Alicea",
-  address: {
-    street: "111 Main St.",
-    city: "New York",
-    state: "NY",
-  },
-};
+// const Tony: Person = {
+//   firstname: "Tony",
+//   lastname: "Alicea",
+//   address: {
+//     street: "111 Main St.",
+//     city: "New York",
+//     state: "NY",
+//   },
+// };
 
-function greet(person: Person) {
-  console.log("Hi " + person.firstname);
-}
-greet(Tony);
+// function greet(person: Person) {
+//   console.log("Hi " + person.firstname);
+// }
+// greet(Tony);
 
-greet({
+// greet({
+//   firstname: "Mary",
+//   lastname: "Doe",
+// });
+
+// Tony.address2 = {
+//   street: "333 Second St.",
+// };
+
+// console.log("Tony:", Tony);
+
+//* Faking Namespaces
+// interface Language {
+//   greet?: string;
+//   greetings?: { basic: string };
+// }
+
+// var greet = "Hello!";
+// var greet = "Hola!";
+// console.log({ greet }); // Hola
+
+// // const english = {} as Language;
+// // english!.greetings!.basic = "Hello"; //* Cannot set properties of undefined (setting 'basic') -> greetings is undefined!
+
+// const english = {
+//   greetings: {
+//     basic: "Hello!",
+//   },
+// } as Language;
+
+// const spanish = {} as Language;
+// spanish.greet = "Hola!";
+
+// console.log("english:", english);
+// console.log("spanish:", spanish);
+
+//* JSON
+const objectLiteral = {
   firstname: "Mary",
-  lastname: "Doe",
-});
-
-Tony.address2 = {
-  street: "333 Second St.",
+  isAProgrammer: true,
 };
+console.log(JSON.stringify(objectLiteral)); //* {"firstname":"Mary","isAProgrammer":true->string}
 
-console.log("Tony:", Tony);
+const jsonValue = JSON.parse('{ "firstname": "Mary", "isAProgrammer": true }');
+console.log(jsonValue); //* { firstname: 'Mary', isAProgrammer: true->boolean }

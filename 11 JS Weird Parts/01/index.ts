@@ -280,20 +280,62 @@
 // expression: results a value
 
 // Function declaration
-greet();
-function greet() {
-  console.log(1, "hi");
-}
+// greet();
+// function greet() {
+//   console.log(1, "hi");
+// }
 
-// Function expression
-const anonymousGreet = function () {
-  console.log(2, "hi");
-};
-anonymousGreet();
+// // Function expression
+// const anonymousGreet = function () {
+//   console.log(2, "hi");
+// };
+// anonymousGreet();
 
-function log(a: Function) {
-  a();
-}
-log(function () {
-  console.log(3, "hi");
-});
+// function log(a: Function) {
+//   a();
+// }
+// log(function () {
+//   console.log(3, "hi");
+// });
+
+// function log2(elem: any) {
+//   console.log("elem:", elem);
+// }
+// log2({ msg: "Test message", time: Date.now() });
+
+//* By Value vs By Reference
+//* Primitive values
+// let a = 3;
+// let b;
+
+// b = a;
+// a = 2;
+
+// console.log({ a });
+// console.log({ b });
+
+//* By reference (all objects (including functions))
+// let c = { greeting: "hi" };
+// let d;
+
+// d = c;
+// c.greeting = "hello"; // Mutate
+
+// console.log(1, { c });
+// console.log(2, { d });
+
+// // By reference (even as parameters)
+// function changeGreeting(obj: { greeting: string }) {
+//   obj.greeting = "Hola"; // Mutate
+// }
+
+// changeGreeting(d);
+// console.log(3, { c });
+// console.log(4, { d });
+
+// // Equals operator sets up new memory space (new address)
+// c = { greeting: "Howdy" };
+// console.log(5, { c });
+// console.log(6, { d });
+
+//* Objects, Functions, and 'this'

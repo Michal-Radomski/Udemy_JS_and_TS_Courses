@@ -255,11 +255,45 @@
 // console.log("spanish:", spanish);
 
 //* JSON
-const objectLiteral = {
-  firstname: "Mary",
-  isAProgrammer: true,
-};
-console.log(JSON.stringify(objectLiteral)); //* {"firstname":"Mary","isAProgrammer":true->string}
+// const objectLiteral = {
+//   firstname: "Mary",
+//   isAProgrammer: true,
+// };
+// console.log(JSON.stringify(objectLiteral)); //* {"firstname":"Mary","isAProgrammer":true->string}
 
-const jsonValue = JSON.parse('{ "firstname": "Mary", "isAProgrammer": true }');
-console.log(jsonValue); //* { firstname: 'Mary', isAProgrammer: true->boolean }
+// const jsonValue = JSON.parse('{ "firstname": "Mary", "isAProgrammer": true }');
+// console.log(jsonValue); //* { firstname: 'Mary', isAProgrammer: true->boolean }
+
+//* Functions Are Objects
+// function greet() {
+//   console.log("hi");
+// }
+// greet();
+// greet.language = "english";
+// console.log("greet.language:", greet.language);
+// console.log("greet:", greet);
+// // @ts-ignore
+// console.log("greet.__proto__:", greet.__proto__);
+
+//* Function Statements and Function Expressions
+// statement: if ...
+// expression: results a value
+
+// Function declaration
+greet();
+function greet() {
+  console.log(1, "hi");
+}
+
+// Function expression
+const anonymousGreet = function () {
+  console.log(2, "hi");
+};
+anonymousGreet();
+
+function log(a: Function) {
+  a();
+}
+log(function () {
+  console.log(3, "hi");
+});

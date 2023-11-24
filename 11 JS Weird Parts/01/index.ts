@@ -571,21 +571,45 @@
 // fs2[2](); //* 2!
 
 //* Function Factory
-function makeGreeting(language: string): (firstname: string, lastname: string) => void {
-  return function (firstname: string, lastname: string): void {
-    if (language === "en") {
-      console.log("Hello " + firstname + " " + lastname);
-    }
-    if (language === "es") {
-      console.log("Hola " + firstname + " " + lastname);
-    }
-  };
+// function makeGreeting(language: string): (firstname: string, lastname: string) => void {
+//   return function (firstname: string, lastname: string): void {
+//     if (language === "en") {
+//       console.log("Hello " + firstname + " " + lastname);
+//     }
+//     if (language === "es") {
+//       console.log("Hola " + firstname + " " + lastname);
+//     }
+//   };
+// }
+
+// const greetEnglish = makeGreeting("en");
+// const greetSpanish = makeGreeting("es");
+
+// greetEnglish("John", "Doe");
+// greetSpanish("John", "Doe");
+
+// makeGreeting("en")("John", "Doe");
+
+//* Closures and Callbacks
+function sayHiLater() {
+  const greeting = "Hi!";
+  setTimeout(function () {
+    console.log(greeting);
+  }, 3000);
+}
+sayHiLater();
+
+function tellMeWhenDone(callback: Function) {
+  const a = 1000; // Some work
+  const b = 2000; // Some work
+  console.log("a+b:", a + b);
+  callback(); // The 'callback', it runs the function I give it!
 }
 
-const greetEnglish = makeGreeting("en");
-const greetSpanish = makeGreeting("es");
+tellMeWhenDone(function () {
+  console.log("I am done!");
+});
 
-greetEnglish("John", "Doe");
-greetSpanish("John", "Doe");
-
-makeGreeting("en")("John", "Doe");
+tellMeWhenDone(function () {
+  console.log("All done...");
+});

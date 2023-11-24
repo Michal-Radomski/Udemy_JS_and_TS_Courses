@@ -339,3 +339,35 @@
 // console.log(6, { d });
 
 //* Objects, Functions, and 'this'
+function a(this: any) {
+  console.log(1, this); // Global object
+  (globalThis as any).newvariable = "hello";
+}
+
+let b = function (this: any) {
+  console.log(2, this);
+};
+
+a();
+b();
+console.log(3, (globalThis as any).newvariable); // Not good!
+// console.log("globalThis:", globalThis);
+
+const c = {
+  name: "The c object", // Property
+  // Method
+  log: function () {
+    const self = this;
+    console.log(4, "self===this:", self === this);
+
+    self.name = "Updated c object";
+    console.log(5, { self });
+
+    const setname = function (newname: string) {
+      self.name = newname;
+    };
+    setname("Updated again! The c object");
+    console.log(6, { self });
+  },
+};
+c.log();

@@ -443,22 +443,50 @@
 // greet("John", "Doe", "es");
 
 //* Function Overloading
-function greet(firstname: string, lastname: string, language?: string) {
-  language = language || "en";
-  if (language === "en") {
-    console.log("Hello " + firstname + " " + lastname);
-  }
-  if (language === "es") {
-    console.log("Hola " + firstname + " " + lastname);
-  }
-}
+// function greet(firstname: string, lastname: string, language?: string) {
+//   language = language || "en";
+//   if (language === "en") {
+//     console.log("Hello " + firstname + " " + lastname);
+//   }
+//   if (language === "es") {
+//     console.log("Hola " + firstname + " " + lastname);
+//   }
+// }
 
-function greetEnglish(firstname: string, lastname: string) {
-  greet(firstname, lastname, "en");
-}
-function greetSpanish(firstname: string, lastname: string) {
-  greet(firstname, lastname, "es");
-}
+// function greetEnglish(firstname: string, lastname: string) {
+//   greet(firstname, lastname, "en");
+// }
+// function greetSpanish(firstname: string, lastname: string) {
+//   greet(firstname, lastname, "es");
+// }
 
-greetEnglish("John", "Doe");
-greetSpanish("John", "Doe");
+// greetEnglish("John", "Doe");
+// greetSpanish("John", "Doe");
+
+//* Automatic Semicolon Insertion
+// function getPerson(name: string) {
+//   return {
+//     firstname: name,
+//   };
+// }
+// console.log(getPerson("Tony"));
+
+//* Whitespace
+const // First name
+  firstname = "Mich",
+  // Last name
+  lastname = "Rad",
+  // Spoken language
+  language = "eng";
+
+const person = {
+  // First name
+  firstname: "John",
+  // Last name
+  lastname: "Doe",
+  // Spoken language
+  language: "pl",
+};
+
+console.log("person:", person);
+console.log({ firstname, lastname, language });

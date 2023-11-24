@@ -374,33 +374,48 @@
 // console.log(7, "c.name:", c.name);
 
 //* This, that
-function UsesThis(this: any, name: string) {
-  this.myName = name;
-  function returnMe(this: any) {
-    return this; // Scope is lost because of the inner function
-  }
-  return {
-    returnMe: returnMe,
-  };
-}
+// function UsesThis(this: any, name: string) {
+//   this.myName = name;
+//   function returnMe(this: any) {
+//     return this; // Scope is lost because of the inner function
+//   }
+//   return {
+//     returnMe: returnMe,
+//   };
+// }
 
-function UsesThat(this: any, name: string) {
-  const that = this;
-  this.myName = name;
-  function returnMe() {
-    return that; // Scope is baked in with 'that' to the "class"
-  }
-  return {
-    returnMe: returnMe,
-  };
-}
+// function UsesThat(this: any, name: string) {
+//   const that = this;
+//   this.myName = name;
+//   function returnMe() {
+//     return that; // Scope is baked in with 'that' to the "class"
+//   }
+//   return {
+//     returnMe: returnMe,
+//   };
+// }
 
-const usesThat = new (UsesThat as any)("Dave");
-const usesThis = new (UsesThis as any)("John");
-console.log(
-  "UsesThat thinks it's called " +
-    usesThat.returnMe().myName +
-    "\r\n" +
-    "UsesThis thinks it's called " +
-    usesThis.returnMe().myName
-);
+// const usesThat = new (UsesThat as any)("Dave");
+// const usesThis = new (UsesThis as any)("John");
+// console.log(
+//   "UsesThat thinks it's called " +
+//     usesThat.returnMe().myName +
+//     "\r\n" +
+//     "UsesThis thinks it's called " +
+//     usesThis.returnMe().myName
+// );
+
+//* Arrays
+const arr = [
+  1,
+  false,
+  { name: "Tony", address: "111 Main St." },
+  function (name: string) {
+    const greeting = "Hello";
+    console.log(`${greeting} ${name}`);
+  },
+  "hello",
+];
+
+console.log("arr:", arr);
+(arr[3] as Function)((arr[2] as { name: string }).name);

@@ -406,16 +406,38 @@
 // );
 
 //* Arrays
-const arr = [
-  1,
-  false,
-  { name: "Tony", address: "111 Main St." },
-  function (name: string) {
-    const greeting = "Hello";
-    console.log(`${greeting} ${name}`);
-  },
-  "hello",
-];
+// const arr = [
+//   1,
+//   false,
+//   { name: "Tony", address: "111 Main St." },
+//   function (name: string) {
+//     const greeting = "Hello";
+//     console.log(`${greeting} ${name}`);
+//   },
+//   "hello",
+// ];
 
-console.log("arr:", arr);
-(arr[3] as Function)((arr[2] as { name: string }).name);
+// console.log("arr:", arr);
+// (arr[3] as Function)((arr[2] as { name: string }).name);
+
+//* "Arguments" and spread
+function greet(firstname?: string, lastname?: string, language?: string) {
+  language = language || "en";
+
+  if (arguments.length === 0) {
+    console.log("Missing parameters!");
+    return;
+  }
+
+  console.log({ firstname });
+  console.log({ lastname });
+  console.log({ language });
+  console.log({ arguments });
+  console.log("arguments[0]:", arguments[0]);
+  console.log("---");
+}
+
+greet();
+greet("John");
+greet("John", "Doe");
+greet("John", "Doe", "es");

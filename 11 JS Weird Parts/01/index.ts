@@ -339,35 +339,68 @@
 // console.log(6, { d });
 
 //* Objects, Functions, and 'this'
-function a(this: any) {
-  console.log(1, this); // Global object
-  (globalThis as any).newvariable = "hello";
+// function a(this: any) {
+//   console.log(1, this); // Global object
+//   (globalThis as any).newvariable = "hello";
+// }
+
+// let b = function (this: any) {
+//   console.log(2, this);
+// };
+
+// a();
+// b();
+// console.log(3, (globalThis as any).newvariable); // Not good!
+// // console.log("globalThis:", globalThis);
+
+// const c = {
+//   name: "The c object", // Property
+//   // Method
+//   log: function () {
+//     const self = this; //* sometimes: const that = this
+//     console.log(4, "self===this:", self === this);
+
+//     self.name = "Updated c object";
+//     console.log(5, { self });
+
+//     const setname = function (newname: string) {
+//       self.name = newname;
+//     };
+//     setname("Updated again! The c object");
+//     console.log(6, { self });
+//   },
+// };
+// c.log();
+// console.log(7, "c.name:", c.name);
+
+//* This, that
+function UsesThis(this: any, name: string) {
+  this.myName = name;
+  function returnMe(this: any) {
+    return this; // Scope is lost because of the inner function
+  }
+  return {
+    returnMe: returnMe,
+  };
 }
 
-let b = function (this: any) {
-  console.log(2, this);
-};
+function UsesThat(this: any, name: string) {
+  const that = this;
+  this.myName = name;
+  function returnMe() {
+    return that; // Scope is baked in with 'that' to the "class"
+  }
+  return {
+    returnMe: returnMe,
+  };
+}
 
-a();
-b();
-console.log(3, (globalThis as any).newvariable); // Not good!
-// console.log("globalThis:", globalThis);
-
-const c = {
-  name: "The c object", // Property
-  // Method
-  log: function () {
-    const self = this;
-    console.log(4, "self===this:", self === this);
-
-    self.name = "Updated c object";
-    console.log(5, { self });
-
-    const setname = function (newname: string) {
-      self.name = newname;
-    };
-    setname("Updated again! The c object");
-    console.log(6, { self });
-  },
-};
-c.log();
+const usesThat = new (UsesThat as any)("Dave");
+const usesThis = new (UsesThis as any)("John");
+console.log(
+  "UsesThat thinks it's called " +
+    usesThat.returnMe().myName +
+    "\r\n" +
+    "UsesThis thinks it's called " +
+    usesThis.returnMe().myName
+);

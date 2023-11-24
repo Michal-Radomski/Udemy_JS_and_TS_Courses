@@ -472,21 +472,47 @@
 // console.log(getPerson("Tony"));
 
 //* Whitespace
-const // First name
-  firstname = "Mich",
-  // Last name
-  lastname = "Rad",
-  // Spoken language
-  language = "eng";
+// const // First name
+//   firstname = "Mich",
+//   // Last name
+//   lastname = "Rad",
+//   // Spoken language
+//   language = "eng";
 
-const person = {
-  // First name
-  firstname: "John",
-  // Last name
-  lastname: "Doe",
-  // Spoken language
-  language: "pl",
+// const person = {
+//   // First name
+//   firstname: "John",
+//   // Last name
+//   lastname: "Doe",
+//   // Spoken language
+//   language: "pl",
+// };
+
+// console.log("person:", person);
+// console.log({ firstname, lastname, language });
+
+//* Immediately Invoked Functions Expressions (IIFEs)
+// Function statement
+function greet(name: string) {
+  console.log(1, "Hello " + name);
+}
+greet("John");
+
+// Function expression
+const greetFunc = function (name: string) {
+  console.log(2, "Hello " + name);
 };
+greetFunc("John");
 
-console.log("person:", person);
-console.log({ firstname, lastname, language });
+// Immediately Invoked Function Expression (IIFE)
+const greeting = (function (name: string) {
+  return "Hello " + name;
+})("John");
+console.log(3, "greeting:", greeting, typeof greeting);
+
+// IIFE
+const firstname = "John";
+(function (name: string) {
+  const greeting = "Inside IIFE: Hello";
+  console.log(4, greeting + " " + name);
+})(firstname);

@@ -493,26 +493,79 @@
 
 //* Immediately Invoked Functions Expressions (IIFEs)
 // Function statement
-function greet(name: string) {
-  console.log(1, "Hello " + name);
+// function greet(name: string) {
+//   console.log(1, "Hello " + name);
+// }
+// greet("John");
+
+// // Function expression
+// const greetFunc = function (name: string) {
+//   console.log(2, "Hello " + name);
+// };
+// greetFunc("John");
+
+// // Immediately Invoked Function Expression (IIFE)
+// const greeting = (function (name: string) {
+//   return "Hello " + name;
+// })("John");
+// console.log(3, "greeting:", greeting, typeof greeting);
+
+// // IIFE -> inside (...) is expression!
+// const firstname = "John";
+// // Function expression
+// (function (name: string) {
+//   const greeting = "Inside IIFE: Hello";
+//   console.log(4, greeting + " " + name);
+// })(firstname);
+
+//* IIFE and Safe Code
+// var greeting = "Hola";
+// (function (globalThis, name) {
+//   const greeting = "Hello";
+//   globalThis.greeting = "Hello";
+//   console.log(1, greeting + " " + name);
+// })(globalThis, "John"); // IIFE
+// console.log(2, "greeting:", greeting);
+// console.log(3, "globalThis.greeting:", globalThis.greeting);
+
+//* Closures
+// function greet(whatToSay: string) {
+//   return function (name: string) {
+//     console.log(`${whatToSay} ${name}`);
+//   };
+// }
+// const sayHi = greet("Hi");
+// sayHi("Tony");
+// greet("Hello")("Michal");
+
+function buildFunctions() {
+  const arr = [] as Function[];
+  for (var i = 0; i < 3; i++) {
+    arr.push(function () {
+      console.log({ i });
+    });
+  }
+  return arr;
 }
-greet("John");
+const fs = buildFunctions();
+fs[0](); //* 3!
+fs[1](); //* 3!
+fs[2](); //* 3!
 
-// Function expression
-const greetFunc = function (name: string) {
-  console.log(2, "Hello " + name);
-};
-greetFunc("John");
-
-// Immediately Invoked Function Expression (IIFE)
-const greeting = (function (name: string) {
-  return "Hello " + name;
-})("John");
-console.log(3, "greeting:", greeting, typeof greeting);
-
-// IIFE
-const firstname = "John";
-(function (name: string) {
-  const greeting = "Inside IIFE: Hello";
-  console.log(4, greeting + " " + name);
-})(firstname);
+function buildFunctions2() {
+  const arr = [] as Function[];
+  for (var i = 0; i < 3; i++) {
+    arr.push(
+      (function (j) {
+        return function () {
+          console.log({ j });
+        };
+      })(i)
+    );
+  }
+  return arr;
+}
+const fs2 = buildFunctions2();
+fs2[0](); //* 0!
+fs2[1](); //* 1!
+fs2[2](); //* 2!

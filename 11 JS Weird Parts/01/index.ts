@@ -538,34 +538,54 @@
 // sayHi("Tony");
 // greet("Hello")("Michal");
 
-function buildFunctions() {
-  const arr = [] as Function[];
-  for (var i = 0; i < 3; i++) {
-    arr.push(function () {
-      console.log({ i });
-    });
-  }
-  return arr;
-}
-const fs = buildFunctions();
-fs[0](); //* 3!
-fs[1](); //* 3!
-fs[2](); //* 3!
+// function buildFunctions() {
+//   const arr = [] as Function[];
+//   for (var i = 0; i < 3; i++) {
+//     arr.push(function () {
+//       console.log({ i });
+//     });
+//   }
+//   return arr;
+// }
+// const fs = buildFunctions();
+// fs[0](); //* 3!
+// fs[1](); //* 3!
+// fs[2](); //* 3!
 
-function buildFunctions2() {
-  const arr = [] as Function[];
-  for (var i = 0; i < 3; i++) {
-    arr.push(
-      (function (j) {
-        return function () {
-          console.log({ j });
-        };
-      })(i)
-    );
-  }
-  return arr;
+// function buildFunctions2() {
+//   const arr = [] as Function[];
+//   for (var i = 0; i < 3; i++) {
+//     arr.push(
+//       (function (j) {
+//         return function () {
+//           console.log({ j });
+//         };
+//       })(i)
+//     );
+//   }
+//   return arr;
+// }
+// const fs2 = buildFunctions2();
+// fs2[0](); //* 0!
+// fs2[1](); //* 1!
+// fs2[2](); //* 2!
+
+//* Function Factory
+function makeGreeting(language: string): (firstname: string, lastname: string) => void {
+  return function (firstname: string, lastname: string): void {
+    if (language === "en") {
+      console.log("Hello " + firstname + " " + lastname);
+    }
+    if (language === "es") {
+      console.log("Hola " + firstname + " " + lastname);
+    }
+  };
 }
-const fs2 = buildFunctions2();
-fs2[0](); //* 0!
-fs2[1](); //* 1!
-fs2[2](); //* 2!
+
+const greetEnglish = makeGreeting("en");
+const greetSpanish = makeGreeting("es");
+
+greetEnglish("John", "Doe");
+greetSpanish("John", "Doe");
+
+makeGreeting("en")("John", "Doe");

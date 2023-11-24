@@ -421,23 +421,44 @@
 // (arr[3] as Function)((arr[2] as { name: string }).name);
 
 //* "Arguments" and spread
-function greet(firstname?: string, lastname?: string, language?: string) {
+// function greet(firstname?: string, lastname?: string = "testLastName", language?: string) {
+//   language = language || "en";
+
+//   if (arguments.length === 0) {
+//     console.log("Missing parameters!");
+//     return;
+//   }
+
+//   console.log({ firstname });
+//   console.log({ lastname });
+//   console.log({ language });
+//   console.log({ arguments });
+//   console.log("arguments[0]:", arguments[0]);
+//   console.log("---");
+// }
+
+// greet();
+// greet("John");
+// greet("John", "Doe");
+// greet("John", "Doe", "es");
+
+//* Function Overloading
+function greet(firstname: string, lastname: string, language?: string) {
   language = language || "en";
-
-  if (arguments.length === 0) {
-    console.log("Missing parameters!");
-    return;
+  if (language === "en") {
+    console.log("Hello " + firstname + " " + lastname);
   }
-
-  console.log({ firstname });
-  console.log({ lastname });
-  console.log({ language });
-  console.log({ arguments });
-  console.log("arguments[0]:", arguments[0]);
-  console.log("---");
+  if (language === "es") {
+    console.log("Hola " + firstname + " " + lastname);
+  }
 }
 
-greet();
-greet("John");
-greet("John", "Doe");
-greet("John", "Doe", "es");
+function greetEnglish(firstname: string, lastname: string) {
+  greet(firstname, lastname, "en");
+}
+function greetSpanish(firstname: string, lastname: string) {
+  greet(firstname, lastname, "es");
+}
+
+greetEnglish("John", "Doe");
+greetSpanish("John", "Doe");

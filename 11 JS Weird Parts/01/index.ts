@@ -974,30 +974,43 @@
 // console.log("people", people);
 
 //* Typeof, instanceof
-const a = 3;
-console.log(1, typeof a);
+// const a = 3;
+// console.log(1, typeof a);
 
-const b = "Hello";
-console.log(2, typeof b);
+// const b = "Hello";
+// console.log(2, typeof b);
 
-const c = {};
-console.log(3, typeof c);
+// const c = {};
+// console.log(3, typeof c);
 
-const d = [] as any[];
-console.log(4, typeof d); // Weird!
-console.log(5, Object.prototype.toString.call(d)); // Better!
+// const d = [] as any[];
+// console.log(4, typeof d); // Weird!
+// console.log(5, Object.prototype.toString.call(d)); // Better!
 
-function Person(this: any, name: string) {
-  this.name = name;
+// function Person(this: any, name: string) {
+//   this.name = name;
+// }
+// const e = new (Person as any)("Jane");
+// console.log(6, typeof e);
+// console.log(7, e instanceof Person);
+
+// console.log(8, typeof undefined); // Makes sense
+// console.log(9, typeof null); //* A bug since, like, forever...
+
+// const z = function () {
+//   console.log("Z");
+// };
+// console.log(10, typeof z);
+
+//@ Strict Mode
+function logNewPerson() {
+  "use strict"; //* Top of the file or top of the function - this is extra feature
+  let person2;
+  person2 = {};
+  console.log(1, "person2:", person2);
 }
-const e = new (Person as any)("Jane");
-console.log(6, typeof e);
-console.log(7, e instanceof Person);
 
-console.log(8, typeof undefined); // Makes sense
-console.log(9, typeof null); // A bug since, like, forever...
-
-const z = function () {
-  console.log("Z");
-};
-console.log(10, typeof z);
+let person;
+person = {};
+console.log(2, "person:", person);
+logNewPerson();

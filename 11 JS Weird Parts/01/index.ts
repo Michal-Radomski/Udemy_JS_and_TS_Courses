@@ -828,15 +828,51 @@
 
 //@ Building Objects
 //* The 'new' keyword
+// function Person2(this: any) {
+//   console.log("this:", this);
+//   (this.firstname = "John"), (this.lastname = "Doe");
+// }
+// const john2 = new (Person2 as any)();
+// console.log({ john2 });
+
+// function Person(this: any, firstname: string, lastname: string) {
+//   console.log("this:", this);
+//   this.firstname = firstname; //* object's firstname = firstname parameter
+//   this.lastname = lastname; //* object's lastname = lastname parameter
+//   console.log("This function is invoked.");
+// }
+
+// const john = new (Person as any)("John", "Doe"); //* new creates an empty object {}
+// console.log("john:", john);
+
+// const jane = new (Person as any)("Jane", "Doe");
+// console.log("jane:", jane);
+
+//* Prototype
+//* Properties in function constructor, methods in prototype1
 function Person(this: any, firstname: string, lastname: string) {
-  console.log("this:", this);
+  // console.log("this:", this);
   this.firstname = firstname;
   this.lastname = lastname;
-  console.log("This function is invoked.");
+  // console.log("This function is invoked.");
 }
 
+Person.prototype.getFullName = function () {
+  return this.firstname + " " + this.lastname;
+};
+
 const john = new (Person as any)("John", "Doe");
-console.log("john:", john);
+console.log({ john });
 
 const jane = new (Person as any)("Jane", "Doe");
-console.log("jane:", jane);
+console.log({ jane });
+
+Person.prototype.getFormalFullName = function () {
+  return this.lastname + ", " + this.firstname; // After object creation you can add functions1
+};
+
+console.log("john.getFormalFullName():", john.getFormalFullName());
+console.log("jane.getFormalFullName():", jane.getFormalFullName());
+
+console.log("Person.prototype:", Person.prototype); //* {}
+console.log("(Person as any).__proto__:", (Person as any).__proto__); //* {}

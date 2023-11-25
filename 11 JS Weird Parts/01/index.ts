@@ -769,4 +769,6 @@ console.log("jane.__proto__.__proto__:", jane.__proto__.__proto__);
 console.log("john.__proto__:", john.__proto__);
 console.log("john.__proto__.__proto__:", john.__proto__.__proto__);
 console.log("john.__proto__===jane.__proto__:", john.__proto__ === jane.__proto__);
-console.log("john.__proto__.__proto === jane.__proto__.__proto__:", john.__proto__.__proto === jane.__proto__.__proto__);
+console.log("john.__proto__.__proto__ === jane.__proto__.__proto__:", john.__proto__.__proto__ === jane.__proto__.__proto__);
+console.log("typeof john.__proto__:", typeof john.__proto__);
+console.log("typeof john.__proto__.__proto__:", typeof john.__proto__.__proto__);

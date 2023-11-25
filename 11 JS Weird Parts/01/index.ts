@@ -615,49 +615,92 @@
 // });
 
 //* Call(), Apply(), and Bind()
-const person = {
-  firstname: "John",
-  lastname: "Doe",
-  getFullName: function () {
-    const fullname = this.firstname + " " + this.lastname;
-    return fullname;
-  },
-};
+// const person = {
+//   firstname: "John",
+//   lastname: "Doe",
+//   getFullName: function () {
+//     const fullname = this.firstname + " " + this.lastname;
+//     return fullname;
+//   },
+// };
 
-const logName = function (this: any, lang1: string, lang2: string) {
-  console.log("this.firstname:", this.firstname);
-  console.log(1, "Logged: " + this.getFullName());
-  console.log(2, "Arguments: " + lang1 + " " + lang2);
-  console.log(3, "-----------");
-};
+// const logName = function (this: any, lang1: string, lang2: string) {
+//   console.log("this.firstname:", this.firstname);
+//   console.log(1, "Logged: " + this.getFullName());
+//   console.log(2, "Arguments: " + lang1 + " " + lang2);
+//   console.log(3, "-----------");
+// };
 
-const logPersonName = logName.bind(person);
-logPersonName("en", "pl");
+// const logPersonName = logName.bind(person); // Returns a function
+// logPersonName("en", "pl");
 
-logName.call(person, "en", "es");
-logName.apply(person, ["en", "pt"]);
+// logName.call(person, "en", "es"); // Invokes a function
+// logName.apply(person, ["en", "pt"]); // Invokes a function
 
-(function (this: any, lang1: string, lang2: string) {
-  console.log("this.lastname:", this.lastname);
-  console.log(4, "Logged: " + this.getFullName());
-  console.log(5, "Arguments: " + lang1 + " " + lang2);
-  console.log(6, "-----------");
-}).apply(person, ["es", "de"]);
+// (function (this: any, lang1: string, lang2: string) {
+//   console.log("this.lastname:", this.lastname);
+//   console.log(4, "Logged: " + this.getFullName());
+//   console.log(5, "Arguments: " + lang1 + " " + lang2);
+//   console.log(6, "-----------");
+// }).apply(person, ["es", "de"]);
 
-// Function borrowing
-const person2 = {
-  firstname: "Jane",
-  lastname: "Doe",
-};
-console.log(7, "person.getFullName.apply(person2):", person.getFullName.apply(person2));
+// // Function borrowing
+// const person2 = {
+//   firstname: "Jane",
+//   lastname: "Doe",
+// };
+// console.log(71, "person.getFullName.apply(person2):", person.getFullName.apply(person2));
+// console.log(72, "person.getFullName.call(person2):", person.getFullName.call(person2));
 
-// Function currying
-function multiply(a: number, b: number) {
-  return a * b;
+// // Function currying
+// function multiply(a: number, b: number) {
+//   return a * b;
+// }
+
+// //* function multiply( b: number) {
+// //*   const a = 2/3
+// //*   return a * b;
+// //* }
+
+// const multipleByTwo = multiply.bind(this, 2); //* Variable a = 2, can be null!
+// console.log(8, "multipleByTwo(4):", multipleByTwo(4)); // 8
+
+// const multipleByThree = multiply.bind(null, 3); //* Variable a = 3, can be this!
+// console.log(9, "multipleByThree(4):", multipleByThree(4)); //12
+
+//* Functional Programming
+function mapForEach(arr: number[], fn: Function) {
+  const newArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    newArr.push(fn(arr[i]));
+  }
+  return newArr;
 }
 
-const multipleByTwo = multiply.bind(this, 2);
-console.log(8, "multipleByTwo(4):", multipleByTwo(4));
+const arr1: number[] = [1, 2, 3];
+console.log("arr1:", arr1);
 
-const multipleByThree = multiply.bind(this, 3);
-console.log(9, "multipleByThree(4):", multipleByThree(4));
+const arr2: number[] = mapForEach(arr1, function (item: number) {
+  return item * 2;
+});
+console.log("arr2:", arr2);
+
+const arr3: boolean[] = mapForEach(arr1, function (item: number) {
+  return item > 2;
+});
+console.log("arr3:", arr3);
+
+const checkPastLimit = function (limiter: number, item: number) {
+  return item > limiter;
+};
+const arr4: boolean[] = mapForEach(arr1, checkPastLimit.bind(this, 1));
+console.log("arr4:", arr4);
+
+const checkPastLimitSimplified = function (this: any, limiter: number) {
+  return function (limiter: number, item: number) {
+    return item > limiter;
+  }.bind(this, limiter);
+};
+
+const arr5: boolean[] = mapForEach(arr1, checkPastLimitSimplified(1));
+console.log("arr5:", arr5);

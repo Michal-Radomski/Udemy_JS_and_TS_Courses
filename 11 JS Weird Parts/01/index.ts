@@ -849,30 +849,92 @@
 // console.log("jane:", jane);
 
 //* Prototype
-//* Properties in function constructor, methods in prototype1
-function Person(this: any, firstname: string, lastname: string) {
-  // console.log("this:", this);
-  this.firstname = firstname;
-  this.lastname = lastname;
-  // console.log("This function is invoked.");
+//* Properties in function constructor, methods in prototype
+//* Convention: function constructor starts with capital letter!
+// function Person(this: any, firstname: string, lastname: string) {
+//   // console.log("this:", this);
+//   this.firstname = firstname;
+//   this.lastname = lastname;
+//   // console.log("This function is invoked.");
+// }
+
+// Person.prototype.getFullName = function () {
+//   return this.firstname + " " + this.lastname;
+// };
+
+// const john = new (Person as any)("John", "Doe");
+// console.log({ john });
+
+// const jane = new (Person as any)("Jane", "Doe");
+// console.log({ jane });
+
+// Person.prototype.getFormalFullName = function () {
+//   return this.lastname + ", " + this.firstname; // After object creation you can add functions1
+// };
+
+// console.log("john.getFormalFullName():", john.getFormalFullName());
+// console.log("jane.getFormalFullName():", jane.getFormalFullName());
+
+// console.log("Person.prototype:", Person.prototype); //* {}
+// console.log("(Person as any).__proto__:", (Person as any).__proto__); //* {}
+
+//* Built-In Function Constructors -> this can be dangerous!
+// String.prototype.isLengthGreaterThan = function (limit: number) {
+//   return this.length > limit;
+// };
+// console.log('("John" as any).isLengthGreaterThan(3):', ("John" as any).isLengthGreaterThan(3)); //* true
+
+// (Number as any).prototype.isPositive = function () {
+//   return this > 0;
+// };
+// const num = new Number(3);
+// console.log("(num as any).isPositive():", (num as any).isPositive()); //* true
+
+// const a = new Number(3); // don't do it
+// const b = Number("3");
+// console.log("{a, b}, typeof a, typeof b:", { a, b }, typeof a, typeof b);
+
+//* Object.create() and Pure Prototypal Inheritance
+// polyfill
+// if (!Object.create) {
+//   Object.create = function (o) {
+//     if (arguments.length > 1) {
+//       throw new Error("Object.create implementation" + " only accepts the first parameter.");
+//     }
+//     function F() {}
+//     F.prototype = o;
+//     return new (F as any)();
+//   };
+// }
+// console.log("Object.create:", Object.create);
+
+// const person = {
+//   firstname: "Default",
+//   lastname: "Default",
+//   greet: function () {
+//     return "Hi " + this.firstname;
+//   },
+// };
+
+// const john = Object.create(person);
+// console.log({ john }); //* {}
+// john.firstname = "John";
+// john.lastname = "Doe";
+// console.log({ john });
+// console.log("john.greet():", john.greet());
+
+//* ES6 and Classes
+class Person {
+  firstname: string;
+  lastname: string;
+  constructor(firstname: string, lastname: string) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+  }
+  greet() {
+    return `Hi ${this.firstname}`;
+  }
 }
 
-Person.prototype.getFullName = function () {
-  return this.firstname + " " + this.lastname;
-};
-
-const john = new (Person as any)("John", "Doe");
-console.log({ john });
-
-const jane = new (Person as any)("Jane", "Doe");
-console.log({ jane });
-
-Person.prototype.getFormalFullName = function () {
-  return this.lastname + ", " + this.firstname; // After object creation you can add functions1
-};
-
-console.log("john.getFormalFullName():", john.getFormalFullName());
-console.log("jane.getFormalFullName():", jane.getFormalFullName());
-
-console.log("Person.prototype:", Person.prototype); //* {}
-console.log("(Person as any).__proto__:", (Person as any).__proto__); //* {}
+const john = new Person("John", "Doe");
+console.log("john.greet():", john.greet(), typeof john); //* Hi John object

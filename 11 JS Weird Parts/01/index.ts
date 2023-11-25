@@ -731,13 +731,58 @@
 // console.log("arr9:", arr9);
 
 //@ OOP JS and Prototypal Inheritance
+// const person = {
+//   firstname: "Default",
+//   lastname: "Default",
+//   getFullName: function () {
+//     return this.firstname + " " + this.lastname;
+//   },
+// } as any;
+
+// const john = {
+//   firstname: "John",
+//   lastname: "Doe",
+// } as any;
+
+// // Don't do this EVER! for demo purposes only!!!
+// john.__proto__ = person;
+// console.log(1, "john.getFullName():", john.getFullName());
+// console.log(2, "john.firstname:", john.firstname);
+
+// const jane = {
+//   firstname: "Jane",
+// } as any;
+
+// jane.__proto__ = person;
+// console.log(3, "jane.getFullName():", jane.getFullName());
+
+// person.getFormalFullName = function () {
+//   return this.lastname + ", " + this.firstname;
+// };
+
+// console.log(4, "john.getFormalFullName():", john.getFormalFullName());
+// console.log(5, "jane.getFormalFullName():", jane.getFormalFullName());
+
+// console.log("person.__proto__:", person.__proto__);
+// console.log("jane.__proto__:", jane.__proto__);
+// console.log("jane.__proto__.__proto__:", jane.__proto__.__proto__);
+// console.log("john.__proto__:", john.__proto__);
+// console.log("john.__proto__.__proto__:", john.__proto__.__proto__);
+// console.log("john.__proto__===jane.__proto__:", john.__proto__ === jane.__proto__);
+// console.log("john.__proto__.__proto__ === jane.__proto__.__proto__:", john.__proto__.__proto__ === jane.__proto__.__proto__);
+// console.log("typeof john.__proto__:", typeof john.__proto__);
+// console.log("typeof john.__proto__.__proto__:", typeof john.__proto__.__proto__);
+
+//* Reflection and Extend
+import _ from "underscore";
+
 const person = {
   firstname: "Default",
   lastname: "Default",
   getFullName: function () {
     return this.firstname + " " + this.lastname;
   },
-} as any;
+};
 
 const john = {
   firstname: "John",
@@ -746,29 +791,27 @@ const john = {
 
 // Don't do this EVER! for demo purposes only!!!
 john.__proto__ = person;
-console.log(1, "john.getFullName():", john.getFullName());
-console.log(2, "john.firstname:", john.firstname);
+
+for (let prop in john) {
+  console.log(1, prop + ": " + john[prop]);
+  if (john.hasOwnProperty(prop)) {
+    console.log(2, prop + ": " + john[prop]);
+  }
+}
 
 const jane = {
-  firstname: "Jane",
+  address: "111 Main St.",
+  getFormalFullName: function () {
+    return this.lastname + ", " + this.firstname;
+  },
 } as any;
 
-jane.__proto__ = person;
-console.log(3, "jane.getFullName():", jane.getFullName());
+const jim = {
+  getFirstName: function () {
+    // @ts-ignore
+    return firstname;
+  },
+} as any;
 
-person.getFormalFullName = function () {
-  return this.lastname + ", " + this.firstname;
-};
-
-console.log(4, "john.getFormalFullName():", john.getFormalFullName());
-console.log(5, "jane.getFormalFullName():", jane.getFormalFullName());
-
-console.log("person.__proto__:", person.__proto__);
-console.log("jane.__proto__:", jane.__proto__);
-console.log("jane.__proto__.__proto__:", jane.__proto__.__proto__);
-console.log("john.__proto__:", john.__proto__);
-console.log("john.__proto__.__proto__:", john.__proto__.__proto__);
-console.log("john.__proto__===jane.__proto__:", john.__proto__ === jane.__proto__);
-console.log("john.__proto__.__proto__ === jane.__proto__.__proto__:", john.__proto__.__proto__ === jane.__proto__.__proto__);
-console.log("typeof john.__proto__:", typeof john.__proto__);
-console.log("typeof john.__proto__.__proto__:", typeof john.__proto__.__proto__);
+_.extend(john, jane, jim);
+console.log({ john });

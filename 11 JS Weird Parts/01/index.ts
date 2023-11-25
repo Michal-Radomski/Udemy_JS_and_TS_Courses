@@ -591,25 +591,73 @@
 // makeGreeting("en")("John", "Doe");
 
 //* Closures and Callbacks
-function sayHiLater() {
-  const greeting = "Hi!";
-  setTimeout(function () {
-    console.log(greeting);
-  }, 3000);
+// function sayHiLater() {
+//   const greeting = "Hi!";
+//   setTimeout(function () {
+//     console.log(greeting);
+//   }, 3000);
+// }
+// sayHiLater();
+
+// function tellMeWhenDone(callback: () => void) {
+//   const a = 1000;
+//   const b = 2000;
+//   console.log("a+b:", a + b); // Some work
+//   callback(); // The 'callback', it runs the function I give it!
+// }
+
+// tellMeWhenDone(function () {
+//   console.log("I am done!");
+// });
+
+// tellMeWhenDone(function () {
+//   console.log("All done...");
+// });
+
+//* Call(), Apply(), and Bind()
+const person = {
+  firstname: "John",
+  lastname: "Doe",
+  getFullName: function () {
+    const fullname = this.firstname + " " + this.lastname;
+    return fullname;
+  },
+};
+
+const logName = function (this: any, lang1: string, lang2: string) {
+  console.log("this.firstname:", this.firstname);
+  console.log(1, "Logged: " + this.getFullName());
+  console.log(2, "Arguments: " + lang1 + " " + lang2);
+  console.log(3, "-----------");
+};
+
+const logPersonName = logName.bind(person);
+logPersonName("en", "pl");
+
+logName.call(person, "en", "es");
+logName.apply(person, ["en", "pt"]);
+
+(function (this: any, lang1: string, lang2: string) {
+  console.log("this.lastname:", this.lastname);
+  console.log(4, "Logged: " + this.getFullName());
+  console.log(5, "Arguments: " + lang1 + " " + lang2);
+  console.log(6, "-----------");
+}).apply(person, ["es", "de"]);
+
+// Function borrowing
+const person2 = {
+  firstname: "Jane",
+  lastname: "Doe",
+};
+console.log(7, "person.getFullName.apply(person2):", person.getFullName.apply(person2));
+
+// Function currying
+function multiply(a: number, b: number) {
+  return a * b;
 }
-sayHiLater();
 
-function tellMeWhenDone(callback: Function) {
-  const a = 1000; // Some work
-  const b = 2000; // Some work
-  console.log("a+b:", a + b);
-  callback(); // The 'callback', it runs the function I give it!
-}
+const multipleByTwo = multiply.bind(this, 2);
+console.log(8, "multipleByTwo(4):", multipleByTwo(4));
 
-tellMeWhenDone(function () {
-  console.log("I am done!");
-});
-
-tellMeWhenDone(function () {
-  console.log("All done...");
-});
+const multipleByThree = multiply.bind(this, 3);
+console.log(9, "multipleByThree(4):", multipleByThree(4));

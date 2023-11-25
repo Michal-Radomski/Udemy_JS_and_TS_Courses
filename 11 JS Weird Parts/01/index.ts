@@ -774,44 +774,69 @@
 // console.log("typeof john.__proto__.__proto__:", typeof john.__proto__.__proto__);
 
 //* Reflection and Extend
-import _ from "underscore";
+// import _ from "underscore";
 
-const person = {
-  firstname: "Default",
-  lastname: "Default",
-  getFullName: function () {
-    return this.firstname + " " + this.lastname;
-  },
-};
+// const person = {
+//   firstname: "Default",
+//   lastname: "Default",
+//   getFullName: function () {
+//     return this.firstname + " " + this.lastname;
+//   },
+// };
 
-const john = {
-  firstname: "John",
-  lastname: "Doe",
-} as any;
+// const john = {
+//   firstname: "John",
+//   lastname: "Doe",
+// } as any;
 
-// Don't do this EVER! for demo purposes only!!!
-john.__proto__ = person;
+// // Don't do this EVER! for demo purposes only!!!
+// john.__proto__ = person;
 
-for (let prop in john) {
-  console.log(1, prop + ": " + john[prop]);
-  if (john.hasOwnProperty(prop)) {
-    console.log(2, prop + ": " + john[prop]);
-  }
+// for (let prop in john) {
+//   console.log(1, prop + ": " + john[prop]);
+//   if (john.hasOwnProperty(prop)) {
+//     console.log(2, prop + ": " + john[prop]);
+//   }
+// }
+
+// const jane = {
+//   address: "111 Main St.",
+//   getFormalFullName: function () {
+//     return this.lastname + ", " + this.firstname;
+//   },
+// } as any;
+
+// const jim = {
+//   getFirstName: function () {
+//     // @ts-ignore
+//     return firstname;
+//   },
+// } as any;
+
+// _.extend(john, jane, jim);
+// console.log({ john });
+
+//@ Void operator
+// const output = void 1;
+// console.log(output); // Expected output: undefined
+
+// void console.log("expression evaluated"); // Expected output: "expression evaluated"
+
+// void (function iife() {
+//   console.log("iife is executed"); // Expected output: "iife is executed"
+// })();
+
+//@ Building Objects
+//* The 'new' keyword
+function Person(this: any, firstname: string, lastname: string) {
+  console.log("this:", this);
+  this.firstname = firstname;
+  this.lastname = lastname;
+  console.log("This function is invoked.");
 }
 
-const jane = {
-  address: "111 Main St.",
-  getFormalFullName: function () {
-    return this.lastname + ", " + this.firstname;
-  },
-} as any;
+const john = new (Person as any)("John", "Doe");
+console.log("john:", john);
 
-const jim = {
-  getFirstName: function () {
-    // @ts-ignore
-    return firstname;
-  },
-} as any;
-
-_.extend(john, jane, jim);
-console.log({ john });
+const jane = new (Person as any)("Jane", "Doe");
+console.log("jane:", jane);

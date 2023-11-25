@@ -924,17 +924,80 @@
 // console.log("john.greet():", john.greet());
 
 //* ES6 and Classes
-class Person {
-  firstname: string;
-  lastname: string;
-  constructor(firstname: string, lastname: string) {
-    this.firstname = firstname;
-    this.lastname = lastname;
-  }
-  greet() {
-    return `Hi ${this.firstname}`;
-  }
-}
+// class Person {
+//   firstname: string;
+//   lastname: string;
+//   constructor(firstname: string, lastname: string) {
+//     this.firstname = firstname;
+//     this.lastname = lastname;
+//   }
+//   greet() {
+//     return `Hi ${this.firstname}`;
+//   }
+// }
 
-const john = new Person("John", "Doe");
-console.log("john.greet():", john.greet(), typeof john); //* Hi John object
+// const john = new Person("John", "Doe");
+// console.log("john.greet():", john.greet(), typeof john); //* Hi John object
+
+// class InformalPerson extends Person {
+//   constructor(firstname: string, lastname: string) {
+//     super(firstname, lastname);
+//   }
+//   greet() {
+//     return `Yo ${this.firstname}`;
+//   }
+// }
+
+// const jane = new InformalPerson("Jane", "Doe");
+// console.log("jane.greet():", jane.greet(), typeof jane); //* Yo Jane object
+
+//@ Odds and Ends
+//* Initialization
+// const people = [
+//   // the 'john' object
+//   {
+//     firstname: "John",
+//     lastname: "Doe",
+//     addresses: ["111 Main St.", "222 Third St."],
+//   },
+//   // the 'jane' object
+//   {
+//     firstname: "Jane",
+//     lastname: "Doe",
+//     addresses: ["333 Main St.", "444 Fifth St."],
+//     greet: function () {
+//       return "Hello!";
+//     },
+//   },
+// ];
+
+// console.log("people", people);
+
+//* Typeof, instanceof
+const a = 3;
+console.log(1, typeof a);
+
+const b = "Hello";
+console.log(2, typeof b);
+
+const c = {};
+console.log(3, typeof c);
+
+const d = [] as any[];
+console.log(4, typeof d); // Weird!
+console.log(5, Object.prototype.toString.call(d)); // Better!
+
+function Person(this: any, name: string) {
+  this.name = name;
+}
+const e = new (Person as any)("Jane");
+console.log(6, typeof e);
+console.log(7, e instanceof Person);
+
+console.log(8, typeof undefined); // Makes sense
+console.log(9, typeof null); // A bug since, like, forever...
+
+const z = function () {
+  console.log("Z");
+};
+console.log(10, typeof z);

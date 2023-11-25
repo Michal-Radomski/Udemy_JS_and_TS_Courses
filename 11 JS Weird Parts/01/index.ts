@@ -669,63 +669,96 @@
 // console.log(9, "multipleByThree(4):", multipleByThree(4)); //12
 
 //* Functional Programming
-import * as _ from "underscore";
-import * as __ from "lodash";
+// import _ from "underscore";
+// import __ from "lodash";
 
-function mapForEach(arr: number[], fn: Function) {
-  const newArr = [];
-  for (let i = 0; i < arr.length; i++) {
-    newArr.push(fn(arr[i]));
-  }
-  return newArr;
-}
+// function mapForEach(arr: number[], fn: Function) {
+//   const newArr = [];
+//   for (let i = 0; i < arr.length; i++) {
+//     newArr.push(fn(arr[i]));
+//   }
+//   return newArr;
+// }
 
-const arr1: number[] = [1, 2, 3];
-console.log("arr1:", arr1);
+// const arr1: number[] = [1, 2, 3];
+// console.log("arr1:", arr1);
 
-const arr2: number[] = mapForEach(arr1, function (item: number): number {
-  return item * 2;
-});
-console.log("arr2:", arr2);
+// const arr2: number[] = mapForEach(arr1, function (item: number): number {
+//   return item * 2;
+// });
+// console.log("arr2:", arr2);
 
-const arr3: boolean[] = mapForEach(arr1, function (item: number): boolean {
-  return item > 2;
-});
-console.log("arr3:", arr3);
+// const arr3: boolean[] = mapForEach(arr1, function (item: number): boolean {
+//   return item > 2;
+// });
+// console.log("arr3:", arr3);
 
-const checkPastLimit = function (limiter: number, item: number): boolean {
-  return item > limiter;
+// const checkPastLimit = function (limiter: number, item: number): boolean {
+//   return item > limiter;
+// };
+// const arr4: boolean[] = mapForEach(arr1, checkPastLimit.bind(this, 1));
+// console.log("arr4:", arr4);
+
+// const checkPastLimitSimplified = function (this: any, limiter: number) {
+//   return function (limiter: number, item: number): boolean {
+//     return item > limiter;
+//   }.bind(this, limiter);
+// };
+
+// const arr5: boolean[] = mapForEach(arr1, checkPastLimitSimplified(1));
+// console.log("arr5:", arr5);
+
+// //* Underscore
+// const arr6: number[] = _.map(arr1, function (item: number): number {
+//   return item * 3;
+// });
+// console.log("arr6:", arr6);
+
+// const arr7: number[] = _.filter([2, 3, 4, 5, 6, 7], function (item: number): boolean {
+//   return item % 2 === 0;
+// });
+// console.log("arr7:", arr7);
+
+// //* Lodash
+// const arr8: number[] = __.map(arr1, function (item: number): number {
+//   return item * 3;
+// });
+// console.log("arr8:", arr8);
+
+// const arr9: number[] = __.filter([2, 3, 4, 5, 6, 7], function (item: number): boolean {
+//   return item % 2 === 0;
+// });
+// console.log("arr9:", arr9);
+
+//@ OOP JS and Prototypal Inheritance
+const person = {
+  firstname: "Default",
+  lastname: "Default",
+  getFullName: function () {
+    return this.firstname + " " + this.lastname;
+  },
+} as any;
+
+const john = {
+  firstname: "John",
+  lastname: "Doe",
+} as any;
+
+// Don't do this EVER! for demo purposes only!!!
+john.__proto__ = person;
+console.log(1, "john.getFullName():", john.getFullName());
+console.log(2, "john.firstname:", john.firstname);
+
+const jane = {
+  firstname: "Jane",
+} as any;
+
+jane.__proto__ = person;
+console.log(3, "jane.getFullName():", jane.getFullName());
+
+person.getFormalFullName = function () {
+  return this.lastname + ", " + this.firstname;
 };
-const arr4: boolean[] = mapForEach(arr1, checkPastLimit.bind(this, 1));
-console.log("arr4:", arr4);
 
-const checkPastLimitSimplified = function (this: any, limiter: number) {
-  return function (limiter: number, item: number): boolean {
-    return item > limiter;
-  }.bind(this, limiter);
-};
-
-const arr5: boolean[] = mapForEach(arr1, checkPastLimitSimplified(1));
-console.log("arr5:", arr5);
-
-//* Underscore
-const arr6: number[] = _.map(arr1, function (item: number): number {
-  return item * 3;
-});
-console.log("arr6:", arr6);
-
-const arr7: number[] = _.filter([2, 3, 4, 5, 6, 7], function (item: number): boolean {
-  return item % 2 === 0;
-});
-console.log("arr7:", arr7);
-
-//* Lodash
-const arr8: number[] = __.map(arr1, function (item: number): number {
-  return item * 3;
-});
-console.log("arr8:", arr8);
-
-const arr9: number[] = __.filter([2, 3, 4, 5, 6, 7], function (item: number): boolean {
-  return item % 2 === 0;
-});
-console.log("arr9:", arr9);
+console.log(4, "john.getFormalFullName():", john.getFormalFullName());
+console.log(5, "jane.getFormalFullName():", jane.getFormalFullName());

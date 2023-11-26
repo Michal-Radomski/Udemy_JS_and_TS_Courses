@@ -1,3 +1,5 @@
+// Save code
+// Here can be a semicolon [;] at the beginning of the file
 (function (global, $) {
   // 'New' an object
   var Greetr = function (firstName, lastName, language) {
@@ -79,10 +81,8 @@
     setLang: function (lang) {
       // Set the language
       this.language = lang;
-
       // Validate
       this.validate();
-
       // Make chainable
       return this;
     },
@@ -91,11 +91,9 @@
       if (!$) {
         throw "jQuery not loaded";
       }
-
       if (!selector) {
         throw "Missing jQuery selector";
       }
-
       // Determine the message
       var msg;
       if (formal) {
@@ -103,10 +101,8 @@
       } else {
         msg = this.greeting();
       }
-
       // Inject the message in the chosen place in the DOM
       $(selector).html(msg);
-
       // Make chainable
       return this;
     },
@@ -118,7 +114,6 @@
     self.firstName = firstName || "";
     self.lastName = lastName || "";
     self.language = language || "en";
-
     self.validate();
   };
 

@@ -10,11 +10,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jquery": "^3.7.1",
+    "jsdom": "^22.1.0",
     "lodash": "^4.17.21",
     "underscore": "^1.13.6"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.29",
+    "@types/jsdom": "^21.1.6",
     "@types/lodash": "^4.14.202",
+    "@types/node": "^20.10.0",
     "@types/underscore": "^1.11.15"
   }
 }

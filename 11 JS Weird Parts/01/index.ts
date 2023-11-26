@@ -1003,14 +1003,26 @@
 // console.log(10, typeof z);
 
 //@ Strict Mode
-function logNewPerson() {
-  "use strict"; //* Top of the file or top of the function - this is extra feature
-  let person2;
-  person2 = {};
-  console.log(1, "person2:", person2);
-}
+// function logNewPerson() {
+//   "use strict"; //* Top of the file or top of the function - this is extra feature
+//   let person2;
+//   person2 = {};
+//   console.log(1, "person2:", person2);
+// }
 
-let person;
-person = {};
-console.log(2, "person:", person);
-logNewPerson();
+// let person;
+// person = {};
+// console.log(2, "person:", person);
+// logNewPerson();
+
+//@ jQuery
+export {};
+const { JSDOM } = require("jsdom");
+const { window } = new JSDOM("");
+const $ = require("jquery")(window);
+
+// console.log({ $ });
+
+$.get("https://httpbin.org/get", function (data: any) {
+  console.log("data:", "data:", data);
+});

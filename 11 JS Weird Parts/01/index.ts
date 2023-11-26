@@ -1015,15 +1015,47 @@
 // console.log(2, "person:", person);
 // logNewPerson();
 
-//@ jQuery
-export {};
-const { JSDOM } = require("jsdom");
-const { window } = new JSDOM("");
-const $ = require("jquery")(window);
+//@ Examining Framework: jQuery
+// export {};
+// const { JSDOM } = require("jsdom");
+// const { window } = new JSDOM("");
+// const $ = require("jquery")(window);
 
-// console.log({ $ });
-// console.log("$.get.toString():", $.get.toString());
+// // console.log({ $ });
+// // console.log("$.get.toString():", $.get.toString());
 
-$.get("https://httpbin.org/get", (data: any) => {
-  console.log("data:", "data:", data);
-});
+// $.get("https://httpbin.org/get", (data: any) => {
+//   console.log("data:", "data:", data);
+// });
+
+//@ Promises, Async, and Await
+// const runThis = (otherFunction: Function) => {
+//   console.log("Running");
+//   setTimeout(() => {
+//     otherFunction();
+//   }, 500);
+// };
+
+// runThis(() => {
+//   console.log("Function 1");
+// });
+
+// runThis(() => {
+//   console.log("Function 2");
+// });
+
+// const function3 = () => {
+//   console.log("Function 3");
+// };
+// runThis(function3);
+
+// fetch("https://httpbin.org/get")
+//   .then((data) => data.json())
+//   .then((res) => console.log("res:", res))
+//   .catch((err) => console.log("err:", err));
+
+(async function getData() {
+  const res = await fetch("https://httpbin.org/get");
+  const data = await res.json();
+  console.log("data:", data);
+})();

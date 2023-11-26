@@ -1022,7 +1022,8 @@ const { window } = new JSDOM("");
 const $ = require("jquery")(window);
 
 // console.log({ $ });
+// console.log("$.get.toString():", $.get.toString());
 
-$.get("https://httpbin.org/get", function (data: any) {
+$.get("https://httpbin.org/get", (data: any) => {
   console.log("data:", "data:", data);
 });

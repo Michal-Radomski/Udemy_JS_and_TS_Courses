@@ -46,16 +46,30 @@
 // console.log({ one });
 
 //* Function invocation / call / execution
-function marry(person1: string, person2: string) {
-  // console.log("arguments:", arguments); //* Not tu use arguments!
-  console.log("Array.from(arguments):", Array.from(arguments)); //* Better
-  return `${person1} is now married to ${person2}`;
-}
-console.log(marry("Tim", "Tine"));
+// function marry(person1: string, person2: string) {
+//   // console.log("arguments:", arguments); //* Not tu use arguments!
+//   console.log("Array.from(arguments):", Array.from(arguments)); //* Better
+//   return `${person1} is now married to ${person2}`;
+// }
+// console.log(marry("Tim", "Tine"));
 
-function marry2(...args: string[]) {
-  console.log("args:", args); //* Can be used
-  console.log(Array.from(arguments)); //* Can be used
-  return `${args[0]} is now married to ${args[1]}`;
+// function marry2(...args: string[]) {
+//   console.log("args:", args); //* Can be used
+//   console.log(Array.from(arguments)); //* Can be used
+//   return `${args[0]} is now married to ${args[1]}`;
+// }
+// console.log(marry2("Tim", "Tine"));
+
+//* Variable Environment
+function two() {
+  var isValid; // 5. isValid is undefined in this execution context.
 }
-console.log(marry2("Tim", "Tine"));
+
+function one() {
+  var isValid = true; // 3. this variable will be put into the new execution context. It's own variable environment
+  two(); // 4. New execution context created.
+}
+
+var isValid = false; // 1. Global variable is created as undefined. Then during execution, it changes in memory to false.
+one(); // 2. New execution context is created on top of the stack.
+console.log({ isValid }); // false

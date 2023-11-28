@@ -44,3 +44,18 @@
 // var one = 1;
 // var one = 2;
 // console.log({ one });
+
+//* Function invocation / call / execution
+function marry(person1: string, person2: string) {
+  // console.log("arguments:", arguments); //* Not tu use arguments!
+  console.log("Array.from(arguments):", Array.from(arguments)); //* Better
+  return `${person1} is now married to ${person2}`;
+}
+console.log(marry("Tim", "Tine"));
+
+function marry2(...args: string[]) {
+  console.log("args:", args); //* Can be used
+  console.log(Array.from(arguments)); //* Can be used
+  return `${args[0]} is now married to ${args[1]}`;
+}
+console.log(marry2("Tim", "Tine"));

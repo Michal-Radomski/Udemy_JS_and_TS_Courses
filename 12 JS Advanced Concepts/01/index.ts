@@ -233,32 +233,95 @@
 // obj.sing();
 
 //* Call(), Apply(), Bind()
-function a() {
-  console.log("a");
-}
-a.apply(null); // a
+// function a() {
+//   console.log("a");
+// }
+// a.call(null); // a
+// a.apply(null); // a
 
-const wizard = {
-  name: "Merlin",
-  health: 100,
-  heal: function (num1: number, num2: number) {
-    this.health += num1 + num2;
-  },
-};
+// const wizard = {
+//   name: "Merlin",
+//   health: 100,
+//   heal: function (num1: number, num2: number) {
+//     this.health += num1 + num2;
+//   },
+// };
 
-const archer = {
-  name: "Robin Hood",
-  health: 50,
-};
-console.log(1, "archer:", archer); // archer: { name: 'Robin Hood', health: 50 }
+// const archer = {
+//   name: "Robin Hood",
+//   health: 50,
+// };
+// console.log(1, "archer:", archer); // archer: { name: 'Robin Hood', health: 50 }
 
-wizard.heal.call(archer, 50, 60);
-console.log(2, "archer:", archer); // archer: { name: 'Robin Hood', health: 160 }
-wizard.heal.apply(archer, [20, 30]);
-console.log(3, "archer:", archer); // archer: { name: 'Robin Hood', health: 210 }
+// wizard.heal.call(archer, 50, 60);
+// console.log(2, "archer:", archer); // archer: { name: 'Robin Hood', health: 160 }
+// wizard.heal.apply(archer, [20, 30]);
+// console.log(3, "archer:", archer); // archer: { name: 'Robin Hood', health: 210 }
 
-// Function borrowing
-const healArcher = wizard.heal.bind(archer, 50, 60);
-console.log(4, "archer:", archer); // archer: { name: 'Robin Hood', health: 210 }
-healArcher();
-console.log(5, "archer:", archer); // archer: { name: 'Robin Hood', health: 320 }
+// // Function borrowing
+// const healArcher = wizard.heal.bind(archer, 50, 60);
+// console.log(4, "archer:", archer); // archer: { name: 'Robin Hood', health: 210 }
+// healArcher();
+// console.log(5, "archer:", archer); // archer: { name: 'Robin Hood', health: 320 }
+
+//* Exercise
+// const array = [1, 2, 3];
+
+// function getMaxNumber(arr: number[]) {
+//   return Math.max.apply(null, arr);
+// }
+// console.log("getMaxNumber(array):", getMaxNumber(array)); // 3
+
+//* Bind() and currying
+// function multiply(a: number, b: number) {
+//   return a * b;
+// }
+
+// const multipleByTwo = multiply.bind(this, 2); //* a = 2
+// console.log("multipleByTwo(4):", multipleByTwo(4)); // 8
+
+// const multipleByThree = multiply.bind(this, 3); //* a = 3
+// console.log("multipleByThree(4):", multipleByThree(4)); // 12
+
+//* Exercise
+// const b = {
+//   name: "jay",
+//   say() {
+//     console.log(1, this);
+//   },
+// };
+
+// const c = {
+//   name: "jay",
+//   say() {
+//     return function (this: any) {
+//       console.log(2, this);
+//     };
+//   },
+// };
+
+// const d = {
+//   name: "jay",
+//   say() {
+//     return () => console.log(3, this);
+//   },
+// };
+
+// b.say(); // Object
+// console.log("c.say():", c.say()); // Function
+// c.say()(); // Window object
+// console.log("d.say():", d.say()); // Function
+// d.say()(); // Object
+
+//* Exercise2
+// const character = {
+//   name: "Simon",
+//   getCharacter() {
+//     return this.name;
+//   },
+// };
+// const giveMeTheCharacterNOW = character.getCharacter.bind(character);
+// console.log("->", giveMeTheCharacterNOW()); // -> Simon
+
+//@ Types in JS
+//* JS Types

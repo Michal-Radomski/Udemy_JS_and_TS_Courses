@@ -170,24 +170,59 @@
 // console.log("script.a():", script.a()); // 5
 
 //* This
+// 1. Gives methods access to their object
+// const obj = {
+//   name: "Billy",
+//   sing: function () {
+//     return "Ulalala " + this.name + "!";
+//   },
+//   singAgain: function () {
+//     return this.sing();
+//   },
+// };
+// console.log("obj.sing():", obj.sing()); // Ulalala Billy!
+// console.log("obj.singAgain():", obj.singAgain()); // Ulalala Billy!
+
+// // 2. Execute code for multiple object
+// function importantPerson(this: any) {
+//   console.log(this.name);
+// }
+
+// const obj1 = { name: "Cassy", importantPerson: importantPerson };
+// const obj2 = { name: "Jacob", importantPerson: importantPerson };
+
+// obj1.importantPerson(); // Cassy
+// obj2.importantPerson(); // Jacob
+
+//* Exercise:
+const a = function (this: any) {
+  console.log(1, this);
+  const b = function (this: any) {
+    console.log(2, this);
+    const c = {
+      hi: function () {
+        console.log(3, this);
+      },
+    };
+    c.hi();
+  };
+  b();
+};
+a();
+
+// JS is weird:
 const obj = {
   name: "Billy",
   sing: function () {
-    return "Ulalala " + this.name + "!";
-  },
-  singAgain: function () {
-    return this.sing();
+    console.log(4, this); // In this case, it's a method on an object.
+    const anotherFunc = () => {
+      console.log(5, this); // Arrow function are lexically bounded
+    };
+    anotherFunc();
+    const anotherFunc2 = function (this: any) {
+      console.log(6, this); // Global window here
+    };
+    anotherFunc2();
   },
 };
-console.log("obj.sing():", obj.sing()); // Ulalala Billy!
-console.log("obj.singAgain():", obj.singAgain()); // Ulalala Billy!
-
-function importantPerson(this: any) {
-  console.log(this.name);
-}
-
-const obj1 = { name: "Cassy", importantPerson: importantPerson };
-const obj2 = { name: "Jacob", importantPerson: importantPerson };
-
-obj1.importantPerson(); // Cassy
-obj2.importantPerson(); // Jacob
+obj.sing();

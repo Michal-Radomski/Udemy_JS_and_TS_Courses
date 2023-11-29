@@ -118,7 +118,36 @@
 // }
 // console.log(sayMyName2()); // Andrei Neagoie
 
+// function weird() {
+//   const height = 50;
+//   return height;
+// }
+// console.log(weird()); // 50
+
+// const test = function test2() {
+//   console.log("test");
+// };
+// test();
+// test2() //* // Error! because it is enclosed in its own scope.
+
 //* Eval() -> don't use it
-console.log(eval("2 + 2")); // Expected output: 4
-console.log(eval("2 + 2") === eval("4")); // Expected output: true
-console.log(eval("2 + 2") === eval(new String("2 + 2") as any)); // Expected output: false
+// console.log(eval("2 + 2")); // Expected output: 4
+// console.log(eval("2 + 2") === eval("4")); // Expected output: true
+// console.log(eval("2 + 2") === eval(new String("2 + 2") as any)); // Expected output: false
+
+// Function vs Block Scope
+function loop() {
+  for (var i = 0; i < 5; i++) {
+    console.log(1, { i });
+  }
+  console.log("final", { i });
+}
+loop();
+
+function loop2() {
+  for (let i = 0; i < 5; i++) {
+    console.log(3, { i });
+  }
+  // console.log({i}) // Error
+}
+loop2();

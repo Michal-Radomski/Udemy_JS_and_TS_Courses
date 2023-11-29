@@ -324,4 +324,25 @@
 // console.log("->", giveMeTheCharacterNOW()); // -> Simon
 
 //@ Types in JS
+//* Infinity
+// const maxNumber = Math.pow(10, 1000); // Max positive number
+// if (maxNumber === Infinity) {
+//   console.log("Let's call it Infinity!"); // Expected output: "Let's call it Infinity!"
+// }
+// console.log("1 / maxNumber:", 1 / maxNumber); // Expected output: 0
+
 //* JS Types
+console.log("typeof 5:", typeof 5); //* number
+console.log("typeof true:", typeof true); //* boolean
+console.log('typeof "To be or not to be":', typeof "To be or not to be"); //* string
+console.log("typeof undefined:", typeof undefined); //* undefined
+console.log("typeof null:", typeof null); //* object -> this is error
+console.log('typeof Symbol("Test"):', typeof Symbol("Test")); //* symbol
+
+const hugeString = BigInt("9007199254740991");
+console.log("hugeString:", hugeString, typeof hugeString); //* 9007199254740991n bigint
+
+// Functions and arrays and objects are objects!
+console.log("typeof {}:", typeof {}); //* object
+console.log("typeof []:", typeof []); //* object
+console.log("typeof function(){}:", typeof function () {}); //* function

@@ -355,30 +355,99 @@
 // console.log("Array.isArray([1, 3, 5]):", Array.isArray([1, 3, 5])); // Expected output: true
 
 //* Pass By Value vs Pass By Reference
-const a = 5;
-let b = a;
-b++;
-console.log({ a, b });
+// const a = 5;
+// let b = a;
+// b++;
+// console.log({ a, b });
 
-const c = [1, 2, 3];
-const d = c;
-d.push(4);
-console.log({ c }); // [1,2,3,4]
-console.log({ d }); // [1,2,3,4]
+// const c = [1, 2, 3];
+// const d = c;
+// d.push(4);
+// console.log({ c }); //* [1,2,3,4]
+// console.log({ d }); //* [1,2,3,4]
 
-const obj = {
-  a: "a",
-  b: "b",
-  c: {
-    deep: "Try and copy me",
-  },
-};
-const clone = Object.assign({}, obj);
-const clone2 = { ...obj };
-const deepClone = JSON.parse(JSON.stringify(obj));
-obj.c.deep = "Hahaha";
+// const obj = {
+//   a: "a",
+//   b: "b",
+//   c: {
+//     deep: "Try and copy me",
+//   },
+// };
+// const clone = Object.assign({}, obj); //* Shallow copy
+// const clone2 = { ...obj }; //* Shallow copy
+// const deepClone = JSON.parse(JSON.stringify(obj)); //* Deep copy!
+// obj.c.deep = "Hahaha";
+// obj.a = "ABC";
 
-console.log({ obj });
-console.log({ clone });
-console.log({ clone2 });
-console.log({ deepClone });
+// console.log({ obj }); //* { a: 'ABC', b: 'b', c: { deep: 'Hahaha' } }
+// console.log({ clone }); //* { a: 'a', b: 'b', c: { deep: 'Hahaha' } }
+// console.log({ clone2 }); //* { a: 'a', b: 'b', c: { deep: 'Hahaha' } }
+// console.log({ deepClone }); //* { a: 'a', b: 'b', c: { deep: 'Try and copy me' } }
+
+//* structuredClone()
+//* no_1
+// const mushrooms1 = {
+//   amanita: ["muscaria", "virosa"],
+// };
+
+// const mushrooms2 = structuredClone(mushrooms1);
+// mushrooms2.amanita.push("pantherina");
+// mushrooms1.amanita.pop(); // Removes the last elem
+
+// console.log(mushrooms2.amanita); // ["muscaria", "virosa", "pantherina"]
+// console.log(mushrooms1.amanita); // ["muscaria"]
+
+//* no_2
+// const buffer1 = new ArrayBuffer(16); // Create an ArrayBuffer with a size in bytes
+// const object1 = {
+//   buffer: buffer1,
+// };
+// console.log({ buffer1, object1 });
+
+// const object2 = structuredClone(object1, { transfer: [buffer1] }); // Clone the object containing the buffer, and transfer it
+// console.log("object1:", object1);
+// console.log("object2", object2);
+
+// const int32View2 = new Int32Array(object2.buffer); // Create an array from the cloned buffer
+// console.log("int32View2:", int32View2);
+// int32View2[0] = 42;
+// console.log("int32View2:", int32View2);
+
+// console.log("object1.buffer:", object1.buffer);
+// const int32View1 = new Int32Array(object1.buffer); //* Creating an array from the original buffer throws a TypeError
+
+//* no_3
+// const uInt8Array = Uint8Array.from({ length: 1024 * 1024 * 16 }); // 16MB = 1024 * 1024 * 16
+// const transferred = structuredClone(uInt8Array, {
+//   transfer: [uInt8Array.buffer],
+// });
+// console.log("uInt8Array.byteLength:", uInt8Array.byteLength); // 0
+
+//* Exercise
+// const user1 = { name: "nerd", org: "dev" };
+// const user2 = { name: "nerd", org: "dev" };
+// console.log("JSON.stringify(user1) === JSON.stringify(user2):", JSON.stringify(user1) === JSON.stringify(user2)); //* true
+
+//* Exercise2
+// const number = 100;
+// const string = "Jay";
+// const obj1 = {
+//   value: "a",
+// };
+// const obj2 = {
+//   value: "b",
+// };
+
+// function change(number: number, string: string, obj1: { value: string }, obj2: { value: string }) {
+//   number = number * 10;
+//   string = "Pete";
+//   obj1 = obj2;
+//   obj2.value = "c";
+// }
+// change(number, string, obj1, obj2);
+
+// console.log(number); //* 100
+// console.log(string); //* Jay
+// console.log(obj1.value); //* a
+
+//* Type Coercion

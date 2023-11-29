@@ -135,19 +135,59 @@
 // console.log(eval("2 + 2") === eval("4")); // Expected output: true
 // console.log(eval("2 + 2") === eval(new String("2 + 2") as any)); // Expected output: false
 
-// Function vs Block Scope
-function loop() {
-  for (var i = 0; i < 5; i++) {
-    console.log(1, { i });
-  }
-  console.log("final", { i });
-}
-loop();
+//* Function vs Block Scope
+// function loop() {
+//   for (var i = 0; i < 5; i++) {
+//     console.log(1, { i });
+//   }
+//   console.log("final", { i });
+// }
+// loop();
 
-function loop2() {
-  for (let i = 0; i < 5; i++) {
-    console.log(3, { i });
-  }
-  // console.log({i}) // Error
+// function loop2() {
+//   for (let i = 0; i < 5; i++) {
+//     console.log(3, { i });
+//   }
+//   // console.log({i}) // Error
+// }
+// loop2();
+
+//* Global Variable are bad!
+
+//* IIFE
+// (function (value: string) {
+//   const greet = "Hello"; //* Private Data
+//   console.log(`${greet} ${value}`);
+// })("IIFEs");
+
+// One global variable inside can be many variables
+// const script = (function () {
+//   function a() {
+//     return 5;
+//   }
+//   return { a: a };
+// })();
+// console.log("script.a():", script.a()); // 5
+
+//* This
+const obj = {
+  name: "Billy",
+  sing: function () {
+    return "Ulalala " + this.name + "!";
+  },
+  singAgain: function () {
+    return this.sing();
+  },
+};
+console.log("obj.sing():", obj.sing()); // Ulalala Billy!
+console.log("obj.singAgain():", obj.singAgain()); // Ulalala Billy!
+
+function importantPerson(this: any) {
+  console.log(this.name);
 }
-loop2();
+
+const obj1 = { name: "Cassy", importantPerson: importantPerson };
+const obj2 = { name: "Jacob", importantPerson: importantPerson };
+
+obj1.importantPerson(); // Cassy
+obj2.importantPerson(); // Jacob

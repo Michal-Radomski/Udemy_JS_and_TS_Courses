@@ -195,34 +195,70 @@
 // obj2.importantPerson(); // Jacob
 
 //* Exercise:
-const a = function (this: any) {
-  console.log(1, this);
-  const b = function (this: any) {
-    console.log(2, this);
-    const c = {
-      hi: function () {
-        console.log(3, this);
-      },
-    };
-    c.hi();
-  };
-  b();
-};
-a();
+// const a = function (this: any) {
+//   console.log(1, this);
+//   const b = function (this: any) {
+//     console.log(2, this);
+//     const c = {
+//       hi: function () {
+//         console.log(3, this);
+//       },
+//     };
+//     c.hi();
+//   };
+//   b();
+// };
+// a();
 
-// JS is weird:
-const obj = {
-  name: "Billy",
-  sing: function () {
-    console.log(4, this); // In this case, it's a method on an object.
-    const anotherFunc = () => {
-      console.log(5, this); // Arrow function are lexically bounded
-    };
-    anotherFunc();
-    const anotherFunc2 = function (this: any) {
-      console.log(6, this); // Global window here
-    };
-    anotherFunc2();
+// const obj = {
+//   name: "Billy",
+//   sing: function () {
+//     console.log(4, this); // Object.
+//     const anotherFunc = () => {
+//       console.log(5, this); // Arrow function are lexically bounded -> object
+//     };
+//     anotherFunc();
+//     const anotherFunc2 = function (this: any) {
+//       console.log(6, this); // Global window here
+//     };
+//     anotherFunc2();
+
+//     const that = this;
+//     const anotherFunc3 = function () {
+//       console.log(7, that); // Object
+//     };
+//     anotherFunc3();
+//   },
+// };
+// obj.sing();
+
+//* Call(), Apply(), Bind()
+function a() {
+  console.log("a");
+}
+a.apply(null); // a
+
+const wizard = {
+  name: "Merlin",
+  health: 100,
+  heal: function (num1: number, num2: number) {
+    this.health += num1 + num2;
   },
 };
-obj.sing();
+
+const archer = {
+  name: "Robin Hood",
+  health: 50,
+};
+console.log(1, "archer:", archer); // archer: { name: 'Robin Hood', health: 50 }
+
+wizard.heal.call(archer, 50, 60);
+console.log(2, "archer:", archer); // archer: { name: 'Robin Hood', health: 160 }
+wizard.heal.apply(archer, [20, 30]);
+console.log(3, "archer:", archer); // archer: { name: 'Robin Hood', health: 210 }
+
+// Function borrowing
+const healArcher = wizard.heal.bind(archer, 50, 60);
+console.log(4, "archer:", archer); // archer: { name: 'Robin Hood', health: 210 }
+healArcher();
+console.log(5, "archer:", archer); // archer: { name: 'Robin Hood', health: 320 }

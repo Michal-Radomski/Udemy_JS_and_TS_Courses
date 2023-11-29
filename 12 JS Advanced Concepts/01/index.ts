@@ -332,17 +332,53 @@
 // console.log("1 / maxNumber:", 1 / maxNumber); // Expected output: 0
 
 //* JS Types
-console.log("typeof 5:", typeof 5); //* number
-console.log("typeof true:", typeof true); //* boolean
-console.log('typeof "To be or not to be":', typeof "To be or not to be"); //* string
-console.log("typeof undefined:", typeof undefined); //* undefined
-console.log("typeof null:", typeof null); //* object -> this is error
-console.log('typeof Symbol("Test"):', typeof Symbol("Test")); //* symbol
+// Standard build-in objects in JS: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
+// Primitive type
+// console.log("typeof 5:", typeof 5); //* number
+// console.log("typeof true:", typeof true); //* boolean
+// console.log('typeof "To be or not to be":', typeof "To be or not to be"); //* string
+// console.log("typeof undefined:", typeof undefined); //* undefined
+// console.log("typeof null:", typeof null); //* object -> this is error
+// console.log('typeof Symbol("Test"):', typeof Symbol("Test")); //* symbol
+// const hugeString = BigInt("9007199254740991");
+// console.log("hugeString:", hugeString, typeof hugeString); //* 9007199254740991n bigint
 
-const hugeString = BigInt("9007199254740991");
-console.log("hugeString:", hugeString, typeof hugeString); //* 9007199254740991n bigint
+// // Non-primitive: functions and arrays and objects are objects!
+// console.log("typeof {}:", typeof {}); //* object
+// console.log("typeof []:", typeof []); //* object
+// console.log("typeof function(){}:", typeof function () {}); //* function
 
-// Functions and arrays and objects are objects!
-console.log("typeof {}:", typeof {}); //* object
-console.log("typeof []:", typeof []); //* object
-console.log("typeof function(){}:", typeof function () {}); //* function
+// console.log("true.toString() === Boolean(true).toString():", true.toString() === Boolean(true).toString()); //* true
+// console.log("typeof Infinity:", typeof Infinity); //* number
+
+// //* Array.isArray()
+// console.log("Array.isArray([1, 3, 5]):", Array.isArray([1, 3, 5])); // Expected output: true
+
+//* Pass By Value vs Pass By Reference
+const a = 5;
+let b = a;
+b++;
+console.log({ a, b });
+
+const c = [1, 2, 3];
+const d = c;
+d.push(4);
+console.log({ c }); // [1,2,3,4]
+console.log({ d }); // [1,2,3,4]
+
+const obj = {
+  a: "a",
+  b: "b",
+  c: {
+    deep: "Try and copy me",
+  },
+};
+const clone = Object.assign({}, obj);
+const clone2 = { ...obj };
+const deepClone = JSON.parse(JSON.stringify(obj));
+obj.c.deep = "Hahaha";
+
+console.log({ obj });
+console.log({ clone });
+console.log({ clone2 });
+console.log({ deepClone });

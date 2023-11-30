@@ -414,7 +414,7 @@
 // console.log("int32View2:", int32View2);
 
 // console.log("object1.buffer:", object1.buffer);
-// const int32View1 = new Int32Array(object1.buffer); //* Creating an array from the original buffer throws a TypeError
+// // const int32View1 = new Int32Array(object1.buffer); //* Creating an array from the original buffer throws a TypeError
 
 //* no_3
 // const uInt8Array = Uint8Array.from({ length: 1024 * 1024 * 16 }); // 16MB = 1024 * 1024 * 16
@@ -450,4 +450,107 @@
 // console.log(string); //* Jay
 // console.log(obj1.value); //* a
 
-//* Type Coercion
+//* Type Coercion * Object.is()
+//! https://dorey.github.io/JavaScript-Equality-Table/
+// // @ts-ignore
+// console.log('1 == "1":', 1 == "1"); //* true
+// // @ts-ignore
+// console.log('1 === "1":', 1 === "1"); //* false
+
+// console.log("-0===+0:", -0 === +0); //* true
+// console.log("Object.is(-0, 0):", Object.is(-0, 0)); //* false
+
+// const obj = {};
+// console.log("Object.is(obj, {}):", Object.is(obj, {})); // Expected output: false
+
+//* Exercise!!!
+// if ([]) {
+//   console.log("[] is truthy"); // [] is truthy
+// }
+// // @ts-ignore
+// if ([] == false) {
+//   console.log("[] == false"); // [] == false
+// }
+
+//@ Closures and Prototypal Inheritance
+//* Functions are Objects
+// const obj = {
+//   two() {
+//     console.log("2");
+//   },
+// };
+// obj.two(); // 2
+
+// const four = new Function("num", "return num");
+// console.log("four(4):", four(4)); // 4
+
+//*  First Class Citizens
+// const stuff = function () {};
+// stuff();
+
+// function a(fn: Function) {
+//   fn();
+// }
+// a(() => console.log("Test"));
+
+// function b() {
+//   return function c() {
+//     console.log("Test2");
+//   };
+// }
+// b()();
+
+// //* Default param value
+// function d(param = 6) {
+//   return param * 2;
+// }
+// console.log("d():", d()); // 12
+
+//* Higher Order Functions: return a function or pass function as argument
+// const giveAccessTo = (name: string) => "Access Granted to " + name;
+
+// function authenticate(person: { name: string }) {
+//   return giveAccessTo(person.name);
+// }
+// console.log(authenticate({ name: "Michal" })); //* Access Granted to Michal
+
+// // Generic function
+// function letPerson(person: { level: string; name?: string }, fn: Function) {
+//   if (person.level === "admin") {
+//     return fn(person);
+//   } else if (person.level === "user") {
+//     return fn(person);
+//   }
+// }
+// console.log(
+//   'letPerson({level: "admin", name:"Michal"}, authenticate):',
+//   letPerson({ level: "admin", name: "Michal" }, authenticate)
+// ); //* Access Granted to Michal
+
+// function sing(person: { name: string }) {
+//   return "My name is " + person.name;
+// }
+// console.log('letPerson({ level: "user", name: "Tim" }, sing):', letPerson({ level: "user", name: "Tim" }, sing)); //* My name is Tim
+
+//* Exercise
+//* V1
+const multiplyBy = (num1: number) => {
+  return function (num2: number) {
+    // return num1 * num2;
+    console.log(`${num1} * ${num2} = ${num1 * num2}`);
+  };
+};
+
+const multiplyByTwo = multiplyBy(2);
+const multiplyByFour = multiplyBy(4);
+
+multiplyByTwo(4); //* 2 * 4 = 8
+multiplyByFour(5); //* 4 * 5 = 20
+
+//* V2
+const multiplyBy2 = (num1: number) => (num2: number) => console.log(`${num1} * ${num2} = ${num1 * num2}`);
+const multiplyByTwo2 = multiplyBy2(2);
+const multiplyByFour2 = multiplyBy2(4);
+
+multiplyByTwo2(4); //* 2 * 4 = 8
+multiplyByFour2(5); //* 4 * 5 = 20

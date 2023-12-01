@@ -596,24 +596,60 @@
 // })();
 
 //* Closures and Memory
-function heavyDuty(index: number) {
-  const bigArray = new Array(60).fill("😄");
-  console.log("Created!", "bigArray:", bigArray);
-  return bigArray[index];
-}
-console.log("heavyDuty(50):", heavyDuty(50)); //* bigArray is created 3x!
-console.log("heavyDuty(51):", heavyDuty(51)); //* bigArray is created 3x!
-console.log("heavyDuty(52):", heavyDuty(52)); //* bigArray is created 3x!
+// function heavyDuty(index: number) {
+//   const bigArray = new Array(60).fill("😄");
+//   console.log("Created!", "bigArray:", bigArray);
+//   return bigArray[index];
+// }
+// console.log("heavyDuty(50):", heavyDuty(50)); //* bigArray is created 3x!
+// console.log("heavyDuty(51):", heavyDuty(51)); //* bigArray is created 3x!
+// console.log("heavyDuty(52):", heavyDuty(52)); //* bigArray is created 3x!
 
-const getHeavyDuty = heavyDuty2();
-console.log("getHeavyDuty(50):", getHeavyDuty(50)); //* bigArray is created only once!
-console.log("getHeavyDuty(51):", getHeavyDuty(51)); //* bigArray is created only once!
-console.log("getHeavyDuty(52):", getHeavyDuty(52)); //* bigArray is created only once!
+// const getHeavyDuty = heavyDuty2();
+// console.log("getHeavyDuty(50):", getHeavyDuty(50)); //* bigArray is created only once!
+// console.log("getHeavyDuty(51):", getHeavyDuty(51)); //* bigArray is created only once!
+// console.log("getHeavyDuty(52):", getHeavyDuty(52)); //* bigArray is created only once!
 
-function heavyDuty2() {
-  const bigArray = new Array(60).fill("😄");
-  console.log("Created Again!", "bigArray:", bigArray);
-  return function (index: number) {
-    return bigArray[index];
+// function heavyDuty2() {
+//   const bigArray = new Array(60).fill("😄");
+//   console.log("Created Again!", "bigArray:", bigArray);
+//   return function (index: number) {
+//     return bigArray[index];
+//   };
+// }
+
+//* Closures and Encapsulation
+function BankAccount(accountNumber: string, accountHolderName: string, balance: number) {
+  const _accountNumber = accountNumber;
+  const _accountHolderName = accountHolderName;
+  let _balance = balance;
+
+  function showAccountDetails() {
+    console.log(`Account Number: ${_accountNumber}`);
+    console.log(`Account Holder Name: ${_accountHolderName}`);
+    console.log(`Balance: ${_balance}`);
+  }
+
+  function deposit(amount: any) {
+    _balance += amount;
+    showAccountDetails();
+  }
+
+  function withdraw(amount: number) {
+    if (_balance >= amount) {
+      _balance -= amount;
+      showAccountDetails();
+    } else {
+      console.log("Insufficient Balance");
+    }
+  }
+
+  return {
+    deposit: deposit,
+    withdraw: withdraw,
   };
 }
+
+const myBankAccount = BankAccount("123456", "John Doe", 1000);
+myBankAccount.deposit(500); // Output: Account Number: 123456 Account Holder Name: John Doe Balance: 1500
+myBankAccount.withdraw(2000); // Output: Insufficient Balance

@@ -451,7 +451,7 @@
 // console.log(obj1.value); //* a
 
 //* Type Coercion * Object.is()
-//! https://dorey.github.io/JavaScript-Equality-Table/
+//! https://dorey.github.io/JavaScript-Equality-Table
 // // @ts-ignore
 // console.log('1 == "1":', 1 == "1"); //* true
 // // @ts-ignore
@@ -534,23 +534,53 @@
 
 //* Exercise
 //* V1
-const multiplyBy = (num1: number) => {
-  return function (num2: number) {
-    // return num1 * num2;
-    console.log(`${num1} * ${num2} = ${num1 * num2}`);
+// const multiplyBy = (num1: number) => {
+//   return function (num2: number) {
+//     // return num1 * num2;
+//     console.log(`${num1} * ${num2} = ${num1 * num2}`);
+//   };
+// };
+
+// const multiplyByTwo = multiplyBy(2);
+// const multiplyByFour = multiplyBy(4);
+
+// multiplyByTwo(4); //* 2 * 4 = 8
+// multiplyByFour(5); //* 4 * 5 = 20
+
+// //* V2
+// const multiplyBy2 = (num1: number) => (num2: number) => console.log(`${num1} * ${num2} = ${num1 * num2}`);
+// const multiplyByTwo2 = multiplyBy2(2);
+// const multiplyByFour2 = multiplyBy2(4);
+
+// multiplyByTwo2(4); //* 2 * 4 = 8
+// multiplyByFour2(5); //* 4 * 5 = 20
+
+//* Closures
+(function a() {
+  const grandpa = "grandpa";
+  return function b() {
+    const father = "father";
+    return function c() {
+      const son = "son";
+      // return `${grandpa} > ${father} > ${son}`;
+      console.log(1, `${grandpa} > ${father} > ${son}`);
+    };
   };
-};
+})()()();
 
-const multiplyByTwo = multiplyBy(2);
-const multiplyByFour = multiplyBy(4);
+// Closures and higher order function
+function boo(string: string) {
+  return function (name: string) {
+    return function (name2: any) {
+      console.log(2, `Hi ${string} ${name} ${name2}`);
+    };
+  };
+}
+boo("hi2")("john")("tanya");
 
-multiplyByTwo(4); //* 2 * 4 = 8
-multiplyByFour(5); //* 4 * 5 = 20
+const boo2 = (string: string) => (name: any) => (name2: any) => console.log(3, `Hi ${string} ${name} ${name2}`);
+boo2("hi2")("john")("tanya");
 
-//* V2
-const multiplyBy2 = (num1: number) => (num2: number) => console.log(`${num1} * ${num2} = ${num1 * num2}`);
-const multiplyByTwo2 = multiplyBy2(2);
-const multiplyByFour2 = multiplyBy2(4);
-
-multiplyByTwo2(4); //* 2 * 4 = 8
-multiplyByFour2(5); //* 4 * 5 = 20
+const booString = boo2("Sing");
+const booStringName = booString("John");
+booStringName("Tanya");

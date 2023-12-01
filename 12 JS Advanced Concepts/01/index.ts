@@ -619,37 +619,80 @@
 // }
 
 //* Closures and Encapsulation
-function BankAccount(accountNumber: string, accountHolderName: string, balance: number) {
-  const _accountNumber = accountNumber;
-  const _accountHolderName = accountHolderName;
-  let _balance = balance;
+// function BankAccount(accountNumber: string, accountHolderName: string, balance: number) {
+//   const _accountNumber = accountNumber;
+//   const _accountHolderName = accountHolderName;
+//   let _balance = balance;
 
-  function showAccountDetails() {
-    console.log(`Account Number: ${_accountNumber}`);
-    console.log(`Account Holder Name: ${_accountHolderName}`);
-    console.log(`Balance: ${_balance}`);
+//   function showAccountDetails() {
+//     console.log(`Account Number: ${_accountNumber}`);
+//     console.log(`Account Holder Name: ${_accountHolderName}`);
+//     console.log(`Balance: ${_balance}`);
+//   }
+
+//   function deposit(amount: any) {
+//     _balance += amount;
+//     showAccountDetails();
+//   }
+
+//   function withdraw(amount: number) {
+//     if (_balance >= amount) {
+//       _balance -= amount;
+//       showAccountDetails();
+//     } else {
+//       console.log("Insufficient Balance");
+//     }
+//   }
+
+//   return {
+//     deposit: deposit,
+//     withdraw: withdraw,
+//   };
+// }
+
+// const myBankAccount = BankAccount("123456", "John Doe", 1000);
+// myBankAccount.deposit(500); // Output: Account Number: 123456 Account Holder Name: John Doe Balance: 1500
+// myBankAccount.withdraw(2000); // Output: Insufficient Balance
+
+//* Exercise 1
+// let view;
+// function initialize() {
+//   let called = 0;
+//   return function () {
+//     if (called > 0) {
+//       return;
+//     } else {
+//       view = "🏔";
+//       called++;
+//       console.log("View has been set!", { called });
+//     }
+//   };
+// }
+
+// const start = initialize();
+// start();
+// start();
+// start();
+// console.log({ view }); //* Function ran only once!
+
+//* Exercise2
+const array = [1, 2, 3, 4];
+setTimeout(function () {
+  for (var i = 0; i < array.length; i++) {
+    console.log("I am at index ", array[i]);
   }
+}, 3000);
 
-  function deposit(amount: any) {
-    _balance += amount;
-    showAccountDetails();
-  }
-
-  function withdraw(amount: number) {
-    if (_balance >= amount) {
-      _balance -= amount;
-      showAccountDetails();
-    } else {
-      console.log("Insufficient Balance");
-    }
-  }
-
-  return {
-    deposit: deposit,
-    withdraw: withdraw,
-  };
+for (let i = 0; i < array.length; i++) {
+  setTimeout(function () {
+    console.log("I am at index ", array[i]);
+  }, 3000);
 }
 
-const myBankAccount = BankAccount("123456", "John Doe", 1000);
-myBankAccount.deposit(500); // Output: Account Number: 123456 Account Holder Name: John Doe Balance: 1500
-myBankAccount.withdraw(2000); // Output: Insufficient Balance
+for (var i = 0; i < array.length; i++) {
+  (function (closureI) {
+    setTimeout(function () {
+      console.log("I am at index ", array[closureI], closureI);
+    }, 3000);
+  })(i);
+}

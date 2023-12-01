@@ -676,23 +676,64 @@
 // console.log({ view }); //* Function ran only once!
 
 //* Exercise2
-const array = [1, 2, 3, 4];
-setTimeout(function () {
-  for (var i = 0; i < array.length; i++) {
-    console.log("I am at index ", array[i]);
-  }
-}, 3000);
+// const array = [1, 2, 3, 4];
+// setTimeout(function () {
+//   for (var i = 0; i < array.length; i++) {
+//     console.log("I am at index ", array[i]);
+//   }
+// }, 3000);
 
-for (let i = 0; i < array.length; i++) {
-  setTimeout(function () {
-    console.log("I am at index ", array[i]);
-  }, 3000);
-}
+// for (let i = 0; i < array.length; i++) {
+//   setTimeout(function () {
+//     console.log("I am at index ", array[i]);
+//   }, 3000);
+// }
 
-for (var i = 0; i < array.length; i++) {
-  (function (closureI) {
-    setTimeout(function () {
-      console.log("I am at index ", array[closureI], closureI);
-    }, 3000);
-  })(i);
-}
+// for (var i = 0; i < array.length; i++) {
+//   (function (closureI) {
+//     setTimeout(function () {
+//       console.log("I am at index ", array[closureI], closureI);
+//     }, 3000);
+//   })(i);
+// }
+
+//* Prototypal Inheritance
+// const arr = [] as any;
+// console.log("arr.__proto__:", arr.__proto__);
+// console.log("arr.__proto__.__proto__:", arr.__proto__.__proto__);
+
+// const func = function a() {} as any;
+// console.log("func.__proto__:", func.__proto__);
+// console.log("func.__proto__.__proto__:", func.__proto__.__proto__);
+
+// const obj = {} as any;
+// console.log("obj.__proto__:", obj.__proto__);
+// console.log("obj.__proto__.__proto__:", obj.__proto__.__proto__);
+
+const dragon = {
+  name: "Tanya",
+  fire: true,
+  fight() {
+    return 5;
+  },
+  sing() {
+    if (this.fire) {
+      return `I am ${this.name}, the breather of fire`;
+    }
+  },
+};
+
+const lizard = {
+  name: "Kiki",
+  fight() {
+    return 1;
+  },
+} as any;
+
+// Don't do this, bad performance. Show with bind.
+lizard.__proto__ = dragon;
+console.log(1, "dragon.isPrototypeOf(lizard):", dragon.isPrototypeOf(lizard));
+console.log(2, lizard.fire);
+console.log(3, lizard.sing());
+const lizardFire = dragon.sing.bind(lizard);
+console.log(4, lizardFire());

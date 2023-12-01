@@ -556,31 +556,64 @@
 // multiplyByFour2(5); //* 4 * 5 = 20
 
 //* Closures
-(function a() {
-  const grandpa = "grandpa";
-  return function b() {
-    const father = "father";
-    return function c() {
-      const son = "son";
-      // return `${grandpa} > ${father} > ${son}`;
-      console.log(1, `${grandpa} > ${father} > ${son}`);
-    };
-  };
-})()()();
+// (function a() {
+//   const grandpa = "grandpa";
+//   return function b() {
+//     const father = "father";
+//     return function c() {
+//       const son = "son";
+//       // return `${grandpa} > ${father} > ${son}`;
+//       console.log(1, `${grandpa} > ${father} > ${son}`);
+//     };
+//   };
+// })()()();
 
-// Closures and higher order function
-function boo(string: string) {
-  return function (name: string) {
-    return function (name2: any) {
-      console.log(2, `Hi ${string} ${name} ${name2}`);
-    };
+// // Closures and higher order function
+// function boo(string: string) {
+//   return function (name: string) {
+//     return function (name2: any) {
+//       console.log(2, `Hi ${string} ${name} ${name2}`);
+//     };
+//   };
+// }
+// boo("hi2")("john")("tanya");
+
+// const boo2 = (string: string) => (name: any) => (name2: any) => console.log(3, `Hi ${string} ${name} ${name2}`);
+// boo2("hi2")("john")("tanya");
+
+// const booString = boo2("Sing");
+// const booStringName = booString("John");
+// booStringName("Tanya");
+
+//* Exercise
+// (function callMeMaybe() {
+//   let callMe = "Hi!";
+//   setTimeout(function () {
+//     console.log({ callMe, callMe2 });
+//   }, 4000);
+//   callMe = "Hi2!!!";
+//   const callMe2 = "Hello";
+// })();
+
+//* Closures and Memory
+function heavyDuty(index: number) {
+  const bigArray = new Array(60).fill("😄");
+  console.log("Created!", "bigArray:", bigArray);
+  return bigArray[index];
+}
+console.log("heavyDuty(50):", heavyDuty(50)); //* bigArray is created 3x!
+console.log("heavyDuty(51):", heavyDuty(51)); //* bigArray is created 3x!
+console.log("heavyDuty(52):", heavyDuty(52)); //* bigArray is created 3x!
+
+const getHeavyDuty = heavyDuty2();
+console.log("getHeavyDuty(50):", getHeavyDuty(50)); //* bigArray is created only once!
+console.log("getHeavyDuty(51):", getHeavyDuty(51)); //* bigArray is created only once!
+console.log("getHeavyDuty(52):", getHeavyDuty(52)); //* bigArray is created only once!
+
+function heavyDuty2() {
+  const bigArray = new Array(60).fill("😄");
+  console.log("Created Again!", "bigArray:", bigArray);
+  return function (index: number) {
+    return bigArray[index];
   };
 }
-boo("hi2")("john")("tanya");
-
-const boo2 = (string: string) => (name: any) => (name2: any) => console.log(3, `Hi ${string} ${name} ${name2}`);
-boo2("hi2")("john")("tanya");
-
-const booString = boo2("Sing");
-const booStringName = booString("John");
-booStringName("Tanya");

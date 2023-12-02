@@ -886,7 +886,27 @@
 // console.log("peter.prototype:", peter.prototype);
 // console.log("(Elf as any).__proto__:", (Elf as any).__proto__);
 
-const a = new Number(5);
-const b = 5;
-console.log("a == b, a === b:", a == b, a === b);
-console.log("a.toString(), b.toString():", a.toString(), b.toString(), typeof a, typeof b);
+// const a = new Number(5);
+// const b = 5;
+// console.log("a == b, a === b:", a == b, a === b);
+// console.log("a.toString(), b.toString():", a.toString(), b.toString(), typeof a, typeof b);
+
+//* ES6 Classes
+class Elf {
+  name: string;
+  weapon: string;
+  constructor(name: string, weapon: string) {
+    this.name = name;
+    this.weapon = weapon;
+  }
+  attack() {
+    return "Attack with: " + this.weapon;
+  }
+}
+
+const fiona = new Elf("Fiona", "ninja stars");
+console.log("fiona:", fiona, typeof fiona);
+console.log("fiona instanceof Elf:", fiona instanceof Elf);
+const ben = new Elf("Ben", "bow");
+console.log("fiona.attack():", fiona.attack());
+console.log("ben:", ben);

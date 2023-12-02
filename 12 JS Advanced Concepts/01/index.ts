@@ -782,27 +782,37 @@
 // console.log("String.prototype:", String.prototype);
 
 //* Exercise 1
-class CustomDate extends Date {
-  lastYear() {
-    return this.getFullYear() - 1;
-  }
-}
-console.log("new CustomDate('1900-10-10').lastYear():", new CustomDate("1900-10-10").lastYear());
+// class CustomDate extends Date {
+//   lastYear() {
+//     return this.getFullYear() - 1;
+//   }
+// }
+// console.log("new CustomDate('1900-10-10').lastYear():", new CustomDate("1900-10-10").lastYear());
 
-// @ts-ignore
-Date.prototype.lastYear = function () {
-  return this.getFullYear() - 1;
-};
-// @ts-ignore
-console.log("new Date('1900-10-10').lastYear():", new Date("1900-10-10").lastYear());
+// // @ts-ignore
+// Date.prototype.lastYear = function () {
+//   return this.getFullYear() - 1;
+// };
+// // @ts-ignore
+// console.log("new Date('1900-10-10').lastYear():", new Date("1900-10-10").lastYear());
 
-//* Exercise 2
-(Array as any).prototype.map = function () {
-  const arr = [];
-  for (let i = 0; i < this.length; i++) {
-    arr.push(this[i] + "🗺");
-  }
-  return arr;
-};
-// @ts-ignore
-console.log("[1, 2, 3].map():", [1, 2, 3].map());
+//* Exercise 2 -> this is dangerous!
+// (Array as any).prototype.map = function () {
+//   const arr = [];
+//   for (let i = 0; i < this.length; i++) {
+//     arr.push(this[i] + "🗺");
+//   }
+//   return arr;
+// };
+// // @ts-ignore
+// console.log("[1, 2, 3].map():", [1, 2, 3].map());
+
+//* *Exercise: Prototypal Inheritance with this
+// Function.prototype.bind = function (whoIsCallingMe) {
+//   const self = this;
+//   return function () {
+//     return self.apply(whoIsCallingMe, arguments);
+//   };
+// };
+
+//@ Object Oriented Programming

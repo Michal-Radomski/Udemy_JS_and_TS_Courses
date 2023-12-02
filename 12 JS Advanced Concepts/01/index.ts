@@ -977,15 +977,19 @@ class Elf extends Character {
     this.type = type;
   }
 }
+// const fiona = new Elf("Fiona", "ninja stars", "house");
+// console.log("fiona:", fiona, typeof fiona);
+// const ogr = { ...fiona };
+// console.log("ogr:", ogr, typeof ogr);
 
 class Ogre extends Character {
   color: string;
   constructor(name: string, weapon: string, color: string) {
-    super(name, weapon);
+    super(name, weapon); //* calls superClass -> Character;
     this.color = color;
   }
   makeFort() {
-    // This is like extending our prototype.
+    //* This is like extending our prototype: Object.prototype.makeFort = function...
     return "Strongest fort in the world made";
   }
 }
@@ -997,3 +1001,8 @@ console.log("houseElf:", houseElf);
 const shrek = new Ogre("Shrek", "club", "green");
 console.log("shrek:", shrek);
 console.log("shrek.makeFort():", shrek.makeFort());
+
+console.log("Ogre.prototype.isPrototypeOf(shrek):", Ogre.prototype.isPrototypeOf(shrek)); // true
+console.log("Character.prototype.isPrototypeOf(Ogre.prototype):", Character.prototype.isPrototypeOf(Ogre.prototype)); // true
+console.log("houseElf instanceof Elf:", houseElf instanceof Elf); // true
+console.log("houseElf instanceof Character:", houseElf instanceof Character); // true

@@ -912,45 +912,88 @@
 // console.log("ben:", ben);
 
 //* This
-function Person(this: any, name: string, age: number) {
-  this.name = name;
-  this.age = age;
-  console.log("this:", this);
+// function Person(this: any, name: string, age: number) {
+//   this.name = name;
+//   this.age = age;
+//   console.log("this:", this);
+// }
+
+// const person1 = new (Person as any)("Xavier", 55);
+// console.log(1, "person1:", person1);
+
+// // Implicit binding
+// const person = {
+//   name: "Karen",
+//   age: 40,
+//   hi() {
+//     console.log(2, "hi " + this.name);
+//   },
+// };
+// person.hi();
+
+// // Explicit binding
+// const person3 = {
+//   name: "Karen",
+//   age: 40,
+//   hi: function (this: any) {
+//     console.log(3, "hi " + this.setTimeout);
+//   }.bind(globalThis),
+// };
+// person3.hi();
+
+// // Arrow functions
+// const person4 = {
+//   name: "Karen",
+//   age: 40,
+//   hi: function () {
+//     const inner = () => {
+//       console.log(4, "hi " + this.name);
+//     };
+//     return inner();
+//   },
+// };
+
+// person4.hi();
+
+//* Class Inheritance
+class Character {
+  name: string;
+  weapon: string;
+  constructor(name: string, weapon: string) {
+    this.name = name;
+    this.weapon = weapon;
+  }
+  attack() {
+    return "Attack with: " + this.weapon;
+  }
 }
 
-const person1 = new (Person as any)("Xavier", 55);
-console.log(1, "person1:", person1);
+class Elf extends Character {
+  type: string;
+  constructor(name: string, weapon: string, type: string) {
+    //* console.log('what am i?', this); //* This gives an error
+    super(name, weapon);
+    console.log("What am i?", this);
+    this.type = type;
+  }
+}
 
-// Implicit binding
-const person = {
-  name: "Karen",
-  age: 40,
-  hi() {
-    console.log(2, "hi " + this.name);
-  },
-};
-person.hi();
+class Ogre extends Character {
+  color: string;
+  constructor(name: string, weapon: string, color: string) {
+    super(name, weapon);
+    this.color = color;
+  }
+  makeFort() {
+    // This is like extending our prototype.
+    return "Strongest fort in the world made";
+  }
+}
 
-// Explicit binding
-const person3 = {
-  name: "Karen",
-  age: 40,
-  hi: function (this: any) {
-    console.log(3, "hi " + this.setTimeout);
-  }.bind(globalThis),
-};
-person3.hi();
+const houseElf = new Elf("Dolby", "cloth", "house");
+console.log("houseElf:", houseElf);
+//* houseElf.makeFort() //* Error
 
-// Arrow functions
-const person4 = {
-  name: "Karen",
-  age: 40,
-  hi: function () {
-    const inner = () => {
-      console.log(4, "hi " + this.name);
-    };
-    return inner();
-  },
-};
-
-person4.hi();
+const shrek = new Ogre("Shrek", "club", "green");
+console.log("shrek:", shrek);
+console.log("shrek.makeFort():", shrek.makeFort());

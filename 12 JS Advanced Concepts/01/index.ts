@@ -698,6 +698,9 @@
 // }
 
 //* Prototypal Inheritance
+//- __proto__ is the actual object that is used in the lookup chain to resolve methods, etc.
+//- prototype is the object that is used to build __proto__ when you create an object with new
+
 // const arr = [] as any;
 // console.log("arr.__proto__:", arr.__proto__);
 // console.log("arr.__proto__.__proto__:", arr.__proto__.__proto__);
@@ -750,14 +753,56 @@
 // console.log('a.hasOwnProperty("call"):', a.hasOwnProperty("call")); // false
 // console.log("a.name:", a.name); // a
 
-function multiplyBy5(num: number) {
-  return num * 5;
-}
+// const array = [] as any[];
+// console.log('(array as any).__proto__.hasOwnProperty("map"):', (array as any).__proto__.hasOwnProperty("map")); // true
+// console.log("Array.prototype===(array as any).__proto__:", Array.prototype === (array as any).__proto__); // true
 
-console.log("(multiplyBy5 as any).__proto__:", (multiplyBy5 as any).__proto__);
-console.log("Function.prototype:", Function.prototype);
-console.log("(multiplyBy5 as any).__proto__.__proto__:", (multiplyBy5 as any).__proto__.__proto__);
-console.log("Object.prototype:", Object.prototype);
-console.log("(multiplyBy5 as any).__proto__.__proto__.__proto__:", (multiplyBy5 as any).__proto__.__proto__.__proto__);
-console.log("typeof Object:", typeof Object);
-console.log("typeof {}:", typeof {});
+// const human = { mortal: true };
+// const socrates = Object.create(human);
+// console.log("human.isPrototypeOf(socrates):", human.isPrototypeOf(socrates)); // true
+// socrates.age = 45;
+// console.log("socrates:", socrates);
+// console.log("socrates.mortal:", socrates.mortal);
+
+//- Only function have the prototype property
+// function multiplyBy5(num: number) {
+//   return num * 5;
+// }
+
+// console.log("(multiplyBy5 as any).__proto__:", (multiplyBy5 as any).__proto__);
+// console.log("Function.prototype:", Function.prototype);
+// console.log("(multiplyBy5 as any).__proto__.__proto__:", (multiplyBy5 as any).__proto__.__proto__);
+// console.log("Object.prototype:", Object.prototype);
+// console.log("(multiplyBy5 as any).__proto__.__proto__.__proto__:", (multiplyBy5 as any).__proto__.__proto__.__proto__);
+// console.log("typeof Object:", typeof Object);
+// console.log("typeof {}:", typeof {});
+// console.log("multiplyBy5.prototype:", multiplyBy5.prototype);
+// console.log("Object.prototype:", Object.prototype);
+// console.log("(Object as any).prototype.__proto__:", (Object as any).prototype.__proto__);
+// console.log("String.prototype:", String.prototype);
+
+//* Exercise 1
+class CustomDate extends Date {
+  lastYear() {
+    return this.getFullYear() - 1;
+  }
+}
+console.log("new CustomDate('1900-10-10').lastYear():", new CustomDate("1900-10-10").lastYear());
+
+// @ts-ignore
+Date.prototype.lastYear = function () {
+  return this.getFullYear() - 1;
+};
+// @ts-ignore
+console.log("new Date('1900-10-10').lastYear():", new Date("1900-10-10").lastYear());
+
+//* Exercise 2
+(Array as any).prototype.map = function () {
+  const arr = [];
+  for (let i = 0; i < this.length; i++) {
+    arr.push(this[i] + "🗺");
+  }
+  return arr;
+};
+// @ts-ignore
+console.log("[1, 2, 3].map():", [1, 2, 3].map());

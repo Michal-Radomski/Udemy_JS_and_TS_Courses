@@ -892,21 +892,65 @@
 // console.log("a.toString(), b.toString():", a.toString(), b.toString(), typeof a, typeof b);
 
 //* ES6 Classes
-class Elf {
-  name: string;
-  weapon: string;
-  constructor(name: string, weapon: string) {
-    this.name = name;
-    this.weapon = weapon;
-  }
-  attack() {
-    return "Attack with: " + this.weapon;
-  }
+// class Elf {
+//   name: string;
+//   weapon: string;
+//   constructor(name: string, weapon: string) {
+//     this.name = name;
+//     this.weapon = weapon;
+//   }
+//   attack() {
+//     return "Attack with: " + this.weapon;
+//   }
+// }
+
+// const fiona = new Elf("Fiona", "ninja stars");
+// console.log("fiona:", fiona, typeof fiona);
+// console.log("fiona instanceof Elf:", fiona instanceof Elf);
+// const ben = new Elf("Ben", "bow");
+// console.log("fiona.attack():", fiona.attack());
+// console.log("ben:", ben);
+
+//* This
+function Person(this: any, name: string, age: number) {
+  this.name = name;
+  this.age = age;
+  console.log("this:", this);
 }
 
-const fiona = new Elf("Fiona", "ninja stars");
-console.log("fiona:", fiona, typeof fiona);
-console.log("fiona instanceof Elf:", fiona instanceof Elf);
-const ben = new Elf("Ben", "bow");
-console.log("fiona.attack():", fiona.attack());
-console.log("ben:", ben);
+const person1 = new (Person as any)("Xavier", 55);
+console.log(1, "person1:", person1);
+
+// Implicit binding
+const person = {
+  name: "Karen",
+  age: 40,
+  hi() {
+    console.log(2, "hi " + this.name);
+  },
+};
+person.hi();
+
+// Explicit binding
+const person3 = {
+  name: "Karen",
+  age: 40,
+  hi: function (this: any) {
+    console.log(3, "hi " + this.setTimeout);
+  }.bind(globalThis),
+};
+person3.hi();
+
+// Arrow functions
+const person4 = {
+  name: "Karen",
+  age: 40,
+  hi: function () {
+    const inner = () => {
+      console.log(4, "hi " + this.name);
+    };
+    return inner();
+  },
+};
+
+person4.hi();

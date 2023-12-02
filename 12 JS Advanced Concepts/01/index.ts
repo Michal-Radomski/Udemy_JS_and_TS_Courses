@@ -710,30 +710,54 @@
 // console.log("obj.__proto__:", obj.__proto__);
 // console.log("obj.__proto__.__proto__:", obj.__proto__.__proto__);
 
-const dragon = {
-  name: "Tanya",
-  fire: true,
-  fight() {
-    return 5;
-  },
-  sing() {
-    if (this.fire) {
-      return `I am ${this.name}, the breather of fire`;
-    }
-  },
-};
+// const dragon = {
+//   name: "Tanya",
+//   fire: true,
+//   fight() {
+//     return 5;
+//   },
+//   sing() {
+//     if (this.fire) {
+//       return `I am ${this.name}, the breather of fire`;
+//     }
+//   },
+// };
 
-const lizard = {
-  name: "Kiki",
-  fight() {
-    return 1;
-  },
-} as any;
+// const lizard = {
+//   name: "Kiki",
+//   fight() {
+//     return 1;
+//   },
+// } as any;
 
-// Don't do this, bad performance. Show with bind.
-lizard.__proto__ = dragon;
-console.log(1, "dragon.isPrototypeOf(lizard):", dragon.isPrototypeOf(lizard));
-console.log(2, lizard.fire);
-console.log(3, lizard.sing());
-const lizardFire = dragon.sing.bind(lizard);
-console.log(4, lizardFire());
+// // Don't do this, bad performance. Show with bind.
+// lizard.__proto__ = dragon;
+// // console.log(1, "dragon.isPrototypeOf(lizard):", dragon.isPrototypeOf(lizard)); //* true
+// // console.log(2, lizard.fire);
+// // console.log(3, lizard.sing());
+// // const lizardFire = dragon.sing.bind(lizard);
+// // console.log(4, lizardFire());
+
+// for (let prop in lizard) {
+//   console.log(1, { prop });
+//   if (lizard.hasOwnProperty(prop)) {
+//     console.log(2, { prop });
+//   }
+// }
+
+// function a() {}
+// console.log('a.hasOwnProperty("name"):', a.hasOwnProperty("name")); // true
+// console.log('a.hasOwnProperty("call"):', a.hasOwnProperty("call")); // false
+// console.log("a.name:", a.name); // a
+
+function multiplyBy5(num: number) {
+  return num * 5;
+}
+
+console.log("(multiplyBy5 as any).__proto__:", (multiplyBy5 as any).__proto__);
+console.log("Function.prototype:", Function.prototype);
+console.log("(multiplyBy5 as any).__proto__.__proto__:", (multiplyBy5 as any).__proto__.__proto__);
+console.log("Object.prototype:", Object.prototype);
+console.log("(multiplyBy5 as any).__proto__.__proto__.__proto__:", (multiplyBy5 as any).__proto__.__proto__.__proto__);
+console.log("typeof Object:", typeof Object);
+console.log("typeof {}:", typeof {});

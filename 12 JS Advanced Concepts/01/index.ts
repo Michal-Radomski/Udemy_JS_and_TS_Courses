@@ -816,3 +816,17 @@
 // };
 
 //@ Object Oriented Programming
+//* Factory Function
+function createElf(name: string, weapon: string) {
+  return {
+    name: name,
+    weapon: weapon,
+    attack() {
+      return "Attack with: " + weapon;
+    },
+  };
+}
+const sam = createElf("Sam", "bow");
+const peter = createElf("Peter", "bow");
+console.log("sam.attack():", sam.attack());
+console.log("peter.attack():", peter.attack());

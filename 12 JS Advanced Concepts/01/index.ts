@@ -833,21 +833,38 @@
 // console.log("sam:", sam, "peter:", peter);
 
 //* Object.create()
-const elfFunctions = {
-  attack: function (this: any) {
-    return "Attack with: " + this.weapon;
-  } as Function,
-};
+// const elfFunctions = {
+//   attack: function (this: any) {
+//     return "Attack with: " + this.weapon;
+//   } as Function,
+// };
 
-function createElf(name: string, weapon: string) {
-  // Object.create creates __proto__ link
-  const newElf = Object.create(elfFunctions);
-  newElf.name = name;
-  newElf.weapon = weapon;
-  return newElf;
+// function createElf(name: string, weapon: string) {
+//   // Object.create creates __proto__ link
+//   const newElf = Object.create(elfFunctions);
+//   console.log({ newElf });
+//   console.log("newElf.__proto__ :", newElf.__proto__);
+//   newElf.name = name;
+//   newElf.weapon = weapon;
+//   return newElf;
+// }
+
+// const sam = createElf("Sam", "bow");
+// const peter = createElf("Peter", "bow");
+// console.log("sam:", sam, "sam.attack():", sam.attack());
+// console.log("peter:", peter, "peter.attack():", peter.attack());
+
+//* Constructor Functions
+function Elf(this: any, name: string, weapon: string) {
+  this.name = name;
+  this.weapon = weapon;
 }
 
-const sam = createElf("Sam", "bow");
-const peter = createElf("Peter", "bow");
+Elf.prototype.attack = function () {
+  return "Attack with: " + this.weapon;
+};
+
+const sam = new (Elf as any)("Sam", "bow");
+const peter = new (Elf as any)("Peter", "bow");
 console.log("sam:", sam, "sam.attack():", sam.attack());
 console.log("peter:", peter, "peter.attack():", peter.attack());

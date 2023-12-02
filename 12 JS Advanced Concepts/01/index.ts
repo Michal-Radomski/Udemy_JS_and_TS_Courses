@@ -854,17 +854,39 @@
 // console.log("sam:", sam, "sam.attack():", sam.attack());
 // console.log("peter:", peter, "peter.attack():", peter.attack());
 
-//* Constructor Functions
-function Elf(this: any, name: string, weapon: string) {
-  this.name = name;
-  this.weapon = weapon;
-}
+//* Constructor Functions -> keyword 'new'
+// const Elf1 = new Function(
+//   "name",
+//   "weapon",
+//   `this.name = name;
+// this.weapon = weapon`
+// );
+// const sara = new (Elf1 as any)("Sara", "fireworks");
+// console.log("sara:", sara);
 
-Elf.prototype.attack = function () {
-  return "Attack with: " + this.weapon;
-};
+// function Elf(this: any, name: string, weapon: string) {
+//   console.log(1, "this:", this);
+//   this.name = name;
+//   this.weapon = weapon;
+//   console.log(2, "this:", this);
+// }
+// console.log("Elf.prototype:", Elf.prototype);
+// console.log("Elf:", Elf, typeof Elf);
 
-const sam = new (Elf as any)("Sam", "bow");
-const peter = new (Elf as any)("Peter", "bow");
-console.log("sam:", sam, "sam.attack():", sam.attack());
-console.log("peter:", peter, "peter.attack():", peter.attack());
+// Elf.prototype.attack = function () {
+//   return "Attack with: " + this.weapon;
+// };
+
+// const sam = new (Elf as any)("Sam", "bow");
+// const peter = new (Elf as any)("Peter", "bow");
+// console.log("sam:", sam, "sam.attack():", sam.attack());
+// console.log("peter:", peter, "peter.attack():", peter.attack());
+
+// console.log("peter.__proto__:", peter.__proto__);
+// console.log("peter.prototype:", peter.prototype);
+// console.log("(Elf as any).__proto__:", (Elf as any).__proto__);
+
+const a = new Number(5);
+const b = 5;
+console.log("a == b, a === b:", a == b, a === b);
+console.log("a.toString(), b.toString():", a.toString(), b.toString(), typeof a, typeof b);

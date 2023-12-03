@@ -1215,22 +1215,40 @@
 // console.log(6, "cache:", cache);
 
 // V3-> Let's make that better with no global scope. This is closure in javascript so
-function memoizeAddTo80() {
-  const cache = {} as { [key: string]: number };
-  console.log("cache:", cache);
-  return function (n: number) {
-    if (n in cache) {
-      return cache[n];
-    } else {
-      console.log("Long time");
-      const answer = n + 80;
-      cache[n] = answer;
-      return answer;
-    }
-  };
-}
+// function memoizeAddTo80() {
+//   const cache = {} as { [key: string]: number };
+//   console.log("cache:", cache);
+//   return function (n: number) {
+//     if (n in cache) {
+//       return cache[n];
+//     } else {
+//       console.log("Long time");
+//       const answer = n + 80;
+//       cache[n] = answer;
+//       return answer;
+//     }
+//   };
+// }
 
-const memoized = memoizeAddTo80();
-console.log(1, "memoized(6):", memoized(6));
-console.log(2, "memoized(6):", memoized(6));
-console.log(3, "memoized(8):", memoized(8));
+// const memoized = memoizeAddTo80();
+// console.log(1, "memoized(6):", memoized(6));
+// console.log(2, "memoized(6):", memoized(6));
+// console.log(3, "memoized(8):", memoized(8));
+
+//* Compose and Pipe -> fn1(fn2(fn3(50)));
+// compose(fn1, fn2, fn3)(50) //* Right to left
+// pipe(fn3, fn2, fn1)(50)//* Left to right
+const compose =
+  (f: Function, g: Function) =>
+  (a: number): number =>
+    f(g(a));
+
+const pipe =
+  (f: Function, g: Function) =>
+  (a: number): number =>
+    g(f(a));
+
+const multiplyBy3AndAbsolute = compose((num: number) => num * 3, Math.abs);
+console.log("multiplyBy3AndAbsolute(-50):", multiplyBy3AndAbsolute(-50));
+const multiplyBy3AndAbsolute2 = pipe((num: number) => num * 3, Math.abs);
+console.log("multiplyBy3AndAbsolute2(-50):", multiplyBy3AndAbsolute2(-50));

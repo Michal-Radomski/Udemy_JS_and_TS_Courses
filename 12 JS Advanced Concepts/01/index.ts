@@ -982,27 +982,51 @@ class Elf extends Character {
 // const ogr = { ...fiona };
 // console.log("ogr:", ogr, typeof ogr);
 
-class Ogre extends Character {
-  color: string;
-  constructor(name: string, weapon: string, color: string) {
-    super(name, weapon); //* calls superClass -> Character;
-    this.color = color;
-  }
-  makeFort() {
-    //* This is like extending our prototype: Object.prototype.makeFort = function...
-    return "Strongest fort in the world made";
+// class Ogre extends Character {
+//   color: string;
+//   constructor(name: string, weapon: string, color: string) {
+//     super(name, weapon); //* calls superClass -> Character;
+//     this.color = color;
+//   }
+//   makeFort() {
+//     //* This is like extending our prototype: Object.prototype.makeFort = function...
+//     return "Strongest fort in the world made";
+//   }
+// }
+
+// const houseElf = new Elf("Dolby", "cloth", "house");
+// console.log("houseElf:", houseElf);
+// //* houseElf.makeFort() //* Error
+
+// const shrek = new Ogre("Shrek", "club", "green");
+// console.log("shrek:", shrek);
+// console.log("shrek.makeFort():", shrek.makeFort());
+
+// console.log("Ogre.prototype.isPrototypeOf(shrek):", Ogre.prototype.isPrototypeOf(shrek)); // true
+// console.log("Character.prototype.isPrototypeOf(Ogre.prototype):", Character.prototype.isPrototypeOf(Ogre.prototype)); // true
+// console.log("houseElf instanceof Elf:", houseElf instanceof Elf); // true
+// console.log("houseElf instanceof Character:", houseElf instanceof Character); // true
+
+//* Public vs Private
+class Employee {
+  #name = "Test"; // private field
+  setName(name: string) {
+    this.#name = name;
   }
 }
+const emp = new Employee();
+emp.#name = "New"; // error
+emp.setName("New"); // Ok
 
-const houseElf = new Elf("Dolby", "cloth", "house");
-console.log("houseElf:", houseElf);
-//* houseElf.makeFort() //* Error
-
-const shrek = new Ogre("Shrek", "club", "green");
-console.log("shrek:", shrek);
-console.log("shrek.makeFort():", shrek.makeFort());
-
-console.log("Ogre.prototype.isPrototypeOf(shrek):", Ogre.prototype.isPrototypeOf(shrek)); // true
-console.log("Character.prototype.isPrototypeOf(Ogre.prototype):", Character.prototype.isPrototypeOf(Ogre.prototype)); // true
-console.log("houseElf instanceof Elf:", houseElf instanceof Elf); // true
-console.log("houseElf instanceof Character:", houseElf instanceof Character); // true
+class Employee2 {
+  #name = "Test";
+  constructor(name: string) {
+    this.#setName(name); // Ok
+  }
+  #setName(name: string) {
+    // Private method
+    this.#name = name;
+  }
+}
+const emp2 = new Employee2("New"); // Ok
+emp2.#setName("New"); // error

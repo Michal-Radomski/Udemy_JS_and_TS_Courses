@@ -31,31 +31,45 @@
 // console.log("4", "Is a crowd");
 
 //* Parallel, Sequence and Race
-const promisify = (item: string, delay: number) => new Promise((resolve) => setTimeout(() => resolve(item), delay));
+const promisify = (item: string, delay: number): Promise<string> =>
+  new Promise((resolve) => setTimeout(() => resolve(item), delay));
 
-const a = () => promisify("a", 100);
-const b = () => promisify("b", 5000);
-const c = () => promisify("c", 3000);
+const a = (): Promise<string> => promisify("a", 100);
+const b = (): Promise<string> => promisify("b", 5000);
+const c = (): Promise<string> => promisify("c", 3000);
 
-async function parallel() {
+async function parallel(): Promise<string> {
   const promises = [a(), b(), c()];
   const [output1, output2, output3] = await Promise.all(promises);
   return `Parallel is done: ${output1} ${output2} ${output3}`;
 }
 
-async function race() {
+async function race(): Promise<string> {
   const promises = [a(), b(), c()];
   const output1 = await Promise.race(promises);
   return `Race is done: ${output1}`;
 }
 
-async function sequence() {
+async function sequence(): Promise<string> {
   const output1 = await a();
   const output2 = await b();
   const output3 = await c();
   return `Sequence is done ${output1} ${output2} ${output3}`;
 }
 
-sequence().then(console.log);
-parallel().then(console.log);
-race().then(console.log);
+sequence()
+  .then(console.log)
+  .catch((err) => console.log({ err }));
+parallel()
+  .then(console.log)
+  .catch((err) => console.log({ err }));
+race()
+  .then(console.log)
+  .catch((err) => console.log({ err }));
+
+//* ES2020: Promise.allSettled()
+const promise1 = Promise.resolve(3);
+const promise2 = new Promise((_resolve, reject) => setTimeout(reject, 100, "foo"));
+const promises = [promise1, promise2];
+
+Promise.allSettled(promises).then((results) => results.forEach((result) => console.log(result.status)));

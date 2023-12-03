@@ -1271,7 +1271,7 @@ const user = {
   active: true,
   cart: [],
   purchases: [],
-};
+} as User;
 
 const shoppingHistory = [] as User[];
 
@@ -1300,7 +1300,7 @@ function addItemToCart(user: User, item: Item) {
 function applyTaxToItems(user: User) {
   shoppingHistory.push(user);
   const { cart } = user;
-  const taxRate = 1.3;
+  const taxRate = 1.2;
   const updatedCart = cart.map((item: Item) => {
     return {
       name: item.name,
@@ -1315,9 +1315,27 @@ function buyItem(user: User) {
   const itemsInCart = user.cart;
   return Object.assign({}, user, { purchases: itemsInCart });
 }
+
 function emptyUserCart(user: User) {
   shoppingHistory.push(user);
   return Object.assign({}, user, { cart: [] });
 }
 
 console.log("shoppingHistory:", shoppingHistory);
+console.log(
+  "shoppingHistory[shoppingHistory.length-1].cart:",
+  shoppingHistory[shoppingHistory.length - 1].cart,
+  shoppingHistory.length
+);
+console.log(
+  "shoppingHistory[shoppingHistory.length-1].purchases:",
+  shoppingHistory[shoppingHistory.length - 1].purchases,
+  shoppingHistory.length
+);
+
+//@ OOP vs FP
+//* Composition vs Inheritance: Inheritance:the child class is dependent upon parent class. Composition: child class and parent class are independent.
+// Inheritance -> superClass is inherited -> class extends
+// Composition -> smaller pieces combined to create some data -> compose, pipe
+// FP: stateless ???, pure, declarative
+// OOP: stateful, side effects, imperative

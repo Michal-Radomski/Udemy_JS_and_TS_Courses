@@ -1133,16 +1133,33 @@
 // array.forEach((elem) => console.log({ elem }));
 
 //* Immutability -> not changing the data /state
-const obj = { name: "Andrei" };
-function clone(obj: any) {
-  return { ...obj }; // This is pure -> object is cloned
-}
+// const obj = { name: "Andrei" };
+// function clone(obj: any) {
+//   return { ...obj }; // This is pure -> object is cloned
+// }
 
-function updateName(obj: { name: string }) {
-  const obj2 = clone(obj);
-  obj2.name = "Anna";
-  return obj2;
-}
+// function updateName(obj: { name: string }) {
+//   const obj2 = clone(obj);
+//   obj2.name = "Anna";
+//   return obj2;
+// }
 
-const updatedObj = updateName(obj);
-console.log({ obj, updatedObj });
+// const updatedObj = updateName(obj);
+// console.log({ obj, updatedObj });
+
+//* Higher Order Functions and Closures
+// HOF
+// const hof = (fn: Function) => fn(5);
+// hof(function a(x: number) {
+//   return x;
+// });
+//Closure
+const closure = function () {
+  const count = 55;
+  return function getCounter() {
+    return count;
+  };
+};
+
+const getCounter2 = closure();
+console.log("getCounter2():", getCounter2());

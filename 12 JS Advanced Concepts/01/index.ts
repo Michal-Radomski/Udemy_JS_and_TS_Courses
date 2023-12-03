@@ -956,27 +956,27 @@
 // person4.hi();
 
 //* Class Inheritance
-class Character {
-  name: string;
-  weapon: string;
-  constructor(name: string, weapon: string) {
-    this.name = name;
-    this.weapon = weapon;
-  }
-  attack() {
-    return "Attack with: " + this.weapon;
-  }
-}
+// class Character {
+//   name: string;
+//   weapon: string;
+//   constructor(name: string, weapon: string) {
+//     this.name = name;
+//     this.weapon = weapon;
+//   }
+//   attack() {
+//     return "Attack with: " + this.weapon;
+//   }
+// }
 
-class Elf extends Character {
-  type: string;
-  constructor(name: string, weapon: string, type: string) {
-    //* console.log('what am i?', this); //* This gives an error
-    super(name, weapon);
-    console.log("What am i?", this);
-    this.type = type;
-  }
-}
+// class Elf extends Character {
+//   type: string;
+//   constructor(name: string, weapon: string, type: string) {
+//     //* console.log('what am i?', this); //* This gives an error
+//     super(name, weapon);
+//     console.log("What am i?", this);
+//     this.type = type;
+//   }
+// }
 // const fiona = new Elf("Fiona", "ninja stars", "house");
 // console.log("fiona:", fiona, typeof fiona);
 // const ogr = { ...fiona };
@@ -1008,25 +1008,84 @@ class Elf extends Character {
 // console.log("houseElf instanceof Character:", houseElf instanceof Character); // true
 
 //* Public vs Private
-class Employee {
-  #name = "Test"; // private field
-  setName(name: string) {
-    this.#name = name;
-  }
-}
-const emp = new Employee();
-emp.#name = "New"; // error
-emp.setName("New"); // Ok
+// class Employee {
+//   #name = "Test"; // private field
+//   setName(name: string) {
+//     this.#name = name;
+//   }
+// }
+// const emp = new Employee();
+// //* emp.#name = "New"; // Error
+// emp.setName("New"); // Ok
+// console.log("emp:", emp);
 
-class Employee2 {
-  #name = "Test";
-  constructor(name: string) {
-    this.#setName(name); // Ok
+// class Employee2 {
+//   #name = "Test";
+//   constructor(name: string) {
+//     this.#setName(name); // Ok
+//   }
+//   #setName(name: string) {
+//     // Private method
+//     this.#name = name;
+//   }
+// }
+// const emp2 = new Employee2("New"); // Ok
+// // emp2.#setName("New"); // Error
+// console.log("emp2:", emp2);
+
+//* Pillars of OOP
+// 1. Encapsulation
+// 2. Abstraction
+// 3. Inheritance
+// 4. Polymorphism
+
+//* Polymorphism
+// class firstClass {
+//   add() {
+//     console.log(1, "First Method");
+//   }
+// }
+// class secondClass extends firstClass {
+//   add() {
+//     console.log(2, 30 + 40);
+//   }
+// }
+// class thirdClass extends secondClass {
+//   add() {
+//     console.log(3, "Last Method");
+//   }
+// }
+// const ob1 = new firstClass();
+// const ob2 = new secondClass();
+// const ob3 = new thirdClass();
+// ob1.add();
+// ob2.add();
+// ob3.add();
+
+//* Exercise
+class Character {
+  name: string;
+  weapon: string;
+  constructor(name: string, weapon: string) {
+    this.name = name;
+    this.weapon = weapon;
   }
-  #setName(name: string) {
-    // Private method
-    this.#name = name;
+  attack() {
+    return "Attack with: " + this.weapon;
   }
 }
-const emp2 = new Employee2("New"); // Ok
-emp2.#setName("New"); // error
+
+class Queen extends Character {
+  kind: string;
+  constructor(name: string, weapon: string, kind: string) {
+    super(name, weapon);
+    this.kind = kind;
+  }
+  attack() {
+    console.log(super.attack());
+    return `I am the ${this.name} of ${this.kind}, now bow down to me! `;
+  }
+}
+
+const victoria = new Queen("Victoria", "army", "hearts");
+victoria.attack();

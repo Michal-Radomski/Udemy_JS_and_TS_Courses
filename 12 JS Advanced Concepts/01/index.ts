@@ -1237,18 +1237,87 @@
 
 //* Compose and Pipe -> fn1(fn2(fn3(50)));
 // compose(fn1, fn2, fn3)(50) //* Right to left
-// pipe(fn3, fn2, fn1)(50)//* Left to right
+// pipe(fn3, fn2, fn1)(50) //* Left to right
+// const compose =
+//   (f: Function, g: Function) =>
+//   (a: number): number =>
+//     f(g(a));
+
+// const pipe =
+//   (f: Function, g: Function) =>
+//   (a: number): number =>
+//     g(f(a));
+
+// const multiplyBy3AndAbsolute = compose((num: number) => num * 3, Math.abs);
+// console.log("multiplyBy3AndAbsolute(-50):", multiplyBy3AndAbsolute(-50));
+// const multiplyBy3AndAbsolute2 = pipe((num: number) => num * 3, Math.abs);
+// console.log("multiplyBy3AndAbsolute2(-50):", multiplyBy3AndAbsolute2(-50));
+
+//* Exercise
+interface Item {
+  name: string;
+  price: number;
+}
+
+interface User {
+  name: string;
+  active: boolean;
+  cart: Item[];
+  purchases: Item[];
+}
+
+const user = {
+  name: "Kim",
+  active: true,
+  cart: [],
+  purchases: [],
+};
+
+const shoppingHistory = [] as User[];
+
 const compose =
   (f: Function, g: Function) =>
-  (a: number): number =>
-    f(g(a));
+  (...args: any[]) =>
+    f(g(...args));
 
 const pipe =
   (f: Function, g: Function) =>
-  (a: number): number =>
-    g(f(a));
+  (...args: any[]) =>
+    g(f(...args));
 
-const multiplyBy3AndAbsolute = compose((num: number) => num * 3, Math.abs);
-console.log("multiplyBy3AndAbsolute(-50):", multiplyBy3AndAbsolute(-50));
-const multiplyBy3AndAbsolute2 = pipe((num: number) => num * 3, Math.abs);
-console.log("multiplyBy3AndAbsolute2(-50):", multiplyBy3AndAbsolute2(-50));
+const purchaseItem = (...fns: Function[]) => fns.reduce(compose);
+const purchaseItem2 = (...fns: Function[]) => fns.reduce(pipe);
+
+purchaseItem(emptyUserCart, buyItem, applyTaxToItems, addItemToCart)(user, { name: "laptop", price: 50 });
+purchaseItem2(addItemToCart, applyTaxToItems, buyItem, emptyUserCart)(user, { name: "laptop", price: 60 });
+
+function addItemToCart(user: User, item: Item) {
+  shoppingHistory.push(user);
+  const updatedCart = user.cart.concat(item);
+  return Object.assign({}, user, { cart: updatedCart });
+}
+
+function applyTaxToItems(user: User) {
+  shoppingHistory.push(user);
+  const { cart } = user;
+  const taxRate = 1.3;
+  const updatedCart = cart.map((item: Item) => {
+    return {
+      name: item.name,
+      price: item.price * taxRate,
+    };
+  });
+  return Object.assign({}, user, { cart: updatedCart });
+}
+
+function buyItem(user: User) {
+  shoppingHistory.push(user);
+  const itemsInCart = user.cart;
+  return Object.assign({}, user, { purchases: itemsInCart });
+}
+function emptyUserCart(user: User) {
+  shoppingHistory.push(user);
+  return Object.assign({}, user, { cart: [] });
+}
+
+console.log("shoppingHistory:", shoppingHistory);

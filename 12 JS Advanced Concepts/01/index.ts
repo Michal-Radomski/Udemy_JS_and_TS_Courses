@@ -1107,17 +1107,42 @@
 // console.log(3, "array:", array);
 
 //* Pure Function
-const array = [1, 2, 3];
-function removeLastItem(arr: number[]) {
-  const newArray = ([] as number[]).concat(arr);
-  newArray.pop();
-  return newArray;
+// const array = [1, 2, 3];
+// function removeLastItem(arr: number[]) {
+//   const newArray = ([] as number[]).concat(arr);
+//   newArray.pop();
+//   return newArray;
+// }
+
+// function multiplyBy2(arr: number[]) {
+//   return arr.map((elem) => elem * 2);
+// }
+
+// const newArray1 = removeLastItem(array);
+// const newArray2 = multiplyBy2(array);
+// console.log({ array, newArray1, newArray2 });
+
+//* Imperative vs Declarative
+// const array = [1, 2, 3, 4, 5];
+
+// // Imperative
+// for (let i = 0; i < array.length; i++) {
+//   console.log("array[i]:", array[i]);
+// }
+// // Declarative
+// array.forEach((elem) => console.log({ elem }));
+
+//* Immutability -> not changing the data /state
+const obj = { name: "Andrei" };
+function clone(obj: any) {
+  return { ...obj }; // This is pure -> object is cloned
 }
 
-function multiplyBy2(arr: number[]) {
-  return arr.map((elem) => elem * 2);
+function updateName(obj: { name: string }) {
+  const obj2 = clone(obj);
+  obj2.name = "Anna";
+  return obj2;
 }
 
-const newArray1 = removeLastItem(array);
-const newArray2 = multiplyBy2(array);
-console.log({ array, newArray1, newArray2 });
+const updatedObj = updateName(obj);
+console.log({ obj, updatedObj });

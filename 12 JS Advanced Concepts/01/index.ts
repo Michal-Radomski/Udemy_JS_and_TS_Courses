@@ -1063,29 +1063,61 @@
 // ob3.add();
 
 //* Exercise
-class Character {
-  name: string;
-  weapon: string;
-  constructor(name: string, weapon: string) {
-    this.name = name;
-    this.weapon = weapon;
-  }
-  attack() {
-    return "Attack with: " + this.weapon;
-  }
+// class Character {
+//   name: string;
+//   weapon: string;
+//   constructor(name: string, weapon: string) {
+//     this.name = name;
+//     this.weapon = weapon;
+//   }
+//   attack() {
+//     return "Attack with: " + this.weapon;
+//   }
+// }
+
+// class Queen extends Character {
+//   kind: string;
+//   constructor(name: string, weapon: string, kind: string) {
+//     super(name, weapon);
+//     this.kind = kind;
+//   }
+//   attack() {
+//     console.log(super.attack());
+//     return `I am the ${this.name} of ${this.kind}, now bow down to me! `;
+//   }
+// }
+
+// const victoria = new Queen("Victoria", "army", "hearts");
+// victoria.attack();
+
+//@ Functional Programming
+//* Side Effects
+// const array = [1, 2, 3];
+// function mutateArray(arr: number[]) {
+//   arr.pop();
+// }
+// function mutateArray2(arr: number[]) {
+//   arr.forEach((item) => arr.push(1));
+// }
+// //The order of the function calls will matter.
+// console.log(1, "array:", array);
+// mutateArray(array); //! Side Effect
+// console.log(2, "array:", array);
+// mutateArray2(array); //! Side Effect
+// console.log(3, "array:", array);
+
+//* Pure Function
+const array = [1, 2, 3];
+function removeLastItem(arr: number[]) {
+  const newArray = ([] as number[]).concat(arr);
+  newArray.pop();
+  return newArray;
 }
 
-class Queen extends Character {
-  kind: string;
-  constructor(name: string, weapon: string, kind: string) {
-    super(name, weapon);
-    this.kind = kind;
-  }
-  attack() {
-    console.log(super.attack());
-    return `I am the ${this.name} of ${this.kind}, now bow down to me! `;
-  }
+function multiplyBy2(arr: number[]) {
+  return arr.map((elem) => elem * 2);
 }
 
-const victoria = new Queen("Victoria", "army", "hearts");
-victoria.attack();
+const newArray1 = removeLastItem(array);
+const newArray2 = multiplyBy2(array);
+console.log({ array, newArray1, newArray2 });

@@ -1154,12 +1154,32 @@
 //   return x;
 // });
 //Closure
-const closure = function () {
-  const count = 55;
-  return function getCounter() {
-    return count;
-  };
-};
+// const closure = function () {
+//   let count = 0;
+//   console.log({ count });
+//   return function increment() {
+//     count++;
+//     return count;
+//   };
+// };
 
-const getCounter2 = closure();
-console.log("getCounter2():", getCounter2());
+// const getCounter = closure();
+// console.log(1, "getCounter():", getCounter()); // 1 let count is modified!
+// console.log(2, "getCounter():", getCounter()); // 2 let count is modified!
+// console.log(3, "getCounter():", getCounter()); // 3 let count is modified!
+// console.log(4, "getCounter():", getCounter()); // 4 let count is modified!
+
+//* Currying
+// const multiply = (a: number, b: number) => a * b;
+// const curriedMultiply = (a: number) => (b: number) => a * b;
+// console.log("curriedMultiply(5)(20):", curriedMultiply(5)(20)); // 100
+// const multiplyBy5 = curriedMultiply(5);
+// console.log("multiplyBy5(20):", multiplyBy5(20)); // 100
+
+//* Partial Application
+const multiply2 = (a: number, b: number, c: number) => a * b * c;
+const curriedMultiply2 = (a: number) => (b: number) => (c: number) => a * b * c;
+console.log("curriedMultiply2(5)(20)(10):", curriedMultiply2(5)(20)(10)); // 1000
+
+const partialMultiplyBy5 = multiply2.bind(null, 5);
+console.log("partialMultiplyBy5(10, 20):", partialMultiplyBy5(10, 20)); // 1000

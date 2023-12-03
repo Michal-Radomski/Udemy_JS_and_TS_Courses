@@ -1177,9 +1177,60 @@
 // console.log("multiplyBy5(20):", multiplyBy5(20)); // 100
 
 //* Partial Application
-const multiply2 = (a: number, b: number, c: number) => a * b * c;
-const curriedMultiply2 = (a: number) => (b: number) => (c: number) => a * b * c;
-console.log("curriedMultiply2(5)(20)(10):", curriedMultiply2(5)(20)(10)); // 1000
+// const multiply2 = (a: number, b: number, c: number) => a * b * c;
+// const curriedMultiply2 = (a: number) => (b: number) => (c: number) => a * b * c;
+// console.log("curriedMultiply2(5)(20)(10):", curriedMultiply2(5)(20)(10)); // 1000
 
-const partialMultiplyBy5 = multiply2.bind(null, 5);
-console.log("partialMultiplyBy5(10, 20):", partialMultiplyBy5(10, 20)); // 1000
+// const partialMultiplyBy5 = multiply2.bind(null, 5);
+// console.log("partialMultiplyBy5(10, 20):", partialMultiplyBy5(10, 20)); // 1000
+
+//* Memoization ~ Caching
+// V1 -> bad
+// function addTo80(n: number) {
+//   return n + 80;
+// }
+// console.log(1, "addTo80(5):", addTo80(5));
+// console.log(2, "addTo80(5):", addTo80(5));
+// console.log(3, "addTo80(5):", addTo80(5));
+
+// V2
+// const cache = {} as { [key: string]: number };
+
+// function memoizeAddTo80(n: number) {
+//   if (n in cache) {
+//     return cache[n as keyof typeof cache];
+//   } else {
+// console.log("Long time");
+//     const answer = n + 80;
+//     cache[n] = answer;
+//     return answer;
+//   }
+// }
+
+// console.log(1, memoizeAddTo80(6));
+// console.log(2, "cache:", cache);
+// console.log(3, memoizeAddTo80(6));
+// console.log(4, "cache:", cache);
+// console.log(5, memoizeAddTo80(8));
+// console.log(6, "cache:", cache);
+
+// V3-> Let's make that better with no global scope. This is closure in javascript so
+function memoizeAddTo80() {
+  const cache = {} as { [key: string]: number };
+  console.log("cache:", cache);
+  return function (n: number) {
+    if (n in cache) {
+      return cache[n];
+    } else {
+      console.log("Long time");
+      const answer = n + 80;
+      cache[n] = answer;
+      return answer;
+    }
+  };
+}
+
+const memoized = memoizeAddTo80();
+console.log(1, "memoized(6):", memoized(6));
+console.log(2, "memoized(6):", memoized(6));
+console.log(3, "memoized(8):", memoized(8));

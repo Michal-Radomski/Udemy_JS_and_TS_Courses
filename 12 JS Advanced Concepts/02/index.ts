@@ -152,12 +152,59 @@
 //     return "failed";
 //   });
 
-//* Async Error Handling 2
-(async function () {
-  try {
-    await Promise.reject("Oopsie");
-  } catch (err) {
-    console.error("Error", { err });
-  }
-  console.log("This is still good!");
-})();
+//* Async Error Handling 2 -> try catch block * async await
+// (async function () {
+//   try {
+//     await Promise.reject("Oopsie");
+//     await Promise.reject("Oopsie2");
+//   } catch (err) {
+//     console.error("Error", { err });
+//   }
+//   console.log("This is still good!");
+// })();
+
+//* Exercise
+// (function () {
+//   try {
+//     throw new Error();
+//   } catch (err) {
+//     var err = 5;
+//     var boo = 10;
+//     console.log(1, { err });
+//   }
+//   console.log(2, { err }); //* { err: undefined }
+//   console.log(3, boo);
+// })();
+
+//* Extending Errors
+// class AuthenticationError extends Error {
+//   constructor(message: string) {
+//     super(message);
+//     this.name = "ValidationError";
+//     this.message = message;
+//   }
+// }
+
+// class PermissionError extends Error {
+//   favouriteSnack: string;
+//   constructor(message: string) {
+//     super(message);
+//     this.name = "PermissionError";
+//     this.message = message;
+//     this.favouriteSnack = "grapes";
+//   }
+// }
+
+// class DatabaseError extends Error {
+//   constructor(message: string) {
+//     super(message);
+//     this.name = "DatabaseError";
+//     this.message = message;
+//   }
+// }
+
+// throw new AuthenticationError("A permission error");
+// throw new PermissionError("A permission error");
+// throw new DatabaseError("A permission error");
+
+//@ Modules in JS

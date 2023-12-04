@@ -61,7 +61,10 @@ const f_2 = new SyntaxError("Syntax Error");
 const g_2 = new ReferenceError("Reference Error");
 console.log({ g_2 });
 
-// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x, y, z, a_2, b_2, c_2, d_2, e_2, f_2, g_2 });
+// const h_2 = new Worker("worker.js");
+// console.log({h_2})
+
+// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x, y, z, a_2, b_2, c_2, d_2, e_2, f_2, g_2, h_2 });
 
 //* Example
 // const date = new Date(Date.UTC(2020, 11, 20, 3, 23, 16, 738));

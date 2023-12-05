@@ -219,18 +219,53 @@
 // }
 // console.log("fight(harry, voldemort):", fight(harry, voldemort));
 
-//* Module Pattern -> IIFE -> no variables in global scope!
-const fightModule = (function () {
-  const harry = "potter";
-  const voldemort = "He who must not be named";
-  function fight(char1: string, char2: string) {
-    const attack1 = Math.floor(Math.random() * char1.length);
-    const attack2 = Math.floor(Math.random() * char2.length);
-    console.log({ attack1, attack2 });
-    return attack1 > attack2 ? `${char1} wins` : `${char2} wins`;
-  }
-  console.log("fight(harry, voldemort):", fight(harry, voldemort));
-  return { fight: fight };
-})();
-console.log("fightModule.fight:", fightModule.fight);
-console.log("fightModule:", fightModule, typeof fightModule);
+//* Module Pattern -> IIFE -> only one variable in global scope: fightModule!
+// const test = "test";
+
+// const fightModule = (function (test: string) {
+//   console.log({ test });
+//   const harry = "potter";
+//   const voldemort = "He who must not be named";
+//   function fight(char1: string, char2: string) {
+//     const attack1 = Math.floor(Math.random() * char1.length);
+//     const attack2 = Math.floor(Math.random() * char2.length);
+//     console.log({ attack1, attack2 });
+//     return attack1 > attack2 ? `${char1} wins` : `${char2} wins`;
+//   }
+//   console.log("fight(harry, voldemort):", fight(harry, voldemort));
+//   return { fight: fight };
+// })(test);
+// console.log("fightModule.fight:", fightModule.fight);
+// console.log("fightModule:", fightModule, typeof fightModule);
+
+//* CommonJS, AMD, UMD
+// 1. CommonJS
+// module.exports = {
+//   fight:fight
+// }
+// const fight = require("module_fight").fight
+
+// 1a. Browserify module
+// 2. AMD -> requireJS
+// 3. UMD
+
+//* ES6 Modules
+// export: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export
+// import: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
+// In HTML file add: type="module"
+
+//@ Data Structures in JS
+//* Arrays
+const strings = ["a", "b", "c", "d"]; //* 32 bits system: 4*4 = 16 bytes of storage
+const numbers = [1, 2, 3, 4, 5];
+console.log({ strings, numbers });
+
+strings.push("e"); // O(1)
+strings.pop(); // O(1)
+
+strings.unshift("x"); // O(n)
+strings.shift(); // O(n)
+console.log({ strings });
+
+strings.splice(2, 0, "Test");
+console.log({ strings }); // O(n/2) -> O(n)

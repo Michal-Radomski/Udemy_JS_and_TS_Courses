@@ -271,55 +271,80 @@
 // console.log({ strings }); // O(n/2) -> O(n)
 
 //* Implementing An Array
-class CustomArray {
-  length: number;
-  data: { [key: string]: string };
-  constructor() {
-    this.length = 0;
-    this.data = {};
-  }
+// class CustomArray {
+//   length: number;
+//   data: { [key: string]: string };
+//   constructor() {
+//     this.length = 0;
+//     this.data = {};
+//   }
 
-  get(index: number) {
-    return this.data[index as keyof typeof this.data];
-  }
+//   get(index: number) {
+//     return this.data[index as keyof typeof this.data];
+//   }
 
-  push(item: string) {
-    this.data[this.length as keyof typeof this.data] = item;
-    this.length++;
-    return this.data;
-  }
+//   push(item: string) {
+//     this.data[this.length as keyof typeof this.data] = item;
+//     this.length++;
+//     return this.data;
+//   }
 
-  pop() {
-    const lastItem = this.data[this.length - 1];
-    delete this.data[this.length - 1];
-    this.length--;
-    return lastItem;
-  }
+//   pop() {
+//     const lastItem = this.data[this.length - 1];
+//     delete this.data[this.length - 1];
+//     this.length--;
+//     return lastItem;
+//   }
 
-  deleteAtIndex(index: number) {
-    const item = this.data[index];
-    this.shiftItems(index);
-    return item;
-  }
+//   deleteAtIndex(index: number) {
+//     const item = this.data[index];
+//     this.shiftItems(index);
+//     return item;
+//   }
 
-  shiftItems(index: number) {
-    for (let i = index; i < this.length - 1; i++) {
-      this.data[i] = this.data[i + 1];
-    }
-    console.log(this.data[this.length - 1]);
-    delete this.data[this.length - 1];
-    this.length--;
+//   shiftItems(index: number) {
+//     //* O(n)
+//     for (let i = index; i < this.length - 1; i++) {
+//       this.data[i] = this.data[i + 1];
+//     }
+//     console.log("this.data[this.length - 1]:", this.data[this.length - 1]);
+//     delete this.data[this.length - 1];
+//     this.length--;
+//   }
+// }
+
+// const customArray = new CustomArray();
+// console.log(1, "customArray:", customArray);
+// customArray.push("Hi");
+// customArray.push("you");
+// customArray.push("!");
+// customArray.pop();
+// customArray.deleteAtIndex(0);
+// customArray.push("are");
+// customArray.push("nice");
+// customArray.shiftItems(0);
+// console.log(2, "customArray:", customArray);
+
+//* Exercise - reverse an array
+function reverse(str: string) {
+  if (!str || typeof str != "string" || str.length < 2) return str;
+
+  const backwards = [];
+  const totalItems = str.length - 1;
+  // console.log({ totalItems });
+  for (let i = totalItems; i >= 0; i--) {
+    backwards.push(str[i]);
   }
+  return backwards.join("");
 }
 
-const customArray = new CustomArray();
-console.log(1, "customArray:", customArray);
-customArray.push("Hi");
-customArray.push("you");
-customArray.push("!");
-customArray.pop();
-customArray.deleteAtIndex(0);
-customArray.push("are");
-customArray.push("nice");
-customArray.shiftItems(0);
-console.log(2, "customArray:", customArray);
+function reverse2(str: string) {
+  // Check for valid input
+  return str.split("").reverse().join("");
+}
+
+const reverse3 = (str: string) => [...str].reverse().join("");
+
+console.log('reverse("Timbits Hi"):', reverse("Timbits Hi"));
+console.log('reverse2("Timbits Hi"):', reverse2("Timbits Hi"));
+console.log('reverse3("Timbits Hi"):', reverse3("Timbits Hi"));

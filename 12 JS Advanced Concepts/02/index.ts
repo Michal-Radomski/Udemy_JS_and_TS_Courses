@@ -208,3 +208,29 @@
 // throw new DatabaseError("A permission error");
 
 //@ Modules in JS
+//* Global scope - bad approach!
+// const harry = "potter";
+// const voldemort = "He who must not be named";
+// function fight(char1: string, char2: string) {
+//   const attack1 = Math.floor(Math.random() * char1.length);
+//   const attack2 = Math.floor(Math.random() * char2.length);
+//   console.log({ attack1, attack2 });
+//   return attack1 > attack2 ? `${char1} wins` : `${char2} wins`;
+// }
+// console.log("fight(harry, voldemort):", fight(harry, voldemort));
+
+//* Module Pattern -> IIFE -> no variables in global scope!
+const fightModule = (function () {
+  const harry = "potter";
+  const voldemort = "He who must not be named";
+  function fight(char1: string, char2: string) {
+    const attack1 = Math.floor(Math.random() * char1.length);
+    const attack2 = Math.floor(Math.random() * char2.length);
+    console.log({ attack1, attack2 });
+    return attack1 > attack2 ? `${char1} wins` : `${char2} wins`;
+  }
+  console.log("fight(harry, voldemort):", fight(harry, voldemort));
+  return { fight: fight };
+})();
+console.log("fightModule.fight:", fightModule.fight);
+console.log("fightModule:", fightModule, typeof fightModule);

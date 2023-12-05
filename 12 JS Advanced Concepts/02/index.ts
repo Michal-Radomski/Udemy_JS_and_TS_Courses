@@ -255,17 +255,71 @@
 // In HTML file add: type="module"
 
 //@ Data Structures in JS
-//* Arrays
-const strings = ["a", "b", "c", "d"]; //* 32 bits system: 4*4 = 16 bytes of storage
-const numbers = [1, 2, 3, 4, 5];
-console.log({ strings, numbers });
+//* Arrays (in JS arrays are dynamic)
+// const strings = ["a", "b", "c", "d"]; //* 32 bits system: 4*4 = 16 bytes of storage
+// const numbers = [1, 2, 3, 4, 5];
+// console.log({ strings, numbers });
 
-strings.push("e"); // O(1)
-strings.pop(); // O(1)
+// strings.push("e"); // O(1)
+// strings.pop(); // O(1)
 
-strings.unshift("x"); // O(n)
-strings.shift(); // O(n)
-console.log({ strings });
+// strings.unshift("x"); // O(n)
+// strings.shift(); // O(n)
+// console.log({ strings });
 
-strings.splice(2, 0, "Test");
-console.log({ strings }); // O(n/2) -> O(n)
+// strings.splice(2, 0, "Test");
+// console.log({ strings }); // O(n/2) -> O(n)
+
+//* Implementing An Array
+class CustomArray {
+  length: number;
+  data: { [key: string]: string };
+  constructor() {
+    this.length = 0;
+    this.data = {};
+  }
+
+  get(index: number) {
+    return this.data[index as keyof typeof this.data];
+  }
+
+  push(item: string) {
+    this.data[this.length as keyof typeof this.data] = item;
+    this.length++;
+    return this.data;
+  }
+
+  pop() {
+    const lastItem = this.data[this.length - 1];
+    delete this.data[this.length - 1];
+    this.length--;
+    return lastItem;
+  }
+
+  deleteAtIndex(index: number) {
+    const item = this.data[index];
+    this.shiftItems(index);
+    return item;
+  }
+
+  shiftItems(index: number) {
+    for (let i = index; i < this.length - 1; i++) {
+      this.data[i] = this.data[i + 1];
+    }
+    console.log(this.data[this.length - 1]);
+    delete this.data[this.length - 1];
+    this.length--;
+  }
+}
+
+const customArray = new CustomArray();
+console.log(1, "customArray:", customArray);
+customArray.push("Hi");
+customArray.push("you");
+customArray.push("!");
+customArray.pop();
+customArray.deleteAtIndex(0);
+customArray.push("are");
+customArray.push("nice");
+customArray.shiftItems(0);
+console.log(2, "customArray:", customArray);

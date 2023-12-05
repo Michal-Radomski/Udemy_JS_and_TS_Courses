@@ -326,25 +326,58 @@
 // console.log(2, "customArray:", customArray);
 
 //* Exercise - reverse an array
-function reverse(str: string) {
-  if (!str || typeof str != "string" || str.length < 2) return str;
+// function reverse(str: string) {
+//   if (!str || typeof str != "string" || str.length < 2) return str;
 
-  const backwards = [];
-  const totalItems = str.length - 1;
-  // console.log({ totalItems });
-  for (let i = totalItems; i >= 0; i--) {
-    backwards.push(str[i]);
+//   const backwards = [];
+//   const totalItems = str.length - 1;
+//   // console.log({ totalItems });
+//   for (let i = totalItems; i >= 0; i--) {
+//     backwards.push(str[i]);
+//   }
+//   return backwards.join("");
+// }
+
+// function reverse2(str: string) {
+//   // Check for valid input
+//   return str.split("").reverse().join("");
+// }
+
+// const reverse3 = (str: string) => [...str].reverse().join("");
+
+// console.log('reverse("Timbits Hi"):', reverse("Timbits Hi"));
+// console.log('reverse2("Timbits Hi"):', reverse2("Timbits Hi"));
+// console.log('reverse3("Timbits Hi"):', reverse3("Timbits Hi"));
+
+//* Exercise - merge arrays
+function mergeSortedArrays(array1: number[], array2: number[]) {
+  const mergedArray = [];
+  let array1Item = array1[0];
+  let array2Item = array2[0];
+  let i = 1;
+  let j = 1;
+
+  // Check if array.length >= 1
+  if (array1.length === 0) {
+    return array2;
   }
-  return backwards.join("");
+  if (array2.length === 0) {
+    return array1;
+  }
+
+  while (array1Item || array2Item) {
+    // console.log({ array1Item, array2Item });
+    if (array2Item === undefined || array1Item < array2Item) {
+      mergedArray.push(array1Item);
+      array1Item = array1[i];
+      i++;
+    } else {
+      mergedArray.push(array2Item);
+      array2Item = array2[j];
+      j++;
+    }
+  }
+  return mergedArray;
 }
 
-function reverse2(str: string) {
-  // Check for valid input
-  return str.split("").reverse().join("");
-}
-
-const reverse3 = (str: string) => [...str].reverse().join("");
-
-console.log('reverse("Timbits Hi"):', reverse("Timbits Hi"));
-console.log('reverse2("Timbits Hi"):', reverse2("Timbits Hi"));
-console.log('reverse3("Timbits Hi"):', reverse3("Timbits Hi"));
+console.log("mergeSortedArrays([0, 3, 4, 31,45], [3, 4, 6, 30]):", mergeSortedArrays([0, 3, 4, 31, 45], [3, 4, 6, 30]));

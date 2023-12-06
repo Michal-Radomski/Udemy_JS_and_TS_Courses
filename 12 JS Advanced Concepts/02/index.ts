@@ -742,64 +742,103 @@
 // console.log({ result }); //* result: '0cbc6611f5540bd0809a388dc95a615b'
 
 //* Exercise
-class HashTable {
-  data: [string, number][][];
-  constructor(size: number) {
-    this.data = new Array(size);
-  }
+// class HashTable {
+//   data: [string, number][][];
+//   constructor(size: number) {
+//     this.data = new Array(size);
+//   }
 
-  // underscore '_' -> private method/ property
-  _hash(key: string) {
-    let hash = 0;
-    for (let i = 0; i < key.length; i++) {
-      hash = (hash + key.charCodeAt(i) * i) % this.data.length;
-      // console.log(key[i], "hash:", hash);
-    }
-    return hash;
-  }
+//   // underscore '_' -> private method/ property
+//   _hash(key: string) {
+//     let hash = 0;
+//     for (let i = 0; i < key.length; i++) {
+//       hash = (hash + key.charCodeAt(i) * i) % this.data.length;
+//       // console.log(key[i], "hash:", hash);
+//     }
+//     return hash;
+//   }
 
-  set(key: string, value: number) {
-    let address = this._hash(key);
-    if (!this.data[address]) {
-      this.data[address] = [];
-    }
-    this.data[address].push([key, value]);
-    return this.data;
-  }
+//   set(key: string, value: number) {
+//     let address = this._hash(key);
+//     if (!this.data[address]) {
+//       this.data[address] = [];
+//     }
+//     this.data[address].push([key, value]);
+//     return this.data;
+//   }
 
-  get(key: string) {
-    const address = this._hash(key);
-    const currentBucket = this.data[address];
-    if (currentBucket) {
-      for (let i = 0; i < currentBucket.length; i++) {
-        if (currentBucket[i][0] === key) {
-          return currentBucket[i][1];
-        }
-      }
-    }
-    return undefined;
-  }
+//   get(key: string) {
+//     const address = this._hash(key);
+//     const currentBucket = this.data[address];
+//     if (currentBucket) {
+//       for (let i = 0; i < currentBucket.length; i++) {
+//         if (currentBucket[i][0] === key) {
+//           return currentBucket[i][1];
+//         }
+//       }
+//     }
+//     return undefined;
+//   }
 
-  keys() {
-    const keysArray = [];
-    // console.log("this.data.length:", this.data.length);
-    // console.log("this.data:", this.data);
-    for (let i = 0; i < this.data.length; i++) {
-      if (this.data[i]) {
-        keysArray.push(this.data[i][0][0]);
-      }
+//   keys() {
+//     const keysArray = [];
+//     // console.log("this.data.length:", this.data.length);
+//     // console.log("this.data:", this.data);
+//     for (let i = 0; i < this.data.length; i++) {
+//       if (this.data[i]) {
+//         keysArray.push(this.data[i][0][0]);
+//       }
+//     }
+//     return keysArray;
+//   }
+// }
+
+// const customHashTable = new HashTable(50);
+// // console.log("customHashTable:", customHashTable);
+// customHashTable.set("grapes", 10000);
+// customHashTable.set("grapes", 10000);
+// console.log('customHashTable.get("grapes"):', customHashTable.get("grapes"));
+// customHashTable.set("apples", 9);
+// console.log('customHashTable.get("apples"):', customHashTable.get("apples"));
+// // console.log("customHashTable:", customHashTable);
+// console.log("customHashTable.data[23][0]:", customHashTable.data[23][0]);
+// console.log("customHashTable.keys():", customHashTable.keys());
+
+//* Exercise
+//Google Question
+//Given an array = [2,5,1,2,3,5,1,2,4] -> it should return 2
+//Given an array = [2,1,1,2,3,5,1,2,4] -> it should return 1
+//Given an array = [2,3,4,5] -> it should return undefined
+
+// function firstRecurringCharacter(input: number[]) {
+//   let set = new Set();
+//   for (const num of input) {
+//     if (set.has(num)) {
+//       return num;
+//     }
+//     set.add(num);
+//   }
+//   return undefined;
+// }
+// console.log("firstRecurringCharacter([1, 5, 5, 1, 3, 4, 6]):", firstRecurringCharacter([1, 5, 5, 1, 3, 4, 6]));
+// console.log("firstRecurringCharacter([2,5,1,2,3,5,1,2,4]):", firstRecurringCharacter([2, 5, 1, 2, 3, 5, 1, 2, 4]));
+// console.log("firstRecurringCharacter([2,1,1,2,3,5,1,2,4]):", firstRecurringCharacter([2, 1, 1, 2, 3, 5, 1, 2, 4]));
+// console.log("firstRecurringCharacter([2,5,5,2,3,5,1,2,4]):", firstRecurringCharacter([2, 5, 5, 2, 3, 5, 1, 2, 4]));
+
+function firstRecurringCharacter2(input: number[]) {
+  const map = {} as { [key: number]: number };
+  for (let i = 0; i < input.length; i++) {
+    // console.log("map[input[i]]:", map[input[i]]);
+    if (map[input[i] as keyof typeof map] !== undefined) {
+      return input[i];
+    } else {
+      map[input[i] as keyof typeof map] = i;
     }
-    return keysArray;
   }
+  return undefined;
 }
 
-const customHashTable = new HashTable(50);
-// console.log("customHashTable:", customHashTable);
-customHashTable.set("grapes", 10000);
-customHashTable.set("grapes", 10000);
-console.log('customHashTable.get("grapes"):', customHashTable.get("grapes"));
-customHashTable.set("apples", 9);
-console.log('customHashTable.get("apples"):', customHashTable.get("apples"));
-// console.log("customHashTable:", customHashTable);
-console.log("customHashTable.data[23][0]:", customHashTable.data[23][0]);
-console.log("customHashTable.keys():", customHashTable.keys());
+console.log("firstRecurringCharacter2([1, 5, 5, 1, 3, 4, 6]):", firstRecurringCharacter2([1, 5, 5, 1, 3, 4, 6]));
+console.log("firstRecurringCharacter2([2,5,1,2,3,5,1,2,4]):", firstRecurringCharacter2([2, 5, 1, 2, 3, 5, 1, 2, 4]));
+console.log("firstRecurringCharacter2([2,1,1,2,3,5,1,2,4]):", firstRecurringCharacter2([2, 1, 1, 2, 3, 5, 1, 2, 4]));
+console.log("firstRecurringCharacter2([2,5,5,2,3,5,1,2,4]):", firstRecurringCharacter2([2, 5, 5, 2, 3, 5, 1, 2, 4]));

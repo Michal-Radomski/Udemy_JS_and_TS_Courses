@@ -825,20 +825,112 @@
 // console.log("firstRecurringCharacter([2,1,1,2,3,5,1,2,4]):", firstRecurringCharacter([2, 1, 1, 2, 3, 5, 1, 2, 4]));
 // console.log("firstRecurringCharacter([2,5,5,2,3,5,1,2,4]):", firstRecurringCharacter([2, 5, 5, 2, 3, 5, 1, 2, 4]));
 
-function firstRecurringCharacter2(input: number[]) {
-  const map = {} as { [key: number]: number };
-  for (let i = 0; i < input.length; i++) {
-    // console.log("map[input[i]]:", map[input[i]]);
-    if (map[input[i] as keyof typeof map] !== undefined) {
-      return input[i];
-    } else {
-      map[input[i] as keyof typeof map] = i;
-    }
-  }
-  return undefined;
-}
+// function firstRecurringCharacter2(input: number[]) {
+//   const map = {} as { [key: number]: number };
+//   for (let i = 0; i < input.length; i++) {
+//     // console.log("map[input[i]]:", map[input[i]]);
+//     if (map[input[i] as keyof typeof map] !== undefined) {
+//       return input[i];
+//     } else {
+//       map[input[i] as keyof typeof map] = i;
+//     }
+//   }
+//   return undefined;
+// }
 
-console.log("firstRecurringCharacter2([1, 5, 5, 1, 3, 4, 6]):", firstRecurringCharacter2([1, 5, 5, 1, 3, 4, 6]));
-console.log("firstRecurringCharacter2([2,5,1,2,3,5,1,2,4]):", firstRecurringCharacter2([2, 5, 1, 2, 3, 5, 1, 2, 4]));
-console.log("firstRecurringCharacter2([2,1,1,2,3,5,1,2,4]):", firstRecurringCharacter2([2, 1, 1, 2, 3, 5, 1, 2, 4]));
-console.log("firstRecurringCharacter2([2,5,5,2,3,5,1,2,4]):", firstRecurringCharacter2([2, 5, 5, 2, 3, 5, 1, 2, 4]));
+// console.log("firstRecurringCharacter2([1, 5, 5, 1, 3, 4, 6]):", firstRecurringCharacter2([1, 5, 5, 1, 3, 4, 6]));
+// console.log("firstRecurringCharacter2([2,5,1,2,3,5,1,2,4]):", firstRecurringCharacter2([2, 5, 1, 2, 3, 5, 1, 2, 4]));
+// console.log("firstRecurringCharacter2([2,1,1,2,3,5,1,2,4]):", firstRecurringCharacter2([2, 1, 1, 2, 3, 5, 1, 2, 4]));
+// console.log("firstRecurringCharacter2([2,5,5,2,3,5,1,2,4]):", firstRecurringCharacter2([2, 5, 5, 2, 3, 5, 1, 2, 4]));
+
+//@ Appendix - JS Basics + Intermediate
+//* Scope
+// const test = "test";
+// function f1() {
+//   const test = "f1";
+//   console.log(1, { test });
+// }
+// function f2() {
+//   const test = "f2";
+//   console.log(2, { test });
+// }
+// function f3() {
+//   const test = "f3";
+//   console.log(3, { test });
+// }
+// console.log(0, { test });
+// f1();
+// f2();
+// f3();
+// console.log(4, { test });
+
+//* Switch
+// const expr: string = "Papayas";
+// switch (expr) {
+//   case "Oranges":
+//     console.log("Oranges are $0.59 a pound.");
+//     break;
+//   case "Mangoes":
+//   case "Papayas":
+//     console.log("Mangoes and papayas are $2.79 a pound."); // Expected output: "Mangoes and papayas are $2.79 a pound."
+//     break;
+//   default:
+//     console.log(`Sorry, we are out of ${expr}.`);
+// }
+
+//* Dynamic property name in object
+// const test = "test_value";
+// const obj = {
+//   [test]: "hello",
+//   [1 + 2]: "world",
+// };
+// console.log("obj:", obj);
+
+// const obj1 = { value: 10 };
+// const obj2 = obj1;
+// console.log("obj1 === obj2:", obj1 === obj2);
+
+//* ES7
+// console.log('"Hello".includes("e"):', "Hello".includes("e")); // true
+// const square = (x: number) => x ** 2;
+// console.log("square(4):", square(4)); // 4^2 = 16
+// const cube = (x: number) => x ** 3;
+// console.log("cube(4):", cube(4)); // 4^3 = 64
+
+//* ES8
+console.log("2".padStart(3, "*")); // '**2'
+console.log("2".padEnd(3, "*")); // '2**'
+
+const obj = {
+  user1: "Santa",
+  user2: "Rudolf",
+  user3: "Mr.Grinch",
+};
+Object.keys(obj).forEach((key, index) => {
+  console.log(index, key, obj[key as keyof typeof obj]);
+});
+
+//* ES9 -> async/await
+
+//* ES10 (ES2019)
+// flatMap
+const arr1 = [1, 2, 3, 4];
+const arr1_1 = arr1.map((x) => [x * 2]);
+console.log("arr1_1:", arr1_1); // [[2], [4], [6], [8]]
+const arr1_2 = arr1.flatMap((x) => [x * 2]);
+console.log("arr1_2:", arr1_2); // [2, 4, 6, 8]
+
+const greeting = [
+  ["Hello", "young", "grasshopper!"],
+  ["you", "are"],
+  ["learning", "fast!"],
+];
+console.log(greeting.flatMap((x) => x.join(" "))); // [ 'Hello young grasshopper!', 'you are', 'learning fast!' ]
+console.log(greeting.flatMap((x) => x.join(" ")).join(" ")); // Hello young grasshopper! you are learning fast!
+
+const trapped = [[[[[[[[[[[[[[[[[[[[[[[[[[3]]]]]]]]]]]]]]]]]]]]]]]]]];
+console.log(trapped.flat(Infinity)); // [3]
+
+const userEmail3 = "     cannotfillemailformcorrectly@gmail.com   ";
+console.log(userEmail3.trimEnd().trimStart()); // Hello young grasshopper! you are learning fast!
+console.log(userEmail3.trim()); //Hello young grasshopper! you are learning fast!

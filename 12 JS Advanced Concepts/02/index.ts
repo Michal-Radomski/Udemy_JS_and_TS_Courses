@@ -542,39 +542,77 @@
 // console.log("cube(4):", cube(4)); // 4^3 = 64
 
 //* ES8
-console.log("2".padStart(3, "*")); // '**2'
-console.log("2".padEnd(3, "*")); // '2**'
+// console.log("2".padStart(3, "*")); // '**2'
+// console.log("2".padEnd(3, "*")); // '2**'
 
-const obj = {
-  user1: "Santa",
-  user2: "Rudolf",
-  user3: "Mr.Grinch",
-};
-Object.keys(obj).forEach((key, index) => {
-  console.log(index, key, obj[key as keyof typeof obj]);
-});
+// const obj = {
+//   user1: "Santa",
+//   user2: "Rudolf",
+//   user3: "Mr.Grinch",
+// };
+// Object.keys(obj).forEach((key, index) => {
+//   console.log(index, key, obj[key as keyof typeof obj]);
+// });
 
 //* ES9 -> async/await
 
 //* ES10 (ES2019)
 // flatMap
-const arr1 = [1, 2, 3, 4];
-const arr1_1 = arr1.map((x) => [x * 2]);
-console.log("arr1_1:", arr1_1); // [[2], [4], [6], [8]]
-const arr1_2 = arr1.flatMap((x) => [x * 2]);
-console.log("arr1_2:", arr1_2); // [2, 4, 6, 8]
+// const arr1 = [1, 2, 3, 4];
+// const arr1_1 = arr1.map((x) => [x * 2]);
+// console.log("arr1_1:", arr1_1); // [[2], [4], [6], [8]]
+// const arr1_2 = arr1.flatMap((x) => [x * 2]);
+// console.log("arr1_2:", arr1_2); // [2, 4, 6, 8]
 
-const greeting = [
-  ["Hello", "young", "grasshopper!"],
-  ["you", "are"],
-  ["learning", "fast!"],
-];
-console.log(greeting.flatMap((x) => x.join(" "))); // [ 'Hello young grasshopper!', 'you are', 'learning fast!' ]
-console.log(greeting.flatMap((x) => x.join(" ")).join(" ")); // Hello young grasshopper! you are learning fast!
+// const greeting = [
+//   ["Hello", "young", "grasshopper!"],
+//   ["you", "are"],
+//   ["learning", "fast!"],
+// ];
+// console.log(greeting.flatMap((x) => x.join(" "))); // [ 'Hello young grasshopper!', 'you are', 'learning fast!' ]
+// console.log(greeting.flatMap((x) => x.join(" ")).join(" ")); // Hello young grasshopper! you are learning fast!
 
-const trapped = [[[[[[[[[[[[[[[[[[[[[[[[[[3]]]]]]]]]]]]]]]]]]]]]]]]]];
-console.log(trapped.flat(Infinity)); // [3]
+// const trapped = [[[[[[[[[[[[[[[[[[[[[[[[[[3]]]]]]]]]]]]]]]]]]]]]]]]]];
+// console.log(trapped.flat(Infinity)); // [3]
 
-const userEmail3 = "     cannotfillemailformcorrectly@gmail.com   ";
-console.log(userEmail3.trimEnd().trimStart()); // Hello young grasshopper! you are learning fast!
-console.log(userEmail3.trim()); //Hello young grasshopper! you are learning fast!
+// const userEmail3 = "     cannotfillemailformcorrectly@gmail.com   ";
+// console.log(userEmail3.trimEnd().trimStart()); // Hello young grasshopper! you are learning fast!
+// console.log(userEmail3.trim()); //Hello young grasshopper! you are learning fast!
+
+//* Loops
+// const basket = ["apples", "oranges", "grapes", "bananas"];
+
+// let basketIndex = 0;
+// while (basketIndex < basket.length) {
+//   console.log({ basketIndex }, basket[basketIndex]);
+//   basketIndex++;
+// }
+
+// for (let i = 0; i < basket.length; i++) {
+//   console.log({ i }, basket[i]);
+// }
+
+// basket.forEach((fruit, index) => console.log({ index }, fruit));
+
+// for (const item of basket) {
+//   console.log("basket.indexOf(item):", basket.indexOf(item), item);
+// }
+
+// // Can't be used with objects
+// for (const index of basket.keys()) {
+//   console.log({ index }, basket[index]);
+// }
+
+// for (const item in basket) {
+//   console.log({ item }, basket[item]);
+// }
+
+const detailedBasket = {
+  apples: 5,
+  oranges: 10,
+  grapes: 15,
+  bananas: 20,
+};
+for (const item in detailedBasket) {
+  console.log({ item }, detailedBasket[item as keyof typeof detailedBasket]);
+}

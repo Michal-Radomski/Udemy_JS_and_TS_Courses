@@ -607,12 +607,53 @@
 //   console.log({ item }, basket[item]);
 // }
 
-const detailedBasket = {
-  apples: 5,
-  oranges: 10,
-  grapes: 15,
-  bananas: 20,
-};
-for (const item in detailedBasket) {
-  console.log({ item }, detailedBasket[item as keyof typeof detailedBasket]);
-}
+// const detailedBasket = {
+//   apples: 5,
+//   oranges: 10,
+//   grapes: 15,
+//   bananas: 20,
+// };
+// for (const item in detailedBasket) {
+//   console.log({ item }, detailedBasket[item as keyof typeof detailedBasket]);
+// }
+
+//* ES2020
+// console.log("Number.MAX_SAFE_INTEGER:", Number.MAX_SAFE_INTEGER); // 9007199254740991 = 2^53 - 1
+
+// console.log("Number.MIN_VALUE", Number.MIN_VALUE); // 2^(-1074) -> 5e-324
+// console.log("Number.MAX_VALUE", Number.MAX_VALUE); // 2^1024 - 2^971 -> 1.7976931348623157e+308
+
+// const hugeBin = BigInt("0b11111111111111111111111111111111111111111111111111111");
+// console.log(hugeBin, typeof hugeBin); // 9007199254740991n bigint
+
+// const alsoHuge = BigInt(9007199254740991); // 9007199254740991n bigint
+
+// const hugeString = BigInt("9007199254740991"); // 9007199254740991n bigint
+
+// const hugeHex = BigInt("0x1fffffffffffff"); // 9007199254740991n bigint
+
+// const hugeOctal = BigInt("0o377777777777777777"); // 9007199254740991n bigint
+
+// console.log(
+//   { alsoHuge, hugeString, hugeHex, hugeOctal },
+//   typeof alsoHuge,
+//   typeof hugeString,
+//   typeof hugeHex,
+//   typeof hugeOctal
+// );
+
+// Nullish coalescing operator (??) -> checks if null or undefined
+// const foo = null ?? "default string";
+// console.log({ foo }); // Expected output: "default string"
+
+// const baz = 0 ?? 42;
+// console.log({ baz }); // Expected output: 0
+
+// // globalThis -> works outside a browser
+// console.log("globalThis:", globalThis);
+
+//* ES2021
+const str = "string string string";
+console.log('str.replaceAll("i", "III"):', str.replaceAll("i", "III")); // strIIIng strIIIng strIIIng
+
+//* ES2022

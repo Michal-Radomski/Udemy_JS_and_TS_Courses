@@ -383,6 +383,7 @@
 // console.log("mergeSortedArrays([0, 3, 4, 31,45], [3, 4, 6, 30]):", mergeSortedArrays([0, 3, 4, 31, 45], [3, 4, 6, 30]));
 
 //@ Hash Tables (in JS -> Objects)
+//- See file ../MD5.js
 // https://en.wikipedia.org/wiki/Hash_table
 
 //* Exercise
@@ -579,6 +580,22 @@
 // console.log(userEmail3.trimEnd().trimStart()); // Hello young grasshopper! you are learning fast!
 // console.log(userEmail3.trim()); //Hello young grasshopper! you are learning fast!
 
+//* Object.fromEntries()
+// const entries = new Map<string, number>([
+//   ["foo", 34],
+//   ["baz", 42],
+// ]);
+// const obj = Object.fromEntries(entries);
+// console.log("obj:", obj); // Expected output: Object { foo: 34, baz: 42 }
+
+// const objArray = [
+//   ["0", "a"],
+//   ["1", "b"],
+//   ["2", "c"],
+// ];
+// const obj2 = Object.fromEntries(objArray);
+// console.log("obj2:", obj2); // { 0: "a", 1: "b", 2: "c" }
+
 //* Loops
 // const basket = ["apples", "oranges", "grapes", "bananas"];
 
@@ -663,22 +680,93 @@
 // console.log("arr.at(-2):", arr.at(-2)); // 400
 
 //* ES2023 -> Methods are correct!
-// //* findLast() + findLastIndex()
-// const array1 = [5, 12, 50, 130, 44];
-// // @ts-ignore
-// const found = array1.findLast((element) => element > 45);
-// console.log({ found }); // Expected output: 130
+//* findLast() + findLastIndex()
+const array1 = [5, 12, 50, 130, 44];
+// @ts-ignore
+const found = array1.findLast((element) => element > 45);
+console.log({ found }); // Expected output: 130
 
-// const isLargeNumber = (element: number) => element > 45;
-// // @ts-ignore
-// console.log("array1.findLastIndex(isLargeNumber):", array1.findLastIndex(isLargeNumber)); // 3 ,Index of element with value: 130
+const isLargeNumber = (element: number) => element > 45;
+// @ts-ignore
+console.log("array1.findLastIndex(isLargeNumber):", array1.findLastIndex(isLargeNumber)); // 3 ,Index of element with value: 130
 
-// const inventory = [
-//   { name: "apples", quantity: 2 },
-//   { name: "bananas", quantity: 0 },
-//   { name: "fish", quantity: 1 },
-//   { name: "cherries", quantity: 5 },
+const inventory = [
+  { name: "apples", quantity: 2 },
+  { name: "bananas", quantity: 0 },
+  { name: "fish", quantity: 1 },
+  { name: "cherries", quantity: 5 },
+];
+function isNotEnough(item: { quantity: number }) {
+  return item.quantity < 2;
+}
+
+// @ts-ignore
+console.log("inventory.findLast(isNotEnough):", inventory.findLast(isNotEnough)); // { name: "fish", quantity: 1 }
+
+//* toReversed()
+const items = [1, 2, 3];
+console.log({ items }); // [1, 2, 3]
+
+// @ts-ignore
+const reversedItems = items.toReversed();
+console.log({ reversedItems }); // [3, 2, 1]
+console.log({ items }); // [1, 2, 3]
+
+//* toSorted()
+const values = [1, 10, 21, 2];
+// @ts-ignore
+const sortedValues = values.toSorted((a, b) => a - b);
+console.log({ sortedValues }); // [1, 2, 10, 21]
+console.log({ values }); // [1, 10, 21, 2]
+
+//* toSpliced()
+const months = ["Jan", "Mar", "Apr", "May"];
+// Inserting an element at index 1
+// @ts-ignore
+const months2 = months.toSpliced(1, 0, "Feb");
+console.log({ months2 }); // ["Jan", "Feb", "Mar", "Apr", "May"]
+
+// Deleting two elements starting from index 2
+// @ts-ignore
+const months3 = months2.toSpliced(2, 2);
+console.log({ months3 }); // ["Jan", "Feb", "May"]
+
+// Replacing one element at index 1 with two new elements
+// @ts-ignore
+const months4 = months3.toSpliced(1, 1, "Feb", "Mar");
+console.log({ months4 }); // ["Jan", "Feb", "Mar", "May"]
+
+// Original array is not modified!
+console.log({ months }); // ["Jan", "Mar", "Apr", "May"]
+
+//* with() -> Creating a new array with a single element changed
+const arr = [1, 2, 3, 4, 5];
+// @ts-ignore
+console.log("arr.with(2, 6):", arr.with(2, 6)); // [1, 2, 6, 4, 5]
+console.log({ arr }); // [1, 2, 3, 4, 5]
+
+// @ Debugging
+// const animals = [
+//   { animal: "Horse", name: "Henry", age: 43 },
+//   { animal: "Dog", name: "Fred", age: 13 },
+//   { animal: "Cat", name: "Frodo", age: 18 },
 // ];
-// function isNotEnough(item: { quantity: number }) {
-//   return item.quantity < 2;
+// console.table(animals);
+
+// console.time("Timer1");
+// const itemsArray = [];
+
+// for (let i = 0; i < 100000; i++) {
+//   itemsArray.push({ index: i });
 // }
+// console.timeEnd("Timer1");
+
+// function foo() {
+//   debugger; //* Works in browser only!
+//   function bar() {
+//     console.log("Test");
+//     console.trace();
+//   }
+//   bar();
+// }
+// foo();

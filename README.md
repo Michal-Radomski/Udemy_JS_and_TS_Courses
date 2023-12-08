@@ -26,4 +26,4 @@ Files created during Udemy.com JS and TS courses:
 
 12. [JS: The Advanced Concepts](https://www.udemy.com/course/advanced-javascript-concepts)
 
-13. [Clean Code](https://www.udemy.com/course/writing-clean-code)
+13. [Clean Code](https://www.udemy.com/course/writing-clean-code) (not JS course)

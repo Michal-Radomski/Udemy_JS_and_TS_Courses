@@ -1,3 +1,5 @@
+# Good names example
+
 from datetime import datetime
 
 

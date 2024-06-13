@@ -36,7 +36,7 @@ console.log("$.ajax:", $.ajax);
 }
 
 {
-  //* template string
+  //* Template string
   const getMessage = () => {
     // const year = new Date().getFullYear();
     // return `The year is ${year}`;
@@ -53,7 +53,7 @@ console.log("$.ajax:", $.ajax);
 }
 
 {
-  //* arrow functions
+  //* Arrow functions
   const add = function (a: number, b: number) {
     return a + b;
   };

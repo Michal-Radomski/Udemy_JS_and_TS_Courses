@@ -286,3 +286,30 @@ const [, , , fourth, fifth] = someJSON.genre_ids;
 console.log({ fourth, fifth });
 const [, two, ...others] = someJSON.genre_ids;
 console.log({ two, others });
+
+//* Nested curly braces
+const addWithCondition = (a: number, b: number): number => {
+  if (a > 0 && b > 0) {
+    return a + b;
+  }
+  return 0;
+};
+
+console.log("addWithCondition(1, 2):", addWithCondition(1, 2)); // Output: 3
+console.log("addWithCondition(-1, 2):", addWithCondition(-1, 2)); // Output: 0
+
+const complexFunction = (x: number): string => {
+  if (x > 0) {
+    if (x % 2 === 0) {
+      return "Positive even";
+    } else {
+      return "Positive odd";
+    }
+  } else {
+    return "Non-positive";
+  }
+};
+
+console.log("complexFunction(3):", complexFunction(3)); // "Positive odd"
+console.log("complexFunction(4):", complexFunction(4)); // "Positive even"
+console.log("complexFunction(-1):", complexFunction(-1)); // "Non-positive"

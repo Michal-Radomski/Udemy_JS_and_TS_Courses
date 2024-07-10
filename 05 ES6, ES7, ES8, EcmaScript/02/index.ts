@@ -73,7 +73,11 @@ console.log({ j_2 });
 // const k_2 = new Document();
 // console.log("k_2:", k_2);
 
-// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x, y, z, a_2, b_2, c_2, d_2, e_2, f_2, g_2, h_2, i_2, j_2, k_2 });
+// const request = new Request("https://example.com/api/data");
+// const l_2 = new FetchEvent("fetch", { request }); //* in the browsers!
+// console.log("l_2:", l_2);
+
+// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x, y, z, a_2, b_2, c_2, d_2, e_2, f_2, g_2, h_2, i_2, j_2, k_2, l_2 });
 
 //* Example
 // const date = new Date(Date.UTC(2020, 11, 20, 3, 23, 16, 738));

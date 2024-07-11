@@ -79,6 +79,34 @@ console.log({ j_2 });
 
 // console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x, y, z, a_2, b_2, c_2, d_2, e_2, f_2, g_2, h_2, i_2, j_2, k_2, l_2 });
 
+//* Other constructors
+const myStream = new ReadableStream({
+  start(controller) {
+    // Enqueue some data
+    controller.enqueue("Hello");
+    controller.enqueue("World");
+
+    // Close the stream
+    controller.close();
+  },
+});
+
+// Read the stream
+const reader = myStream.getReader();
+reader
+  .read()
+  .then((result) => {
+    console.log(result.value); // Output: Hello
+    return reader.read();
+  })
+  .then((result) => {
+    console.log(result.value); // Output: World
+    console.log(result.done); // Output: true
+  });
+
+console.log("myStream:", myStream);
+console.log("reader:", reader);
+
 //* Example
 // const date = new Date(Date.UTC(2020, 11, 20, 3, 23, 16, 738));
 // console.log(new Intl.DateTimeFormat("en-US").format(date)); // Expected output: "12/20/2020"

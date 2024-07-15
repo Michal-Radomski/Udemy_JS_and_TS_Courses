@@ -113,6 +113,11 @@ reader
 console.log("myStream:", myStream);
 console.log("reader:", reader);
 
+//* btoa() - Binary to ASCII, atob() - ASCII to Binary
+const encodedData = btoa("Hello, world"); // encode a string
+const decodedData = atob(encodedData); // decode a string
+console.log({ encodedData, decodedData });
+
 //* Example
 // const date = new Date(Date.UTC(2020, 11, 20, 3, 23, 16, 738));
 // console.log(new Intl.DateTimeFormat("en-US").format(date)); // Expected output: "12/20/2020"
@@ -492,7 +497,7 @@ class Car {
   }
 }
 
-let myCar = new Car(`Red`, `Chevy`, `Tahoe`);
+const myCar = new Car(`Red`, `Chevy`, `Tahoe`);
 console.log({ myCar });
 myCar.color = `blue`;
 console.log({ myCar });

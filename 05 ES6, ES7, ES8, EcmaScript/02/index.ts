@@ -91,6 +91,12 @@ const myStream = new ReadableStream({
   },
 });
 
+// const options = {
+//   body: "You successfully subscribed to our Notification service!",
+// };
+// const notification = new Notification("Successfully subscribed!", options);
+// console.log({ notification });
+
 // Read the stream
 const reader = myStream.getReader();
 reader

@@ -1,0 +1,59 @@
+Here is a comprehensive list of all the built-in mathematical constants available in JavaScript through the `Math` object:
+
+1. **Math.PI**
+   - Represents the mathematical constant π (pi).
+   - Approximate value: 3.141592653589793
+   ```javascript
+   console.log(Math.PI); // 3.141592653589793
+   ```
+
+2. **Math.E**
+   - Represents Euler's number, the base of natural logarithms.
+   - Approximate value: 2.718281828459045
+   ```javascript
+   console.log(Math.E); // 2.718281828459045
+   ```
+
+3. **Math.LN10**
+   - The natural logarithm of 10.
+   - Approximate value: 2.302585092994046
+   ```javascript
+   console.log(Math.LN10); // 2.302585092994046
+   ```
+
+4. **Math.LN2**
+   - The natural logarithm of 2.
+   - Approximate value: 0.6931471805599453
+   ```javascript
+   console.log(Math.LN2); // 0.6931471805599453
+   ```
+
+5. **Math.LOG10E**
+   - The base-10 logarithm of e.
+   - Approximate value: 0.4342944819032518
+   ```javascript
+   console.log(Math.LOG10E); // 0.4342944819032518
+   ```
+
+6. **Math.LOG2E**
+   - The base-2 logarithm of e.
+   - Approximate value: 1.4426950408889634
+   ```javascript
+   console.log(Math.LOG2E); // 1.4426950408889634
+   ```
+
+7. **Math.SQRT1_2**
+   - The square root of 1/2.
+   - Approximate value: 0.7071067811865476
+   ```javascript
+   console.log(Math.SQRT1_2); // 0.7071067811865476
+   ```
+
+8. **Math.SQRT2**
+   - The square root of 2.
+   - Approximate value: 1.4142135623730951
+   ```javascript
+   console.log(Math.SQRT2); // 1.4142135623730951
+   ```
+
+These constants are part of the `Math` object and are readily available for use in mathematical calculations. They provide precise values for common mathematical constants, which are essential for various scientific, engineering, and mathematical computations.

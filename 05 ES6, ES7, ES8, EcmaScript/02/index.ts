@@ -113,6 +113,110 @@ reader
 console.log("myStream:", myStream);
 console.log("reader:", reader);
 
+//* PushEvent * NotificationEvent
+// const dataInit = {
+//   data: "Some sample text",
+// };
+// const myPushEvent = new PushEvent("push", dataInit);
+// myPushEvent.data?.text(); // should return 'Some sample text'
+// console.log({ myPushEvent });
+
+// const notif = new Notification("Hello");
+// const myNotificationEvent = new NotificationEvent("notificationclose", { notification: notif });
+// console.log({ notif, myNotificationEvent });
+
+{
+  //* PushEvent
+  class PushMessageData {
+    private data: string;
+
+    constructor(data: string) {
+      this.data = data;
+    }
+
+    text(): string {
+      return this.data;
+    }
+
+    json(): any {
+      return JSON.parse(this.data);
+    }
+  }
+
+  class PushEvent extends Event {
+    readonly data: PushMessageData;
+
+    constructor(type: string, eventInitDict?: PushEventInit) {
+      super(type, eventInitDict);
+      this.data = new PushMessageData(eventInitDict?.data || "");
+    }
+  }
+
+  interface PushEventInit extends EventInit {
+    data?: string;
+  }
+
+  // Usage example:
+  const pushEvent = new PushEvent("push", {
+    data: JSON.stringify({ message: "New message received!" }),
+  });
+
+  console.log(pushEvent.data.text()); // '{"message":"New message received!"}'
+  console.log(pushEvent.data.json().message); // 'New message received!'
+
+  //* NOtification Event
+  interface NotificationOptions {
+    body?: string;
+    icon?: string;
+    tag?: string;
+    data?: any;
+    // Add other notification options as needed
+  }
+
+  class Notification {
+    readonly title: string;
+    readonly options: NotificationOptions;
+
+    constructor(title: string, options?: NotificationOptions) {
+      this.title = title;
+      this.options = options || {};
+    }
+  }
+
+  class NotificationEvent extends Event {
+    readonly notification: Notification;
+    readonly action: string;
+
+    constructor(type: string, eventInitDict: NotificationEventInit) {
+      super(type, eventInitDict);
+      this.notification = eventInitDict.notification;
+      this.action = eventInitDict.action || "";
+    }
+  }
+
+  interface NotificationEventInit extends EventInit {
+    notification: Notification;
+    action?: string;
+  }
+
+  // Usage example:
+  const notification = new Notification("New Message", {
+    body: "You have a new message from Alice",
+    icon: "message-icon.png",
+    tag: "message",
+    data: { messageId: 12345 },
+  });
+
+  const notificationEvent = new NotificationEvent("notificationclick", {
+    notification: notification,
+    action: "reply",
+  });
+
+  console.log(notificationEvent.notification.title); // 'New Message'
+  console.log(notificationEvent.notification.options.body); // 'You have a new message from Alice'
+  console.log(notificationEvent.action); // 'reply'
+}
+
 //* btoa() - Binary to ASCII, atob() - ASCII to Binary
 const encodedData = btoa("Hello, world"); // encode a string
 const decodedData = atob(encodedData); // decode a string

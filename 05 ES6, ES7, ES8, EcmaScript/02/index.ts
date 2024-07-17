@@ -125,6 +125,15 @@ console.log("reader:", reader);
 // const myNotificationEvent = new NotificationEvent("notificationclose", { notification: notif });
 // console.log({ notif, myNotificationEvent });
 
+const formData = new FormData();
+// Add fields to the FormData object
+formData.append("name", "Jane Doe");
+formData.append("email", "jane@example.com");
+formData.append("age", "28");
+for (const pair of formData.entries()) {
+  console.log("pair[0], pair[1]:", pair[0], pair[1]);
+}
+
 {
   //* PushEvent
   class PushMessageData {

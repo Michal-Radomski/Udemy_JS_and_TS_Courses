@@ -113,6 +113,10 @@ reader
 console.log("myStream:", myStream);
 console.log("reader:", reader);
 
+//* Float16Array() constructor - works in browsers only!
+// const float16Array = new Float16Array(3);
+// console.log("float16Array:", float16Array); // Float16Array(3) [0, 0, 0]
+
 //* PushEvent * NotificationEvent
 // const dataInit = {
 //   data: "Some sample text",

@@ -64,20 +64,17 @@ console.log({ g_2 });
 // const h_2 = new Worker("worker.js");
 // console.log({h_2})
 
-const i_2 = new TextEncoder();
+const i_2 = new AggregateError([new Error("some error")], "Hello");
 console.log({ i_2 });
 
-const j_2 = new AggregateError([new Error("some error")], "Hello");
-console.log({ j_2 });
-
-// const k_2 = new Document();
-// console.log("k_2:", k_2);
+// const j_2 = new Document();
+// console.log("j_2:", j_2);
 
 // const request = new Request("https://example.com/api/data");
-// const l_2 = new FetchEvent("fetch", { request }); //* in the browsers!
-// console.log("l_2:", l_2);
+// const k_2 = new FetchEvent("fetch", { request }); //* in the browsers!
+// console.log("k_2:", k_2);
 
-// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x, y, z, a_2, b_2, c_2, d_2, e_2, f_2, g_2, h_2, i_2, j_2, k_2, l_2 });
+// console.log({ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w, x, y, z, a_2, b_2, c_2, d_2, e_2, f_2, g_2, h_2, i_2, j_2, k_2 });
 
 //* Other constructors
 const myStream = new ReadableStream({
@@ -136,6 +133,29 @@ formData.append("email", "jane@example.com");
 formData.append("age", "28");
 for (const pair of formData.entries()) {
   console.log("pair[0], pair[1]:", pair[0], pair[1]);
+
+  //* TextDecoder, TextEncoder
+  console.log("* TextDecoder, TextEncoder");
+  const utf8decoder: TextDecoder = new TextDecoder("utf-8"); // default 'utf-8' or 'utf8'
+  console.log("utf8decoder:", utf8decoder);
+  const u8arr = new Uint8Array([240, 160, 174, 183]);
+  const i8arr = new Int8Array([-16, -96, -82, -73]);
+  const u16arr = new Uint16Array([41200, 47022]);
+  const i16arr = new Int16Array([-24336, -18514]);
+  const i32arr = new Int32Array([-1213292304]);
+  console.log({ u8arr, i8arr, u16arr, i16arr, i32arr });
+
+  console.log(utf8decoder.decode(u8arr));
+  console.log(utf8decoder.decode(i8arr));
+  console.log(utf8decoder.decode(u16arr));
+  console.log(utf8decoder.decode(i16arr));
+  console.log(utf8decoder.decode(i32arr));
+
+  const textEncoder: TextEncoder = new TextEncoder();
+  console.log("textEncoder:", textEncoder);
+  const sourceParagraph: string = "This is a sample paragraph.";
+  const encoded: Uint8Array = textEncoder.encode(sourceParagraph);
+  console.log("encoded:", encoded);
 }
 
 {

@@ -1,0 +1,106 @@
+Bitwise operators in TypeScript operate on the binary representations of integers, allowing for low-level manipulation of individual bits. They are particularly useful in scenarios involving flags, binary data, or performance optimizations. Here’s a detailed overview of the main bitwise operators along with examples in TypeScript.
+
+## Types of Bitwise Operators
+
+1. **Bitwise AND (`&`)**: Compares each bit of two numbers and returns a new number whose bits are set to 1 only if both corresponding bits are 1.
+
+   **Example**:
+   ```typescript
+   let a = 5; // Binary: 0101
+   let b = 3; // Binary: 0011
+   console.log(a & b); // Output: 1 (Binary: 0001)
+   ```
+
+2. **Bitwise OR (`|`)**: Compares each bit of two numbers and returns a new number whose bits are set to 1 if at least one of the corresponding bits is 1.
+
+   **Example**:
+   ```typescript
+   console.log(a | b); // Output: 7 (Binary: 0111)
+   ```
+
+3. **Bitwise XOR (`^`)**: Compares each bit of two numbers and returns a new number whose bits are set to 1 if only one of the corresponding bits is 1.
+
+   **Example**:
+   ```typescript
+   console.log(a ^ b); // Output: 6 (Binary: 0110)
+   ```
+
+4. **Bitwise NOT (`~`)**: Flips all the bits of the operand, turning 0s into 1s and vice versa.
+
+   **Example**:
+   ```typescript
+   console.log(~a); // Output: -6 (Binary: ...11111010)
+   ```
+
+5. **Left Shift (`<<`)**: Shifts the bits of a number to the left by a specified number of positions. Each shift to the left effectively multiplies the number by 2.
+
+   **Example**:
+   ```typescript
+   console.log(a << 1); // Output: 10 (Binary: 1010)
+   ```
+
+6. **Right Shift (`>>`)**: Shifts the bits of a number to the right by a specified number of positions, discarding bits on the right and filling in from the left based on the sign of the number.
+
+   **Example**:
+   ```typescript
+   console.log(a >> 1); // Output: 2 (Binary: 0010)
+   ```
+
+7. **Unsigned Right Shift (`>>>`)**: Similar to right shift but fills in zeros from the left regardless of the sign.
+
+   **Example**:
+   ```typescript
+   console.log(-8 >>> 2); // Output: 1073741820 (Binary representation changes)
+   ```
+
+## Summary Table
+
+| Operator | Description                                          | Example             | Result |
+|----------|------------------------------------------------------|---------------------|--------|
+| `&`      | Bitwise AND                                         | `5 & 3`             | `1`    |
+| `|`      | Bitwise OR                                          | `5 | 3`             | `7`    |
+| `^`      | Bitwise XOR                                         | `5 ^ 3`             | `6`    |
+| `~`      | Bitwise NOT                                         | `~5`                | `-6`   |
+| `<<`     | Left Shift                                          | `5 << 1`            | `10`   |
+| `>>`     | Right Shift                                         | `5 >> 1`            | `2`    |
+| `>>>`    | Unsigned Right Shift                                | `-8 >>> 2`          | `1073741820` |
+
+Understanding these operators can greatly enhance your ability to work with binary data and optimize algorithms in TypeScript programming [1][2][3].
+
+Citations:
+[1] https://reflectoring.io/typescript-operators/
+[2] https://www.tutorialspoint.com/typescript/typescript_bitwise_operators_examples.htm
+[3] https://www.tektutorialshub.com/typescript/bitwise-operators-in-typescript/
+[4] https://www.geeksforgeeks.org/python-bitwise-operators/
+[5] https://www.geeksforgeeks.org/cpp-bitwise-operators/
+[6] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_AND
+[7] https://stackoverflow.com/questions/50356429/what-is-the-operator-used-for-in-typescript
+[8] https://www.codeproject.com/Questions/310799/Bitwise-Operators-in-a-where-clause
+
+The absence of an **unsigned left shift operator** (`<<<`) 
+in TypeScript and JavaScript can be attributed to the nature of how the left shift operator (`<<`) operates. Here are the key points explaining this:
+
+## Characteristics of Left Shift (`<<`)
+
+1. **Logical Operation**: The left shift operator (`<<`) shifts all bits in a number to the left by a specified number of positions. This operation inherently fills the vacated bits on the right with zeros, regardless of whether the number is signed or unsigned. Thus, there is no need for a distinct unsigned version because the operation itself does not depend on the sign of the number.
+
+2. **Behavior with Signed Numbers**: In two's complement representation (which is used for signed integers), left shifting a signed number effectively doubles its value for each position shifted. Since it already behaves as an unsigned operation by filling with zeros, an additional unsigned left shift operator would not provide any new functionality.
+
+3. **Consistency Across Types**: The existing operators in TypeScript and JavaScript maintain a consistent approach where:
+   - **Left Shift (`<<`)**: Shifts bits left and fills with zeros.
+   - **Right Shift (`>>`)**: Shifts bits right and preserves the sign bit (sign-propagating).
+   - **Unsigned Right Shift (`>>>`)**: Shifts bits right and fills with zeros, ignoring the sign.
+
+## Conclusion
+
+The design choice to omit an unsigned left shift operator simplifies the operator set while ensuring that shifting operations are consistent and intuitive. Since left shifts do not affect the sign in a way that would necessitate a separate operator, `<<` suffices for both signed and unsigned integers in TypeScript and JavaScript [1][3][4].
+
+Citations:
+[1] https://reflectoring.io/typescript-operators/
+[2] https://learn.microsoft.com/ka-ge/cpp/cpp/left-shift-and-right-shift-operators-input-and-output?view=msvc-170
+[3] https://www.tektutorialshub.com/typescript/bitwise-operators-in-typescript/
+[4] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Left_shift
+[5] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Unsigned_right_shift
+[6] https://www.geeksforgeeks.org/left-shift-assignment-operator-in-javascript/
+[7] https://www.geeksforgeeks.org/left-shift-bitwise-operator-in-javascript/
+[8] https://www.tutorialspoint.com/typescript/typescript_bitwise_operators_examples.htm

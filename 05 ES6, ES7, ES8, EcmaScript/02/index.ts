@@ -158,6 +158,9 @@ for (const pair of formData.entries()) {
   console.log("encoded:", encoded);
 }
 
+// const parser = new DOMParser(); //* Only in browsers!
+// console.log("parser:", parser);
+
 {
   //* PushEvent
   class PushMessageData {

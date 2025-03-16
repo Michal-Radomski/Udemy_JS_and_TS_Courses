@@ -159,6 +159,19 @@ for (const pair of formData.entries()) {
   const sourceParagraph: string = "This is a sample paragraph.";
   const encoded: Uint8Array = textEncoder.encode(sourceParagraph);
   console.log("encoded:", encoded);
+
+  //* Create a canvas and get its context - only in browsers!
+  // const canvas = document.querySelector("canvas#canvas") as HTMLCanvasElement;
+  // // console.log("canvas:", canvas);
+
+  // const observer: ResizeObserver = new ResizeObserver((): void => {
+  //   canvas.width = canvas.clientWidth;
+  //   canvas.height = canvas.clientHeight;
+
+  //   // Note: You might want to add logic to resize your render target textures here.
+  // });
+  // // console.log("observer:", observer);
+  // observer.observe(canvas);
 }
 
 // const parser = new DOMParser(); //* Only in browsers!

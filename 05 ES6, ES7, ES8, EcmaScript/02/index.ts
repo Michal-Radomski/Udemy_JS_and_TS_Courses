@@ -160,6 +160,10 @@ for (const pair of formData.entries()) {
   const encoded: Uint8Array = textEncoder.encode(sourceParagraph);
   console.log("encoded:", encoded);
 
+  // const audioUrl = "";
+  // const audio: HTMLAudioElement = new Audio(audioUrl);
+  // console.log("audio:", audio);
+
   //* Create a canvas and get its context - only in browsers!
   // const canvas = document.querySelector("canvas#canvas") as HTMLCanvasElement;
   // // console.log("canvas:", canvas);

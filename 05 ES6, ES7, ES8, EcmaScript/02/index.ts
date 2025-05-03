@@ -160,6 +160,33 @@ for (const pair of formData.entries()) {
   const encoded: Uint8Array = textEncoder.encode(sourceParagraph);
   console.log("encoded:", encoded);
 
+  // const iterator = new Iterator()
+
+  class NumberIterator implements Iterator<number> {
+    private current = 0;
+    private max: number;
+
+    constructor(max: number) {
+      this.max = max;
+    }
+
+    next(): IteratorResult<number> {
+      if (this.current < this.max) {
+        return { value: this.current++, done: false };
+      } else {
+        return { value: undefined, done: true };
+      }
+    }
+  }
+
+  // Usage:
+  const iter = new NumberIterator(3);
+  console.log("iter:", iter);
+  console.log(iter.next()); // { value: 0, done: false }
+  console.log(iter.next()); // { value: 1, done: false }
+  console.log(iter.next()); // { value: 2, done: false }
+  console.log(iter.next()); // { value: undefined, done: true }
+
   // const audioUrl = "";
   // const audio: HTMLAudioElement = new Audio(audioUrl);
   // console.log("audio:", audio);
@@ -674,3 +701,15 @@ console.log({ myCar });
 //     console.log("Not an error");
 //   }
 // }
+
+//* Array.prototype.keys()
+const array1: string[] = ["a", "b", "c"];
+const iterator: ArrayIterator<number> = array1.keys();
+console.log("iterator:", iterator);
+
+for (const key of iterator) {
+  console.log(key);
+}
+// Expected output: 0
+// Expected output: 1
+// Expected output: 2

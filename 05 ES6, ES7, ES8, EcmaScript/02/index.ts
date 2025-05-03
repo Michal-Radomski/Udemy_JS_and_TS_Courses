@@ -661,3 +661,16 @@ const myCar = new Car(`Red`, `Chevy`, `Tahoe`);
 console.log({ myCar });
 myCar.color = `blue`;
 console.log({ myCar });
+
+//* Error.isError() example
+// try {
+//   throw new TypeError("This is a type error");
+// } catch (error) {
+//   // @ts-ignore
+//   if (Error.isError(error)) {
+//     // @ts-ignore
+//     console.log("Caught an error:", error.message);
+//   } else {
+//     console.log("Not an error");
+//   }
+// }

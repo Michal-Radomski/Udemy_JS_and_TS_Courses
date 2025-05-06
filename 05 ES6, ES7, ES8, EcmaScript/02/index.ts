@@ -208,6 +208,16 @@ for (const pair of formData.entries()) {
 // const parser = new DOMParser(); //* Only in browsers!
 // console.log("parser:", parser);
 
+//* Create an empty MediaStream
+// const mediaStream = new MediaStream();
+
+//* Create a MediaStream from existing tracks (e.g., from getUserMedia)
+// navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
+//   // Clone the tracks into a new MediaStream
+//   const clonedStream = new MediaStream(stream.getTracks());
+//   console.log("clonedStream:", clonedStream);
+// });
+
 {
   //* PushEvent
   class PushMessageData {

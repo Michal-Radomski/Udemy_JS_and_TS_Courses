@@ -25,3 +25,5 @@ Files created during Udemy.com JS and TS courses:
 11. [JS: Understanding the Weird Parts](https://www.udemy.com/course/understand-javascript)
 
 12. [JS: The Advanced Concepts](https://www.udemy.com/course/advanced-javascript-concepts)
+
+13. [TypeScript for Professionals](https://www.udemy.com/course/typescript-for-professionals)

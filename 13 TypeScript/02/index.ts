@@ -441,6 +441,25 @@
   //   req.body;
   //   req.json;
   // }
+
+  interface User {
+    id: number;
+    name: string;
+  }
+
+  interface User {
+    age: number;
+    isActive: boolean;
+  }
+
+  // TypeScript merges them into a single interface containing all properties (id, name, age, and isActive)
+  const user: User = {
+    id: 1,
+    name: "Alice",
+    age: 30,
+    isActive: true,
+  };
+  console.log("user:", user);
 }
 
 {
@@ -452,6 +471,7 @@
   }
 
   const test1: InputPropsI = { type: "text", value: "string", onChange: (val: string) => console.log(val) };
+  console.log("test1:", test1);
 
   type InputOnChange = (newValue: InputValue) => void;
   type InputValue = string;
@@ -463,4 +483,14 @@
     onChange: InputOnChange;
   };
   const test2: InputProps = { type: "text", value: "string", onChange: (val: string) => console.log(val) };
+  console.log("test2:", test2);
+}
+
+{
+  //* Never Type
+  // TypeScript infers return type but we are explicit here for demo
+  // function fail(message: string): never {
+  //   throw new Error(message);
+  // }
+  // fail("test");
 }

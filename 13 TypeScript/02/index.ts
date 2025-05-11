@@ -138,7 +138,7 @@
   }
 
   const cat = new Cat();
-  console.log("speak(cat):", speak(cat));
+  speak(cat);
 }
 
 {
@@ -163,7 +163,7 @@
       console.error("Failure, error reason:", result.errorReason);
     }
   }
-  console.log('logResult({ isValid: true, validatedValue: "Ok" }):', logResult({ isValid: true, validatedValue: "Ok" }));
+  logResult({ isValid: true, validatedValue: "Ok" });
 
   // Property as its type
   type Circle = {
@@ -280,7 +280,7 @@
     console.log(0 == null); // false
     console.log("" == null); // false
 
-    function someBooleanOrNullOrUndefined() {
+    function someBooleanOrNullOrUndefined(): boolean | null | undefined {
       return [true, false, null, undefined].at(Math.floor(Math.random() * 3 + 1));
     }
 
@@ -295,6 +295,7 @@
     // Guard clause
     function decorate(value: string | null | undefined) {
       if (value == null) {
+        //* null == undefined!
         return value;
       }
       return `-- ${value.trim()} --`;
@@ -304,4 +305,29 @@
     console.log(decorate(null)); // null
     console.log(decorate(undefined)); // undefined
   })();
+}
+
+{
+  //* Intersection types
+  type Person = {
+    name: string;
+  };
+
+  type Email = {
+    email: string;
+  };
+
+  type Phone = {
+    phone: string;
+  };
+
+  type ContactDetails = Person & Email & Phone;
+
+  function contact(details: ContactDetails): void {
+    console.log(`Dear ${details.name}. 
+  I hope you received our email at ${details.email}.
+  We will call you at ${details.phone} shortly.
+  `);
+  }
+  contact({ name: "name", email: "name@com", phone: "123" });
 }

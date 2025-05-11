@@ -87,3 +87,56 @@
   move("down"); // OK
   // move("forward"); // Error: Argument of type '"forward"' is not assignable to parameter of type 'Direction'.
 }
+
+{
+  //* Type Narrowing
+  type Square = {
+    size: number;
+  };
+
+  type Rectangle = {
+    width: number;
+    height: number;
+  };
+
+  type Shape = Square | Rectangle;
+
+  function area(shape: Shape): number | undefined {
+    if ("size" in shape) {
+      return shape.size * shape.size;
+    }
+    if ("width" in shape) {
+      return shape.width * shape.height;
+    }
+  }
+
+  area({ size: 2 }); // 4
+  area({ width: 2, height: 3 }); // 6
+
+  // Class Instance
+  class Cat {
+    meow() {
+      console.log("Meow!");
+    }
+  }
+
+  class Dog {
+    bark() {
+      console.log("Woof!");
+    }
+  }
+
+  type Animal = Cat | Dog;
+
+  function speak(animal: Animal): void {
+    if (animal instanceof Cat) {
+      animal.meow();
+    }
+    if (animal instanceof Dog) {
+      animal.bark();
+    }
+  }
+
+  const cat = new Cat();
+  console.log(speak(cat));
+}

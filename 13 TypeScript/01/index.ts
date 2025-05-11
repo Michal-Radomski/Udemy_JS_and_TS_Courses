@@ -40,4 +40,40 @@
 
   const queue: Queue<number> = new Queue();
   console.log("queue:", queue);
+
+  // Create a new Map with string keys and number values
+  const map: Map<string, number> = new Map();
+
+  // Add entries to the map
+  map.set("apple", 5);
+  map.set("banana", 10);
+  map.set("orange", 7);
+
+  // Access a value by key
+  const appleCount = map.get("apple"); // 5
+  console.log(`Apple count: ${appleCount}`);
+
+  // Check if a key exists
+  const hasBanana = map.has("banana"); // true
+  console.log(`Has banana? ${hasBanana}`);
+
+  // Iterate over map entries
+  for (const [key, value] of map) {
+    console.log(`${key} => ${value}`);
+  }
+  // Output:
+  // apple => 5
+  // banana => 10
+  // orange => 7
+  console.log("map:", map);
+
+  // Remove an entry
+  map.delete("orange");
+
+  // Size of the map
+  console.log(`Map size: ${map.size}`); // 2
+
+  // Clear all entries
+  map.clear();
+  console.log(`Map size after clear: ${map.size}`); // 0
 }

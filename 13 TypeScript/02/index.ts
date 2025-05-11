@@ -344,3 +344,45 @@
   point.x = 0;
   point.x = undefined;
 }
+
+{
+  //* Non-null Assertion Operator
+  (() => {
+    type Point = {
+      x: number;
+      y: number;
+    };
+
+    let point: Point;
+
+    function initialize(): void {
+      point = { x: 0, y: 0 };
+    }
+
+    initialize(); // It is best to avoid it if you can
+    console.log("After initialized:", point!.x, point!.y); // Non-null assertion operator !.
+
+    type Person = {
+      name: string;
+      email?: string | null;
+    };
+
+    function sendEmail(email: string): void {
+      console.log("Sent email to", email);
+    }
+
+    function ensureContactable(person: Person): void {
+      if (person.email == null) {
+        throw new Error(`Person ${person.name} is not contactable`);
+      }
+    }
+
+    function contact(person: Person): void {
+      ensureContactable(person);
+      sendEmail(person.email!); // It can be avoided moving the null condition inside the function
+    }
+
+    const person: Person = { name: "Michal", email: "michal@com.pl" };
+    contact(person);
+  })();
+}

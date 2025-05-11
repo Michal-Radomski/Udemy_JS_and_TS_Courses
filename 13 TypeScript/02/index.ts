@@ -208,3 +208,43 @@
   const adam = new Person("Adam", 120000);
   console.log("adam.name, adam.age:", adam.name, adam.age); // 'Adam', 120000
 }
+
+{
+  //* Strict Compiler Option
+  class Point {
+    x: number;
+    y: number;
+
+    constructor(x: number, y: number) {
+      this.x = x;
+      this.y = y;
+    }
+    move(x: number, y: number): void {
+      this.x += x;
+      this.y += y;
+    }
+  }
+
+  const point = new Point(0, 0);
+  point.move(1, 2);
+  console.log("point:", point);
+
+  type User = {
+    name: string;
+    age: number;
+  };
+
+  const users: User[] = [
+    { name: "Oby", age: 12 },
+    { name: "Heera", age: 32 },
+  ];
+
+  function getUserAge(name: string): number {
+    const user = users.find((user) => user.name === name);
+    if (user == null) {
+      throw new Error(`User not found: ${name}`);
+    }
+    return user.age;
+  }
+  console.log('getUserAge("Oby"):', getUserAge("Oby"));
+}

@@ -94,7 +94,18 @@
       const ensure: never = shape;
       return ensure;
     }
-
     console.log("area({ size: 5 }):", area({ size: 5 }));
+
+    function isString(test: any): test is string {
+      return typeof test === "string";
+    }
+
+    function example(foo: any) {
+      if (isString(foo)) {
+        console.log("it is a string" + foo);
+        console.log(foo.length); // string function
+      }
+    }
+    example("hello world");
   })();
 }

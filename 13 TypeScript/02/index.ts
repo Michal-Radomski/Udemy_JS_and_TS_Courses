@@ -198,3 +198,13 @@
   console.log(area({ kind: "square", size: 2 })); // 4
   console.log(area({ kind: "rectangle", height: 2, width: 4 })); // 8
 }
+
+{
+  //* Class Parameter Properties
+  class Person {
+    constructor(public name: string, public age: number) {}
+  }
+
+  const adam = new Person("Adam", 120000);
+  console.log("adam.name, adam.age:", adam.name, adam.age); // 'Adam', 120000
+}

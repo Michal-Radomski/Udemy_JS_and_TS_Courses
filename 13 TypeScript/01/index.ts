@@ -77,3 +77,26 @@
   map.clear();
   console.log(`Map size after clear: ${map.size}`); // 0
 }
+
+{
+  //* 04 Arrays and Tuples
+  // Array
+  let array: number[] = [1, 2, 3];
+
+  // Usage
+  array = [1];
+  array = [1, 2, 3, 4, 5];
+  // array = ["hello"]; //* Error
+  console.log("array:", array);
+
+  // Tuple
+  let tuple: [number, number] = [0, 0];
+
+  // Usage
+  tuple = [1, 1];
+  tuple = [2, 6];
+  // tuple = [5]; //* Error: must be 2 items
+  // tuple = [5, 4, 3]; //* Error: must be 2 items
+  // tuple = ["elite", 1337]; //* Error: must be number
+  console.log("tuple:", tuple);
+}

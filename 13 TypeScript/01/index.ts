@@ -99,4 +99,27 @@
   // tuple = [5, 4, 3]; //* Error: must be 2 items
   // tuple = ["elite", 1337]; //* Error: must be number
   console.log("tuple:", tuple);
+
+  // Define our tuple
+  let ourTuple: [number, boolean, string];
+  // Initialize correctly
+  ourTuple = [5, false, "Coding God was here"];
+  console.log("ourTuple:", ourTuple);
+}
+
+{
+  //* 05 Objects Types
+  type Point = { x: number; y: number };
+
+  let center: Point = {
+    x: 0,
+    y: 0,
+  };
+
+  let unit: Point = {
+    x: 1,
+    y: 1,
+  };
+
+  console.log("center, unit:", center, unit);
 }

@@ -111,15 +111,88 @@
   //* 05 Objects Types
   type Point = { x: number; y: number };
 
-  let center: Point = {
+  const center: Point = {
     x: 0,
     y: 0,
   };
 
-  let unit: Point = {
+  const unit: Point = {
     x: 1,
     y: 1,
   };
 
+  center.x = 100;
+  unit.y = 100;
   console.log("center, unit:", center, unit);
 }
+
+{
+  //* 06 Functions
+  function sum(...values: number[]): number {
+    return values.reduce((a: number, b: number) => a + b, 0);
+  }
+  console.log("sum(1,2,3):", sum(1, 2, 3));
+
+  type Add = (a: number, b: number) => number;
+
+  let add: Add;
+
+  add = function (a: number, b: number): number {
+    return a + b;
+  };
+
+  add = (a, b) => a + b;
+  console.log(add(1, 2));
+}
+
+// {
+//   //* 07 Structural Typing
+//   type Point2D = { x: number; y: number };
+//   type Point3D = { x: number; y: number; z: number };
+
+//   let point2D: Point2D = { x: 0, y: 10 };
+//   let point3D: Point3D = { x: 0, y: 10, z: 20 };
+
+//   /** Extra info ok */
+//   point2D = point3D;
+//   function takesPoint2D(point: Point2D) {
+//     /** ... */
+//   }
+//   takesPoint2D(point3D);
+
+//   /** Error: missing info */
+//   point3D = point2D;
+//   function takesPoint3D(point: Point3D) {
+//     /** ... */
+//   }
+//   takesPoint3D(point2D);
+// }
+
+// {
+//   //* Classes
+//   class Animal {
+//     // protected name: string;
+//     public name: string;
+
+//     constructor(name: string) {
+//       this.name = name;
+//     }
+
+//     public move(distanceInMeters: number): void {
+//       console.log(`${this.name} moved ${distanceInMeters}m.`);
+//     }
+//   }
+
+//   const cat = new Animal("Cat");
+//   console.log("cat:", cat);
+//   cat.move(10);
+//   cat.name = "Dog";
+
+//   class Bird extends Animal {
+//     fly(distanceInMeters: number) {
+//       console.log(`${this.name} flew ${distanceInMeters}m.`);
+//     }
+//   }
+//   const bird: Bird = new Bird("bird");
+//   console.log("bird:", bird);
+// }

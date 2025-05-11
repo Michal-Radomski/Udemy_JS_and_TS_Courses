@@ -169,7 +169,7 @@
 }
 
 {
-  //* Classes
+  //* 08 Classes
   class Animal {
     // protected name: string;
     public name: string;
@@ -196,4 +196,25 @@
   }
   const bird: Bird = new Bird("bird");
   console.log("bird:", bird);
+}
+
+{
+  //* Generics
+  class Queue<T> {
+    data = [] as T[];
+    push(item: T) {
+      this.data.push(item);
+    }
+    pop() {
+      return this.data.shift();
+    }
+  }
+
+  const queue: Queue<number> = new Queue<number>();
+  queue.push(123);
+  queue.push(456);
+  console.log("queue:", queue);
+
+  console.log(queue.pop()?.toPrecision(1));
+  console.log(queue.pop()?.toPrecision(1));
 }

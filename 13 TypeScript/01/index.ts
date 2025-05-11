@@ -1,12 +1,12 @@
 {
-  //* Intro
+  //* 01 Intro
   let message: string = "Hello world";
   message += " again";
   console.log("message:", message);
 }
 
 {
-  //* Primitives
+  //* 02 Primitives
   const isPresent: boolean = false;
   const magic: number = 66.6;
   const hello: string = "world";
@@ -22,7 +22,7 @@
 }
 
 {
-  //* Instance Types
+  //* 03 Instance Types
   const regexp: RegExp = new RegExp("ab+c");
   const array: Array<number> = [1, 2, 3];
   const set: Set<number> = new Set([1, 2, 3]);

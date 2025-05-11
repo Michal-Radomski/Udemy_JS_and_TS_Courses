@@ -199,13 +199,13 @@
 }
 
 {
-  //* Generics
+  //* 09 Generics
   class Queue<T> {
     data = [] as T[];
-    push(item: T) {
+    push(item: T): void {
       this.data.push(item);
     }
-    pop() {
+    pop(): T | undefined {
       return this.data.shift();
     }
   }
@@ -217,4 +217,21 @@
 
   console.log(queue.pop()?.toPrecision(1));
   console.log(queue.pop()?.toPrecision(1));
+}
+
+{
+  //* 10 Any and Unknown
+  // any -> any type
+  // unknown -> any type but safer
+
+  function log(value: unknown): void {
+    if (typeof value == "number") {
+      console.log(value.toFixed(2));
+    } else {
+      console.log(value);
+    }
+  }
+
+  log(123.456);
+  log("Hello world");
 }

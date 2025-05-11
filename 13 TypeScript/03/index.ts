@@ -122,22 +122,59 @@
       return [{ name: "John Doe" } as Person, undefined].at(Math.floor(Math.random()));
     }
 
-    // Assertion functions are designed for tests code Use User Defined Type Guards for application code instead
+    //* Assertion functions are designed for tests code Use User Defined Type Guards for application code instead
     function assert(condition: unknown, message: string): asserts condition {
       if (!condition) throw new Error(message);
     }
 
-    function assertDate(value: unknown): asserts value is Date {
-      if (value instanceof Date) return;
-      else throw new TypeError("value is not a Date");
-    }
+    // function assertDate(value: unknown): asserts value is Date {
+    //   if (value instanceof Date) return;
+    //   else throw new TypeError("value is not a Date");
+    // }
 
     const maybePerson = loadPerson();
 
     assert(maybePerson != null, "Could not load person");
     console.log("Name:", maybePerson.name);
 
-    assertDate(maybePerson.dateOfBirth);
-    console.log("Date of birth:", maybePerson.dateOfBirth.toISOString());
+    // assertDate(maybePerson.dateOfBirth);
+    // console.log("Date of birth:", maybePerson.dateOfBirth.toISOString());
+  })();
+}
+
+{
+  //* Function Overloading
+  (() => {
+    function reverse(string: string): string; // Function overload
+    function reverse(stringArray: string[]): string[]; // Function overload
+    // Function implementation (all cases)
+    function reverse(stringOrStringArray: string | string[]) {
+      if (typeof stringOrStringArray == "string") {
+        return stringOrStringArray.split("").reverse().join("");
+      } else {
+        return stringOrStringArray.slice().reverse();
+      }
+    }
+
+    const hello: string = reverse("hello"); // olleh
+    const h_e_l_l_o: string[] = reverse(["h", "e", "l", "l", "o"]); // ['o', 'l', 'l', 'e', 'h']
+    console.log({ hello, h_e_l_l_o });
+
+    // Function overload
+    function makeDate(timestamp: number): Date;
+    function makeDate(year: number, month: number, day: number): Date;
+    // Function implementation (all cases)
+    function makeDate(timestampOrYear: number, month?: number, day?: number): Date {
+      if (month != null && day != null) {
+        return new Date(timestampOrYear, month - 1, day);
+      } else {
+        return new Date(timestampOrYear);
+      }
+    }
+
+    const doomsday: Date = makeDate(2000, 1, 1); // 1 Jan 2000
+    const epoch: Date = makeDate(0); // 1 Jun 1970
+    console.log({ doomsday, epoch });
+    // const invalid = makeDate(2000, 1); //* Not allowed
   })();
 }

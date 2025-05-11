@@ -63,3 +63,27 @@
   padLeft("Hello world", "---"); // '---Hello world'
   // padLeft("Hello world", false); //* Error
 }
+
+{
+  //* Literal Types
+  // type DiceValue = 1 | 2 | 3 | 4 | 5 | 6;
+
+  // function rollDice() {
+  //   return (Math.floor(Math.random() * 6) + 1) as DiceValue;
+  // }
+
+  // Error
+  // if (rollDice() === 7) {
+  //   throw new Error("Not possible!");
+  // }
+
+  type Direction = "up" | "down" | "left" | "right";
+
+  function move(direction: Direction): void {
+    console.log(`Moving ${direction}`);
+  }
+
+  move("up"); // OK
+  move("down"); // OK
+  // move("forward"); // Error: Argument of type '"forward"' is not assignable to parameter of type 'Direction'.
+}

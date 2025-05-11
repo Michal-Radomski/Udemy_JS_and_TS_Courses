@@ -235,3 +235,61 @@
   log(123.456);
   log("Hello world");
 }
+
+{
+  //* 11 Type Casting
+  let leet;
+
+  // Later
+  leet = "1337";
+
+  // Use as number
+  const number = +leet;
+
+  console.log("number === 1337:", number === 1337); // true
+  console.log({ number }); // '1337'
+}
+
+//* 12 Modules
+/**
+ * @returns true if the input string is a palindrome
+ */
+export function isPalindrome(str: string): boolean {
+  return str === str.split("").reverse().join("");
+}
+console.log('isPalindrome("madam"):', isPalindrome("madam")); // true
+
+//* Type Declarations (*.d.ts)
+// console.log("Logged in user:", process.env.USER);
+// declare const process: any;
+
+{
+  //* 13 Async/await
+  const main = (): void => {
+    setTimeout(() => {
+      console.log("1s");
+      setTimeout(() => {
+        console.log("2s");
+        setTimeout(() => {
+          console.log("3s");
+        }, 1000);
+      }, 1000);
+    }, 1000);
+  };
+
+  main();
+
+  //* Better way
+  const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
+  const mainAsync = async (): Promise<void> => {
+    await delay(1000);
+    console.log("1s");
+    await delay(1000);
+    console.log("2s");
+    await delay(1000);
+    console.log("3s");
+  };
+
+  mainAsync();
+}

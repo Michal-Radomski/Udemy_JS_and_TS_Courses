@@ -105,7 +105,7 @@
     if ("size" in shape) {
       return shape.size * shape.size;
     }
-    if ("width" in shape) {
+    if ("width" in shape && "height" in shape) {
       return shape.width * shape.height;
     }
   }
@@ -138,5 +138,63 @@
   }
 
   const cat = new Cat();
-  console.log(speak(cat));
+  console.log("speak(cat):", speak(cat));
+}
+
+{
+  //* Discriminated Unions
+  type ValidationSuccess = {
+    isValid: true;
+    validatedValue: string;
+  };
+
+  type ValidationFailure = {
+    isValid: false;
+    errorReason: string;
+  };
+
+  type ValidationResult = ValidationSuccess | ValidationFailure;
+
+  function logResult(result: ValidationResult): void {
+    if (result.isValid) {
+      console.log("Success, validated value:", result.validatedValue);
+    }
+    if (result.isValid === false) {
+      console.error("Failure, error reason:", result.errorReason);
+    }
+  }
+  console.log('logResult({ isValid: true, validatedValue: "Ok" }):', logResult({ isValid: true, validatedValue: "Ok" }));
+
+  // Property as its type
+  type Circle = {
+    kind: "circle";
+    radius: number;
+  };
+
+  type Rectangle = {
+    kind: "rectangle";
+    height: number;
+    width: number;
+  };
+
+  type Square = {
+    kind: "square";
+    size: number;
+  };
+
+  type Shape = Circle | Rectangle | Square;
+
+  function area(shape: Shape): number {
+    switch (shape.kind) {
+      case "circle":
+        return Math.PI * shape.radius ** 2;
+      case "rectangle":
+        return shape.height * shape.width;
+      case "square":
+        return shape.size * shape.size;
+    }
+  }
+
+  console.log(area({ kind: "square", size: 2 })); // 4
+  console.log(area({ kind: "rectangle", height: 2, width: 4 })); // 8
 }

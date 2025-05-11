@@ -331,3 +331,16 @@
   }
   contact({ name: "name", email: "name@com", phone: "123" });
 }
+
+{
+  //* Optional modifier
+  class Point {
+    x?: number;
+    y?: number;
+  }
+
+  const point = new Point();
+  console.log("point.x:", point.x); // undefined
+  point.x = 0;
+  point.x = undefined;
+}

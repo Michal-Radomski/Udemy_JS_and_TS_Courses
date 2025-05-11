@@ -168,31 +168,32 @@
   // takesPoint3D(point2D);
 }
 
-// {
-//   //* Classes
-//   class Animal {
-//     // protected name: string;
-//     public name: string;
+{
+  //* Classes
+  class Animal {
+    // protected name: string;
+    public name: string;
+    // private name: string;
 
-//     constructor(name: string) {
-//       this.name = name;
-//     }
+    constructor(name: string) {
+      this.name = name;
+    }
 
-//     public move(distanceInMeters: number): void {
-//       console.log(`${this.name} moved ${distanceInMeters}m.`);
-//     }
-//   }
+    public move(distanceInMeters: number): void {
+      console.log(`${this.name} moved ${distanceInMeters}m.`);
+    }
+  }
 
-//   const cat = new Animal("Cat");
-//   console.log("cat:", cat);
-//   cat.move(10);
-//   cat.name = "Dog";
+  const cat: Animal = new Animal("Cat");
+  console.log("cat:", cat);
+  cat.move(10);
+  cat.name = "Dog";
 
-//   class Bird extends Animal {
-//     fly(distanceInMeters: number) {
-//       console.log(`${this.name} flew ${distanceInMeters}m.`);
-//     }
-//   }
-//   const bird: Bird = new Bird("bird");
-//   console.log("bird:", bird);
-// }
+  class Bird extends Animal {
+    fly(distanceInMeters: number) {
+      console.log(`${this.name} flew ${distanceInMeters}m.`);
+    }
+  }
+  const bird: Bird = new Bird("bird");
+  console.log("bird:", bird);
+}

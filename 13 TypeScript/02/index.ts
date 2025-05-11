@@ -321,7 +321,7 @@
     phone: string;
   };
 
-  type ContactDetails = Person & Email & Phone;
+  type ContactDetails = Person & Email & Phone; //* All together!
 
   function contact(details: ContactDetails): void {
     console.log(`Dear ${details.name}. 
@@ -396,7 +396,7 @@
       y: number;
     };
 
-    type Point3D = Point2D & { z: number };
+    type Point3D = Point2D & { z: number }; //* All together! (equivalent to extend in interfaces)
 
     const pointWithType: Point3D = {
       x: 0,
@@ -422,4 +422,45 @@
 
     console.log({ pointWithType, pointWithInterface });
   })();
+}
+
+{
+  //* Interface Declaration Merging
+  // Express Base
+  interface Request {
+    body: any;
+  }
+
+  // Express JSON
+  interface Request {
+    json: any;
+  }
+
+  // Our App
+  // function handleRequest(req: Request) {
+  //   req.body;
+  //   req.json;
+  // }
+}
+
+{
+  //* Types vs Interfaces
+  interface InputPropsI {
+    type: "text" | "email";
+    value: string;
+    onChange: (newValue: string) => void;
+  }
+
+  const test1: InputPropsI = { type: "text", value: "string", onChange: (val: string) => console.log(val) };
+
+  type InputOnChange = (newValue: InputValue) => void;
+  type InputValue = string;
+  type InputType = "text" | "email";
+
+  type InputProps = {
+    type: InputType;
+    value: InputValue;
+    onChange: InputOnChange;
+  };
+  const test2: InputProps = { type: "text", value: "string", onChange: (val: string) => console.log(val) };
 }

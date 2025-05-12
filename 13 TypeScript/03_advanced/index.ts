@@ -221,3 +221,28 @@
     };
   })();
 }
+
+{
+  //* Abstract Class
+  ((): void => {
+    abstract class Command {
+      abstract commandLine(): string;
+
+      execute(): void {
+        console.log("Executing:", this.commandLine());
+      }
+    }
+
+    class GitResetCommand extends Command {
+      commandLine(): string {
+        return "git reset --hard";
+      }
+    }
+
+    class GitFetchCommand extends Command {
+      commandLine(): string {
+        return "git fetch --all";
+      }
+    }
+  })();
+}

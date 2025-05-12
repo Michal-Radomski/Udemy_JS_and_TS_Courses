@@ -388,3 +388,40 @@
     point3 = person as unknown as Point3D; // TypeScript trust us
   })();
 }
+
+{
+  //* Const Assertion
+  ((): void => {
+    const king = "elvis";
+    // king = "john"; // Error
+    const upperCased = king.toUpperCase(); // king === 'elvis'
+
+    const dave = {
+      name: "dave",
+      role: "drummer",
+      skills: ["drumming", "headbanging"],
+    } as const; // Converts primitives to literal types, makes properties as readonly
+
+    // dave = {
+    //   name: "grohl",
+    //   role: "singer",
+    //   skills: ["drumming", "headbanging", "singing"],
+    // }; // Error
+
+    // dave.name = "grohl";
+    // dave.role = "singer";
+    // dave.skills.push("singing");
+
+    // Apply it to the most specific point possible.
+    function layout(settings: { align: "left" | "center" | "right"; padding: number }): void {
+      console.log("Performing layout:", settings);
+    }
+
+    const example = {
+      align: "left" as const,
+      padding: 0,
+    };
+
+    layout(example);
+  })();
+}

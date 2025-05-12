@@ -475,3 +475,18 @@
     // }); // Property lastName is missing
   })();
 }
+
+{
+  //*  Temporal Uncertainty
+  function buildExample() {
+    return ["foo", null].at(Math.floor(Math.random() + 1));
+  }
+
+  let example: string | null | undefined = buildExample();
+  if (example != null) {
+    const exampleLocal = example;
+    setTimeout(() => {
+      console.log(exampleLocal.toLocaleUpperCase());
+    });
+  }
+}

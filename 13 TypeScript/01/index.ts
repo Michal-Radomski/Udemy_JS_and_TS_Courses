@@ -152,6 +152,7 @@
 
   let point2D: Point2D = { x: 0, y: 10 };
   let point3D: Point3D = { x: 0, y: 10, z: 20 };
+  console.log({ point2D });
 
   //* Extra info ok
   point2D = point3D;

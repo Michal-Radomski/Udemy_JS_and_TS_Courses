@@ -30,7 +30,8 @@
 {
   //* Definite Assignment Assertion
   ((): void => {
-    let dice!: number; //* Definite assignment assertion "!" (tells TypeScript that this variable will always be assigned)
+    //- No error: "Variable 'dice' is used before being assigned.ts(2454)"
+    let dice!: number; //* Definite assignment assertion "!" (it tells TypeScript that this variable will always be assigned)
 
     function rollDice(): void {
       dice = Math.floor(Math.random() * 6) + 1;

@@ -292,3 +292,80 @@
     console.log("persons:", persons);
   })();
 }
+
+{
+  //* Dictionary
+
+  //* Interface with an index signature
+  interface IDictionary {
+    [key: string]: number;
+  }
+
+  // Create a dictionary to store ages
+  let ageDictionary: IDictionary = {};
+
+  // Add entries
+  ageDictionary["Alice"] = 25;
+  ageDictionary["Bob"] = 30;
+  ageDictionary["Charlie"] = 28;
+
+  // Access a value
+  const aliceAge = ageDictionary["Alice"]; // 25
+  console.log({ aliceAge });
+
+  // Check if a key exists
+  const hasBob = "Bob" in ageDictionary; // true
+  console.log({ hasBob });
+
+  // Iterate over entries
+  for (let name in ageDictionary) {
+    console.log(`${name}: ${ageDictionary[name]}`);
+  }
+
+  // Remove an entry
+  delete ageDictionary["Charlie"];
+  console.log({ ageDictionary });
+
+  //* Record utility type
+  type StringDictionary = Record<string, string>;
+
+  const capitals: StringDictionary = {
+    USA: "Washington, D.C.",
+    Canada: "Ottawa",
+    Mexico: "Mexico City",
+  };
+
+  capitals["Germany"] = "Berlin";
+  console.log({ capitals });
+  console.log(capitals["USA"]); // Washington, D.C.
+}
+
+{
+  //* Readonly Arrays and Tuples
+  ((): void => {
+    //* Arrays
+    function reverseSorted(input: readonly number[]): number[] {
+      return input.slice().sort().reverse(); //* Without slice() -> error!
+    }
+
+    const start = [1, 2, 3, 5, 4];
+    const result = reverseSorted(start);
+    console.log("start:", start); // [1, 2, 3, 5, 4]
+    console.log("result:", result); // [5, 4, 3, 2, 1]
+
+    const newArray: ReadonlyArray<number> = [0, 1, 2, 3];
+    console.log("newArray:", newArray);
+
+    //* Tuples
+    type Point = readonly [number, number];
+
+    function move(point: Point, x: number, y: number): Point {
+      return [point[0] + x, point[1] + y];
+    }
+
+    const point: Point = [0, 0];
+    const moved: Point = move(point, 10, 10);
+    console.log("point:", point); // [0, 0]
+    console.log("moved:", moved); // [10, 10]
+  })();
+}

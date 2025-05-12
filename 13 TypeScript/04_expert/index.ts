@@ -7,7 +7,7 @@
       z: 0,
     };
 
-    //* type Point = typeof center
+    // type Point = typeof center;
 
     // Inline
     const unit: typeof center = {
@@ -26,7 +26,7 @@
 
     type PersonResponse = typeof response;
 
-    function processResponse(person: PersonResponse) {
+    function processResponse(person: PersonResponse): void {
       console.log("Full name:", `${person.firstName} ${person.lastName}`);
     }
     processResponse(response);

@@ -425,3 +425,26 @@
     layout(example);
   })();
 }
+
+{
+  //* This parameter
+  ((): void => {
+    function double(this: { value: number }): void {
+      console.log("this:", this);
+      this.value = this.value * 2;
+    }
+
+    const valid = {
+      value: 10,
+      double,
+    };
+    // const invalid = {
+    //   valve: 10, // Typo
+    //   double,
+    // };
+
+    valid.double();
+    console.log("valid.value:", valid.value); // 20
+    // invalid.double(); // Error
+  })();
+}

@@ -32,3 +32,70 @@
     processResponse(response);
   })();
 }
+
+{
+  //* Lookup Types
+  ((): void => {
+    type SubmitRequest = {
+      transactionId: string;
+      personal: {
+        title: string;
+        driverFirstName: string;
+        driverMiddleName: string;
+        driverLastName: string;
+        email: string;
+        phone: string;
+        previousAliases: {
+          firstName: string;
+          middleName: string;
+          lastName: string;
+        }[];
+        gender: string;
+        dob: string;
+        birthCountry: string;
+      };
+      driver: {
+        licenseNumber: string;
+        expiryDate: string;
+        hasLicenseForMin6Months: boolean;
+        hasTerritoryLicense: boolean;
+        territoryLicenseStates?: string[];
+        hasDriverAccreditation: boolean;
+        driverAccreditationNumber?: string;
+        vehicleClasses: string[];
+        tandc: true;
+      };
+      consent: {
+        understandInformation: boolean;
+        informationTrue: boolean;
+        informationConsidered: boolean;
+        medicalVicRoadsPoliceCheckConsent: boolean;
+        consentToDisclosing: boolean;
+        indemnifyAgainstLiability: boolean;
+        acicCheckConsent: boolean;
+        childrenCheckConsent: boolean;
+        personalInfoCheckConsent: boolean;
+        trafficOffenses: boolean;
+        assessAcicCheckConsent: boolean;
+        criminalOffenses: boolean;
+        licenseCancelledSuspended: boolean;
+        sexOffendersReporting: boolean;
+        ausWorkRights: boolean;
+        additionalInformation: string;
+      };
+      payment: {
+        creditCardToken: string;
+      };
+    };
+
+    // UI
+    type PaymentRequest = SubmitRequest["payment"];
+    type PreviousAliasRequest = SubmitRequest["personal"]["previousAliases"][0];
+
+    function getPayment(): PaymentRequest {
+      return {
+        creditCardToken: "124q234n12l!@#$3412n34!@#$",
+      };
+    }
+  })();
+}

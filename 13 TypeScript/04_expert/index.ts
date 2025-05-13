@@ -252,7 +252,7 @@
 
 {
   //* Mapped Types
-  (() => {
+  ((): void => {
     type Point = {
       x: number;
       y: number;
@@ -281,7 +281,7 @@
 
 {
   //* Mapped type modifiers
-  (() => {
+  ((): void => {
     // Mapped Type Modifiers with Types
     type Point = {
       readonly x: number;
@@ -310,5 +310,64 @@
     const state = new State({ x: 0, y: 0 });
     state.update({ y: 1 });
     console.log(state.current); // { x: 0, y: 1 }
+  })();
+}
+
+{
+  //* Template Literal Type
+  ((): void => {
+    let jsStringLiteral;
+    jsStringLiteral = "hello";
+    jsStringLiteral = "world";
+
+    let jsTemplateLiteral;
+    jsTemplateLiteral = `Example: ${jsStringLiteral}`; // Example: world
+
+    let str: string;
+    str = "whatever";
+
+    // Literal Type
+    let strLiteral: "hello";
+    strLiteral = "hello"; // This is ok
+    // strLiteral = "oh oh"; // This is not
+
+    // Template Literal Type
+    let templateLiteral: `Example: ${string}`;
+    templateLiteral = "Example: hello";
+    templateLiteral = "Example: world";
+    // templateLiteral = "Without Example prefix"; // Not allowed
+
+    // Use cases
+    // Typing CSS Values
+    type CssValue =
+      // implies px
+      | number
+      // number + px|em|rem|%
+      | `${number}px`
+      | `${number}em`
+      | `${number}rem`
+      | `${number}%`;
+
+    function size(input: CssValue): string {
+      return typeof input == "number" ? input + "px" : input;
+    }
+
+    size(16);
+    size("16px");
+    size("1em");
+    size("1rem");
+    size("10%");
+    // size("1rex"); // Typo
+
+    // Typing style
+    type Size = "small" | "medium" | "large";
+    type Color = "primary" | "secondary";
+    type Style = `${Size}-${Color}`;
+
+    function applyStyle(style: Style): void {}
+
+    applyStyle("small-primary");
+    applyStyle("large-secondary");
+    // applyStyle("medim-primary"); // Typo
   })();
 }

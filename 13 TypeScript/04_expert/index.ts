@@ -89,13 +89,49 @@
     };
 
     // UI
-    type PaymentRequest = SubmitRequest["payment"];
-    type PreviousAliasRequest = SubmitRequest["personal"]["previousAliases"][0];
+    type PaymentRequest = SubmitRequest["payment"]; //* creditCardToken: string;
+    type PreviousAliasRequest = SubmitRequest["personal"]["previousAliases"][0]["firstName"]; //* firstName: string;
 
     function getPayment(): PaymentRequest {
       return {
         creditCardToken: "124q234n12l!@#$3412n34!@#$",
       };
     }
+  })();
+}
+
+{
+  //* Keyof type operator
+  ((): void => {
+    type Person = {
+      age: number;
+      location: string;
+      name: string;
+    };
+
+    const john: Person = {
+      age: 34,
+      location: "Dallas",
+      name: "John",
+    };
+
+    type PersonKeys = keyof Person; //* "name" | "age" | "location"
+
+    // keyof returns the union of keys of a given type
+    function logGet<Obj, Key extends keyof Obj>(obj: Obj, key: Key): Obj[Key] {
+      const value = obj[key];
+      console.log("Getting:", key, value);
+      return value;
+    }
+
+    const age: number = logGet(john, "age"); // 34
+    console.log({ age });
+
+    function logSet<Obj, Key extends keyof Obj>(obj: Obj, key: Key, value: Obj[Key]): void {
+      console.log("Settings", key, value);
+      obj[key] = value;
+    }
+
+    logSet(john, "age", 36); // Settings age 36
   })();
 }

@@ -235,7 +235,7 @@
       };
     }
 
-    // type ReturnType<T> = T extends (...args: any) => infer R ? R : never;
+    // type ReturnType<T> = T extends (...args: any) => infer R ? R : never; //* Build-in
     type Person = ReturnType<typeof createPerson>;
     //     type Person = {
     //     firstName: string;
@@ -267,7 +267,7 @@
     };
 
     // Mapped Type version Explanation (Readonly is including in TS)
-    type Readonly<T> = { readonly [Item in keyof T]: T[Item] };
+    // type Readonly<T> = { readonly [Item in keyof T]: T[Item] }; //* Build-in
 
     const center: Readonly<Point> = {
       x: 0,

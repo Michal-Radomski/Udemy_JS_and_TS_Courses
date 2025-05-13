@@ -278,3 +278,37 @@
     // center.x = 100; // Not allowed
   })();
 }
+
+{
+  //* Mapped type modifiers
+  (() => {
+    // Mapped Type Modifiers with Types
+    type Point = {
+      readonly x: number;
+      y?: number;
+    };
+
+    // The negative modifier removes the modifiers of the original type
+    type Mapped<T> = {
+      -readonly [P in keyof T]-?: T[P];
+    };
+
+    type Result = Mapped<Point>;
+    //     type Result = {
+    //     x: number;
+    //     y: number;
+    // }
+
+    // Mapped Type Modifiers with Classes (Partial is already implemented by TypeScript)
+    class State<T> {
+      constructor(public current: T) {}
+      update(next: Partial<T>) {
+        this.current = { ...this.current, ...next };
+      }
+    }
+
+    const state = new State({ x: 0, y: 0 });
+    state.update({ y: 1 });
+    console.log(state.current); // { x: 0, y: 1 }
+  })();
+}

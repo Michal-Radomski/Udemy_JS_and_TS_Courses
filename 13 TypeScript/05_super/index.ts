@@ -312,7 +312,7 @@
 
 {
   //* PropertyKey
-  (() => {
+  ((): void => {
     const str: string = "key";
     const num: number = 123;
     const sym: symbol = Symbol();
@@ -342,7 +342,7 @@
 
 {
   //* ThisType<T> Utility
-  (() => {
+  ((): void => {
     // Example A
     type Math = {
       double(): void;
@@ -395,5 +395,36 @@
     state.x = 10;
     state.y = 20;
     state.moveBy(5, 5);
+  })();
+}
+
+{
+  // * Awaited<T> Utility
+  ((): void => {
+    async function main(): Promise<void> {
+      const single: Promise<string> = new Promise((result) => result("Foo"));
+      // The promise of a promise of a promise is a promise
+      const triple: Promise<Promise<Promise<string>>> = new Promise<Promise<Promise<string>>>((result) =>
+        result(new Promise<Promise<string>>((result) => new Promise<string>((result) => result("Bar"))))
+      );
+
+      const singleResult = await single;
+      console.log(singleResult); // Foo
+      const tripleResult = await triple; // TypeScript detects that variable is string type
+      console.log(tripleResult); // Bar
+    }
+
+    type WrappedInDeep = Promise<Promise<Promise<string>>>;
+    type AwaitedResult = Awaited<WrappedInDeep>; //* = string!
+
+    async function example<T>(input: T): Promise<T> {
+      const output: Awaited<T> = await input;
+      return output;
+    }
+
+    (async function (): Promise<void> {
+      const x: string = await example("x");
+      console.log({ x });
+    })();
   })();
 }

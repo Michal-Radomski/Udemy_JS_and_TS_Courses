@@ -175,6 +175,7 @@
     // peopleWithRoles = {owner: ["Jane", "Foo"],}; // Error: admin is missing
 
     const admins: string[] = peopleWithRoles["admin"]; // Safe. Never undefined
+    console.log({ admins });
 
     // Use case: Quick Type creation
     // Same as { x: number, y: number }
@@ -194,5 +195,30 @@
     };
 
     type Pages = Record<"home" | "services" | "about" | "contact", { id: string; title: string }>;
+  })();
+}
+
+{
+  //* AutoComplete Literal Unions with Primitives
+  ((): void => {
+    type Padding = "small" | "normal" | "large" | (string & {});
+
+    function getPadding(padding: Padding): string {
+      switch (padding) {
+        case "small":
+          return "12px";
+        case "normal":
+          return "16px";
+        case "large":
+          return "24px";
+        default:
+          return padding;
+      }
+    }
+
+    let padding: Padding;
+    padding = "small";
+    padding = "8px";
+    padding = ""; // Check autocomplete
   })();
 }

@@ -476,7 +476,7 @@
   type Age = { age: number };
 
   // Union: A-AB-B
-  type Union = Age | Name; //* Properties from Name or Age or from both
+  type Union = Age | Name; //* Properties from Name or Age or from both (but not designed for both)
   // Intersection: AB
   type Intersection = Age & Name; //* Must contain properties from Name and Age
 
@@ -493,4 +493,33 @@
   intersection = nameAndAge;
   // intersection = age // Error
   // intersection = name // Error
+}
+
+{
+  //* TypeScript Enums are Bad!
+  // Unexpected behavior on numeric enums
+  enum Enum {
+    app = 0,
+    email = 1,
+    social = 2,
+  }
+
+  console.log("Enum['app']:", Enum["app"]); // 0
+  console.log("Enum[0]:", Enum[0]); // 'app'
+
+  const keys = Object.keys(Enum);
+  console.log({ keys });
+  // Expected: ['app', 'email', 'social']
+  // Actual: ['0', '1', '2', 'app', 'email', 'social']
+
+  // Fixed by string enums, but violates DRY
+  enum Enum2 {
+    app = "app",
+    email = "email",
+    social = "social",
+  }
+
+  const keys2 = Object.keys(Enum2);
+  console.log({ keys2 }); // ['app', 'email', 'social']
+  console.log("Enum2.app:", Enum2.app); // 'app'
 }

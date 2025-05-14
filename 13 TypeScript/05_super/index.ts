@@ -469,3 +469,28 @@
 // personStore.setName("John");
 // console.log("personStore.getAge():", personStore.getAge()); // 30
 // console.log("personStore.getName():", personStore.getName()); // 'John'
+
+{
+  //* TypeScript Unions vs Intersection Mental Model
+  type Name = { name: string };
+  type Age = { age: number };
+
+  // Union: A-AB-B
+  type Union = Age | Name; //* Properties from Name or Age or from both
+  // Intersection: AB
+  type Intersection = Age & Name; //* Must contain properties from Name and Age
+
+  const age = { age: 30 };
+  const name = { name: "John" };
+  const nameAndAge = { age: 30, name: "John" };
+
+  let union: Union;
+  union = name;
+  union = age;
+  union = nameAndAge;
+
+  let intersection: Intersection;
+  intersection = nameAndAge;
+  // intersection = age // Error
+  // intersection = name // Error
+}

@@ -522,4 +522,32 @@
   const keys2 = Object.keys(Enum2);
   console.log({ keys2 }); // ['app', 'email', 'social']
   console.log("Enum2.app:", Enum2.app); // 'app'
+
+  //- Alternatives
+  //* String literal union
+  ((): void => {
+    type AltToEnum = "app" | "email" | "social";
+
+    function doSomething(alt: AltToEnum) {}
+
+    doSomething("app"); // Check refactoring of type
+    // doSomething('') // Check autocomplete
+  })();
+
+  //* Object as const
+  ((): void => {
+    const AltToEnum = {
+      device: "device",
+      email: "email",
+      social: "social",
+    } as const;
+
+    type AltToEnum = keyof typeof AltToEnum;
+
+    function doSomething(alt: AltToEnum) {}
+
+    doSomething("device");
+    doSomething(AltToEnum.device);
+    Object.keys(AltToEnum); // ['device', 'email', 'social']
+  })();
 }

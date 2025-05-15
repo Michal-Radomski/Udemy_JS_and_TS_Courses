@@ -551,3 +551,82 @@
     Object.keys(AltToEnum); // ['device', 'email', 'social']
   })();
 }
+
+{
+  //* Mixin
+  // Define a generic constructor type
+  type Constructor<T = {}> = new (...args: any[]) => T;
+
+  // Define a mixin function that adds a timestamp property and method
+  function Timestamped<TBase extends Constructor>(Base: TBase) {
+    return class extends Base {
+      timestamp = new Date();
+      getTimestamp() {
+        return this.timestamp;
+      }
+    };
+  }
+
+  // A simple base class
+  class Message {
+    content: string;
+    constructor(content: string) {
+      this.content = content;
+    }
+  }
+
+  // Apply the mixin to create a new class
+  const TimestampedMessage = Timestamped(Message);
+
+  // Use the new class with mixin functionality
+  const message = new TimestampedMessage("Hello, mixins!");
+  console.log("message.content:", message.content); // Output: Hello, mixins!
+  console.log("message.getTimestamp():", message.getTimestamp()); // Output: current timestamp
+
+  //* Example 2
+  class Disposable {
+    isDisposed = false;
+    dispose(): void {
+      this.isDisposed = true;
+    }
+  }
+
+  class Activatable {
+    isActive = false;
+    activate(): void {
+      this.isActive = true;
+    }
+    deactivate(): void {
+      this.isActive = false;
+    }
+  }
+
+  class SmartObject implements Disposable, Activatable {
+    isDisposed = false;
+    dispose!: () => void;
+    isActive = false;
+    activate!: () => void;
+    deactivate!: () => void;
+
+    interact(): void {
+      this.activate();
+    }
+  }
+
+  // Helper function to copy methods from mixins to target class
+  function applyMixins(derivedCtor: any, baseCtors: any[]): void {
+    baseCtors.forEach((baseCtor) => {
+      Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
+        derivedCtor.prototype[name] = baseCtor.prototype[name];
+      });
+    });
+  }
+
+  applyMixins(SmartObject, [Disposable, Activatable]);
+
+  const smartObj = new SmartObject();
+  smartObj.interact();
+  console.log("smartObj.isActive:", smartObj.isActive); // true
+  smartObj.dispose();
+  console.log("smartObj.isDisposed:", smartObj.isDisposed); // true
+}

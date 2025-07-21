@@ -214,6 +214,7 @@
     let maxSum = 0;
     let tempSum = 0;
     if (arr.length < num) return null;
+
     for (let i = 0; i < num; i++) {
       maxSum += arr[i];
     }
@@ -226,4 +227,46 @@
   }
 
   console.log(maxSubarraySum([2, 6, 9, 2, 1, 8, 5, 6, 3], 3)); // 19
+}
+
+{
+  //* Divide And Conquer Pattern
+  function mergeSort(arr: number[]): number[] {
+    if (arr.length <= 1) return arr; // Base case: array of length 0 or 1 is sorted
+
+    // Divide: split array into two halves
+    const mid = Math.floor(arr.length / 2);
+    const left = arr.slice(0, mid);
+    const right = arr.slice(mid);
+
+    // Conquer: recursively sort both halves
+    const sortedLeft = mergeSort(left);
+    const sortedRight = mergeSort(right);
+
+    // Combine: merge two sorted halves
+    return merge(sortedLeft, sortedRight);
+  }
+
+  function merge(left: number[], right: number[]): number[] {
+    const result: number[] = [];
+    let i = 0,
+      j = 0;
+
+    while (i < left.length && j < right.length) {
+      if (left[i] <= right[j]) {
+        result.push(left[i]);
+        i++;
+      } else {
+        result.push(right[j]);
+        j++;
+      }
+    }
+
+    // Append remaining elements
+    return result.concat(left.slice(i)).concat(right.slice(j));
+  }
+
+  // Example usage:
+  const array = [38, 27, 43, 3, 9, 82, 10];
+  console.log(mergeSort(array)); // Output: [3, 9, 10, 27, 38, 43, 82]
 }

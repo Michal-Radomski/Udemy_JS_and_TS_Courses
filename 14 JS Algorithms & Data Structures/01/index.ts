@@ -164,8 +164,21 @@
     return pairs;
   }
 
-  // Example usage:
   const numbers = [1, 3, 5, 2, 8, -2];
   const result = findPairs(numbers, 6);
   console.log(result); // Output: [[-2, 8], [1, 5]]
+
+  function countUniqueValues(arr: number[]): number {
+    if (arr.length === 0) return 0;
+    let i = 0;
+    for (let j = 1; j < arr.length; j++) {
+      if (arr[i] !== arr[j]) {
+        i++;
+        arr[i] = arr[j];
+      }
+    }
+    return i + 1;
+  }
+
+  console.log(countUniqueValues([1, 2, 2, 5, 7, 7, 99])); // 5
 }

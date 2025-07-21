@@ -89,7 +89,7 @@
       // if letter exists, increment, otherwise set to 1
       lookup[letter] ? (lookup[letter] += 1) : (lookup[letter] = 1);
     }
-    console.log({ lookup });
+    console.log(1, { lookup });
 
     for (let i = 0; i < second.length; i++) {
       let letter = second[i];
@@ -100,9 +100,72 @@
         lookup[letter] -= 1;
       }
     }
+    console.log(2, { lookup });
 
     return true;
   }
 
   console.log(validAnagram("cinema", "iceman"));
+}
+
+{
+  //* Multiple Pointers Pattern
+  function sumZero(arr: number[]): number[] | undefined {
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = i + 1; j < arr.length; j++) {
+        if (arr[i] + arr[j] === 0) {
+          return [arr[i], arr[j]];
+        }
+      }
+    }
+  }
+
+  console.log(sumZero([-4, -3, -2, -1, 0, 1, 2, 5])); // [ -2, 2 ]
+
+  function sumZero2(arr: number[]): number[] | undefined {
+    let left = 0;
+    let right = arr.length - 1;
+    while (left < right) {
+      let sum = arr[left] + arr[right];
+      if (sum === 0) {
+        return [arr[left], arr[right]];
+      } else if (sum > 0) {
+        right--;
+      } else {
+        left++;
+      }
+    }
+  }
+
+  console.log(sumZero2([-4, -3, -2, -1, 0, 1, 2, 3, 10])); // [ -3, 3 ]
+
+  function findPairs(numbers: number[], target: number): number[][] {
+    // Sort the array first (if not already sorted)
+    numbers.sort((a, b) => a - b);
+
+    let left = 0; // Pointer at start
+    let right = numbers.length - 1; // Pointer at end
+    let pairs: number[][] = [];
+
+    while (left < right) {
+      const sum = numbers[left] + numbers[right];
+
+      if (sum === target) {
+        pairs.push([numbers[left], numbers[right]]);
+        left++; // Move both pointers after finding a pair
+        right--;
+      } else if (sum < target) {
+        left++; // Increase sum by moving left pointer right
+      } else {
+        right--; // Decrease sum by moving right pointer left
+      }
+    }
+
+    return pairs;
+  }
+
+  // Example usage:
+  const numbers = [1, 3, 5, 2, 8, -2];
+  const result = findPairs(numbers, 6);
+  console.log(result); // Output: [[-2, 8], [1, 5]]
 }

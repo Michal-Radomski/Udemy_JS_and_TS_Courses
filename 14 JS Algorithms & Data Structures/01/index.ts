@@ -182,3 +182,48 @@
 
   console.log(countUniqueValues([1, 2, 2, 5, 7, 7, 99])); // 5
 }
+
+{
+  //* Sliding Window Pattern
+  function maxSumSubarray(arr: number[], k: number): number {
+    let maxSum = 0;
+    let windowSum = 0;
+
+    // Calculate the sum of the first window of size k
+    for (let i = 0; i < k; i++) {
+      windowSum += arr[i];
+    }
+    maxSum = windowSum;
+
+    // Slide the window from k to end of array
+    for (let end = k; end < arr.length; end++) {
+      windowSum += arr[end] - arr[end - k]; // Add next element and remove leftmost element
+      maxSum = Math.max(maxSum, windowSum);
+    }
+
+    return maxSum;
+  }
+
+  // Example usage:
+  const numbers = [2, 1, 5, 1, 3, 2];
+  const k = 3;
+  console.log(maxSumSubarray(numbers, k)); // Output: 9 (sum of subarray [5,1,3])
+
+  //* Almost the same
+  function maxSubarraySum(arr: number[], num: number): number | null {
+    let maxSum = 0;
+    let tempSum = 0;
+    if (arr.length < num) return null;
+    for (let i = 0; i < num; i++) {
+      maxSum += arr[i];
+    }
+    tempSum = maxSum;
+    for (let i = num; i < arr.length; i++) {
+      tempSum = tempSum - arr[i - num] + arr[i];
+      maxSum = Math.max(maxSum, tempSum);
+    }
+    return maxSum;
+  }
+
+  console.log(maxSubarraySum([2, 6, 9, 2, 1, 8, 5, 6, 3], 3)); // 19
+}

@@ -272,30 +272,74 @@
 }
 
 {
-  //* Recursion
-  // Call Stack
-  // function takeShower(): string {
-  //   return "Showering!";
-  // }
-  // function eatBreakfast(): string {
-  //   let meal: string = cookFood();
-  //   return `Eating ${meal}`;
-  // }
-  // function cookFood(): string {
-  //   let items = ["Oatmeal", "Eggs", "Protein Shake"];
-  //   return items[Math.floor(Math.random() * items.length)];
-  // }
-  // function wakeUp(): void {
-  //   takeShower();
-  //   eatBreakfast();
-  //   console.log("Ok ready to go to work!");
-  // }
-  // wakeUp();
+  //* Frequency Patter Exercises
+  function sameFrequency(num1: number, num2: number): boolean {
+    let strNum1 = num1.toString();
+    let strNum2 = num2.toString();
+    if (strNum1.length !== strNum2.length) return false;
 
-  function factorial(n: number): number {
-    if (n === 0) return 1; // Base case
-    return n * factorial(n - 1); // Recursive case
+    let countNum1 = {} as { [key: string]: number };
+    let countNum2 = {} as { [key: string]: number };
+
+    for (let i = 0; i < strNum1.length; i++) {
+      countNum1[strNum1[i]] = (countNum1[strNum1[i]] || 0) + 1;
+    }
+
+    for (let j = 0; j < strNum1.length; j++) {
+      countNum2[strNum2[j]] = (countNum2[strNum2[j]] || 0) + 1;
+    }
+
+    for (let key in countNum1) {
+      if (countNum1[key] !== countNum2[key]) return false;
+    }
+
+    return true;
   }
 
-  console.log(factorial(5)); // Output: 120
+  console.log(sameFrequency(182, 281)); // true
+
+  function areThereDuplicates(...args: number[]): boolean {
+    let collection = {} as { [key: string]: number };
+
+    for (let val in args) {
+      collection[args[val]] = (collection[args[val]] || 0) + 1;
+    }
+    for (let key in collection) {
+      if (collection[key] > 1) return true;
+    }
+    return false;
+  }
+  console.log(areThereDuplicates(...[1, 2, 2])); // true
+
+  function constructNote(message: string, letters: string): boolean {
+    let frequency = {} as { [key: string]: number };
+    let frequencyM = {} as { [key: string]: number };
+
+    for (let i = 0; i < letters.length; i++) {
+      frequency[letters[i]] = ++frequency[letters[i]] || 1;
+    }
+
+    for (let i = 0; i < message.length; i++) {
+      frequencyM[message[i]] = ++frequencyM[message[i]] || 1;
+    }
+
+    for (let k in frequencyM) {
+      if (!frequency[k]) return false;
+      if (frequencyM[k] > frequency[k]) return false;
+    }
+
+    return true;
+  }
+  console.log(constructNote("abc", "dcba")); // true
+
+  function findAllDuplicates(nums: number[]): number[] {
+    let ans = [];
+    let s = new Set();
+
+    for (let i = 0; i < nums.length; i++) {
+      s.has(nums[i]) ? ans.push(nums[i]) : s.add(nums[i]);
+    }
+    return ans;
+  }
+  console.log(findAllDuplicates([4, 3, 2, 1, 0])); // []
 }

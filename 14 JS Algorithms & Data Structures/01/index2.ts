@@ -148,3 +148,44 @@ console.log(sumRange(4)); // 10
   }
   console.log(fib(35)); // 9227465
 }
+
+{
+  //* //* Recursion Exercises2
+  function reverse(str: string): string {
+    if (str.length <= 1) return str;
+    return reverse(str.slice(1)) + str[0];
+  }
+  console.log(reverse("abba")); // "abba"
+
+  function isPalindrome(str: string): boolean {
+    if (str.length === 1) return true;
+    if (str.length === 2) return str[0] === str[1];
+    if (str[0] === str.slice(-1)) return isPalindrome(str.slice(1, -1));
+    return false;
+  }
+  console.log(isPalindrome("tacocat")); // true
+
+  const isOdd = (val: number) => val % 2 !== 0;
+
+  function someRecursive(array: number[], callback: (arg0: number) => boolean): boolean {
+    if (array.length === 0) return false;
+    if (callback(array[0])) return true;
+    return someRecursive(array.slice(1), callback);
+  }
+  console.log(someRecursive([1, 2, 3, 4], isOdd)); // true
+
+  type NestedNumberArray = (number | NestedNumberArray)[];
+
+  function flatten(oldArr: NestedNumberArray): number[] {
+    let newArr = [] as number[];
+    for (let i = 0; i < oldArr.length; i++) {
+      if (Array.isArray(oldArr[i])) {
+        newArr = newArr.concat(flatten(oldArr[i] as NestedNumberArray));
+      } else {
+        newArr.push(oldArr[i] as number);
+      }
+    }
+    return newArr;
+  }
+  console.log(flatten([1, [2, [3, 4], [[5]]]])); // [1, 2, 3, 4, 5]
+}

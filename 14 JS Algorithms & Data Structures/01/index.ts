@@ -343,3 +343,59 @@
   }
   console.log(findAllDuplicates([4, 3, 2, 1, 0])); // []
 }
+
+{
+  //*  Multiple Pointers
+  function averagePair(arr: number[], num: number): boolean {
+    let start = 0;
+    let end = arr.length - 1;
+    while (start < end) {
+      let avg = (arr[start] + arr[end]) / 2;
+      if (avg === num) return true;
+      else if (avg < num) start++;
+      else end--;
+    }
+    return false;
+  }
+  console.log(averagePair([1, 2, 3], 2.5)); // true
+
+  function isSubsequence(str1: string, str2: string): boolean {
+    let i = 0;
+    let j = 0;
+    if (!str1) return true;
+    while (j < str2.length) {
+      if (str2[j] === str1[i]) i++;
+      if (i === str1.length) return true;
+      j++;
+    }
+    return false;
+  }
+  console.log(isSubsequence("hello", "hello world")); // true
+
+  function findPair(arr: number[], n: number): boolean {
+    // if n is 0, we just need to see if there's any duplicate in the array
+    if (n === 0) {
+      const seen = new Set();
+      for (let num of arr) {
+        if (seen.has(num)) {
+          return true;
+        }
+        seen.add(num);
+      }
+      return false;
+    }
+
+    // for non-zero n, place all elements in a set
+    const setVals = new Set(arr);
+
+    // check for val + n or val - n in the set
+    for (let val of arr) {
+      if (setVals.has(val + n) || setVals.has(val - n)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+  console.log(findPair([6, 1, 4, 10, 2, 4], 2)); // true
+}

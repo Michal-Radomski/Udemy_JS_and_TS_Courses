@@ -13,7 +13,7 @@ function linearSearch<T>(arr: T[], val: T): number {
 
 console.log(linearSearch([34, 51, 1, 2, 3, 45, 56, 687], 100)); //* -1
 
-//* Binary Search: O(1) -> Array MUST be sorted!
+//* Binary Search: O(log n) -> Array MUST be sorted!
 // Original Solution
 function binarySearchOrig<T>(arr: T[], elem: T): number {
   let start = 0;

@@ -244,4 +244,82 @@ console.log(sumRange(4)); // 10
     return res;
   }
   console.log(capitalizeFirst(["i", "am", "learning", "recursion"])); // [ 'I', 'Am', 'Learning', 'Recursion' ]
+
+  const obj = {
+    num: 1,
+    test: [],
+    data: {
+      val: 4,
+      info: {
+        isRight: true,
+        random: 66,
+      },
+    },
+  };
+
+  type NestedObj2 = { [x: string]: number | NestedObj2 | string };
+
+  function stringifyNumbers(obj: NestedObj2): NestedObj2 {
+    let newObj = {} as NestedObj2;
+    for (let key in obj) {
+      if (typeof obj[key] === "number") {
+        newObj[key] = obj[key].toString();
+      } else if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+        newObj[key] = stringifyNumbers(obj[key]);
+      } else {
+        newObj[key as keyof typeof obj] = obj[key];
+      }
+    }
+    return newObj;
+  }
+  console.log(stringifyNumbers(obj as unknown as NestedObj2));
+
+  const obj3 = {
+    stuff: "foo",
+    data: {
+      val: {
+        thing: {
+          info: "bar",
+          moreInfo: {
+            evenMoreInfo: {
+              weMadeIt: "baz",
+            },
+          },
+        },
+      },
+    },
+  };
+
+  function collectStrings(obj: NestedObj): string[] {
+    let stringsArr = [] as string[];
+
+    function gatherStrings(o: NestedObj) {
+      for (let key in o) {
+        if (typeof o[key] === "string") {
+          stringsArr.push(o[key]);
+        } else if (typeof o[key] === "object") {
+          return gatherStrings(o[key]);
+        }
+      }
+    }
+
+    gatherStrings(obj);
+
+    return stringsArr;
+  }
+  console.log(collectStrings(obj3)); // ["foo", "bar", "baz"]
+
+  function collectStringsPure(obj: NestedObj): string[] {
+    let stringsArr = [] as string[];
+    for (let key in obj) {
+      if (typeof obj[key] === "string") {
+        stringsArr.push(obj[key]);
+      } else if (typeof obj[key] === "object") {
+        stringsArr = stringsArr.concat(collectStrings(obj[key]));
+      }
+    }
+
+    return stringsArr;
+  }
+  console.log(collectStringsPure(obj3)); // ["foo", "bar", "baz"]
 }

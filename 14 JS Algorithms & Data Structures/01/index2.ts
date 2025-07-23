@@ -188,4 +188,60 @@ console.log(sumRange(4)); // 10
     return newArr;
   }
   console.log(flatten([1, [2, [3, 4], [[5]]]])); // [1, 2, 3, 4, 5]
+
+  function capitalizeWords(array: string[]): string[] {
+    if (array.length === 1) {
+      return [array[0].toUpperCase()];
+    }
+    let res = capitalizeWords(array.slice(0, -1));
+    res.push(array.slice(array.length - 1)[0].toUpperCase());
+    return res;
+  }
+  console.log(capitalizeWords(["car", "taco", "banana"])); // [ 'CAR', 'TACO', 'BANANA' ]
+
+  const obj1 = {
+    outer: 2,
+    obj: {
+      inner: 2,
+      otherObj: {
+        superInner: 2,
+        notANumber: true,
+        alsoNotANumber: "yup",
+      },
+    },
+  };
+
+  const obj2 = {
+    a: 2,
+    b: { b: 2, bb: { b: 3, bb: { b: 2 } } },
+    c: { c: { c: 2 }, cc: "ball", ccc: 5 },
+    d: 1,
+    e: { e: { e: 2 }, ee: "car" },
+  };
+
+  type NestedObj = { [x: string]: number | NestedObj | string | boolean };
+
+  function nestedEvenSum(obj: NestedObj, sum = 0): number {
+    for (let key in obj) {
+      if (typeof obj[key] === "object") {
+        sum += nestedEvenSum(obj[key]);
+      } else if (typeof obj[key] === "number" && obj[key] % 2 === 0) {
+        sum += obj[key];
+      }
+    }
+    return sum;
+  }
+  console.log(nestedEvenSum(obj1 as NestedObj)); // 6
+  console.log(nestedEvenSum(obj2 as NestedObj)); // 10
+
+  function capitalizeFirst(array: string[]): string[] {
+    if (array.length === 1) {
+      return [array[0][0].toUpperCase() + array[0].substr(1)];
+    }
+    const res = capitalizeFirst(array.slice(0, -1));
+    const string = array.slice(array.length - 1)[0][0].toUpperCase() + array.slice(array.length - 1)[0].substr(1);
+    res.push(string);
+    return res;
+  }
+  console.log(capitalizeFirst(["i", "am", "learning", "recursion"])); // [ 'I', 'Am', 'Learning', 'Recursion' ]
 }

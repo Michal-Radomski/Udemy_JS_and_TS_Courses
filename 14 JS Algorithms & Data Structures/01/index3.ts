@@ -13,7 +13,7 @@ function linearSearch<T>(arr: T[], val: T): number {
 
 console.log(linearSearch([34, 51, 1, 2, 3, 45, 56, 687], 100)); //* -1
 
-//* Binary Search: O(log n) -> Array MUST be sorted!
+//* Binary Search: O(log n) -> Array MUST be sorted! -> LOG Base 2
 // Original Solution
 function binarySearchOrig<T>(arr: T[], elem: T): number {
   let start = 0;
@@ -49,3 +49,17 @@ function binarySearch<T>(arr: T[], elem: T): number {
   return arr[middle] === elem ? middle : -1;
 }
 console.log(binarySearch([2, 5, 6, 9, 13, 15, 28, 30], 103)); //* -1
+
+//* Naive String Search
+function naiveSearch(long: string, short: string): number {
+  let count = 0;
+  for (let i = 0; i < long.length; i++) {
+    for (let j = 0; j < short.length; j++) {
+      if (short[j] !== long[i + j]) break;
+      if (j === short.length - 1) count++;
+    }
+  }
+  return count;
+}
+
+console.log(naiveSearch("lorie loled", "lol")); // 1

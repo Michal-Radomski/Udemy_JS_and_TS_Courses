@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon index.ts",
     "start2": "nodemon index2.ts",
-    "start3": "nodemon index3.ts"
+    "start3": "nodemon index3.ts",
+    "start4": "nodemon index4.ts"
   },
   "keywords": [],
   "author": "Michal Radomski <michalra@op.pl>",

@@ -50,8 +50,8 @@ function binarySearch<T>(arr: T[], elem: T): number {
 }
 console.log(binarySearch([2, 5, 6, 9, 13, 15, 28, 30], 103)); //* -1
 
-//* Naive String Search
-function naiveSearch(long: string, short: string): number {
+//* Naive String Search -> O(n^2)  [O(m*n) ?]
+function naiveStringSearch(long: string, short: string): number {
   let count = 0;
   for (let i = 0; i < long.length; i++) {
     for (let j = 0; j < short.length; j++) {
@@ -62,4 +62,4 @@ function naiveSearch(long: string, short: string): number {
   return count;
 }
 
-console.log(naiveSearch("lorie loled", "lol")); // 1
+console.log(naiveStringSearch("lorie loled", "lol")); //* 1

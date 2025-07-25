@@ -95,9 +95,9 @@ function selectionSort2(arr: number[]): number[] {
   return arr;
 }
 
-console.log(selectionSort2([0, 2, 34, 22, 10, 19, 17])); // [0,  2, 10, 17, 19, 22, 34]
+console.log(selectionSort2([0, 2, 34, 22, 10, 19, 17])); // [0, 2, 10, 17, 19, 22, 34]
 
-//^ Insertion Sort -> O(n^2)
+//^ Insertion Sort -> O(n^2) (good for incoming data)
 function insertionSort(arr: number[]): number[] {
   let currentVal: number;
   for (let i = 1; i < arr.length; i++) {

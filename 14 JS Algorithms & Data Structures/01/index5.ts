@@ -1,7 +1,8 @@
 //* Sorting Algorithms 2
 //- https://www.toptal.com/developers/sorting-algorithms
+//- https://www.bigocheatsheet.com
 
-//^ Merge Sort
+//^ Merge Sort -> O(n log n)
 // Merges two already sorted arrays
 function merge(arr1: number[], arr2: number[]): number[] {
   let results = [];
@@ -30,7 +31,7 @@ console.log(merge([100, 200], [1, 2, 3, 5, 6])); // [1, 2, 3, 5, 6, 100, 200]
 
 // Reclusive Merge Sort
 function mergeSort(arr: number[]): number[] {
-  if (arr.length <= 1) return arr;
+  if (arr.length <= 1) return arr; // Base case
   let mid: number = Math.floor(arr.length / 2);
   let left: number[] = mergeSort(arr.slice(0, mid));
   let right: number[] = mergeSort(arr.slice(mid));
@@ -38,3 +39,5 @@ function mergeSort(arr: number[]): number[] {
   return merge(left, right);
 }
 console.log(mergeSort([10, 24, 76, 73])); // [ 10, 24, 73, 76 ]
+
+//^ Quick Sort

@@ -71,3 +71,52 @@ const p1 = new Point(5, 5);
 const p2 = new Point(10, 10);
 
 console.log(Point.distance(p1, p2)); // 7.0710678118654755
+
+class Person {
+  name: string;
+  age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+
+  greet(): string {
+    return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+  }
+}
+
+const person1 = new Person("Alice", 30);
+console.log(person1.greet());
+// Output: Hello, my name is Alice and I am 30 years old.
+
+const person2 = new Person("Bob", 25);
+console.log(person2.greet());
+// Output: Hello, my name is Bob and I am 25 years old.
+
+interface PersonI {
+  greet(): () => void;
+  name: string;
+  age: number;
+}
+
+// Constructor function
+function Person2(this: PersonI, name: string, age: number): void {
+  this.name = name;
+  this.age = age;
+}
+console.log("Person2.toString():", Person2.toString());
+
+// Add methods to the prototype
+Person2.prototype.greet = function (): string {
+  return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+};
+
+// Create instances
+const person1_2 = new (Person2 as any)("Alice", 30) as PersonI;
+console.log(person1_2.greet());
+// Output: Hello, my name is Alice and I am 30 years old.
+
+const person2_2 = new (Person2 as any)("Bob", 25);
+console.log(person2_2.greet());
+// Output: Hello, my name is Bob and I am 25 years old.

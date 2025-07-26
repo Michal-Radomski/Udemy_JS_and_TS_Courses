@@ -101,7 +101,7 @@ function quickSort(arr: number[], left = 0, right = arr.length - 1): number[] {
 
 console.log(quickSort([100, -3, 2, 4, 6, 9, 1, 2, 5, 3, 23])); // [-3, 1, 2, 2,  3, 4, 5, 6, 9, 23, 100]
 
-//^ Radix Sort
+//^ Radix Sort -> O(nk) (n - length of array, k - number of digits (average))
 function getDigit(num: number, i: number): number {
   return Math.floor(Math.abs(num) / Math.pow(10, i)) % 10;
 }
@@ -139,3 +139,14 @@ function radixSort(nums: number[]): number[] {
 }
 
 console.log(radixSort([23, 345, 5467, 12, 2345, 9852])); // [ 12, 23, 345, 2345, 5467, 9852 ]
+
+//* Concat exercise
+const arr1 = [1];
+const arr2 = [2];
+const arr3 = [3];
+const arr4 = [4];
+const arr = [arr1, arr2, arr3, arr4];
+console.log(arr); // [ [ 1 ], [ 2 ], [ 3 ], [ 4 ] ]
+
+const arr0 = ([] as number[]).concat(...arr);
+console.log(arr0); // [ 1, 2, 3, 4 ]

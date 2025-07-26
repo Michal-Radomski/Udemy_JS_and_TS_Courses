@@ -37,9 +37,37 @@ class Student {
     });
     return sum / this.scores.length;
   }
+
+  static enrollStudents(): string {
+    // Static methods can't be called through a class instance!
+    return "ENROLLING STUDENTS!";
+  }
 }
 
 const firstStudent = new Student("Colt", "Steele", 1);
 const secondStudent = new Student("Blue", "Steele", 2);
+console.log(Student.enrollStudents()); // ENROLLING STUDENTS!
 
 console.log(firstStudent, secondStudent);
+
+class Point {
+  x: number;
+  y: number;
+  constructor(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
+
+  static distance(a: Point, b: Point): number {
+    // Static methods can't be called through a class instance!
+    const dx = a.x - b.x;
+    const dy = a.y - b.y;
+
+    return Math.hypot(dx, dy);
+  }
+}
+
+const p1 = new Point(5, 5);
+const p2 = new Point(10, 10);
+
+console.log(Point.distance(p1, p2)); // 7.0710678118654755

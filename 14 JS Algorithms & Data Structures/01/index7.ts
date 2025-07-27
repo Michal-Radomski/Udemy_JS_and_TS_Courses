@@ -23,7 +23,7 @@ class SinglyLinkedList {
     this.length = 0;
   }
 
-  push(val: string) {
+  push(val: string): this {
     const newNode: Node = new Node(val);
     if (!this.head) {
       this.head = newNode;
@@ -35,9 +35,29 @@ class SinglyLinkedList {
     this.length++;
     return this;
   }
+
+  //* Removing the last node
+  pop(): Node | undefined {
+    if (!this.head) return undefined;
+    let current: Node = this.head;
+    let newTail: Node = current;
+    while (current.next) {
+      newTail = current;
+      current = current.next;
+    }
+    this.tail = newTail;
+    this.tail.next = null;
+    this.length--;
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+    return current;
+  }
 }
 
 const list = new SinglyLinkedList();
 list.push("HELLO");
 list.push("GOODBYE");
+list.push("!");
 console.log("list:", list);

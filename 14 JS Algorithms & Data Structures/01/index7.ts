@@ -68,8 +68,10 @@ class SinglyLinkedList {
 }
 
 const list = new SinglyLinkedList();
+list.push("Test");
 list.push("HELLO");
 list.push("GOODBYE");
 list.push("!");
 list.pop();
+list.shift();
 console.log("list:", list);

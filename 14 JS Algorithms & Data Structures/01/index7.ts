@@ -1,6 +1,5 @@
 export {};
 //^ Singly Linked List
-
 // Piece of data -> val
 // Reference to next node -> next
 
@@ -54,10 +53,23 @@ class SinglyLinkedList {
     }
     return current;
   }
+
+  //* Removing the first node
+  shift(): Node | undefined {
+    if (!this.head) return undefined;
+    let currentHead: Node = this.head;
+    this.head = currentHead.next;
+    this.length--;
+    if (this.length === 0) {
+      this.tail = null;
+    }
+    return currentHead;
+  }
 }
 
 const list = new SinglyLinkedList();
 list.push("HELLO");
 list.push("GOODBYE");
 list.push("!");
+list.pop();
 console.log("list:", list);

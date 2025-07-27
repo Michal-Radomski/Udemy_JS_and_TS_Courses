@@ -1,4 +1,3 @@
-//^ Data Structures
 //* Class Syntax
 class Student {
   firstName: string;

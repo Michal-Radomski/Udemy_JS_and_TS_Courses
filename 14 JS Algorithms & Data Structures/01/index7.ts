@@ -89,6 +89,29 @@ class SinglyLinkedList {
     }
     return current;
   }
+
+  set(index: number, val: string): boolean {
+    const foundNode: Node | null = this.get(index);
+    if (foundNode) {
+      foundNode.val = val;
+      return true;
+    }
+    return false;
+  }
+
+  insert(index: number, val: string): boolean {
+    if (index < 0 || index > this.length) return false;
+    if (index === this.length) return !!this.push(val);
+    if (index === 0) return !!this.unshift(val);
+
+    const newNode: Node = new Node(val);
+    const prev = this.get(index - 1) as Node;
+    const temp = prev.next;
+    prev.next = newNode;
+    newNode.next = temp;
+    this.length++;
+    return true;
+  }
 }
 
 const list = new SinglyLinkedList();
@@ -100,5 +123,9 @@ list.pop();
 list.shift();
 list.unshift("Test2");
 console.log("list.get(1):", list.get(1));
+list.set(1, "Hello");
+list.set(2, "Goodbye");
+list.insert(2, "Inserted Value");
 
 console.log("list:", list);
+console.log("JSON.stringify(list):", JSON.stringify(list));

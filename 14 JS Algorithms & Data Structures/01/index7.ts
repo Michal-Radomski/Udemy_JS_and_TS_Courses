@@ -123,6 +123,31 @@ class SinglyLinkedList {
     this.length--;
     return removed;
   }
+
+  reverse(): this {
+    let node = this.head as Node;
+    this.head = this.tail;
+    this.tail = node;
+    let next;
+    let prev = null;
+    for (let i = 0; i < this.length; i++) {
+      next = node.next as Node;
+      node.next = prev;
+      prev = node;
+      node = next;
+    }
+    return this;
+  }
+
+  print(): void {
+    const arr = [] as string[];
+    let current = this.head as Node;
+    while (current) {
+      arr.push(current.val);
+      current = current.next as Node;
+    }
+    console.log("arr:", arr);
+  }
 }
 
 const list = new SinglyLinkedList();
@@ -138,6 +163,10 @@ list.set(1, "Hello");
 list.set(2, "Goodbye");
 list.insert(2, "Inserted Value");
 list.remove(2);
+list.print();
 
 console.log("list:", list);
 console.log("JSON.stringify(list):", JSON.stringify(list));
+
+list.reverse();
+list.print();

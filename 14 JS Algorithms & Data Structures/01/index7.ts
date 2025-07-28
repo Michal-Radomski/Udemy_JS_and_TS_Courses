@@ -112,6 +112,17 @@ class SinglyLinkedList {
     this.length++;
     return true;
   }
+
+  remove(index: number): Node | undefined {
+    if (index < 0 || index >= this.length) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+    const previousNode = this.get(index - 1) as Node;
+    const removed = previousNode.next as Node;
+    previousNode.next = removed.next;
+    this.length--;
+    return removed;
+  }
 }
 
 const list = new SinglyLinkedList();
@@ -126,6 +137,7 @@ console.log("list.get(1):", list.get(1));
 list.set(1, "Hello");
 list.set(2, "Goodbye");
 list.insert(2, "Inserted Value");
+list.remove(2);
 
 console.log("list:", list);
 console.log("JSON.stringify(list):", JSON.stringify(list));

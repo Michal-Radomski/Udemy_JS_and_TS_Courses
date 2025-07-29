@@ -22,7 +22,7 @@ class DoublyLinkedList {
   }
 
   push(val: string): this {
-    var newNode: Node = new Node(val);
+    const newNode: Node = new Node(val);
     if (this.length === 0) {
       this.head = newNode;
       this.tail = newNode;
@@ -34,6 +34,21 @@ class DoublyLinkedList {
     this.length++;
     return this;
   }
+
+  pop(): Node | undefined {
+    if (!this.head) return undefined;
+    const poppedNode = this.tail as Node;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.tail = poppedNode.prev;
+      this.tail!.next = null;
+      poppedNode.prev = null;
+    }
+    this.length--;
+    return poppedNode;
+  }
 }
 
 const list = new DoublyLinkedList();
@@ -41,5 +56,6 @@ list.push("Test");
 list.push("HELLO");
 list.push("GOODBYE");
 list.push("!");
+list.pop();
 
 console.log("list:", list);

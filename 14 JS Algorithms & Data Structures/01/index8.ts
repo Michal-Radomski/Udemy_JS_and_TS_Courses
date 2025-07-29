@@ -108,6 +108,39 @@ class DoublyLinkedList {
     }
     return false;
   }
+
+  insert(index: number, val: string): boolean {
+    if (index < 0 || index > this.length) return false;
+    if (index === 0) return !!this.unshift(val);
+    if (index === this.length) return !!this.push(val);
+
+    const newNode: Node = new Node(val);
+    const beforeNode = this.get(index - 1) as Node;
+    const afterNode = beforeNode.next as Node;
+
+    (beforeNode.next = newNode), (newNode.prev = beforeNode);
+    (newNode.next = afterNode), (afterNode.prev = newNode);
+    this.length++;
+    return true;
+  }
+
+  remove(index: number): Node | undefined {
+    if (index < 0 || index >= this.length) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+
+    const removedNode = this.get(index) as Node;
+    const beforeNode = removedNode.prev as Node;
+    const afterNode = removedNode.next as Node;
+    beforeNode.next = afterNode;
+    afterNode.prev = beforeNode;
+    // removedNode.prev.next = removedNode.next;
+    // removedNode.next.prev = removedNode.prev;
+    removedNode.next = null;
+    removedNode.prev = null;
+    this.length--;
+    return removedNode;
+  }
 }
 
 const list = new DoublyLinkedList();
@@ -121,5 +154,7 @@ list.unshift("Test2");
 console.log("list.get(1):", list.get(1));
 list.set(1, "Hello");
 list.set(2, "Goodbye");
+list.insert(2, "Inserted Value");
+list.remove(2);
 
 console.log("list:", list);

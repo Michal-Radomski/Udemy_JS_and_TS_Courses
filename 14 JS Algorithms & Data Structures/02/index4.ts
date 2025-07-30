@@ -20,7 +20,7 @@ class Stack {
     this.size = 0;
   }
 
-  push(val: string): number {
+  enqueue(val: string): number {
     const newNode: Node = new Node(val);
     if (!this.first) {
       this.first = newNode;
@@ -46,9 +46,54 @@ class Stack {
 }
 
 const stack: Stack = new Stack();
-stack.push("HELLO");
-stack.push("GOODBYE");
-stack.push("!");
+stack.enqueue("HELLO");
+stack.enqueue("GOODBYE");
+stack.enqueue("!");
 stack.pop();
 
 console.log("stack:", stack);
+
+//^ Queue
+
+class Queue {
+  first: Node | null;
+  last: Node | null;
+  size: number;
+  constructor() {
+    this.first = null;
+    this.last = null;
+    this.size = 0;
+  }
+
+  enqueue(val: string): number {
+    const newNode: Node = new Node(val);
+    if (!this.first) {
+      this.first = newNode;
+      this.last = newNode;
+    } else {
+      this.last!.next = newNode;
+      this.last = newNode;
+    }
+    return ++this.size;
+  }
+
+  dequeue(): string | null {
+    if (!this.first) return null;
+
+    let temp = this.first;
+    if (this.first === this.last) {
+      this.last = null;
+    }
+    this.first = this.first.next;
+    this.size--;
+    return temp.value;
+  }
+}
+
+const queue: Queue = new Queue();
+queue.enqueue("!");
+queue.enqueue("HELLO");
+queue.enqueue("GOODBYE");
+queue.dequeue();
+
+console.log("queue:", queue);

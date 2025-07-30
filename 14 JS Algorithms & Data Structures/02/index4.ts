@@ -20,6 +20,7 @@ class Stack {
     this.size = 0;
   }
 
+  //* Push
   enqueue(val: string): number {
     const newNode: Node = new Node(val);
     if (!this.first) {
@@ -33,6 +34,7 @@ class Stack {
     return ++this.size;
   }
 
+  //* Pop
   pop(): string | null {
     if (!this.first) return null;
     let temp = this.first;
@@ -65,6 +67,7 @@ class Queue {
     this.size = 0;
   }
 
+  //* Push
   enqueue(val: string): number {
     const newNode: Node = new Node(val);
     if (!this.first) {
@@ -77,6 +80,7 @@ class Queue {
     return ++this.size;
   }
 
+  //* Pop
   dequeue(): string | null {
     if (!this.first) return null;
 

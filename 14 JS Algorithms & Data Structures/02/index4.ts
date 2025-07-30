@@ -45,8 +45,7 @@ class Stack {
   }
 }
 
-const stack = new Stack();
-stack.push("Test");
+const stack: Stack = new Stack();
 stack.push("HELLO");
 stack.push("GOODBYE");
 stack.push("!");

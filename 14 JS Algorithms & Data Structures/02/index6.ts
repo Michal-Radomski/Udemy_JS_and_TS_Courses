@@ -1,7 +1,6 @@
 export {};
 //^ Tree Traversal
 
-//* Breadth First Search
 class Node {
   value: number;
   left: null | Node;
@@ -78,11 +77,12 @@ class BinarySearchTree {
     return false;
   }
 
+  //^ Breadth First Search
   BFS(): number[] {
-    let node = this.root,
+    let node = this.root as Node,
       data = [],
       queue = [] as Node[];
-    queue.push(node as Node);
+    queue.push(node);
 
     while (queue.length) {
       node = queue.shift() as Node;
@@ -90,6 +90,43 @@ class BinarySearchTree {
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
+    return data;
+  }
+
+  //^ Depth First Search
+  //* PreOrder
+  DFSPreOrder(): number[] {
+    const data = [] as number[];
+    function traverse(node: Node): void {
+      data.push(node.value);
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+    }
+    traverse(this.root as Node);
+    return data;
+  }
+
+  //* PostOrder
+  DFSPostOrder(): number[] {
+    const data = [] as number[];
+    function traverse(node: Node): void {
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+      data.push(node.value);
+    }
+    traverse(this.root as Node);
+    return data;
+  }
+
+  //* InOrder
+  DFSInOrder(): number[] {
+    const data = [] as number[];
+    function traverse(node: Node): void {
+      if (node.left) traverse(node.left);
+      data.push(node.value);
+      if (node.right) traverse(node.right);
+    }
+    traverse(this.root as Node);
     return data;
   }
 }
@@ -107,4 +144,7 @@ tree.insert(8);
 tree.insert(11);
 tree.insert(20);
 console.log("tree:", tree);
-console.log("tree.BFS():", tree.BFS());
+console.log("tree.BFS():", tree.BFS()); //* [10, 6, 15, 3, 8, 11, 20]
+console.log("tree.DFSPreOrder():", tree.DFSPreOrder()); //* [10, 6, 3, 8, 15, 11, 20]
+console.log("tree.DFSPostOrder():", tree.DFSPostOrder()); //* [3, 8, 6, 11, 20, 15, 10]
+console.log("tree.DFSInOrder():", tree.DFSInOrder()); //* [3, 6, 8, 10, 11, 15, 20]

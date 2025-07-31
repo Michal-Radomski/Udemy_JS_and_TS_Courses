@@ -9,7 +9,8 @@
     "start3": "nodemon index3.ts",
     "start4": "nodemon index4.ts",
     "start5": "nodemon index5.ts",
-    "start6": "nodemon index6.ts"
+    "start6": "nodemon index6.ts",
+    "start7": "nodemon index7.ts"
   },
   "keywords": [],
   "author": "Michal Radomski <michalra@op.pl>",

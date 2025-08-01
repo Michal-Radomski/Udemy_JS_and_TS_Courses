@@ -23,10 +23,7 @@ function hash(key: string, arrayLen: number): number {
 console.log("hash('test', 10):", hash("test", 10));
 
 //-----
-
-[["plum", "#DDA0DD"]];
-
-type Data = [[string, string]];
+type Data = [string, string][];
 
 class HashTable {
   keyMap: Data[];
@@ -46,15 +43,15 @@ class HashTable {
   }
 
   set(key: string, value: string): void {
-    let index = this._hash(key);
+    let index: number = this._hash(key);
     if (!this.keyMap[index]) {
-      this.keyMap[index] = [] as unknown as Data;
+      this.keyMap[index] = [] as Data;
     }
     this.keyMap[index].push([key, value]);
   }
 
   get(key: string): string | undefined {
-    let index = this._hash(key);
+    let index: number = this._hash(key);
     if (this.keyMap[index]) {
       for (let i = 0; i < this.keyMap[index].length; i++) {
         if (this.keyMap[index][i][0] === key) {
@@ -74,5 +71,31 @@ hashTable.set("salmon", "#FA8072");
 hashTable.set("lightcoral", "#F08080");
 hashTable.set("mediumvioletred", "#C71585");
 hashTable.set("plum", "#DDA0DD");
+console.log('hashTable.get("maroon"):', hashTable.get("maroon"));
 
 console.log("JSON.stringify(hashTable):", JSON.stringify(hashTable));
+
+// const ht = {
+//   keyMap: [
+//     [["plum", "#DDA0DD"]],
+//     null,
+//     null,
+//     [["salmon", "#FA8072"]],
+//     null,
+//     null,
+//     null,
+//     null,
+//     [
+//       ["maroon", "#800000"],
+//       ["yellow", "#FFFF00"],
+//     ],
+//     null,
+//     [["olive", "#808000"]],
+//     null,
+//     null,
+//     [["lightcoral", "#F08080"]],
+//     null,
+//     null,
+//     [["mediumvioletred", "#C71585"]],
+//   ],
+// };

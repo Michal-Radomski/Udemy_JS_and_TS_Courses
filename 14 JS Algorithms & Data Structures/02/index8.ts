@@ -61,6 +61,33 @@ class HashTable {
     }
     return undefined;
   }
+
+  keys(): string[] {
+    const keysArr = [] as string[];
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if (this.keyMap[i]) {
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          if (!keysArr.includes(this.keyMap[i][j][0])) {
+            keysArr.push(this.keyMap[i][j][0]);
+          }
+        }
+      }
+    }
+    return keysArr;
+  }
+  values(): string[] {
+    const valuesArr = [] as string[];
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if (this.keyMap[i]) {
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          if (!valuesArr.includes(this.keyMap[i][j][1])) {
+            valuesArr.push(this.keyMap[i][j][1]);
+          }
+        }
+      }
+    }
+    return valuesArr;
+  }
 }
 
 const hashTable = new HashTable(17);
@@ -74,6 +101,13 @@ hashTable.set("plum", "#DDA0DD");
 console.log('hashTable.get("maroon"):', hashTable.get("maroon"));
 
 console.log("JSON.stringify(hashTable):", JSON.stringify(hashTable));
+
+hashTable.keys().forEach(function (key: string): void {
+  console.log(key);
+});
+hashTable.values().forEach(function (value: string): void {
+  console.log(value);
+});
 
 // const ht = {
 //   keyMap: [

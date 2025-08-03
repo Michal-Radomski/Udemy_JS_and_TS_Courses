@@ -1,5 +1,27 @@
 //^ Dijkstra's Algorithm
 
+type Priority = { val: string; priority: number };
+
+class PriorityQueue {
+  values: Priority[];
+  constructor() {
+    this.values = [];
+  }
+
+  enqueue(val: string, priority: number): void {
+    this.values.push({ val, priority });
+    this.sort();
+  }
+
+  dequeue(): Priority {
+    return this.values.shift() as Priority;
+  }
+
+  sort(): void {
+    this.values.sort((a: Priority, b: Priority) => a.priority - b.priority);
+  }
+}
+
 type ADList = { [key: string]: { node: string; weight: number }[] };
 
 class WeightedGraph {

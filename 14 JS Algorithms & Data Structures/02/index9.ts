@@ -1,5 +1,4 @@
 //^ Graph
-//* Graph Traversal
 class Graph {
   adjacencyList: { [key: string]: string[] };
 
@@ -47,6 +46,49 @@ class Graph {
 
     return result;
   }
+
+  //* Graph Traversal
+  depthFirstIterative(start: string): string[] {
+    const stack = [start];
+    const result = [] as string[];
+    const visited = {} as { [key: string]: boolean };
+    let currentVertex: string;
+
+    visited[start] = true;
+    while (stack.length) {
+      currentVertex = stack.pop() as string;
+      result.push(currentVertex as string);
+
+      this.adjacencyList[currentVertex as string].forEach((neighbor: string) => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true;
+          stack.push(neighbor);
+        }
+      });
+    }
+    return result;
+  }
+
+  breadthFirst(start: string): string[] {
+    const queue = [start];
+    const result = [] as string[];
+    const visited = {} as { [key: string]: boolean };
+    let currentVertex: string;
+    visited[start] = true;
+
+    while (queue.length) {
+      currentVertex = queue.shift() as string;
+      result.push(currentVertex);
+
+      this.adjacencyList[currentVertex].forEach((neighbor: string) => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true;
+          queue.push(neighbor);
+        }
+      });
+    }
+    return result;
+  }
 }
 
 const graph = new Graph();
@@ -86,3 +128,5 @@ graph2.addEdge("D", "E");
 graph2.addEdge("D", "F");
 graph2.addEdge("E", "F");
 console.log('graph2.depthFirstRecursive("A"):', graph2.depthFirstRecursive("A"));
+console.log('graph2.depthFirstIterative("A"):', graph2.depthFirstIterative("A"));
+console.log('graph2.breadthFirst("A"):', graph2.breadthFirst("A"));

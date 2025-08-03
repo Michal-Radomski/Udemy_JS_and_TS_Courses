@@ -1,24 +1,105 @@
+export {};
 //^ Dijkstra's Algorithm
 
-type Priority = { val: string; priority: number };
+//* V1
+// type Priority = { val: string; priority: number };
+
+// class PriorityQueue {
+//   values: Priority[];
+//   constructor() {
+//     this.values = [];
+//   }
+
+//   enqueue(val: string, priority: number): void {
+//     this.values.push({ val, priority });
+//     this.sort();
+//   }
+
+//   dequeue(): Priority {
+//     return this.values.shift() as Priority;
+//   }
+
+//   sort(): void {
+//     this.values.sort((a: Priority, b: Priority) => a.priority - b.priority);
+//   }
+// }
+
+//* V2
+class Node {
+  val: string;
+  priority: number;
+  constructor(val: string, priority: number) {
+    this.val = val;
+    this.priority = priority;
+  }
+}
 
 class PriorityQueue {
-  values: Priority[];
+  values: Node[];
   constructor() {
     this.values = [];
   }
 
   enqueue(val: string, priority: number): void {
-    this.values.push({ val, priority });
-    this.sort();
+    let newNode: Node = new Node(val, priority);
+    this.values.push(newNode);
+    this.bubbleUp();
   }
 
-  dequeue(): Priority {
-    return this.values.shift() as Priority;
+  bubbleUp(): void {
+    let idx: number = this.values.length - 1;
+    const element: Node = this.values[idx];
+
+    while (idx > 0) {
+      let parentIdx = Math.floor((idx - 1) / 2);
+      let parent = this.values[parentIdx];
+      if (element.priority >= parent.priority) break;
+      this.values[parentIdx] = element;
+      this.values[idx] = parent;
+      idx = parentIdx;
+    }
   }
 
-  sort(): void {
-    this.values.sort((a: Priority, b: Priority) => a.priority - b.priority);
+  dequeue(): Node {
+    const min: Node = this.values[0];
+    const end = this.values.pop() as Node;
+    if (this.values.length > 0) {
+      this.values[0] = end;
+      this.sinkDown();
+    }
+    return min;
+  }
+
+  sinkDown(): void {
+    let idx = 0;
+    const length: number = this.values.length;
+    const element: Node = this.values[0];
+    while (true) {
+      let leftChildIdx = 2 * idx + 1;
+      let rightChildIdx = 2 * idx + 2;
+      let leftChild, rightChild;
+      let swap = null;
+
+      if (leftChildIdx < length) {
+        leftChild = this.values[leftChildIdx];
+        if (leftChild.priority < element.priority) {
+          swap = leftChildIdx;
+        }
+      }
+      if (rightChildIdx < length) {
+        rightChild = this.values[rightChildIdx];
+        if (
+          (swap === null && rightChild.priority < element.priority) ||
+          (swap !== null && rightChild.priority < leftChild!.priority)
+        ) {
+          swap = rightChildIdx;
+        }
+      }
+      if (swap === null) break;
+      this.values[idx] = this.values[swap];
+      this.values[swap] = element;
+      idx = swap;
+    }
   }
 }
 
@@ -111,4 +192,4 @@ graph.addEdge("D", "F", 1);
 graph.addEdge("E", "F", 1);
 console.log("graph.adjacencyList:", graph.adjacencyList);
 
-console.log('graph.Dijkstra("A", "E"):', graph.Dijkstra("A", "E")); //* [ 'A', 'C', 'D', 'F', 'E' ]
+console.log('graph.Dijkstra("A", "E"):', graph.Dijkstra("A", "E")); //*  V1/V2 -> [ 'A', 'C', 'D', 'F', 'E' ],

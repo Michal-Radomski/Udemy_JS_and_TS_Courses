@@ -1,4 +1,5 @@
 //^ Graph
+//* Graph Traversal
 class Graph {
   adjacencyList: { [key: string]: string[] };
 
@@ -27,6 +28,25 @@ class Graph {
     }
     delete this.adjacencyList[vertex];
   }
+
+  depthFirstRecursive(start: string): string[] {
+    const result = [] as string[];
+    const visited = {} as { [key: string]: boolean };
+    const adjacencyList = this.adjacencyList;
+
+    (function dfs(vertex: string) {
+      if (!vertex) return null;
+      visited[vertex] = true;
+      result.push(vertex);
+      adjacencyList[vertex].forEach((neighbor: string) => {
+        if (!visited[neighbor]) {
+          return dfs(neighbor);
+        }
+      });
+    })(start);
+
+    return result;
+  }
 }
 
 const graph = new Graph();
@@ -42,3 +62,27 @@ graph.addEdge("Hong Kong", "Dallas");
 graph.addEdge("Los Angeles", "Hong Kong");
 graph.addEdge("Los Angeles", "Aspen");
 console.log("graph:", graph);
+
+//          A
+//        /   \
+//       B     C
+//       |     |
+//       D --- E
+//        \   /
+//          F
+
+const graph2 = new Graph();
+graph2.addVertex("A");
+graph2.addVertex("B");
+graph2.addVertex("C");
+graph2.addVertex("D");
+graph2.addVertex("E");
+graph2.addVertex("F");
+graph2.addEdge("A", "B");
+graph2.addEdge("A", "C");
+graph2.addEdge("B", "D");
+graph2.addEdge("C", "E");
+graph2.addEdge("D", "E");
+graph2.addEdge("D", "F");
+graph2.addEdge("E", "F");
+console.log('graph2.depthFirstRecursive("A"):', graph2.depthFirstRecursive("A"));

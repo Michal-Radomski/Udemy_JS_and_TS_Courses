@@ -205,6 +205,19 @@ for (const pair of formData.entries()) {
   // observer.observe(canvas);
 }
 
+{
+  // 1. Define configuration with STUN servers (used to discover your public IP)
+  // const configuration = {
+  //   iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
+  // };
+  // 2. Initialize the RTCPeerConnection
+  // const peerConnection = new RTCPeerConnection(configuration);
+  // console.log("peerConnection:", peerConnection);
+  //* ---
+  // const eventSource = new EventSource("https://api.example.com/live-updates");
+  // console.log("eventSource:", eventSource);
+}
+
 // const parser = new DOMParser(); //* Only in browsers!
 // console.log("parser:", parser);
 
